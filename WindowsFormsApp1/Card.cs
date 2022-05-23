@@ -139,7 +139,8 @@ namespace WindowsFormsApp1
             {
                 this.attack = true;
             }
-            else{
+            else
+            {
                 this.attack = false;
             }
         }
@@ -175,9 +176,9 @@ namespace WindowsFormsApp1
             setName(key);
 
             int i = 0;
-            foreach(JToken j in jtoken)
+            foreach (JToken j in jtoken)
             { 
-                foreach(JToken j2 in j)
+                foreach (JToken j2 in j)
                 {
                     //효과이름(key값) 얻기위해 JProperty로 형변환
                     JProperty jp = j2.ToObject<JProperty>();
@@ -186,7 +187,8 @@ namespace WindowsFormsApp1
                     setAmount(10);
 
                     //int 타입 멤버변수일 경우
-                    if(Array.IndexOf(ops, subKey) > -1){
+                    if (Array.IndexOf(ops, subKey) > -1)
+                    {
                         //int값이 들어가야하는 곳에서 n이 들어갈 때 -> 임시로 0으로 해놓기
                         if (jp.Value.ToString().Equals("n"))
                         {
