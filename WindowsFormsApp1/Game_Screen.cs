@@ -52,15 +52,21 @@ namespace WindowsFormsApp1
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            string name = cardList[0].Name;
             int amount = cardList[0].amount;
-            cardList[0].amount = amount - 1;
+            market.SellCard(cardList[0]);
 
-            MessageBox.Show(name + " 카드 " + amount + "개 중 1개를 구입하여 " + cardList[0].amount + 
-                "장 남았습니다.");
+            MessageBox.Show(cardList[0].Name + " 카드 " + amount + "개 중 1개를 구입하여 " + 
+                cardList[0].amount + "장 남았습니다.");
         }
 
-       
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            int amount = cardList[1].amount;
+            market.SellCard(cardList[1]);
+
+            MessageBox.Show(cardList[1].Name + " 카드 " + amount + "개 중 1개를 구입하여 " +
+                cardList[1].amount + "장 남았습니다.");
+        }
     }
     //public class market
     //{
