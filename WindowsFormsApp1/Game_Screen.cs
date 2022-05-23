@@ -48,12 +48,19 @@ namespace WindowsFormsApp1
             gameTable = new GameTable();
             trash = new Trash();
             player = new Player(deck,gameTable,market);
+
+            listBox1.Items.Clear();
+            listBox1.Items.Add("player1");
+            listBox1.Items.Add("player2");
+            listBox1.Items.Add("player3");
+            listBox1.Items.Add("player4");
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             int amount = cardList[0].amount;
             market.SellCard(cardList[0]);
+            amount1.Text = cardList[0].amount.ToString();
 
             MessageBox.Show(cardList[0].Name + " 카드 " + amount + "개 중 1개를 구입하여 " + 
                 cardList[0].amount + "장 남았습니다.");
@@ -63,6 +70,7 @@ namespace WindowsFormsApp1
         {
             int amount = cardList[1].amount;
             market.SellCard(cardList[1]);
+            amount2.Text = cardList[1].amount.ToString();
 
             MessageBox.Show(cardList[1].Name + " 카드 " + amount + "개 중 1개를 구입하여 " +
                 cardList[1].amount + "장 남았습니다.");
