@@ -17,12 +17,13 @@ namespace WindowsFormsApp1
         //**시작 세팅-- 진우
 
         //**내 턴 - 경길
-        //ABC 초기화 -   1 1 0
-        //Action카드사용 - 횟수
-        //Buy 사용 - Coin, 횟수
-        //덱 초기화 - clear,shuffle, draw
+        //ABC 초기화 -   1 1 0                GameTable -> setABC()
+        
+        //Action카드사용 - 횟수               Player -> useCard(ActionCard card)
+        //Buy 사용 - Coin, 횟수               Player -> buyCard(Card card)
+        //덱 초기화 - clear,shuffle, draw     Deck -> clear,shuffle, draw
 
-
+        
         //플레이어 본인차례 false 턴 종료
 
         //

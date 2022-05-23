@@ -75,6 +75,21 @@ namespace WindowsFormsApp1
             MessageBox.Show(cardList[1].Name + " 카드 " + amount + "개 중 1개를 구입하여 " +
                 cardList[1].amount + "장 남았습니다.");
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //cc
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void amount1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
     //public class market
     //{
