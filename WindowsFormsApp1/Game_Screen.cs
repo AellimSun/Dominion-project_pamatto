@@ -7,12 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace WindowsFormsApp1
 {
     public partial class Game_Screen : Form
     {
         Market market;
+        List<Card> cardList;
         Deck deck;
         Game game;
         GameTable gameTable;
@@ -27,20 +30,34 @@ namespace WindowsFormsApp1
         private void Form1_Load(object sender, EventArgs e)
         {
             market = new Market();
+            cardList = market.getMarketList();
+            //마켓에 이미지추가하기(Market.cs에서 하려고 하니 이 cs의 것이라 설정이 어려움)
+            pictureBox1.BackColor = Color.AliceBlue;
+            pictureBox2.BackColor = Color.AliceBlue;
+            pictureBox3.BackColor = Color.AliceBlue;
+            pictureBox4.BackColor = Color.AliceBlue;
+            pictureBox5.BackColor = Color.AliceBlue;
+            pictureBox6.BackColor = Color.AliceBlue;
+            pictureBox7.BackColor = Color.AliceBlue;
+            pictureBox8.BackColor = Color.AliceBlue;
+            pictureBox9.BackColor = Color.AliceBlue;
+            pictureBox10.BackColor = Color.AliceBlue;
+
             deck = new Deck();
             game = new Game();
             gameTable = new GameTable();
             trash = new Trash();
             player = new Player(deck,gameTable,market);
-
-
-
-            pictureBox1.BackColor = Color.AliceBlue;
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            
+            string name = cardList[0].Name;
+            int amount = cardList[0].amount;
+            cardList[0].amount = amount - 1;
+
+            MessageBox.Show(name + " 카드 " + amount + "개 중 1개를 구입하여 " + cardList[0].amount + 
+                "장 남았습니다.");
         }
 
        

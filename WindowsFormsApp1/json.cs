@@ -13,20 +13,24 @@ namespace WindowsFormsApp1
 {
     public class json
     {
-        public void getJson(string cardName, string key)
+        public JObject getJson()
         {
+            //json 파일 위치 설정
             string path = Directory.GetCurrentDirectory() + "\\card.json";
-
+            //json 파일 내용 읽어오기
             string content = File.ReadAllText(path);
 
             try
             {
+                //파싱(문자열 -> json)
                 JObject jobj = JObject.Parse(content);
-                MessageBox.Show("마녀 가격 : " + jobj[cardName][key]);
+
+                return jobj;
             }
             catch(Exception e)
             {
                 MessageBox.Show("json 파일을 읽는 중에 오류가 발생했습니다.");
+                return null;
             }
         }
     }
