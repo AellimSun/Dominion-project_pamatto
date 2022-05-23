@@ -76,6 +76,16 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.amount1 = new System.Windows.Forms.Label();
+            this.amount2 = new System.Windows.Forms.Label();
+            this.amount3 = new System.Windows.Forms.Label();
+            this.amount4 = new System.Windows.Forms.Label();
+            this.amount5 = new System.Windows.Forms.Label();
+            this.amount6 = new System.Windows.Forms.Label();
+            this.amount7 = new System.Windows.Forms.Label();
+            this.amount8 = new System.Windows.Forms.Label();
+            this.amount9 = new System.Windows.Forms.Label();
+            this.amount10 = new System.Windows.Forms.Label();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox19)).BeginInit();
@@ -330,6 +340,16 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.amount10);
+            this.groupBox1.Controls.Add(this.amount9);
+            this.groupBox1.Controls.Add(this.amount8);
+            this.groupBox1.Controls.Add(this.amount7);
+            this.groupBox1.Controls.Add(this.amount6);
+            this.groupBox1.Controls.Add(this.amount5);
+            this.groupBox1.Controls.Add(this.amount4);
+            this.groupBox1.Controls.Add(this.amount3);
+            this.groupBox1.Controls.Add(this.amount2);
+            this.groupBox1.Controls.Add(this.amount1);
             this.groupBox1.Controls.Add(this.pictureBox10);
             this.groupBox1.Controls.Add(this.pictureBox5);
             this.groupBox1.Controls.Add(this.pictureBox9);
@@ -566,6 +586,106 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "액션 :";
             // 
+            // amount1
+            // 
+            this.amount1.AutoSize = true;
+            this.amount1.ForeColor = System.Drawing.Color.Red;
+            this.amount1.Location = new System.Drawing.Point(20, 25);
+            this.amount1.Name = "amount1";
+            this.amount1.Size = new System.Drawing.Size(16, 14);
+            this.amount1.TabIndex = 1;
+            this.amount1.Text = "10";
+            // 
+            // amount2
+            // 
+            this.amount2.AutoSize = true;
+            this.amount2.ForeColor = System.Drawing.Color.Red;
+            this.amount2.Location = new System.Drawing.Point(117, 25);
+            this.amount2.Name = "amount2";
+            this.amount2.Size = new System.Drawing.Size(16, 14);
+            this.amount2.TabIndex = 2;
+            this.amount2.Text = "10";
+            // 
+            // amount3
+            // 
+            this.amount3.AutoSize = true;
+            this.amount3.ForeColor = System.Drawing.Color.Red;
+            this.amount3.Location = new System.Drawing.Point(226, 25);
+            this.amount3.Name = "amount3";
+            this.amount3.Size = new System.Drawing.Size(16, 14);
+            this.amount3.TabIndex = 3;
+            this.amount3.Text = "10";
+            // 
+            // amount4
+            // 
+            this.amount4.AutoSize = true;
+            this.amount4.ForeColor = System.Drawing.Color.Red;
+            this.amount4.Location = new System.Drawing.Point(330, 25);
+            this.amount4.Name = "amount4";
+            this.amount4.Size = new System.Drawing.Size(16, 14);
+            this.amount4.TabIndex = 4;
+            this.amount4.Text = "10";
+            // 
+            // amount5
+            // 
+            this.amount5.AutoSize = true;
+            this.amount5.ForeColor = System.Drawing.Color.Red;
+            this.amount5.Location = new System.Drawing.Point(434, 26);
+            this.amount5.Name = "amount5";
+            this.amount5.Size = new System.Drawing.Size(16, 14);
+            this.amount5.TabIndex = 5;
+            this.amount5.Text = "10";
+            // 
+            // amount6
+            // 
+            this.amount6.AutoSize = true;
+            this.amount6.ForeColor = System.Drawing.Color.Red;
+            this.amount6.Location = new System.Drawing.Point(20, 155);
+            this.amount6.Name = "amount6";
+            this.amount6.Size = new System.Drawing.Size(16, 14);
+            this.amount6.TabIndex = 6;
+            this.amount6.Text = "10";
+            // 
+            // amount7
+            // 
+            this.amount7.AutoSize = true;
+            this.amount7.ForeColor = System.Drawing.Color.Red;
+            this.amount7.Location = new System.Drawing.Point(117, 155);
+            this.amount7.Name = "amount7";
+            this.amount7.Size = new System.Drawing.Size(16, 14);
+            this.amount7.TabIndex = 7;
+            this.amount7.Text = "10";
+            // 
+            // amount8
+            // 
+            this.amount8.AutoSize = true;
+            this.amount8.ForeColor = System.Drawing.Color.Red;
+            this.amount8.Location = new System.Drawing.Point(226, 155);
+            this.amount8.Name = "amount8";
+            this.amount8.Size = new System.Drawing.Size(16, 14);
+            this.amount8.TabIndex = 8;
+            this.amount8.Text = "10";
+            // 
+            // amount9
+            // 
+            this.amount9.AutoSize = true;
+            this.amount9.ForeColor = System.Drawing.Color.Red;
+            this.amount9.Location = new System.Drawing.Point(330, 155);
+            this.amount9.Name = "amount9";
+            this.amount9.Size = new System.Drawing.Size(16, 14);
+            this.amount9.TabIndex = 9;
+            this.amount9.Text = "10";
+            // 
+            // amount10
+            // 
+            this.amount10.AutoSize = true;
+            this.amount10.ForeColor = System.Drawing.Color.Red;
+            this.amount10.Location = new System.Drawing.Point(434, 155);
+            this.amount10.Name = "amount10";
+            this.amount10.Size = new System.Drawing.Size(16, 14);
+            this.amount10.TabIndex = 10;
+            this.amount10.Text = "10";
+            // 
             // Game_Screen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
@@ -605,6 +725,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox23)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox24)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
@@ -677,6 +798,16 @@
         private System.Windows.Forms.PictureBox pictureBox25;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.TextBox chatCon;
+        private System.Windows.Forms.Label amount10;
+        private System.Windows.Forms.Label amount9;
+        private System.Windows.Forms.Label amount8;
+        private System.Windows.Forms.Label amount7;
+        private System.Windows.Forms.Label amount6;
+        private System.Windows.Forms.Label amount5;
+        private System.Windows.Forms.Label amount4;
+        private System.Windows.Forms.Label amount3;
+        private System.Windows.Forms.Label amount2;
+        private System.Windows.Forms.Label amount1;
     }
 }
 
