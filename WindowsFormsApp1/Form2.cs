@@ -22,6 +22,8 @@ namespace WindowsFormsApp1
             Game_Screen game_Screen = new Game_Screen();
             game_Screen.Show();
             this.Hide();
+            //this.Enabled = false;  비활성화
+            //this.Visible = false;  안보이게
         }
     }
 }
