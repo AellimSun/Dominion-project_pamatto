@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace WindowsFormsApp1
 {
@@ -60,7 +62,7 @@ namespace WindowsFormsApp1
             market.SellCard(cardList[0]);
             amount1.Text = cardList[0].amount.ToString();
 
-            MessageBox.Show(cardList[0].Name + " 카드 " + amount + "개 중 1개를 구입하여 " +
+            MessageBox.Show(cardList[0].Name + " 카드 " + amount + "개 중 1개를 구입하여 " + 
                 cardList[0].amount + "장 남았습니다.");
         }
 
@@ -72,11 +74,7 @@ namespace WindowsFormsApp1
 
             MessageBox.Show(cardList[1].Name + " 카드 " + amount + "개 중 1개를 구입하여 " +
                 cardList[1].amount + "장 남았습니다.");
-
-
-            
         }
-
         private void pictureBox12_Click(object sender, EventArgs e)
         {
             DB_ACCESS db_test = new DB_ACCESS();
