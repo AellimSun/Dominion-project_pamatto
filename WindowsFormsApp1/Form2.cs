@@ -16,5 +16,12 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
         }
+
+        private void startBTN_Click(object sender, EventArgs e)
+        {
+            Game_Screen game_Screen = new Game_Screen();
+            game_Screen.Show();
+            this.Hide();
+        }
     }
 }

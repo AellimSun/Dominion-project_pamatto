@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CardNS
+namespace WindowsFormsApp1
 {
-
     public class Card
     {
         private int price = 0;
@@ -38,20 +37,27 @@ namespace CardNS
         {
             this.amount -= amount;
         }
+        public int getAmount()
+        {
+            return amount;
+        }
+        //추가
+
     }
 
     public class ActionCard : Card
     {
-        private int add_Draw = 0;
-        private int goto_Grave = 0;
-        private int goto_Trash = 0;
-        private int add_Action = 0;
-        private int add_Buy = 0;
-        private int add_Money = 0;
-        private int gain_to_Deck = 0;
-        private int gain_to_Hand = 0;
-        private bool attack = false;
-        private bool protect = false;
+        //초기값 설정 코드 추가
+        public int add_Draw { get; set; }
+        public int goto_Grave { get; set; }
+        public int goto_Trash { get; set; }
+        public int add_Action { get; set; }
+        public int add_Buy { get; set; }
+        public int add_Money { get; set; }
+        public int gain_to_Deck { get; set; }
+        public int gain_to_Hand { get; set; }
+        public bool attack = false;
+        public bool protect = false;
 
         public ActionCard(string CardName)
         {
@@ -59,11 +65,13 @@ namespace CardNS
             {
                 add_Draw = 2;
                 attack = true;
-            }else if (CardName.Equals("market"))
+            }
+            else if (CardName.Equals("market"))
             {
 
             }
         }
+
         public void setIsAttack(bool attack)
         {
             this.attack = attack;
