@@ -23,7 +23,7 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
         }
-
+        
         private void Form1_Load(object sender, EventArgs e)
         {
             market = new Market();
@@ -31,19 +31,26 @@ namespace WindowsFormsApp1
             game = new Game();
             gameTable = new GameTable();
             trash = new Trash();
-            player = new Player(deck,gameTable,market);
+            player = new Player(deck,gameTable,market,"pamatto");
 
 
 
             pictureBox1.BackColor = Color.AliceBlue;
+            pictureBox2.BackColor = Color.GreenYellow;
+
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            
+            DB_ACCESS db_test = new DB_ACCESS();
+            db_test.SendLog(player,"sending LogTest");
         }
 
-       
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            DB_ACCESS db_test = new DB_ACCESS();
+            db_test.RecieveLog(listLog);
+        }
     }
     //public class market
     //{

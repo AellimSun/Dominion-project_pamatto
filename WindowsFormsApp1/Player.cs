@@ -12,12 +12,14 @@ namespace WindowsFormsApp1
         private Deck deck;
         private GameTable gameTable;
         private Market market;
-
-        public Player(Deck deck, GameTable gameTable, Market market)
+        string playerName { get; set; }
+        public string PlayerName { get => playerName; }
+        public Player(Deck deck, GameTable gameTable, Market market, string nickName)
         {
             this.deck = deck;
             this.gameTable = gameTable;
             this.market = market;
+            this.playerName = nickName;
         }
         public void useCard(ActionCard card)
         {
