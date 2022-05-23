@@ -8,6 +8,7 @@ namespace WindowsFormsApp1
 {
     public class Card
     {
+        public json cardInfo = new json();
         private int price = 0;
         private int amount = 0;
         private string Name = "";
@@ -48,8 +49,8 @@ namespace WindowsFormsApp1
     public class ActionCard : Card
     {
         //초기값 설정 코드 추가
-        public int add_Draw { get; set; }
-        public int goto_Grave { get; set; }
+        public int add_Draw = 0;
+        public int goto_Grave = 0;
         public int goto_Trash { get; set; }
         public int add_Action { get; set; }
         public int add_Buy { get; set; }
