@@ -45,6 +45,8 @@ namespace WindowsFormsApp1
 
         public void SellCard(Card card)
         {
+            string name = card.Name;
+            int amount = card.amount;
             card.minusAmount(1);
         }
 
