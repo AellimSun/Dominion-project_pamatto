@@ -48,6 +48,12 @@ namespace WindowsFormsApp1
             gameTable = new GameTable();
             trash = new Trash();
             player = new Player(deck,gameTable,market);
+
+            listBox1.Items.Clear();
+            listBox1.Items.Add("player1");
+            listBox1.Items.Add("player2");
+            listBox1.Items.Add("player3");
+            listBox1.Items.Add("player4");
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
