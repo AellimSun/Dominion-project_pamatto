@@ -19,26 +19,26 @@ namespace WindowsFormsApp1
         private int duration = 16;
         private void Form3_Load(object sender, EventArgs e)
         {
-            //int count = StartMatching("",UserID);
+            btnStart.Enabled = false;
+            int Qcount = Global.transHandler.Start_Matching();
             //if(count==1) CreateGameName();
+            if (Qcount == 1)
+            {
+                btnStart.Enabled = true;
+                ShowCountDown();
+            }
+               
+
+        }
+        public void ShowCountDown()
+        {
             timer1 = new System.Windows.Forms.Timer();
             timer1.Tick += new EventHandler(count_down);
             timer1.Interval = 1000;
             timer1.Start();
         }
-        private void TimeText_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            //TimeText.Text = DateTime.Now.ToLongTimeString();
-        }
-
         private void count_down(object sender, EventArgs e)
         {
-
             if (duration == 0)
             {
                 timer1.Stop();
@@ -50,14 +50,24 @@ namespace WindowsFormsApp1
                 TimeText.Text = duration.ToString();
             }
         }
+        private void TimeText_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            //TimeText.Text = DateTime.Now.ToLongTimeString();
+        }
+
+
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            //SendServer sendServer = new SendServer();
             Game_Screen game_Screen = new Game_Screen();
             DB_ACCESS dB_ACCESS = new DB_ACCESS();
-
-            //Respond(1,UserID);
+            //Global.transHandler.Respond(1,Global.UserID);
+            
             dB_ACCESS.SendLog(Global.UserID, "logging in");          //sending game login
             game_Screen.Show();
             this.Close();
