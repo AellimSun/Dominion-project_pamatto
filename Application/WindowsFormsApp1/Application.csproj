@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DTL">
-      <HintPath>..\..\Server\DTL\DTL\bin\Debug\DTL.dll</HintPath>
+      <HintPath>..\..\..\project\Server\Dominion_Client\Dominion_Client\DTL.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
