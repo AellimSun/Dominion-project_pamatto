@@ -8,30 +8,65 @@ namespace WindowsFormsApp1
 {
     class Deck : GameTable
     {
-        private List<Card> HandDeck;
-        private List<Card> DrawDeck;
-        private List<Card> GraveDeck;
+        public List<Card> HandDeck;
+        public List<Card> DrawDeck;
+        public List<Card> GraveDeck;
         //private List<Card> MerketDeck;
 
         private Random random = new Random();
 
-        public Deck()
+        public Deck(List<Card> estatelist, List<Card> moneylist)
         {
             HandDeck = new List<Card>();
             DrawDeck = new List<Card>();
             GraveDeck = new List<Card>();
+
+            Card copper = null;
+            int i;
+            for (i = 0; i < 3; i++)
+            {
+                if (moneylist[i].Name.Equals("copper"))
+                {
+                    copper = moneylist[i];
+                }
+            }
+            Card estate = null;
+            int j;
+            for (j = 0; j < 4; j++)
+            {
+                if (estatelist[j].Name.Equals("estate"))
+                {
+                    estate = estatelist[j];
+                }
+            }
+
+            for (int k = 0; k < 7; k++)
+            {
+                DrawDeck.Add(copper);
+                moneylist[i].amount -= 1;
+            }
+
+            for (int k = 0; k < 3; k++)
+            {
+                DrawDeck.Add(estate);
+                estatelist[j].amount -= 1;
+            }
+
+            Shuffle(DrawDeck);
         }
-        public void Shuffle()
+
+        public void Shuffle(List<Card> Obj)
         {
             List<Card> NewCards = new List<Card>();
-            while (GraveDeck.Count > 0)
+            while (Obj.Count > 0)
             {
-                int CardToMove = random.Next(GraveDeck.Count);
-                NewCards.Add(GraveDeck[CardToMove]);
-                GraveDeck.RemoveAt(CardToMove);
+                int CardToMove = random.Next(Obj.Count);
+                NewCards.Add(Obj[CardToMove]);
+                Obj.RemoveAt(CardToMove);
             }
-            GraveDeck = NewCards;
+            Obj = NewCards;
         }
+
         public void DrawToHand()
         {
             while (HandDeck.Count < 6)
@@ -39,7 +74,7 @@ namespace WindowsFormsApp1
                 HandDeck.Add(GraveDeck[0]);
                 GraveDeck.RemoveAt(0); //0번이 채ㅣ워지나?
                 if (DrawDeck.Count == 0)
-                    Shuffle();
+                    Shuffle(GraveDeck);
             }
         }
         public void DrawToHand(int i)
@@ -49,7 +84,7 @@ namespace WindowsFormsApp1
                 HandDeck.Add(GraveDeck[0]);
                 GraveDeck.RemoveAt(0);
                 if (DrawDeck.Count == 0)
-                    Shuffle();
+                    Shuffle(GraveDeck);
                 i--;
             }
         }
@@ -73,6 +108,10 @@ namespace WindowsFormsApp1
         public void BuyCard(Card card)
         {
             GraveDeck.Add(card);
+        }
+
+        public void DeckInit()
+        {
         }
     }
 }
