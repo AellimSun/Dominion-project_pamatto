@@ -12,13 +12,13 @@ namespace WindowsFormsApp1
     class DB_ACCESS
     {
         private SqlConnection Con;
-        public void SendLog(Player player, string GameLog)
+        public void SendLog(string player, string GameLog)
         {
             string send_string = GameLog;
             try
             {
                 Con = new SqlConnection();
-                Con.ConnectionString = "Server=(local);database=GameTestDB;Integrated Security = true";
+                Con.ConnectionString = "Server=210.119.12.76;database=GameTestDB;Integrated Security = true";
                 Con.Open();
 
                 SqlCommand Com = new SqlCommand();
@@ -28,7 +28,8 @@ namespace WindowsFormsApp1
                 //"insert into GameLog values(@ID, @NickName ,@time, @GameLog)";
                 //Com.Parameters.Add("@ID", SqlDbType.VarChar).Value = ID;
                 Com.Parameters.Add("@ID", SqlDbType.VarChar).Value = "pamatto123";
-                Com.Parameters.Add("@NickName", SqlDbType.NVarChar).Value = player.PlayerName;
+                Com.Parameters.Add("@NickName", SqlDbType.NVarChar).Value = player;
+                //Com.Parameters.Add("@NickName", SqlDbType.NVarChar).Value = player.PlayerName;
                 Com.Parameters.Add("@GameLog", SqlDbType.NVarChar).Value = send_string;
                 Com.Parameters.Add("@time", SqlDbType.DateTime).Value = DateTime.Now;
                 Com.ExecuteNonQuery();
