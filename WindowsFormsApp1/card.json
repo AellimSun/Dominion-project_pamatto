@@ -44,10 +44,34 @@
 		"add_Action" : "1",
 		"add_Buy" : "1"
 	},
-	"mine" : {
-		"price" : "5",
-		"goto_Trash" : "1",
-		"gain_to_Deck" : " 1",
-		"gain_to_Hand" : "1"
+	"mine": {
+		"price": "5",
+		"goto_Trash": "1",
+		"gain_to_Deck": " 1",
+		"gain_to_Hand": "1"
+	},
+	"cooper": {
+		"price": "0",
+		"money": "1"
+	},
+	"silver": {
+		"price": "3",
+		"money": "2"
+	},
+	"gold": {
+		"price": "6",
+		"money": "3"
+	},
+	"estate": {
+		"price": "2",
+		"score": "1"
+	},
+	"Duchy": {
+		"price": "5",
+		"score": "3"
+	},
+	"Province": {
+		"price": "8",
+		"score" :  "6"
 	}
 }
