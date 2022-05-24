@@ -25,7 +25,7 @@ namespace WindowsFormsApp1
             int i;
             for (i = 0; i < 3; i++)
             {
-                if (moneylist[i].Name.Equals("cooper"))
+                if (moneylist[i].Name.Equals("copper"))
                 {
                     copper = moneylist[i];
                     break;
