@@ -162,5 +162,121 @@ namespace Dominion_Client
 
             return 0;
         }
+
+        public void Game_Listener(bool Hyeaja)  //내 차례가 아닐 때 수신대기하는 메서드
+        {
+            while (true)
+            {
+                Message Alway_Listen = MessageUtil.Receive(Stream);
+                switch (Alway_Listen.Header.MSGTYPE)
+                {
+                    case CONSTANTS.TURN_SEND:
+                        return;
+                    case CONSTANTS.ALERT_ACTION:
+                        {
+                            switch((Alway_Listen.Body as BodyAlertAction).ACTION)
+                            {
+                                case CONSTANTS.ATTACK:
+                                    switch((Alway_Listen.Body as BodyAlertAction).CARD)
+                                    {
+                                        case 00: //마녀 번호 입력해야됨
+                                            //마녀 사용 이펙트 호출
+                                            if (Hyeaja)
+                                            {
+                                                //방어 이펙트 호출
+                                                Message Send_Log = new Message();
+                                                Send_Log.Body = new BodyLogSend()
+                                                {
+                                                    //해자카드에 대한 로그 정의를 확실히 한 후 추가
+                                                    //LOG = 
+                                                };
+                                                Send_Log.Header = new Header()
+                                                {
+                                                    HASBODY = CONSTANTS.HAS_BODY,
+                                                    MSGTYPE = CONSTANTS.LOG_SEND,
+                                                    BODYLEN = (uint)Send_Log.Body.GetSize()
+                                                };
+                                                MessageUtil.Send(Stream, Send_Log);
+                                            }
+                                            else
+                                            {
+                                                //저주 획득 이펙트 호출
+                                                //저주 카드 개수 줄이는 메서드 호출
+
+                                                Message GetCard = new Message();
+                                                GetCard.Body = new BodyAlertAction()
+                                                {
+                                                    ACTION = CONSTANTS.GET_CARD,
+                                                    CARD = 01       //저주 카드 번호 입력 필요함
+                                                };
+                                                GetCard.Header = new Header()
+                                                {
+                                                    HASBODY = CONSTANTS.HAS_BODY,
+                                                    MSGTYPE = CONSTANTS.ALERT_ACTION,
+                                                    BODYLEN = (uint)GetCard.Body.GetSize()
+                                                };
+
+                                                Message Send_Log = new Message();
+                                                Send_Log.Body = new BodyLogSend()
+                                                {
+                                                    //저주카드에 대한 로그 정의를 확실히 한 후 추가
+                                                    //LOG = 
+                                                };
+                                                Send_Log.Header = new Header()
+                                                {
+                                                    HASBODY = CONSTANTS.HAS_BODY,
+                                                    MSGTYPE = CONSTANTS.LOG_SEND,
+                                                    BODYLEN = (uint)Send_Log.Body.GetSize()
+                                                };
+
+                                                MessageUtil.Send(Stream, GetCard);
+                                                MessageUtil.Send(Stream, Send_Log);
+                                            }
+                                            break;
+                                    }
+                                    break;
+                                case CONSTANTS.GET_CARD:
+                                    uint getcard_recv = (Alway_Listen.Body as BodyAlertAction).CARD;
+                                    //해당 카드 번호 줄이는 메소드(매개변수 카드번호(<-getcard_recv))
+                                    break;
+                                case CONSTANTS.SCRAP_CARD:
+                                    uint scrap_recv = (Alway_Listen.Body as BodyAlertAction).CARD;
+                                    //폐기장에 해당 카드 번호 추가하는 메소드 (매개변수 카드번호(<-scrap_recv))
+                                    break;
+                            }
+                        }
+                        break;
+                    case CONSTANTS.LOG_SEND:
+                        string log_recv = BitConverter.ToString((Alway_Listen.Body as BodyLogSend).LOG);
+                        //로그 추가 메서드(매개변수 바이트 로그를 스트링으로 변환한 것 (<-log_recv))
+                        break;
+                    case CONSTANTS.SCORE_REQUEST:
+                        Message my_score = new Message();
+                        my_score.Body = new BodyScoreSend()
+                        {
+                            //Score = 스코어 계산하는 메서드 호출
+                        };
+                        my_score.Header = new Header()
+                        {
+                            HASBODY = CONSTANTS.HAS_BODY,
+                            MSGTYPE = CONSTANTS.SCORE_SEND,
+                            BODYLEN = (uint)my_score.Body.GetSize()
+                        };
+                        MessageUtil.Send(Stream, my_score);
+
+                        Message All_Score = MessageUtil.Receive(Stream);
+                        int[] all_score = new int[4];
+                        all_score[0] = (int)(All_Score.Body as BodyTotalScoreSend).SCORE1;
+                        all_score[1] = (int)(All_Score.Body as BodyTotalScoreSend).SCORE2;
+                        all_score[2] = (int)(All_Score.Body as BodyTotalScoreSend).SCORE3;
+                        all_score[3] = (int)(All_Score.Body as BodyTotalScoreSend).SCORE4;
+
+                        //출력 메서드 호출 (매개변수 all_score)
+                        break;
+                }   
+            }
+        }
+
+        public void 
     }
 }
