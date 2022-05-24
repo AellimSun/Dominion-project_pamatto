@@ -25,9 +25,10 @@ namespace WindowsFormsApp1
             int i;
             for (i = 0; i < 3; i++)
             {
-                if (moneylist[i].Name.Equals("copper"))
+                if (moneylist[i].Name.Equals("cooper"))
                 {
                     copper = moneylist[i];
+                    break;
                 }
             }
             Card estate = null;
@@ -37,6 +38,7 @@ namespace WindowsFormsApp1
                 if (estatelist[j].Name.Equals("estate"))
                 {
                     estate = estatelist[j];
+                    break;
                 }
             }
 
