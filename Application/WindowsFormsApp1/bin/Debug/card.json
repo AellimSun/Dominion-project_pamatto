@@ -55,29 +55,40 @@
 	"money": {
 		"cooper": {
 			"price": "0",
-			"money": "1"
+			"money": "1",
+			"amount" :  "60"
 		},
 		"silver": {
 			"price": "3",
-			"money": "2"
+			"money": "2",
+			"amount" :  "40"
 		},
 		"gold": {
 			"price": "6",
-			"money": "3"
+			"money": "3",
+			"amount" :  "30"
 		}
 	},
 	"estate": {
 		"estate": {
 			"price": "2",
-			"score": "1"
+			"score": "1",
+			"amount" :  "24"
 		},
-		"Duchy": {
+		"duchy": {
 			"price": "5",
-			"score": "3"
+			"score": "3",
+			"amount" :  "12"
 		},
-		"Province": {
+		"province": {
 			"price": "8",
-			"score": "6"
+			"score": "6",
+			"amount": "12"
+		},
+		"curse": {
+			"price": "0",
+			"score": "-1",
+			"amount" : "30"
 		}
 	}
 }

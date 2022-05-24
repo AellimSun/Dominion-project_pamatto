@@ -223,7 +223,6 @@ namespace WindowsFormsApp1
                     JProperty jp = j2.ToObject<JProperty>();
                     //효과이름 얻기
                     string subKey = jp.Name;
-                    setAmount(10);
 
                     //subKey라는 스트링 변수의 값을 변수명으로 가진 변수에 값 세팅
                     this.GetType().GetField(subKey).SetValue(this, Convert.ToInt32(jp.Value));
@@ -250,7 +249,6 @@ namespace WindowsFormsApp1
                     JProperty jp = j2.ToObject<JProperty>();
                     //효과이름 얻기
                     string subKey = jp.Name;
-                    setAmount(10);
 
                     //subKey라는 스트링 변수의 값을 변수명으로 가진 변수에 값 세팅
                     this.GetType().GetField(subKey).SetValue(this, Convert.ToInt32(jp.Value));
