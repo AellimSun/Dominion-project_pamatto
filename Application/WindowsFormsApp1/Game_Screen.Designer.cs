@@ -196,14 +196,12 @@
             this.pictureBox22.TabIndex = 5;
             this.pictureBox22.TabStop = false;
             this.groupBox4.Location = new System.Drawing.Point(771, 37);
-            this.groupBox4.Controls.Add(this.buttonLog);
             this.groupBox4.Size = new System.Drawing.Size(171, 426);
             this.groupBox4.Location = new System.Drawing.Point(899, 32);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(199, 365);
             this.groupBox4.TabIndex = 3;
-            this.listLog.Size = new System.Drawing.Size(186, 340);
-            this.listLog.TabIndex = 0;
+
             // 
             this.groupBox5.Location = new System.Drawing.Point(771, 484);
             // 

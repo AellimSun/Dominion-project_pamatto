@@ -16,7 +16,7 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
         }
-        private int duration = 15;
+        private int duration = 16;
         private void Form3_Load(object sender, EventArgs e)
         {
             //int count = StartMatching("",UserID);

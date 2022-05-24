@@ -42,12 +42,14 @@ namespace WindowsFormsApp1
             // 
             this.textBox1.BackColor = System.Drawing.SystemColors.MenuBar;
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.textBox1.Font = new System.Drawing.Font("돋움체", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.textBox1.Location = new System.Drawing.Point(210, 37);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(34, 22);
             this.textBox1.TabIndex = 0;
+            this.textBox1.TabStop = false;
             // 
             // WaitingLabel
             // 
@@ -75,6 +77,7 @@ namespace WindowsFormsApp1
             this.TimeText.ReadOnly = true;
             this.TimeText.Size = new System.Drawing.Size(34, 33);
             this.TimeText.TabIndex = 2;
+            this.TimeText.TabStop = false;
             this.TimeText.TextChanged += new System.EventHandler(this.TimeText_TextChanged);
             // 
             // btnStart
