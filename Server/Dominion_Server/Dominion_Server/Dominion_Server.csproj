@@ -33,8 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DTL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="DTL">
       <HintPath>..\..\DTL\DTL\bin\Debug\DTL.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -47,8 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="server파일.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

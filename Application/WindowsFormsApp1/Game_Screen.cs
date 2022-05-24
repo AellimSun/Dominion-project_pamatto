@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -34,15 +36,36 @@ namespace WindowsFormsApp1
 
             //마켓에 이미지추가하기(Market.cs에서 하려고 하니 이 cs의 것이라 설정이 어려움)
             pictureBox1.BackColor = Color.AliceBlue;
-            pictureBox2.BackColor = Color.Blue;
-            pictureBox3.BackColor = Color.Salmon;
-            pictureBox4.BackColor = Color.PaleGreen;
-            pictureBox5.BackColor = Color.PaleVioletRed;
-            pictureBox6.BackColor = Color.Yellow;
-            pictureBox7.BackColor = Color.SlateGray;
-            pictureBox8.BackColor = Color.Orange;
-            pictureBox9.BackColor = Color.LightSkyBlue;
-            pictureBox10.BackColor = Color.Purple;
+            pictureBox2.BackColor = Color.AliceBlue;
+            pictureBox3.BackColor = Color.AliceBlue;
+            pictureBox4.BackColor = Color.AliceBlue;
+            pictureBox5.BackColor = Color.AliceBlue;
+            pictureBox6.BackColor = Color.AliceBlue;
+            pictureBox7.BackColor = Color.AliceBlue;
+            pictureBox8.BackColor = Color.AliceBlue;
+            pictureBox9.BackColor = Color.AliceBlue;
+            pictureBox10.BackColor = Color.AliceBlue;
+
+            Market market = game.market;
+            List<Card> moneyList = market.MoneyPile;
+            List<Card> estateList = market.estatePile;
+
+            pictureBox12.Load(Directory.GetCurrentDirectory() + "\\copper.png");
+            pictureBox11.Load(Directory.GetCurrentDirectory() + "\\silver.png");
+            pictureBox16.Load(Directory.GetCurrentDirectory() + "\\gold.png");
+            pictureBox14.Load(Directory.GetCurrentDirectory() + "\\estate.png");
+            pictureBox13.Load(Directory.GetCurrentDirectory() + "\\duchy.png");
+            pictureBox15.Load(Directory.GetCurrentDirectory() + "\\province.png");
+            pictureBox17.Load(Directory.GetCurrentDirectory() + "\\curse.png");
+            //456781011
+            label4.Text = moneyList[0].amount.ToString();
+            label5.Text = moneyList[1].amount.ToString();
+            label6.Text = moneyList[2].amount.ToString();
+
+            label7.Text = estateList[0].amount.ToString();
+            label8.Text = estateList[1].amount.ToString();
+            label10.Text = estateList[2].amount.ToString();
+            label11.Text = estateList[3].amount.ToString();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
