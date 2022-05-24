@@ -14,13 +14,7 @@ namespace WindowsFormsApp1
 {
     public partial class Game_Screen : Form
     {
-        Market market;
-        List<Card> cardList;
-        Deck deck;
         Game game;
-        GameTable gameTable;
-        Player player;
-        Trash trash;
 
         public Game_Screen()
         {
@@ -29,6 +23,8 @@ namespace WindowsFormsApp1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            game = new Game();
+
             //플레이어 리스트
             listBox1.Items.Clear();
             listBox1.Items.Add("player1");
@@ -36,9 +32,6 @@ namespace WindowsFormsApp1
             listBox1.Items.Add("player3");
             listBox1.Items.Add("player4");
 
-            //마켓 초기화
-            market = new Market();
-            cardList = market.getMarketList();
             //마켓에 이미지추가하기(Market.cs에서 하려고 하니 이 cs의 것이라 설정이 어려움)
             pictureBox1.BackColor = Color.AliceBlue;
             pictureBox2.BackColor = Color.AliceBlue;
@@ -50,34 +43,24 @@ namespace WindowsFormsApp1
             pictureBox8.BackColor = Color.AliceBlue;
             pictureBox9.BackColor = Color.AliceBlue;
             pictureBox10.BackColor = Color.AliceBlue;
-
-            //덱 초기화
-            deck = new Deck();
-
-            game = new Game();
-            gameTable = new GameTable();
-            trash = new Trash();
-            player = new Player(deck,gameTable,market);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            int amount = cardList[0].amount;
-            market.SellCard(cardList[0]);
-            amount1.Text = cardList[0].amount.ToString();
+            Card res = game.buyCard(0);
+            amount1.Text = res.amount.ToString();
 
-            MessageBox.Show(cardList[0].Name + " 카드 " + amount + "개 중 1개를 구입하여 " + 
-                cardList[0].amount + "장 남았습니다.");
+            MessageBox.Show(res.Name + " 카드 1개를 구입하여 " + 
+                res.amount + "장 남았습니다.");
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-            int amount = cardList[1].amount;
-            market.SellCard(cardList[1]);
-            amount2.Text = cardList[1].amount.ToString();
+            Card res = game.buyCard(1);
+            amount1.Text = res.amount.ToString();
 
-            MessageBox.Show(cardList[1].Name + " 카드 " + amount + "개 중 1개를 구입하여 " +
-                cardList[1].amount + "장 남았습니다.");
+            MessageBox.Show(res.Name + " 카드 1개를 구입하여 " +
+                res.amount + "장 남았습니다.");
         }
     }
     //public class market

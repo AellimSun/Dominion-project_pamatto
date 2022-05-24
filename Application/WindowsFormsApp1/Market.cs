@@ -62,7 +62,7 @@ namespace WindowsFormsApp1
             card2 = card2.Next;
             JToken estate = card2.First.First;
 
-            for(int i = 0; i<3; i++)
+            for(int i = 0; i<4; i++)
             {
                 //key값을 얻기위해 JProperty형식으로 형변환
                 JProperty jp = estate.ToObject<JProperty>();
