@@ -57,7 +57,7 @@ namespace WindowsFormsApp1
             game = new Game();
             gameTable = new GameTable();
             trash = new Trash();
-            player = new Player(deck,gameTable,market);
+            player = new Player(deck,gameTable,market,"elim");
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
