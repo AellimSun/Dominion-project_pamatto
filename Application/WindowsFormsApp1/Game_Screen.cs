@@ -26,7 +26,7 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
         }
-        
+
         private void Form1_Load(object sender, EventArgs e)
         {
             //플레이어 리스트
@@ -57,13 +57,6 @@ namespace WindowsFormsApp1
             game = new Game();
             gameTable = new GameTable();
             trash = new Trash();
-            player = new Player(deck,gameTable,market,"pamatto");
-
-            listBox1.Items.Clear();
-            listBox1.Items.Add("player1");
-            listBox1.Items.Add("player2");
-            listBox1.Items.Add("player3");
-            listBox1.Items.Add("player4");
             player = new Player(deck,gameTable,market);
         }
 
@@ -85,17 +78,6 @@ namespace WindowsFormsApp1
 
             MessageBox.Show(cardList[1].Name + " 카드 " + amount + "개 중 1개를 구입하여 " +
                 cardList[1].amount + "장 남았습니다.");
-        }
-        private void pictureBox12_Click(object sender, EventArgs e)
-        {
-            DB_ACCESS db_test = new DB_ACCESS();
-            db_test.SendLog(player, "sending LogTest");
-        }
-
-        private void pictureBox11_Click(object sender, EventArgs e)
-        {
-            DB_ACCESS db_test = new DB_ACCESS();
-            db_test.RecieveLog(listLog);
         }
     }
     //public class market
