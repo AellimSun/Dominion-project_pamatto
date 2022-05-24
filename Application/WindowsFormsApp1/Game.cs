@@ -8,11 +8,11 @@ namespace WindowsFormsApp1
 {
     class Game
     {
-        Market market;
-        List<Card> cardList;
-        Deck deck;
-        GameTable gameTable;
-        Trash trash;
+        public Market market;
+        public List<Card> cardList;
+        public Deck deck;
+        public GameTable gameTable;
+        public Trash trash;
 
         public Game()
         {
