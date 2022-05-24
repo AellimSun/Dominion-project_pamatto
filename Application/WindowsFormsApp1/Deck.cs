@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApp1
 {
-    class Deck : GameTable
+    public class Deck : GameTable
     {
         public List<Card> HandDeck;
         public List<Card> DrawDeck;
@@ -55,6 +55,7 @@ namespace WindowsFormsApp1
             }
 
             Shuffle(DrawDeck);
+            DrawToHand(5);
         }
 
         public void Shuffle(List<Card> Obj)
@@ -66,27 +67,27 @@ namespace WindowsFormsApp1
                 NewCards.Add(Obj[CardToMove]);
                 Obj.RemoveAt(CardToMove);
             }
-            Obj = NewCards;
+            DrawDeck = NewCards;
         }
 
         public void DrawToHand()
         {
             while (HandDeck.Count < 6)
             {
-                HandDeck.Add(GraveDeck[0]);
-                GraveDeck.RemoveAt(0); //0번이 채ㅣ워지나?
+                HandDeck.Add(DrawDeck[0]);
+                DrawDeck.RemoveAt(0); //0번이 채ㅣ워지나?
                 if (DrawDeck.Count == 0)
-                    Shuffle(GraveDeck);
+                    Shuffle(DrawDeck);
             }
         }
         public void DrawToHand(int i)
         {
             while (0 < i)
             {
-                HandDeck.Add(GraveDeck[0]);
-                GraveDeck.RemoveAt(0);
+                HandDeck.Add(DrawDeck[0]);
+                DrawDeck.RemoveAt(0);
                 if (DrawDeck.Count == 0)
-                    Shuffle(GraveDeck);
+                    Shuffle(DrawDeck);
                 i--;
             }
         }
@@ -110,6 +111,10 @@ namespace WindowsFormsApp1
         public void BuyCard(Card card)
         {
             GraveDeck.Add(card);
+        }
+
+        public void DeckInit()
+        {
         }
     }
 }
