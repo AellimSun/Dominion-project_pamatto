@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Game_Screen));
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.pictureBox18 = new System.Windows.Forms.PictureBox();
@@ -100,9 +101,9 @@
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox19)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox20)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox21)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox22)).BeginInit();
+            this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
@@ -211,8 +212,7 @@
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(199, 365);
             this.groupBox4.TabIndex = 3;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "게임 로그";
+
             // 
             // groupBox5
             // 
@@ -350,6 +350,9 @@
             this.pictureBox17.Name = "pictureBox17";
             this.pictureBox17.Size = new System.Drawing.Size(40, 62);
             this.pictureBox17.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox17.Location = new System.Drawing.Point(19, 199);
+            this.pictureBox17.Name = "pictureBox17";
+            this.pictureBox17.Size = new System.Drawing.Size(34, 72);
             this.pictureBox17.TabIndex = 7;
             this.pictureBox17.TabStop = false;
             // 
@@ -360,6 +363,9 @@
             this.pictureBox15.Name = "pictureBox15";
             this.pictureBox15.Size = new System.Drawing.Size(40, 62);
             this.pictureBox15.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox15.Location = new System.Drawing.Point(142, 119);
+            this.pictureBox15.Name = "pictureBox15";
+            this.pictureBox15.Size = new System.Drawing.Size(34, 72);
             this.pictureBox15.TabIndex = 6;
             this.pictureBox15.TabStop = false;
             // 
@@ -369,6 +375,9 @@
             this.pictureBox16.Name = "pictureBox16";
             this.pictureBox16.Size = new System.Drawing.Size(40, 62);
             this.pictureBox16.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox16.Location = new System.Drawing.Point(142, 33);
+            this.pictureBox16.Name = "pictureBox16";
+            this.pictureBox16.Size = new System.Drawing.Size(34, 72);
             this.pictureBox16.TabIndex = 5;
             this.pictureBox16.TabStop = false;
             // 
@@ -379,6 +388,9 @@
             this.pictureBox13.Name = "pictureBox13";
             this.pictureBox13.Size = new System.Drawing.Size(40, 62);
             this.pictureBox13.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox13.Location = new System.Drawing.Point(79, 119);
+            this.pictureBox13.Name = "pictureBox13";
+            this.pictureBox13.Size = new System.Drawing.Size(34, 72);
             this.pictureBox13.TabIndex = 3;
             this.pictureBox13.TabStop = false;
             // 
@@ -389,6 +401,9 @@
             this.pictureBox14.Name = "pictureBox14";
             this.pictureBox14.Size = new System.Drawing.Size(40, 62);
             this.pictureBox14.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox14.Location = new System.Drawing.Point(17, 119);
+            this.pictureBox14.Name = "pictureBox14";
+            this.pictureBox14.Size = new System.Drawing.Size(34, 72);
             this.pictureBox14.TabIndex = 4;
             this.pictureBox14.TabStop = false;
             // 
@@ -398,6 +413,9 @@
             this.pictureBox11.Name = "pictureBox11";
             this.pictureBox11.Size = new System.Drawing.Size(40, 62);
             this.pictureBox11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox11.Location = new System.Drawing.Point(79, 33);
+            this.pictureBox11.Name = "pictureBox11";
+            this.pictureBox11.Size = new System.Drawing.Size(34, 72);
             this.pictureBox11.TabIndex = 1;
             this.pictureBox11.TabStop = false;
             // 
@@ -407,6 +425,9 @@
             this.pictureBox12.Name = "pictureBox12";
             this.pictureBox12.Size = new System.Drawing.Size(40, 62);
             this.pictureBox12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox12.Location = new System.Drawing.Point(17, 33);
+            this.pictureBox12.Name = "pictureBox12";
+            this.pictureBox12.Size = new System.Drawing.Size(34, 72);
             this.pictureBox12.TabIndex = 2;
             this.pictureBox12.TabStop = false;
             // 
@@ -465,9 +486,6 @@
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(600, 247);
             this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "시장";
-            // 
             // amount10
             // 
             this.amount10.AutoSize = true;
@@ -568,7 +586,8 @@
             this.amount1.TabIndex = 1;
             this.amount1.Text = "10";
             // 
-            // pictureBox10
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "시장";
             // 
             this.pictureBox10.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox10.Image")));
             this.pictureBox10.Location = new System.Drawing.Point(503, 130);
@@ -665,7 +684,7 @@
             this.groupBox10.Controls.Add(this.pictureBox30);
             this.groupBox10.Controls.Add(this.pictureBox29);
             this.groupBox10.Controls.Add(this.pictureBox28);
-            this.groupBox10.Controls.Add(this.pictureBox27);
+            this.groupBox10.Location = new System.Drawing.Point(231, 351);
             this.groupBox10.Controls.Add(this.pictureBox26);
             this.groupBox10.Controls.Add(this.pictureBox25);
             this.groupBox10.Location = new System.Drawing.Point(269, 301);
@@ -741,7 +760,7 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.button1);
-            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Location = new System.Drawing.Point(274, 546);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Location = new System.Drawing.Point(320, 468);
@@ -750,7 +769,7 @@
             this.groupBox2.TabIndex = 14;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "액션/바이 횟수";
-            // 
+            this.button1.Location = new System.Drawing.Point(319, 16);
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(372, 14);
@@ -824,6 +843,38 @@
             this.pictureBox34.TabIndex = 9;
             this.pictureBox34.TabStop = false;
             // 
+            // amount8
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
+            this.amount8.ForeColor = System.Drawing.Color.Red;
+            this.ClientSize = new System.Drawing.Size(969, 810);
+            this.amount8.Name = "amount8";
+            this.amount8.Size = new System.Drawing.Size(16, 14);
+            this.amount8.TabIndex = 8;
+            this.amount8.Text = "10";
+            // 
+            // amount9
+            // 
+            this.amount9.AutoSize = true;
+            this.amount9.ForeColor = System.Drawing.Color.Red;
+            this.amount9.Location = new System.Drawing.Point(330, 155);
+            this.amount9.Name = "amount9";
+            this.amount9.Size = new System.Drawing.Size(16, 14);
+            this.amount9.TabIndex = 9;
+            this.amount9.Text = "10";
+            // 
+            // amount10
+            // 
+            this.amount10.AutoSize = true;
+            this.amount10.ForeColor = System.Drawing.Color.Red;
+            this.amount10.Name = "amount10";
+            this.amount10.Size = new System.Drawing.Size(16, 14);
+            this.amount10.TabIndex = 10;
+            this.amount10.Text = "10";
+            this.amount10.Size = new System.Drawing.Size(16, 14);
+            this.amount10.TabIndex = 10;
+            this.amount10.Text = "10";
+            // 
             // Game_Screen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -848,6 +899,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox20)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox21)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox22)).EndInit();
+            this.groupBox4.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox6.ResumeLayout(false);
@@ -918,6 +970,13 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox pictureBox17;
         private System.Windows.Forms.PictureBox pictureBox15;
