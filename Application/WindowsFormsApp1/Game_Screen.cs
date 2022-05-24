@@ -29,6 +29,14 @@ namespace WindowsFormsApp1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //플레이어 리스트
+            listBox1.Items.Clear();
+            listBox1.Items.Add("player1");
+            listBox1.Items.Add("player2");
+            listBox1.Items.Add("player3");
+            listBox1.Items.Add("player4");
+
+            //마켓 초기화
             market = new Market();
             cardList = market.getMarketList();
             //마켓에 이미지추가하기(Market.cs에서 하려고 하니 이 cs의 것이라 설정이 어려움)
@@ -43,17 +51,13 @@ namespace WindowsFormsApp1
             pictureBox9.BackColor = Color.AliceBlue;
             pictureBox10.BackColor = Color.AliceBlue;
 
+            //덱 초기화
             deck = new Deck();
+
             game = new Game();
             gameTable = new GameTable();
             trash = new Trash();
             player = new Player(deck,gameTable,market);
-
-            listBox1.Items.Clear();
-            listBox1.Items.Add("player1");
-            listBox1.Items.Add("player2");
-            listBox1.Items.Add("player3");
-            listBox1.Items.Add("player4");
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
