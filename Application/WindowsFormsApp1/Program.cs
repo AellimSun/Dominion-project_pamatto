@@ -12,7 +12,7 @@ namespace WindowsFormsApp1
     public static class Global
     {
         public static string UserID;
-        public static TransHandler transHandler = new TransHandler("127.0.0.1", 5542, UserID);
+        public static TransHandler transHandler;
     }
 
     internal static class Program

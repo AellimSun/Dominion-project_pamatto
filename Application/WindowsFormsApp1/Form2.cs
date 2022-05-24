@@ -28,6 +28,7 @@ namespace WindowsFormsApp1
             else
             {
                 Global.UserID = textID.Text;
+                Global.transHandler = new TransHandler("127.0.0.1", 5542, Global.UserID);
                 Form3 form3 = new Form3();
                 this.textID.Enabled = false;
                 this.textPW.Enabled = false;
