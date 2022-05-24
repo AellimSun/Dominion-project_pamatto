@@ -15,6 +15,7 @@ namespace WindowsFormsApp1
     public partial class Game_Screen : Form
     {
         Game game;
+        DB_ACCESS dB;
 
         public Game_Screen()
         {
@@ -61,6 +62,13 @@ namespace WindowsFormsApp1
 
             MessageBox.Show(res.Name + " 카드 1개를 구입하여 " +
                 res.amount + "장 남았습니다.");
+        }
+
+
+        private void buttonLog_Click(object sender, EventArgs e)
+        {
+            dB = new DB_ACCESS();
+            dB.RecieveLog(listLog);
         }
     }
     //public class market

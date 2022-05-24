@@ -89,6 +89,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.buttonLog = new System.Windows.Forms.Button();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox19)).BeginInit();
@@ -191,6 +192,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.buttonLog);
             this.groupBox4.Controls.Add(this.listLog);
             this.groupBox4.Location = new System.Drawing.Point(899, 32);
             this.groupBox4.Name = "groupBox4";
@@ -702,6 +704,16 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "액션 :";
             // 
+            // buttonLog
+            // 
+            this.buttonLog.Location = new System.Drawing.Point(44, 316);
+            this.buttonLog.Name = "buttonLog";
+            this.buttonLog.Size = new System.Drawing.Size(118, 23);
+            this.buttonLog.TabIndex = 1;
+            this.buttonLog.Text = "로그불러오기";
+            this.buttonLog.UseVisualStyleBackColor = true;
+            this.buttonLog.Click += new System.EventHandler(this.buttonLog_Click);
+            // 
             // Game_Screen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -827,6 +839,7 @@
         private System.Windows.Forms.Label amount1;
         private System.Windows.Forms.ListBox listLog;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button buttonLog;
     }
 }
 

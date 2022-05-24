@@ -51,7 +51,7 @@ namespace WindowsFormsApp1
             try
             {
                 Con = new SqlConnection();
-                Con.ConnectionString = "Server=(local);database=GameTestDB;Integrated Security = true";
+                Con.ConnectionString = "Server=210.119.12.76;database=GameTestDB;Integrated Security = true";
                 Con.Open();
 
                 SqlCommand Com = new SqlCommand();
