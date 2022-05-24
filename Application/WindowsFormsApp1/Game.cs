@@ -21,7 +21,7 @@ namespace WindowsFormsApp1
             cardList = market.getMarketList();
 
             //덱 초기화
-            //deck = new Deck(market.estatePile, market.MoneyPile);
+            deck = new Deck(market.estatePile, market.MoneyPile);
             gameTable = new GameTable();
             trash = new Trash();
         }
@@ -30,7 +30,6 @@ namespace WindowsFormsApp1
 
         //재화, 부동산 카드 리스트 만들기
         //player에 기본패 나누기
-
         //deck에서 셔플 후 드로우하기 - 덱 초기화
         //**시작 세팅-- 진우
 
