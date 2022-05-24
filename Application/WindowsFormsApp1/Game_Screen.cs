@@ -17,6 +17,8 @@ namespace WindowsFormsApp1
     public partial class Game_Screen : Form
     {
         Game game;
+        Market market;
+        Deck deck;
 
         public Game_Screen()
         {
@@ -25,7 +27,9 @@ namespace WindowsFormsApp1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            game = new Game();
+            game = new Game(this);
+            market = game.market;
+            deck = game.deck;
 
             //플레이어 리스트
             listBox1.Items.Clear();
@@ -46,7 +50,6 @@ namespace WindowsFormsApp1
             pictureBox9.BackColor = Color.AliceBlue;
             pictureBox10.BackColor = Color.AliceBlue;
 
-            Market market = game.market;
             List<Card> moneyList = market.MoneyPile;
             List<Card> estateList = market.estatePile;
 
@@ -68,6 +71,32 @@ namespace WindowsFormsApp1
             label11.Text = estateList[3].amount.ToString();
         }
 
+        public void changeABC(GameTable gameTable)
+        {
+            label1.Text = "액션 : " + gameTable.ActionNumber;
+            label2.Text = "바이 : " + gameTable.BuyNumber;
+            label3.Text = "재물 : "  + gameTable.Coin;
+        }
+
+        public void setHandDeckImg(Deck deck)
+        {
+            this.deck = deck;
+
+            List<Card> handList = deck.HandDeck;
+            pictureBox22.Load(Directory.GetCurrentDirectory() + "\\" + handList[0].Name + ".png");
+            pictureBox21.Load(Directory.GetCurrentDirectory() + "\\" + handList[1].Name + ".png");
+            pictureBox20.Load(Directory.GetCurrentDirectory() + "\\" + handList[2].Name + ".png");
+            pictureBox19.Load(Directory.GetCurrentDirectory() + "\\" + handList[3].Name + ".png");
+            pictureBox18.Load(Directory.GetCurrentDirectory() + "\\" + handList[4].Name + ".png");
+
+            button1.Text = "액션 종료";
+        }
+
+        public void printMessageBox(string content)
+        {
+            MessageBox.Show(content);
+        }
+
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             Card res = game.buyCard(0);
@@ -84,6 +113,44 @@ namespace WindowsFormsApp1
 
             MessageBox.Show(res.Name + " 카드 1개를 구입하여 " +
                 res.amount + "장 남았습니다.");
+        }
+
+        private void pictureBox22_Click(object sender, EventArgs e)
+        {
+            string now = button1.Text;
+
+            game.clickHand(now, 0);
+        }
+
+        public bool pictureBox27_SetImg()
+        {
+            if (pictureBox22.Image != null)
+            {
+                pictureBox27.Image = pictureBox22.Image;
+                pictureBox22.Image = null;
+
+                return true;
+            }
+
+            return false;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string state = button1.Text;
+            if(state.Equals("액션 종료"))
+            {
+                button1.Text = "구매 종료";
+            }
+        }
+
+        public void turn_button1()
+        {
+            string state = button1.Text;
+            if (state.Equals("액션 종료"))
+            {
+                button1.Text = "구매 종료";
+            }
         }
     }
     //public class market

@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApp1
 {
-    class GameTable
+    public class GameTable
     {
         public int ActionNumber { get; set; }
         public int BuyNumber { get; set; }
         public int Coin { get; set; }
 
-        public void setABC()
+        public GameTable()
         {
             ActionNumber = 1;
             BuyNumber = 1;

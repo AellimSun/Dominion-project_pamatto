@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApp1
 {
-    class Deck : GameTable
+    public class Deck : GameTable
     {
         public List<Card> HandDeck;
         public List<Card> DrawDeck;
@@ -25,7 +25,7 @@ namespace WindowsFormsApp1
             int i;
             for (i = 0; i < 3; i++)
             {
-                if (moneylist[i].Name.Equals("cooper"))
+                if (moneylist[i].Name.Equals("copper"))
                 {
                     copper = moneylist[i];
                     break;
@@ -67,7 +67,7 @@ namespace WindowsFormsApp1
                 NewCards.Add(Obj[CardToMove]);
                 Obj.RemoveAt(CardToMove);
             }
-            Obj = NewCards;
+            DrawDeck = NewCards;
         }
 
         public void DrawToHand()
