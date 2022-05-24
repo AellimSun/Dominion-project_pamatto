@@ -55,6 +55,7 @@ namespace WindowsFormsApp1
             }
 
             Shuffle(DrawDeck);
+            DrawToHand(5);
         }
 
         public void Shuffle(List<Card> Obj)
@@ -73,20 +74,20 @@ namespace WindowsFormsApp1
         {
             while (HandDeck.Count < 6)
             {
-                HandDeck.Add(GraveDeck[0]);
-                GraveDeck.RemoveAt(0); //0번이 채ㅣ워지나?
+                HandDeck.Add(DrawDeck[0]);
+                DrawDeck.RemoveAt(0); //0번이 채ㅣ워지나?
                 if (DrawDeck.Count == 0)
-                    Shuffle(GraveDeck);
+                    Shuffle(DrawDeck);
             }
         }
         public void DrawToHand(int i)
         {
             while (0 < i)
             {
-                HandDeck.Add(GraveDeck[0]);
-                GraveDeck.RemoveAt(0);
+                HandDeck.Add(DrawDeck[0]);
+                DrawDeck.RemoveAt(0);
                 if (DrawDeck.Count == 0)
-                    Shuffle(GraveDeck);
+                    Shuffle(DrawDeck);
                 i--;
             }
         }
