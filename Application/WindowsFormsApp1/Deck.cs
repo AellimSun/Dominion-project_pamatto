@@ -109,9 +109,5 @@ namespace WindowsFormsApp1
         {
             GraveDeck.Add(card);
         }
-
-        public void DeckInit()
-        {
-        }
     }
 }
