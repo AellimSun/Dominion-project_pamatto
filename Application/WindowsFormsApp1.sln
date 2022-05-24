@@ -1,9 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.1.32228.430
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32106.194
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2022", "WindowsFormsApp1\2022.csproj", "{1C53276F-1EFA-44E8-9276-3F80B28BDDDC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "image", "image", "{5184E32F-1DA4-48C6-BF5F-5350B25EA78C}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Desktop\도미니언 사진\공작령.jpg = ..\..\..\Desktop\도미니언 사진\공작령.jpg
+		..\..\..\Desktop\도미니언 사진\금.jpg = ..\..\..\Desktop\도미니언 사진\금.jpg
+		..\..\..\Desktop\도미니언 사진\동.jpg = ..\..\..\Desktop\도미니언 사진\동.jpg
+		..\..\..\Desktop\도미니언 사진\사유지.jpg = ..\..\..\Desktop\도미니언 사진\사유지.jpg
+		..\..\..\Desktop\도미니언 사진\속주.jpg = ..\..\..\Desktop\도미니언 사진\속주.jpg
+		..\..\..\Desktop\도미니언 사진\은.jpg = ..\..\..\Desktop\도미니언 사진\은.jpg
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

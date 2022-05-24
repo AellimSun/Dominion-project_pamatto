@@ -74,6 +74,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -89,6 +90,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Dominion.png" />
+    <None Include="Resources\동.jpg" />
+    <None Include="Resources\은.jpg" />
+    <None Include="Resources\금.jpg" />
+    <None Include="Resources\사유지.jpg" />
+    <None Include="Resources\공작령.jpg" />
+    <None Include="Resources\속주.jpg" />
     <Content Include="정리.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
