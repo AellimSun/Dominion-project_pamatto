@@ -13,7 +13,7 @@ namespace DTL
 
         public const uint ENTER_SERVER = 0x01;              //x
         public const uint SUCCESS_SERVER = 0x02;            //x
-        public const uint START_MATCHING = 0x03;            //ID(string),NICK(string)
+        public const uint START_MATCHING = 0x03;            //ID(string)
         public const uint INSERT_QUEUE = 0x04;              //user_count(uint)
         public const uint CANCLE_MATCHING = 0x05;           //ID(string)
         public const uint SUCCESS_CANCLE_MATCHING = 0x06;   //x
@@ -22,7 +22,7 @@ namespace DTL
         public const uint FULL_QUEUE = 0x09;                //x
         public const uint ACCEPT = 0x0A;                    //x
         public const uint DECLINE = 0x0B;                   //x
-        public const uint GAME_START = 0x0C;                //NICK1(string), NICK2(string), NICK3(string), NICK4(string)
+        public const uint GAME_START = 0x0C;                //ID1(string), ID2(string), ID3(string), ID4(string)
         public const uint GAME_CANCLE = 0x0D;               //x
         public const uint ALERT_ACTION = 0x0E;              //TYPE(uint), CARD(uint)
         public const uint LOG_SEND = 0x0F;                  //LOG(string)

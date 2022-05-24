@@ -9,27 +9,23 @@ namespace DTL
     public class BodyStartMatching : ISerializable
     {
         public byte[] ID;
-        public byte[] NICK;
 
         public BodyStartMatching() { }
         public BodyStartMatching(byte[] bytes)
         {
             ID = new byte[11];
-            NICK = new byte[21];
             Array.Copy(bytes, 0, ID, 0, 11);
-            Array.Copy(bytes, 11, NICK, 0, 21);
         }
 
         public byte[] GetBytes()
         {
             byte[] bytes = new byte[GetSize()];
             ID.CopyTo(bytes, 0);
-            NICK.CopyTo(bytes, 11);
             return bytes;
         }
         public int GetSize()
         {
-            return 32;
+            return 11;
         }
     }
     public class BodyInsertQueue : ISerializable
@@ -74,34 +70,34 @@ namespace DTL
 
     public class BodyGameStart : ISerializable
     {
-        public byte[] NICK1;
-        public byte[] NICK2;
-        public byte[] NICK3;
-        public byte[] NICK4;
+        public byte[] ID1;
+        public byte[] ID2;
+        public byte[] ID3;
+        public byte[] ID4;
         public BodyGameStart() { }
         public BodyGameStart(byte[] bytes)
         {
-            NICK1 = new byte[21];
-            NICK2 = new byte[21];
-            NICK3 = new byte[21];
-            NICK4 = new byte[21];
-            for (int i = 0; i < 4; i++)
-            {
-                Array.Copy(bytes, 21 * i, NICK1, 0, 21);
-            }
+            ID1 = new byte[11];
+            ID2 = new byte[11];
+            ID3 = new byte[11];
+            ID4 = new byte[11];
+            Array.Copy(bytes, 0, ID1, 0, 11);
+            Array.Copy(bytes, 11, ID2, 0, 11);
+            Array.Copy(bytes, 22, ID3, 0, 11);
+            Array.Copy(bytes, 33, ID4, 0, 11);
         }
         public byte[] GetBytes()
         {
             byte[] bytes = new byte[GetSize()];
-            NICK1.CopyTo(bytes, 0);
-            NICK2.CopyTo(bytes, 21);
-            NICK3.CopyTo(bytes, 42);
-            NICK4.CopyTo(bytes, 63);
+            ID1.CopyTo(bytes, 0);
+            ID2.CopyTo(bytes, 11);
+            ID3.CopyTo(bytes, 22);
+            ID4.CopyTo(bytes, 33);
             return bytes;
         }
         public int GetSize()
         {
-            return 84;
+            return 44;
         }
     }
 

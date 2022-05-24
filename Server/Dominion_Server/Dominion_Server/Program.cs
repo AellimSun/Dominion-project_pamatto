@@ -15,19 +15,8 @@ namespace Dominion_Server
         public TcpClient client;
         public NetworkStream stream { get; set; }
         public string ID { get; set; }
-        public string NICK { get; set; }
         public bool Accept { get; set; }
 
-        public Client DeepCopy()
-        {
-            Client newClient = new Client();
-            newClient.client = this.client;
-            newClient.stream = this.stream;
-            newClient.ID = this.ID;
-            newClient.NICK = this.NICK;
-            newClient.Accept = this.Accept;
-            return newClient;
-        }
     }
     internal class Program
     {
@@ -43,7 +32,7 @@ namespace Dominion_Server
             {
                 //4명 모이기 전까지 계속 돈다
                 AddClient(server, clients);
-
+                Console.WriteLine(clients.Count);
                 if (clients.Count == 4)
                 {
                     Create_Game(clients);
@@ -69,26 +58,25 @@ namespace Dominion_Server
                 {
                     BodyStartMatching bsm = new BodyStartMatching(recv.Body.GetBytes());
                     tmp.ID = Encoding.Default.GetString(bsm.ID);
-                    tmp.NICK = Encoding.Default.GetString(bsm.NICK);
                     break;
                 }
             }
             //List에 있는 Client들에게 메시지 Send(큐에 인원이 들어왔다는 메시지) 
-            //if (clients.Count != 0)
-            //{
-            //    Message ADDP = new Message();
-            //    ADDP.Body = null;
-            //    ADDP.Header = new Header()
-            //    {
-            //        HASBODY = CONSTANTS.NO_BODY,
-            //        MSGTYPE = CONSTANTS.ADD_PLAYER,
-            //        BODYLEN = 0
-            //    };
-            //    foreach (Client c in clients)
-            //    {
-            //        MessageUtil.Send(c.stream, ADDP);
-            //    }
-            //}
+            if (clients.Count != 0)
+            {
+                Message ADDP = new Message();
+                ADDP.Body = null;
+                ADDP.Header = new Header()
+                {
+                    HASBODY = CONSTANTS.NO_BODY,
+                    MSGTYPE = CONSTANTS.ADD_PLAYER,
+                    BODYLEN = 0
+                };
+                foreach (Client c in clients)
+                {
+                    MessageUtil.Send(c.stream, ADDP);
+                }
+            }
             clients.Add(tmp);
             //메시지 전송(현재 클라이언트에게 큐에 있는 인원 수를 알려주는 메시지)
 
@@ -138,22 +126,22 @@ namespace Dominion_Server
                                 break;
                             }
                         }
-                        
+
                         //매칭 취소 인원이 존재함을 나머지 Client에게 전송
-                        //{
-                        //    Message SUBP = new Message();
-                        //    SUBP.Body = null;
-                        //    SUBP.Header = new Header()
-                        //    {
-                        //        HASBODY = CONSTANTS.NO_BODY,
-                        //        MSGTYPE = CONSTANTS.SUB_PLAYER,
-                        //        BODYLEN = 0
-                        //    };
-                        //    foreach (Client c in clients)
-                        //    {
-                        //        MessageUtil.Send(c.stream, SUBP);
-                        //    }
-                        //}
+                        {
+                            Message SUBP = new Message();
+                            SUBP.Body = null;
+                            SUBP.Header = new Header()
+                            {
+                                HASBODY = CONSTANTS.NO_BODY,
+                                MSGTYPE = CONSTANTS.SUB_PLAYER,
+                                BODYLEN = 0
+                            };
+                            foreach (Client c in clients)
+                            {
+                                MessageUtil.Send(c.stream, SUBP);
+                            }
+                        }
                         break;
                     case CONSTANTS.ACCEPT:
                         me.Accept = true;
@@ -181,6 +169,7 @@ namespace Dominion_Server
                 full_list[i] = clients[index_list[next]];
                 index_list.RemoveAt(next);
             }
+            Console.WriteLine("{0} {1} {2} {3}",full_list[0].ID, full_list[1].ID, full_list[2].ID, full_list[3].ID);
             await Task.Run(async () =>
             {
                 Message F_Q = new Message();
@@ -205,11 +194,11 @@ namespace Dominion_Server
 
                 if (Ready)
                 {
-                    byte[] bytes = new byte[84];
+                    byte[] bytes = new byte[44];
                     for (int i=0; i<4; i++)
                     {
-                        byte[] tmp = Encoding.ASCII.GetBytes(clients[i].NICK);
-                        Array.Copy(tmp, 0, bytes, 21 * i, 21);
+                        byte[] tmp = Encoding.ASCII.GetBytes(clients[i].ID);
+                        Array.Copy(tmp, 0, bytes, 11 * i, 11);
                     }
                     Message P_G = new Message();
                     P_G.Body = new BodyGameStart(bytes);
@@ -217,8 +206,9 @@ namespace Dominion_Server
                     {
                         HASBODY = CONSTANTS.HAS_BODY,
                         MSGTYPE = CONSTANTS.GAME_START,
-                        BODYLEN = 84
+                        BODYLEN = (uint)P_G.Body.GetSize()
                     };
+
                     foreach (Client c in full_list)
                     {
                         MessageUtil.Send(c.stream, P_G);
@@ -249,7 +239,195 @@ namespace Dominion_Server
         }
         static public void Play_Game(Client[] full_list)
         {
+            /*
+                1. Game 스타트
+            턴시작 -> 메시지 받기, 주기 -> 턴 종료
+            유저1---------
+                1 <- 턴 시작 메세지 전송 list[0] , 나머지 유저들의 정보 저장 리스트 필요?!
+                2
+                3  
+                4             
+             */
+            int next_player = 0;
+            bool turn_end = false;
+
+            while (true)
+            {
+                //TURN_SEND
+                Message Start_Turn = new Message();
+                Start_Turn.Body = null;
+                Start_Turn.Header = new Header()
+                {
+                    HASBODY = CONSTANTS.NO_BODY,
+                    MSGTYPE = CONSTANTS.TURN_SEND,
+                    BODYLEN = 0
+                };
+
+                //첫턴을 넘겨준다
+                MessageUtil.Send(full_list[next_player].stream, Start_Turn);
+
+                //2. 주고받기
+                while(true)
+                {
+                    Message R_Msg = MessageUtil.Receive(full_list[next_player].stream);
+
+                    switch (R_Msg.Header.MSGTYPE)
+                    {
+
+                        case CONSTANTS.LOG_SEND:
+                            {
+                                foreach (Client c in full_list)
+                                {
+                                    MessageUtil.Send(c.stream, R_Msg);
+                                }
+                            }
+                            break;
+
+                        case CONSTANTS.ALERT_ACTION:
+                            {
+                                //공격!예외처리
+                                for (int i = 0; i < 4; i++)
+                                {
+                                    if(next_player != i)
+                                    {
+                                        MessageUtil.Send(full_list[i].stream, R_Msg);
+                                        if ((R_Msg.Body as BodyAlertAction).ACTION == CONSTANTS.ATTACK)
+                                        {
+                                            uint CardNo = (R_Msg.Body as BodyAlertAction).CARD;
+                                            Message recv_res = MessageUtil.Receive(full_list[i].stream);
+                                            switch (CardNo)
+                                            {
+                                                case 00:        //이후 여기에 마녀 번호 입력
+                                                    if (recv_res.Header.MSGTYPE == CONSTANTS.ALERT_ACTION)
+                                                    {
+                                                        //해자가 없다면 저주 카드 획득 메시지를 날리므로
+                                                        for (int j = 0; j < 4; j++)
+                                                        {
+                                                            //다른 플레이어에게 전달
+                                                            if (i != j)
+                                                                MessageUtil.Send(full_list[j].stream, recv_res);
+                                                        }
+                                                        //이후 저주 카드 획득 로그 전달
+                                                        recv_res = MessageUtil.Receive(full_list[i].stream);
+                                                        if (recv_res.Header.MSGTYPE == CONSTANTS.LOG_SEND)
+                                                        {
+                                                            foreach (Client c in full_list)
+                                                            {
+                                                                MessageUtil.Send(c.stream, R_Msg);
+                                                            }
+                                                        }
+
+                                                    }
+                                                    else
+                                                    {
+                                                        //해자가 있다면 획득메시지 없이 로그만 전달
+                                                        foreach (Client c in full_list)
+                                                        {
+                                                            MessageUtil.Send(c.stream, R_Msg);
+                                                        }
+                                                    }
+                                                    break;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            break;
+
+                        case CONSTANTS.TURN_END:
+                            {
+                                next_player++;
+                                if (next_player == 4)
+                                    next_player = 0;
+                                
+                                turn_end = true;
+                            }
+                            break;
+
+                        case CONSTANTS.GAME_FIN:
+                            {
+                                game_Fin(full_list);
+                            }
+                            return;
+                    }
+
+                    if (turn_end)
+                    {
+                        turn_end = false;
+                        break;
+                    }
+                        
+                }
+
+            }
 
         }
+
+        static public void game_Fin(Client[] full_list)
+        {
+            //시장 카드3개 솔드아웃 or 속주 솔드아웃
+            // => 점수계산
+
+            //점수를 저장 할 공간
+            uint[] U_Score = new uint[4];
+
+
+            //1. 점수주세요->client
+            Message Score_Req = new Message();
+            Score_Req.Body = null;
+            Score_Req.Header = new Header()
+            {
+                HASBODY = CONSTANTS.NO_BODY,
+                MSGTYPE = CONSTANTS.SCORE_REQUEST,
+                BODYLEN = 0
+            };
+
+            foreach(Client c in full_list)
+            {
+                MessageUtil.Send(c.stream, Score_Req);
+
+            }
+
+            //2. client 요청응답 받기
+            for (int i = 0; i < 4; i++)
+            {
+                Message Score_Rec = MessageUtil.Receive(full_list[i].stream);
+                
+                if(Score_Rec.Header.MSGTYPE == CONSTANTS.SCORE_SEND)
+                {
+                    U_Score[i] = (Score_Rec.Body as BodyScoreSend).SCORE;
+                }
+                                
+            }
+
+            Message Score_Final = new Message();
+            Score_Final.Body = new BodyTotalScoreSend()
+            {
+                SCORE1 = U_Score[0],
+                SCORE2 = U_Score[1],
+                SCORE3 = U_Score[2],
+                SCORE4 = U_Score[3]
+            };
+
+            Score_Final.Header = new Header()
+            {
+                HASBODY = CONSTANTS.HAS_BODY,
+                MSGTYPE = CONSTANTS.TOTAL_SCORE_SEND,
+                BODYLEN = (uint)Score_Final.Body.GetSize()
+            };
+
+            //3. 점수 다시보내기 및 끊기
+            foreach (Client c in full_list)
+            {
+                MessageUtil.Send(c.stream, Score_Final);
+
+                c.stream.Close();
+                c.client.Close();
+                
+            }
+
+
+        }
+
     }
 }

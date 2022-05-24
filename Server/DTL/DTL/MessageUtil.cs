@@ -60,7 +60,7 @@ namespace DTL
                 case CONSTANTS.INSERT_QUEUE:
                     body = new BodyInsertQueue(bBuffer);
                     break;
-                case CONSTANTS.CANCLE_MATCHING:             //확인필요
+                case CONSTANTS.CANCLE_MATCHING:
                     body = new BodyCancleMatching(bBuffer);
                     break;
                 case CONSTANTS.GAME_START:
