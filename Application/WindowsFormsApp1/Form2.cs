@@ -29,7 +29,7 @@ namespace WindowsFormsApp1
                 Game_Screen game_Screen = new Game_Screen();
                 DB_ACCESS dB_ACCESS = new DB_ACCESS();
                 string ID = textID.Text;
-                sendServer.sendServer_StartSignal(ID);
+                //sendServer.sendServer_StartSignal(ID);
                 dB_ACCESS.SendLog(ID, "게임접속");
 
                 game_Screen.Show();

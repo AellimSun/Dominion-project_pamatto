@@ -41,7 +41,7 @@
             this.startBTN.Location = new System.Drawing.Point(246, 222);
             this.startBTN.Name = "startBTN";
             this.startBTN.Size = new System.Drawing.Size(571, 121);
-            this.startBTN.TabIndex = 16;
+            this.startBTN.TabIndex = 18;
             this.startBTN.Text = "Start the Game";
             this.startBTN.UseVisualStyleBackColor = true;
             this.startBTN.Click += new System.EventHandler(this.startBTN_Click);
@@ -51,7 +51,7 @@
             this.textID.Location = new System.Drawing.Point(405, 195);
             this.textID.Name = "textID";
             this.textID.Size = new System.Drawing.Size(116, 21);
-            this.textID.TabIndex = 17;
+            this.textID.TabIndex = 16;
             // 
             // label1
             // 
@@ -77,6 +77,7 @@
             this.textPW.Name = "textPW";
             this.textPW.Size = new System.Drawing.Size(116, 21);
             this.textPW.TabIndex = 17;
+            this.textPW.UseSystemPasswordChar = true;
             // 
             // Form2
             // 
