@@ -23,7 +23,9 @@ namespace WindowsFormsApp1
         PictureBox[] upper = null;
         PictureBox[] lower = null;
         PictureBox[] marketPics = null;
+        PictureBox[] CSPics = null;
         Label[] marketAmt = null;
+        Label[] CSAmt = null;
 
         public Game_Screen()
         {
@@ -46,6 +48,10 @@ namespace WindowsFormsApp1
             marketPics = new PictureBox[] { pictureBox1, pictureBox2, pictureBox3, pictureBox4,
                 pictureBox5, pictureBox6, pictureBox7, pictureBox8, pictureBox9, pictureBox10 };
 
+            CSPics = new PictureBox[] { pictureBox12, pictureBox11, pictureBox16, pictureBox14, pictureBox13, pictureBox15, pictureBox17 };
+
+            CSAmt = new Label[] { CSamount1, CSamount2, CSamount3, CSamount4, CSamount5, CSamount6, CSamount7 };
+           
             game = new Game(this);
             market = game.market;
             deck = game.deck;
@@ -80,14 +86,14 @@ namespace WindowsFormsApp1
             pictureBox15.Load(Directory.GetCurrentDirectory() + "\\province.png");
             pictureBox17.Load(Directory.GetCurrentDirectory() + "\\curse.png");
             //456781011
-            label4.Text = moneyList[0].amount.ToString();
-            label5.Text = moneyList[1].amount.ToString();
-            label6.Text = moneyList[2].amount.ToString();
+            CSamount1.Text = moneyList[0].amount.ToString();
+            CSamount2.Text = moneyList[1].amount.ToString();
+            CSamount3.Text = moneyList[2].amount.ToString();
 
-            label7.Text = estateList[0].amount.ToString();
-            label8.Text = estateList[1].amount.ToString();
-            label10.Text = estateList[2].amount.ToString();
-            label11.Text = estateList[3].amount.ToString();
+            CSamount4.Text = estateList[0].amount.ToString();
+            CSamount5.Text = estateList[1].amount.ToString();
+            CSamount6.Text = estateList[2].amount.ToString();
+            CSamount7.Text = estateList[3].amount.ToString();
         }
 
         public void changeABC(GameTable gameTable)
@@ -133,8 +139,23 @@ namespace WindowsFormsApp1
             Card res = game.buyCard(i);
             marketAmt[i].Text = res.amount.ToString();
 
-            MessageBox.Show(res.Name + " 카드 1개를 구입하여 " +
-                res.amount + "장 남았습니다.");
+           // MessageBox.Show(res.Name + " 카드 1개를 구입하여 " +
+            //    res.amount + "장 남았습니다.");
+        }
+
+        private void CSClick(object sender, EventArgs e)
+        {
+            PictureBox tmp = (PictureBox)sender;
+            string name = tmp.Name;
+
+            int i;
+            for(i=0;i<CSPics.Length;i++)
+            {
+                if (name.Equals(CSPics[i].Name))
+                    break;
+            }
+            Card res = game.buyCSCard(i);
+            CSAmt[i].Text = res.amount.ToString();
         }
 
         public bool pictureBox_SetImg(int idx)
