@@ -9,15 +9,15 @@ namespace DTL
     public class Header:ISerializable
     {
         public byte HASBODY { get; set; }
-        public uint MSGTYPE { get; set; }
-        public uint BODYLEN { get; set; }
+        public int MSGTYPE { get; set; }
+        public int BODYLEN { get; set; }
 
         public Header() { }
         public Header(byte[] bytes)
         {
             HASBODY = bytes[0];
-            MSGTYPE = BitConverter.ToUInt32(bytes, 1);
-            BODYLEN = BitConverter.ToUInt32(bytes, 5); ;
+            MSGTYPE = BitConverter.ToInt32(bytes, 1);
+            BODYLEN = BitConverter.ToInt32(bytes, 5);
         }
 
         public byte[] GetBytes()

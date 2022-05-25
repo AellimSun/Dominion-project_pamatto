@@ -10,7 +10,7 @@ using DTL;
 
 namespace Dominion_Client
 {
-    internal class Program
+    internal class Dominion_Client
     {
         static void Main(string[] args)
         {
@@ -66,7 +66,7 @@ namespace Dominion_Client
             {
                 HASBODY = CONSTANTS.HAS_BODY,
                 MSGTYPE = CONSTANTS.START_MATCHING,
-                BODYLEN = (uint)STM.Body.GetSize()
+                BODYLEN = STM.Body.GetSize()
             };
 
             MessageUtil.Send(Stream, STM);
@@ -105,20 +105,20 @@ namespace Dominion_Client
         {
             await Task.Run(async () =>
             {
-               //큐 매칭 취소
-               Message CNM = new Message();
-               CNM.Body = new BodyCancleMatching()
-               {
-                   ID = Encoding.ASCII.GetBytes(ID)
-               };
-               CNM.Header = new Header()
-               {
-                   HASBODY = CONSTANTS.HAS_BODY,
-                   MSGTYPE = CONSTANTS.CANCLE_MATCHING,
-                   BODYLEN = (uint)CNM.Body.GetSize()
-               };
-                
-               MessageUtil.Send(Stream, CNM);
+                //큐 매칭 취소
+                Message CNM = new Message();
+                CNM.Body = new BodyCancleMatching()
+                {
+                    ID = Encoding.ASCII.GetBytes(ID)
+                };
+                CNM.Header = new Header()
+                {
+                    HASBODY = CONSTANTS.HAS_BODY,
+                    MSGTYPE = CONSTANTS.CANCLE_MATCHING,
+                    BODYLEN = CNM.Body.GetSize()
+                };
+
+                MessageUtil.Send(Stream, CNM);
             });
         }
         public int Respond(int Res, string[] ID_LIST)
@@ -168,16 +168,17 @@ namespace Dominion_Client
             while (true)
             {
                 Message Alway_Listen = MessageUtil.Receive(Stream);
+
                 switch (Alway_Listen.Header.MSGTYPE)
                 {
                     case CONSTANTS.TURN_SEND:
                         return;
                     case CONSTANTS.ALERT_ACTION:
                         {
-                            switch((Alway_Listen.Body as BodyAlertAction).ACTION)
+                            switch ((Alway_Listen.Body as BodyAlertAction).ACTION)
                             {
                                 case CONSTANTS.ATTACK:
-                                    switch((Alway_Listen.Body as BodyAlertAction).CARD)
+                                    switch ((Alway_Listen.Body as BodyAlertAction).CARD)
                                     {
                                         case 00: //마녀 번호 입력해야됨
                                             //마녀 사용 이펙트 호출
@@ -194,7 +195,7 @@ namespace Dominion_Client
                                                 {
                                                     HASBODY = CONSTANTS.HAS_BODY,
                                                     MSGTYPE = CONSTANTS.LOG_SEND,
-                                                    BODYLEN = (uint)Send_Log.Body.GetSize()
+                                                    BODYLEN = Send_Log.Body.GetSize()
                                                 };
                                                 MessageUtil.Send(Stream, Send_Log);
                                             }
@@ -213,7 +214,7 @@ namespace Dominion_Client
                                                 {
                                                     HASBODY = CONSTANTS.HAS_BODY,
                                                     MSGTYPE = CONSTANTS.ALERT_ACTION,
-                                                    BODYLEN = (uint)GetCard.Body.GetSize()
+                                                    BODYLEN = GetCard.Body.GetSize()
                                                 };
 
                                                 Message Send_Log = new Message();
@@ -226,7 +227,7 @@ namespace Dominion_Client
                                                 {
                                                     HASBODY = CONSTANTS.HAS_BODY,
                                                     MSGTYPE = CONSTANTS.LOG_SEND,
-                                                    BODYLEN = (uint)Send_Log.Body.GetSize()
+                                                    BODYLEN = Send_Log.Body.GetSize()
                                                 };
 
                                                 MessageUtil.Send(Stream, GetCard);
@@ -236,11 +237,11 @@ namespace Dominion_Client
                                     }
                                     break;
                                 case CONSTANTS.GET_CARD:
-                                    uint getcard_recv = (Alway_Listen.Body as BodyAlertAction).CARD;
+                                    int getcard_recv = (Alway_Listen.Body as BodyAlertAction).CARD;
                                     //해당 카드 번호 줄이는 메소드(매개변수 카드번호(<-getcard_recv))
                                     break;
                                 case CONSTANTS.SCRAP_CARD:
-                                    uint scrap_recv = (Alway_Listen.Body as BodyAlertAction).CARD;
+                                    int scrap_recv = (Alway_Listen.Body as BodyAlertAction).CARD;
                                     //폐기장에 해당 카드 번호 추가하는 메소드 (매개변수 카드번호(<-scrap_recv))
                                     break;
                             }
@@ -260,7 +261,7 @@ namespace Dominion_Client
                         {
                             HASBODY = CONSTANTS.HAS_BODY,
                             MSGTYPE = CONSTANTS.SCORE_SEND,
-                            BODYLEN = (uint)my_score.Body.GetSize()
+                            BODYLEN = my_score.Body.GetSize()
                         };
                         MessageUtil.Send(Stream, my_score);
 
@@ -273,10 +274,111 @@ namespace Dominion_Client
 
                         //출력 메서드 호출 (매개변수 all_score)
                         break;
-                }   
+                }
             }
         }
 
-        public void 
+        public void Attack(int Card_Num)
+        {
+            Message Amsg = new Message();
+            Amsg.Body = new BodyAlertAction()
+            {
+                ACTION = CONSTANTS.ATTACK,
+                CARD = Card_Num
+            };
+            Amsg.Header = new Header()
+            {
+                HASBODY = CONSTANTS.HAS_BODY,
+                MSGTYPE = CONSTANTS.ALERT_ACTION,
+                BODYLEN = Amsg.Body.GetSize()
+            };
+            MessageUtil.Send(Stream , Amsg);
+        }
+        public void Get_Card(int Card_Num)
+        {
+            Message GCmsg = new Message();
+            GCmsg.Body = new BodyAlertAction()
+            {
+                ACTION = CONSTANTS.GET_CARD,
+                CARD = Card_Num
+            };
+            GCmsg.Header = new Header()
+            {
+                HASBODY = CONSTANTS.HAS_BODY,
+                MSGTYPE = CONSTANTS.ALERT_ACTION,
+                BODYLEN = GCmsg.Body.GetSize()
+            };
+            MessageUtil.Send(Stream, GCmsg);
+        }
+        public void Scrap_Card(int Card_Num)
+        {
+            Message SCmsg = new Message();
+            SCmsg.Body = new BodyAlertAction()
+            {
+                ACTION = CONSTANTS.SCRAP_CARD,
+                CARD = Card_Num
+            };
+            SCmsg.Header = new Header()
+            {
+                HASBODY = CONSTANTS.HAS_BODY,
+                MSGTYPE = CONSTANTS.ALERT_ACTION,
+                BODYLEN = SCmsg.Body.GetSize()
+            };
+            MessageUtil.Send(Stream, SCmsg);
+        }
+        public void Turn_end()
+        {
+            Message TEmsg = new Message();
+            TEmsg.Body = null;
+            TEmsg.Header = new Header()
+            {
+                HASBODY = CONSTANTS.NO_BODY,
+                MSGTYPE = CONSTANTS.TURN_END,
+                BODYLEN = 0
+            };
+            MessageUtil.Send(Stream, TEmsg);
+        }
+        public void Log_Send(string Log)
+        {
+            Message LSmsg = new Message();
+            LSmsg.Body = new BodyLogSend()
+            {
+                LOG = Encoding.UTF8.GetBytes(Log)
+            };
+            LSmsg.Header = new Header()
+            {
+                HASBODY = CONSTANTS.HAS_BODY,
+                MSGTYPE = CONSTANTS.LOG_SEND,
+                BODYLEN = LSmsg.Body.GetSize()
+            };
+            MessageUtil.Send(Stream, LSmsg);
+        }
+        public void Game_End()
+        {
+            Message GEmsg = new Message();
+            GEmsg.Body = null;
+            GEmsg.Header = new Header()
+            {
+                HASBODY = CONSTANTS.NO_BODY,
+                MSGTYPE = CONSTANTS.GAME_FIN,
+                BODYLEN = 0
+            };
+            MessageUtil.Send(Stream, GEmsg);
+        }
+        public void Score_send(int Score)
+        {
+            Message SSmsg = new Message();
+            SSmsg.Body = new BodyScoreSend()
+            {
+                SCORE = Score
+            };
+            SSmsg.Header = new Header()
+            {
+                HASBODY = CONSTANTS.HAS_BODY,
+                MSGTYPE = CONSTANTS.SCORE_SEND,
+                BODYLEN = SSmsg.Body.GetSize()
+            };
+            MessageUtil.Send(Stream, SSmsg);
+        }
     }
 }
