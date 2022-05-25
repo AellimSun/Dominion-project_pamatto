@@ -24,6 +24,7 @@ namespace WindowsFormsApp1
             //마켓 초기화
             market = new Market();
             cardList = market.getMarketList();
+            form.marketImgInit(market.MarketPile);
 
             //덱 초기화
             deck = new Deck(market.estatePile, market.MoneyPile);
@@ -71,7 +72,7 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                    bool res = form.pictureBox27_SetImg();
+                    bool res = form.pictureBox_SetImg(idx);
 
                     if (res)
                     {
@@ -86,7 +87,7 @@ namespace WindowsFormsApp1
             {
                 if (!now.Equals("액션 종료"))
                 {
-                    bool res = form.pictureBox27_SetImg();
+                    bool res = form.pictureBox_SetImg(idx);
 
                     if (res)
                     {
