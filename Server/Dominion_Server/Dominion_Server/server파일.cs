@@ -148,6 +148,7 @@ namespace Dominion_Server
                         break;
                     //큐 종료 후 매칭 취소 (메시지 전송은 Create_Game에서)
                     case CONSTANTS.DECLINE:
+                        Console.WriteLine("거절");
                         //me.Accept = false; 디폴트값
                         break;
                 }

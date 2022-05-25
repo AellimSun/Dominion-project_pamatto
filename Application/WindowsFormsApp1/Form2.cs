@@ -34,7 +34,7 @@ namespace WindowsFormsApp1
                 this.textPW.Enabled = false;
                 this.startBTN.Enabled = false;
                 form3.ShowDialog();
-                this.Hide();
+                //this.Hide();
             }
             //this.Enabled = false;  비활성화
             //this.Visible = false;  안보이게

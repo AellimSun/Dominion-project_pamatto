@@ -15,20 +15,47 @@ namespace WindowsFormsApp1
         public Form3()
         {
             InitializeComponent();
+
         }
         private int duration = 16;
+        int Qcount = 0;
         private void Form3_Load(object sender, EventArgs e)
         {
             btnStart.Enabled = false;
-            int Qcount = Global.transHandler.Start_Matching();
-            //if(count==1) CreateGameName();
+            Qcount = Global.transHandler.Start_Matching();
             if (Qcount == 1)
             {
-                btnStart.Enabled = true;
-                ShowCountDown();
+                //DB에 방 이름 생성 CreateGameName();
             }
-               
+            TextNumber.Text = Qcount.ToString();
+            WaitingForGameStart();
+        }
+        async public void WaitingForGameStart()
+        {
+            await Task.Run(() =>
+            {
+                int res = Global.transHandler.Wait_Full_Queue(this);
+                if (res == 1)
+                {   //게임시작하실?
+                    btnStart.Enabled = true;
+                    ShowCountDown();
+                }
+                else if (res == -1)
+                {   //큐나가기
+                    //this.Close();
+                }
 
+            });
+        }
+        public void ADD_P()
+        {
+            Qcount++;
+            TextNumber.Text = Qcount.ToString();
+        }
+        public void SUB_P()
+        {
+            Qcount--;
+            TextNumber.Text = Qcount.ToString();
         }
         public void ShowCountDown()
         {
@@ -42,7 +69,7 @@ namespace WindowsFormsApp1
             if (duration == 0)
             {
                 timer1.Stop();
-                //Respon(-1,UserID);
+                Global.transHandler.Respond(-1,Global.ID_List);
             }
             else if (duration > 0)
             {
@@ -50,18 +77,10 @@ namespace WindowsFormsApp1
                 TimeText.Text = duration.ToString();
             }
         }
-        private void TimeText_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             //TimeText.Text = DateTime.Now.ToLongTimeString();
         }
-
-
-
         private void btnStart_Click(object sender, EventArgs e)
         {
             Game_Screen game_Screen = new Game_Screen();
@@ -72,11 +91,25 @@ namespace WindowsFormsApp1
             game_Screen.Show();
             this.Close();
         }
-
         private void btnCancle_Click(object sender, EventArgs e)
         {
-            //Respond(-1,UserID);
-            Close();
+            MessageBox.Show("거절");
+            Global.transHandler.Cancle_Matching();
+            //if (btnStart.Enabled == true)
+            //    Global.transHandler.Respond(-1, Global.ID_List);
+            //else
+            //{
+            //    Global.transHandler.Cancle_Matching();
+            //}
+        }
+        private void TextNumber_TextChanged(object sender, EventArgs e)
+        {
+            if (TextNumber.Text == "1")
+                WaitingForGameStart();
+        }
+        public TextBox setNumberTextBox()
+        {
+            return TextNumber;
         }
     }
 }

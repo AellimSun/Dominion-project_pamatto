@@ -30,7 +30,7 @@ namespace WindowsFormsApp1
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.TextNumber = new System.Windows.Forms.TextBox();
             this.WaitingLabel = new System.Windows.Forms.Label();
             this.TimeText = new System.Windows.Forms.TextBox();
             this.btnStart = new System.Windows.Forms.Button();
@@ -38,18 +38,19 @@ namespace WindowsFormsApp1
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
-            // textBox1
+            // TextNumber
             // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.textBox1.Font = new System.Drawing.Font("돋움체", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.textBox1.Location = new System.Drawing.Point(210, 37);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(34, 22);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.TabStop = false;
+            this.TextNumber.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.TextNumber.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TextNumber.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.TextNumber.Font = new System.Drawing.Font("돋움체", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.TextNumber.Location = new System.Drawing.Point(210, 37);
+            this.TextNumber.Name = "TextNumber";
+            this.TextNumber.ReadOnly = true;
+            this.TextNumber.Size = new System.Drawing.Size(34, 22);
+            this.TextNumber.TabIndex = 0;
+            this.TextNumber.TabStop = false;
+            this.TextNumber.TextChanged += new System.EventHandler(this.TextNumber_TextChanged);
             // 
             // WaitingLabel
             // 
@@ -78,7 +79,7 @@ namespace WindowsFormsApp1
             this.TimeText.Size = new System.Drawing.Size(34, 33);
             this.TimeText.TabIndex = 2;
             this.TimeText.TabStop = false;
-            this.TimeText.TextChanged += new System.EventHandler(this.TimeText_TextChanged);
+            //this.TimeText.TextChanged += new System.EventHandler(this.TimeText_TextChanged);
             // 
             // btnStart
             // 
@@ -113,7 +114,7 @@ namespace WindowsFormsApp1
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.TimeText);
             this.Controls.Add(this.WaitingLabel);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.TextNumber);
             this.Name = "Form3";
             this.Text = "Form3";
             this.Load += new System.EventHandler(this.Form3_Load);
@@ -124,7 +125,7 @@ namespace WindowsFormsApp1
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox TextNumber;
         private System.Windows.Forms.Label WaitingLabel;
         private System.Windows.Forms.TextBox TimeText;
         private System.Windows.Forms.Button btnStart;

@@ -22,11 +22,11 @@ namespace WindowsFormsApp1
             TransHandler t = new TransHandler("127.0.0.1", 5542, myID);
             Console.WriteLine(myID);
             t.Start_Matching();
-            if (t.Wait_Full_Queue(A) == 1)
-            {
-                Console.WriteLine("다찾음");
-                t.Respond(1, OID);
-            }
+            //if (t.Wait_Full_Queue(A) == 1)
+            //{
+            //    Console.WriteLine("다찾음");
+            //    t.Respond(1, OID);
+            //}
 
         }
     }
@@ -81,7 +81,7 @@ namespace WindowsFormsApp1
                 return 0;
             }
         }
-        public int Wait_Full_Queue(int Current_user)
+        public int Wait_Full_Queue(Form3 f)
         {
             while (true)
             {
@@ -89,15 +89,19 @@ namespace WindowsFormsApp1
                 switch (recv.Header.MSGTYPE)
                 {
                     case CONSTANTS.ADD_PLAYER:
-                        Current_user++;
+                        //f.setNumberTextBox().Text = Current_user.ToString();
+                        f.ADD_P();
                         break;
                     case CONSTANTS.SUB_PLAYER:
-                        Current_user--;
+                        //f.setNumberTextBox().Text = Current_user.ToString();
+                        f.SUB_P();
                         break;
                     case CONSTANTS.SUCCESS_CANCLE_MATCHING:
                         return -1;
                     case CONSTANTS.FULL_QUEUE:
                         return 1;
+                    default:
+                        break;
                 }
             }
         }
@@ -116,9 +120,7 @@ namespace WindowsFormsApp1
                     HASBODY = CONSTANTS.HAS_BODY,
                     MSGTYPE = CONSTANTS.CANCLE_MATCHING,
                     BODYLEN = CNM.Body.GetSize()
-                };
-
-                MessageUtil.Send(Stream, CNM);
+                };                
             });
         }
         public int Respond(int Res, string[] ID_LIST)
