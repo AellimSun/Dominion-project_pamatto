@@ -189,6 +189,8 @@ namespace WindowsFormsApp1
             if (state.Equals("액션 종료"))
             {
                 button1.Text = "구매 종료";
+                game.gameTable.ActionNumber = 0;
+                changeABC(game.gameTable);
             }
         }
 
