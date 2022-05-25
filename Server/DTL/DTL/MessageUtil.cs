@@ -37,7 +37,7 @@ namespace DTL
             {
                 totalRecv = 0;
                 bBuffer = new byte[header.BODYLEN];
-                sizeToRead = (int)header.BODYLEN;
+                sizeToRead = header.BODYLEN;
 
                 while (sizeToRead > 0)
                 {

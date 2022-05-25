@@ -8,18 +8,18 @@ using System.Net.Sockets;
 using System.Threading;
 using DTL;
 
-namespace WindowsFormsApp1
+namespace Dominion_Client
 {
     internal class Dominion_Client
     {
-        public void test(string[] args)
+        static void Main(string[] args)
         {
             int A = 0;
             string[] OID = new string[4];
-            string myID = "";
+            string myID="";
             Random ran = new Random();
             myID += (char)ran.Next('a', 'z');
-            TransHandler t = new TransHandler("127.0.0.1", 5542, myID);
+            TransHandler t = new TransHandler("127.0.0.1", 5542,myID);
             Console.WriteLine(myID);
             t.Start_Matching();
             if (t.Wait_Full_Queue(A) == 1)
@@ -27,7 +27,7 @@ namespace WindowsFormsApp1
                 Console.WriteLine("다찾음");
                 t.Respond(1, OID);
             }
-
+            
         }
     }
 
@@ -292,7 +292,7 @@ namespace WindowsFormsApp1
                 MSGTYPE = CONSTANTS.ALERT_ACTION,
                 BODYLEN = Amsg.Body.GetSize()
             };
-            MessageUtil.Send(Stream, Amsg);
+            MessageUtil.Send(Stream , Amsg);
         }
         public void Get_Card(int Card_Num)
         {

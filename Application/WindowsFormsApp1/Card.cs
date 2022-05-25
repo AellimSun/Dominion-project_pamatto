@@ -13,6 +13,7 @@ namespace WindowsFormsApp1
         public int price = 0;
         public int amount = 0;
         public string Name = "";
+        public string kind = "";
 
         public void setName(string Name)
         {
@@ -183,7 +184,8 @@ namespace WindowsFormsApp1
                     JProperty jp = j2.ToObject<JProperty>();
                     //효과이름 얻기
                     string subKey = jp.Name;
-                    setAmount(10);
+                    amount = 10;
+                    kind = "action";
 
                     //int 타입 멤버변수일 경우
                     if(Array.IndexOf(ops, subKey) > -1){
@@ -212,7 +214,8 @@ namespace WindowsFormsApp1
         public MoneyCard(string key, JToken jtoken)
         {
             Card card = new Card();
-            setName(key);
+            Name = key;
+            kind = "money";
             int i = 0;
 
             foreach (JToken j in jtoken)
@@ -238,7 +241,9 @@ namespace WindowsFormsApp1
         public EstateCard(string key, JToken jtoken)
         {
             Card card = new Card();
-            setName(key);
+            Name = key;
+            kind = "estate";
+
             int i = 0;
 
             foreach (JToken j in jtoken)
