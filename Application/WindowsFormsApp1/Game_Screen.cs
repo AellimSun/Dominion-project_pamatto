@@ -94,6 +94,15 @@ namespace WindowsFormsApp1
             CSamount5.Text = estateList[1].amount.ToString();
             CSamount6.Text = estateList[2].amount.ToString();
             CSamount7.Text = estateList[3].amount.ToString();
+
+            if (deck.DrawDeck.Count == 0)
+            {
+                pictureBox123.Visible = false;
+            }
+            if(deck.GraveDeck.Count !=0)
+            {
+                pictureBox124.Visible = true;
+            }
         }
 
         public void changeABC(GameTable gameTable)
@@ -186,6 +195,14 @@ namespace WindowsFormsApp1
             {
                 button1.Text = "구매 종료";
             }
+            else if (state.Equals("구매 종료"))
+            {
+                //Global.transHandler.Turn_end();
+                button1.Text = "액션 종료";
+                //버튼 비활성화
+                //button1.Enabled = false;
+                
+            }
         }
 
         public void turn_button1()
@@ -194,6 +211,7 @@ namespace WindowsFormsApp1
             if (state.Equals("액션 종료"))
             {
                 button1.Text = "구매 종료";
+                button1.Enabled.ToString();
             }
         }
 
@@ -223,6 +241,8 @@ namespace WindowsFormsApp1
                 marketPics[i].Load(Directory.GetCurrentDirectory() + "\\" + marketlist[i].Name + ".png");
             }
         }
+
+        
     }
     //public class market
     //{

@@ -19,7 +19,7 @@ namespace WindowsFormsApp1
             Coin = 0;
         }
 
-
+        
 
     }
 }
