@@ -102,7 +102,7 @@ namespace WindowsFormsApp1
                 MarketPile.RemoveAt(CardToMove);
             }
 
-            NewCards.Sort((a, b) => (a.price > b.price) ? -1 : 1);
+            NewCards.Sort((a, b) => (a.price < b.price) ? -1 : 1);
             MarketPile = NewCards;
         }
     }
