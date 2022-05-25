@@ -13,21 +13,55 @@ namespace Dominion_Client
     internal class Dominion_Client
     {
         static void Main(string[] args)
-        {
+        {   
+            //TEST
+
             int A = 0;
             string[] OID = new string[4];
             string myID="";
+            int myScore = 0;
+            int[] TotalScore = new int[4];
+            string B;
             Random ran = new Random();
-            myID += (char)ran.Next('a', 'z');
-            TransHandler t = new TransHandler("127.0.0.1", 5542,myID);
+            myID += (char)ran.Next('a', 'z');   //가상 아이디 :: test용
+            myScore = ran.Next(100);
+            TransHandler t = new TransHandler("127.0.0.1", 5542, myID);
             Console.WriteLine(myID);
             t.Start_Matching();
-            if (t.Wait_Full_Queue(A) == 1)
+            if (t.Wait_Full_Queue(A) == 0)  //client 4개 가상으로 생성 후 큐 확인
             {
-                Console.WriteLine("다찾음");
-                t.Respond(1, OID);
+                Console.WriteLine("ERROR!");
+                return;
             }
-            
+            int res = t.Respond(1, OID);
+            if (res == -1)
+            {
+                Console.WriteLine("방폭!");
+                return;
+            }
+            else if (res == 0)
+            {
+                Console.WriteLine("ERROR!");
+                return;
+            }
+            if(res == 1)
+                Console.WriteLine("게임 시작!");
+            while (true)
+            {
+                if (t.Game_Listener(false, myScore, TotalScore) == -1) break;
+                Console.WriteLine("내 턴!");
+                B = Console.ReadLine();
+                if(B=="T")
+                    t.Turn_end();
+                if (B == "E")
+                {
+                    t.Game_End(myScore);
+                    t.Recv_Total_Score(TotalScore);
+                    break;
+                }
+            }
+            Console.WriteLine("{0} {1} {2} {3}",TotalScore[0],TotalScore[1],TotalScore[2],TotalScore[3]);
+
         }
     }
 
@@ -61,6 +95,7 @@ namespace Dominion_Client
             STM.Body = new BodyStartMatching()
             {
                 ID = Encoding.ASCII.GetBytes(ID)
+
             };
             STM.Header = new Header()
             {
@@ -144,6 +179,7 @@ namespace Dominion_Client
                     };
                     break;
             }
+            MessageUtil.Send(Stream, Res_Msg);
             Message recv = MessageUtil.Receive(Stream);
             switch (recv.Header.MSGTYPE)
             {
@@ -163,7 +199,7 @@ namespace Dominion_Client
             return 0;
         }
 
-        public void Game_Listener(bool Hyeaja)  //내 차례가 아닐 때 수신대기하는 메서드
+        public int Game_Listener(bool Hyeaja, int S, int[] TS)  //내 차례가 아닐 때 수신대기하는 메서드  테스트용 수정필!
         {
             while (true)
             {
@@ -172,7 +208,7 @@ namespace Dominion_Client
                 switch (Alway_Listen.Header.MSGTYPE)
                 {
                     case CONSTANTS.TURN_SEND:
-                        return;
+                        return 1;
                     case CONSTANTS.ALERT_ACTION:
                         {
                             switch ((Alway_Listen.Body as BodyAlertAction).ACTION)
@@ -185,53 +221,15 @@ namespace Dominion_Client
                                             if (Hyeaja)
                                             {
                                                 //방어 이펙트 호출
-                                                Message Send_Log = new Message();
-                                                Send_Log.Body = new BodyLogSend()
-                                                {
-                                                    //해자카드에 대한 로그 정의를 확실히 한 후 추가
-                                                    //LOG = 
-                                                };
-                                                Send_Log.Header = new Header()
-                                                {
-                                                    HASBODY = CONSTANTS.HAS_BODY,
-                                                    MSGTYPE = CONSTANTS.LOG_SEND,
-                                                    BODYLEN = Send_Log.Body.GetSize()
-                                                };
-                                                MessageUtil.Send(Stream, Send_Log);
+                                                //Log_Send(Defence_Log);  Defence_Log에 방어 성공 로그 입력
                                             }
                                             else
                                             {
                                                 //저주 획득 이펙트 호출
                                                 //저주 카드 개수 줄이는 메서드 호출
 
-                                                Message GetCard = new Message();
-                                                GetCard.Body = new BodyAlertAction()
-                                                {
-                                                    ACTION = CONSTANTS.GET_CARD,
-                                                    CARD = 01       //저주 카드 번호 입력 필요함
-                                                };
-                                                GetCard.Header = new Header()
-                                                {
-                                                    HASBODY = CONSTANTS.HAS_BODY,
-                                                    MSGTYPE = CONSTANTS.ALERT_ACTION,
-                                                    BODYLEN = GetCard.Body.GetSize()
-                                                };
-
-                                                Message Send_Log = new Message();
-                                                Send_Log.Body = new BodyLogSend()
-                                                {
-                                                    //저주카드에 대한 로그 정의를 확실히 한 후 추가
-                                                    //LOG = 
-                                                };
-                                                Send_Log.Header = new Header()
-                                                {
-                                                    HASBODY = CONSTANTS.HAS_BODY,
-                                                    MSGTYPE = CONSTANTS.LOG_SEND,
-                                                    BODYLEN = Send_Log.Body.GetSize()
-                                                };
-
-                                                MessageUtil.Send(Stream, GetCard);
-                                                MessageUtil.Send(Stream, Send_Log);
+                                                //Get_Card(Curse_No); Curse_No에 저주 카드 번호 입력
+                                                //Log_Send(Curse_Get_Log); Curse_Get_Log에 저주 카드 획득 로그 입력
                                             }
                                             break;
                                     }
@@ -252,28 +250,10 @@ namespace Dominion_Client
                         //로그 추가 메서드(매개변수 바이트 로그를 스트링으로 변환한 것 (<-log_recv))
                         break;
                     case CONSTANTS.SCORE_REQUEST:
-                        Message my_score = new Message();
-                        my_score.Body = new BodyScoreSend()
-                        {
-                            //Score = 스코어 계산하는 메서드 호출
-                        };
-                        my_score.Header = new Header()
-                        {
-                            HASBODY = CONSTANTS.HAS_BODY,
-                            MSGTYPE = CONSTANTS.SCORE_SEND,
-                            BODYLEN = my_score.Body.GetSize()
-                        };
-                        MessageUtil.Send(Stream, my_score);
-
-                        Message All_Score = MessageUtil.Receive(Stream);
-                        int[] all_score = new int[4];
-                        all_score[0] = (int)(All_Score.Body as BodyTotalScoreSend).SCORE1;
-                        all_score[1] = (int)(All_Score.Body as BodyTotalScoreSend).SCORE2;
-                        all_score[2] = (int)(All_Score.Body as BodyTotalScoreSend).SCORE3;
-                        all_score[3] = (int)(All_Score.Body as BodyTotalScoreSend).SCORE4;
-
+                        Score_send(S);    //Score에 자기 점수 넣으면됨
+                        Recv_Total_Score(TS);     //Total_Score에 모두의 점수 받을 int형 배열 입력
                         //출력 메서드 호출 (매개변수 all_score)
-                        break;
+                        return -1;
                 }
             }
         }
@@ -353,7 +333,7 @@ namespace Dominion_Client
             };
             MessageUtil.Send(Stream, LSmsg);
         }
-        public void Game_End()
+        public void Game_End(int S) //테스트용 수정 필
         {
             Message GEmsg = new Message();
             GEmsg.Body = null;
@@ -364,6 +344,13 @@ namespace Dominion_Client
                 BODYLEN = 0
             };
             MessageUtil.Send(Stream, GEmsg);
+
+            Message RSmsg = MessageUtil.Receive(Stream);
+            if (RSmsg.Header.MSGTYPE != CONSTANTS.SCORE_REQUEST)
+            {
+                return;
+            }
+            Score_send(S);
         }
         public void Score_send(int Score)
         {
@@ -379,6 +366,14 @@ namespace Dominion_Client
                 BODYLEN = SSmsg.Body.GetSize()
             };
             MessageUtil.Send(Stream, SSmsg);
+        }
+        public void Recv_Total_Score(int[] all_score)
+        {
+            Message All_Score = MessageUtil.Receive(Stream);
+            all_score[0] = (int)(All_Score.Body as BodyTotalScoreSend).SCORE1;
+            all_score[1] = (int)(All_Score.Body as BodyTotalScoreSend).SCORE2;
+            all_score[2] = (int)(All_Score.Body as BodyTotalScoreSend).SCORE3;
+            all_score[3] = (int)(All_Score.Body as BodyTotalScoreSend).SCORE4;
         }
     }
 }
