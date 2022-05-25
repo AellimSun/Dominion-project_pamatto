@@ -27,7 +27,8 @@ namespace WindowsFormsApp1
             form.marketImgInit(market.MarketPile);
 
             //덱 초기화
-            deck = new Deck(market.estatePile, market.MoneyPile);
+            //deck = new Deck(market.estatePile, market.MoneyPile);
+            deck = new Deck(market.estatePile, market.MoneyPile, market.MarketPile);   // 지워야됨
             gameTable = new GameTable();
             trash = new Trash();
 
@@ -85,13 +86,16 @@ namespace WindowsFormsApp1
             }
             else if (deck.HandDeck[idx].kind.Equals("action"))
             {
-                if (!now.Equals("액션 종료"))
+                if (now.Equals("액션 종료"))
                 {
                     bool res = form.pictureBox_SetImg(idx);
 
                     if (res)
                     {
                         gameTable.ActionNumber -= 1;
+                        ActionCard actionCard = (ActionCard)deck.HandDeck[idx];
+                        form.printMessageBox(string.Format("{0}",actionCard.add_Draw));
+                        useCard(actionCard);
                         form.changeABC(gameTable);
 
                         if (gameTable.ActionNumber <= 0)
@@ -116,6 +120,8 @@ namespace WindowsFormsApp1
                 gameTable.Coin += card.add_Money;
             if (card.goto_Grave != 0)
                 deck.GoToGrave(card.goto_Grave);
+            if (card.add_Draw != 0)
+                deck.DrawToHand(card.add_Draw, form);
             //if (card.attack == true)
 
             //ShowTable에 보여지는 UI관련 메소드

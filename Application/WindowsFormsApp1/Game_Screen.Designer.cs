@@ -325,6 +325,7 @@
             this.pictureBox31.TabIndex = 6;
             this.pictureBox31.TabStop = false;
             this.pictureBox31.Visible = false;
+            this.pictureBox31.Click += new System.EventHandler(this.handClick);     //수정했음
             // 
             // pictureBox18
             // 

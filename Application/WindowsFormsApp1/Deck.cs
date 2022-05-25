@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace WindowsFormsApp1
 {
@@ -15,7 +16,7 @@ namespace WindowsFormsApp1
 
         private Random random = new Random();
 
-        public Deck(List<Card> estatelist, List<Card> moneylist)
+        public Deck(List<Card> estatelist, List<Card> moneylist, Game_Screen g)
         {
             HandDeck = new List<Card>();
             DrawDeck = new List<Card>();
@@ -55,8 +56,51 @@ namespace WindowsFormsApp1
             }
 
             Shuffle(DrawDeck);
-            DrawToHand(5);
+            DrawToHand(5, g);
         }
+
+        public Deck(List<Card> estatelist, List<Card> moneylist, List<Card> actionlist)     //지워야됨
+        {
+            HandDeck = new List<Card>();
+            DrawDeck = new List<Card>();
+            GraveDeck = new List<Card>();
+
+            Card copper = null;
+            int i;
+            for (i = 0; i < 3; i++)
+            {
+                if (moneylist[i].Name.Equals("copper"))
+                {
+                    copper = moneylist[i];
+                    break;
+                }
+            }
+            Card estate = null;
+            int j;
+            for (j = 0; j < 4; j++)
+            {
+                if (estatelist[j].Name.Equals("estate"))
+                {
+                    estate = estatelist[j];
+                    break;
+                }
+            }
+
+            for (int k = 0; k < 7; k++)
+            {
+                DrawDeck.Add(copper);
+                moneylist[i].amount -= 1;
+            }
+
+            for (int k = 0; k < 3; k++)
+            {
+                DrawDeck.Add(estate);
+                estatelist[j].amount -= 1;
+            }
+
+            Shuffle(DrawDeck);
+            DrawToHand(5,actionlist);
+        }       //지워야됨
 
         public void Shuffle(List<Card> Obj)
         {
@@ -80,7 +124,24 @@ namespace WindowsFormsApp1
                     Shuffle(DrawDeck);
             }
         }
-        public void DrawToHand(int i)
+        public void DrawToHand(int i, Game_Screen g)
+        {
+            while (0 < i)
+            {
+                HandDeck.Add(DrawDeck[0]);
+                g.getLower()[HandDeck.Count - 1].Load(Directory.GetCurrentDirectory() + "\\" + HandDeck[HandDeck.Count - 1].Name + ".png");
+                g.getLower()[HandDeck.Count - 1].Visible = true;
+                g.getLower()[HandDeck.Count - 1].Enabled = true;
+                //pictureBox31.Load(Directory.GetCurrentDirectory() + "\\" + handList[5].Name + ".png");
+                //pictureBox31.Visible = true; 
+                DrawDeck.RemoveAt(0);
+                if (DrawDeck.Count == 0)
+                    Shuffle(DrawDeck);
+                i--;
+            }
+            
+        }
+        public void DrawToHand(int i, List<Card> actionlist)        //지워야됨
         {
             while (0 < i)
             {
@@ -90,8 +151,17 @@ namespace WindowsFormsApp1
                     Shuffle(DrawDeck);
                 i--;
             }
-        }
-        public void Clear()
+            Card tmp = null;
+            for (int j = 0; j < 10; j++) {
+                if (actionlist[j].Name.Equals("smithy"))
+                {
+                    tmp = actionlist[j];
+                    break;
+                }
+            }
+            HandDeck.Add(tmp);
+        }           //지워야됨
+            public void Clear()
         {
             //HandToGrave
             for (int i = 0; i < HandDeck.Count; i++)

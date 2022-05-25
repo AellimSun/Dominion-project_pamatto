@@ -30,6 +30,7 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
+        public PictureBox[] getLower() { return lower; }
         private void Form1_Load(object sender, EventArgs e)
         {
             upper = new PictureBox[] { pictureBox27, pictureBox26, pictureBox25, pictureBox30,
@@ -107,6 +108,9 @@ namespace WindowsFormsApp1
             pictureBox20.Load(Directory.GetCurrentDirectory() + "\\" + handList[2].Name + ".png");
             pictureBox19.Load(Directory.GetCurrentDirectory() + "\\" + handList[3].Name + ".png");
             pictureBox18.Load(Directory.GetCurrentDirectory() + "\\" + handList[4].Name + ".png");
+            pictureBox31.Load(Directory.GetCurrentDirectory() + "\\" + handList[5].Name + ".png");      //삭제해야됨
+            pictureBox31.Visible = true; //삭제해야됨
+            pictureBox31.Enabled = true; //삭제해야됨
 
             button1.Text = "액션 종료";
         }
