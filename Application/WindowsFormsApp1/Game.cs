@@ -121,10 +121,15 @@ namespace WindowsFormsApp1
         }
         public Card buyCard(int i)
         {
-            int amount = cardList[i].amount;
-            market.SellCard(cardList[0]);
-            //deck.BuyCard(card);
-            //간단하게..?
+            if (gameTable.Coin >= cardList[i].price)
+            {
+                gameTable.Coin -= cardList[i].price;
+                //int amount = cardList[i].amount;
+                market.SellCard(cardList[i]);
+                deck.BuyCard(cardList[i]);
+            }
+
+            //if(gameTable.Coin >=)
 
             return cardList[i];
         }
