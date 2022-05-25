@@ -61,12 +61,11 @@ namespace WindowsFormsApp1
             dB_ACCESS.SendLog(Global.UserID, "logging in");          //sending game login
             game_Screen.Show();
             this.Close();
-            
         }
 
         private void btnCancle_Click(object sender, EventArgs e)
         {
-            //CancleMatch();
+            //Respond(-1,UserID);
             Close();
         }
     }

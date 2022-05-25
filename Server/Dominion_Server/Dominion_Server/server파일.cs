@@ -10,16 +10,19 @@ using DTL;
 
 namespace Dominion_Server
 {
+
     public class Client
     {
         public TcpClient client;
         public NetworkStream stream { get; set; }
         public string ID { get; set; }
         public bool Accept { get; set; }
+        public bool respond { get; set; }
 
     }
     internal class Program
     {
+        //private Object lck = new System.Object();
         static void Main(string[] args)
         {
             List<Client> clients= new List<Client>();
@@ -32,7 +35,6 @@ namespace Dominion_Server
             {
                 //4명 모이기 전까지 계속 돈다
                 AddClient(server, clients);
-                Console.WriteLine(clients.Count);
                 if (clients.Count == 4)
                 {
                     Create_Game(clients);
@@ -41,7 +43,6 @@ namespace Dominion_Server
             }
 
         }
-        //
 
         async static private void AddClient(TcpListener server, List<Client> clients)
         {
@@ -51,6 +52,7 @@ namespace Dominion_Server
             tmp.client = newClient;
             tmp.stream = newClient.GetStream();
             tmp.Accept = false;
+            tmp.respond = false;
             //newClient에 대한 정보를 tmp객체의 멤버변수에 정의
             while (true)
             {
@@ -78,7 +80,10 @@ namespace Dominion_Server
                     MessageUtil.Send(c.stream, ADDP);
                 }
             }
-            clients.Add(tmp);
+            //lock ()
+            //{
+                clients.Add(tmp);
+            //}
             //메시지 전송(현재 클라이언트에게 큐에 있는 인원 수를 알려주는 메시지)
 
             Message I_Q = new Message();
@@ -92,10 +97,8 @@ namespace Dominion_Server
                 MSGTYPE = CONSTANTS.INSERT_QUEUE,
                 BODYLEN = 4
             };
-            foreach (Client c in clients)
-            {
-                MessageUtil.Send(c.stream, I_Q);
-            }
+            MessageUtil.Send(tmp.stream, I_Q);
+            
 
             await Task.Run(async () =>
             {
@@ -123,7 +126,12 @@ namespace Dominion_Server
                                 MessageUtil.Send(me.stream, SCM);
                                 me.client.Close();
                                 me.stream.Close();
-                                clients.RemoveAt(i);
+
+                                //lock()
+                                //{
+                                    clients.RemoveAt(i);
+                                //}
+                                
                                 break;
                             }
                         }
@@ -145,10 +153,12 @@ namespace Dominion_Server
                         }
                         break;
                     case CONSTANTS.ACCEPT:
+                        me.respond = true;
                         me.Accept = true;
                         break;
                     //큐 종료 후 매칭 취소 (메시지 전송은 Create_Game에서)
                     case CONSTANTS.DECLINE:
+                        me.respond = true;
                         //me.Accept = false; 디폴트값
                         break;
                 }
@@ -166,11 +176,10 @@ namespace Dominion_Server
             for (int i = 0; i < 4; i++)
             {
                 Random rand = new Random();
-                int next = rand.Next(0, 4 - i);
+                int next = rand.Next(4 - i);
                 full_list[i] = clients[index_list[next]];
                 index_list.RemoveAt(next);
             }
-            Console.WriteLine("{0} {1} {2} {3}",full_list[0].ID, full_list[1].ID, full_list[2].ID, full_list[3].ID);
             await Task.Run(async () =>
             {
                 Message F_Q = new Message();
@@ -186,7 +195,15 @@ namespace Dominion_Server
                 {
                     MessageUtil.Send(c.stream, F_Q);
                 }
-                await Task.Delay(16000);
+                while (true)
+                {
+                    bool All_Respond = true;
+                    foreach(Client c  in full_list)
+                    {
+                        All_Respond = All_Respond && c.respond;
+                    }
+                    if (All_Respond) break;
+                }
                 bool Ready = true;
                 foreach (Client c in full_list)
                 {
@@ -314,7 +331,7 @@ namespace Dominion_Server
                                                         {
                                                             foreach (Client c in full_list)
                                                             {
-                                                                MessageUtil.Send(c.stream, R_Msg);
+                                                                MessageUtil.Send(c.stream, recv_res);
                                                             }
                                                         }
 
@@ -324,7 +341,7 @@ namespace Dominion_Server
                                                         //해자가 있다면 획득메시지 없이 로그만 전달
                                                         foreach (Client c in full_list)
                                                         {
-                                                            MessageUtil.Send(c.stream, R_Msg);
+                                                            MessageUtil.Send(c.stream, recv_res);
                                                         }
                                                     }
                                                     break;
