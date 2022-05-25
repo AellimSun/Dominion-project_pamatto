@@ -24,7 +24,7 @@ namespace WindowsFormsApp1
             JToken action = card2.First.First;
 
             //foreach 조건문 안에서 KeyValuePair 사용하면 오류 없는데 이상하게 안이나 밖에서 쓰면 오류남..
-            //jtoken.Next도 bool타입이 아니니 일단 이렇게 작성하는걸로....
+            //jtoken.Next도 bool타입이 아니니 일단 이렇게 작성하는걸로...
             for (int i = 0; i < 10; i++)
             {
                 //key값을 얻기위해 JProperty형식으로 형변환
