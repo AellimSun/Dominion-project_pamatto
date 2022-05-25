@@ -62,7 +62,7 @@ namespace WindowsFormsApp1
             card2 = card2.Next;
             JToken estate = card2.First.First;
 
-            for(int i = 0; i<4; i++)
+            for (int i = 0; i < 4; i++)
             {
                 //key값을 얻기위해 JProperty형식으로 형변환
                 JProperty jp = estate.ToObject<JProperty>();
@@ -76,6 +76,8 @@ namespace WindowsFormsApp1
                 //다음 카드로
                 estate = estate.Next;
             }
+
+            ShuffleDraw();
         }
 
         public List<Card> getMarketList()
@@ -89,6 +91,19 @@ namespace WindowsFormsApp1
             int amount = card.amount;
             card.minusAmount(1);
         }
+        public void ShuffleDraw()
+        {
+            List<Card> NewCards = new List<Card>();
+            Random random = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                int CardToMove = random.Next(MarketPile.Count);
+                NewCards.Add(MarketPile[CardToMove]);
+                MarketPile.RemoveAt(CardToMove);
+            }
 
+            NewCards.Sort((a, b) => (a.price > b.price) ? -1 : 1);
+            MarketPile = NewCards;
+        }
     }
 }

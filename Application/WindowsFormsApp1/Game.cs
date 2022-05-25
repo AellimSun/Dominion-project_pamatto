@@ -24,6 +24,7 @@ namespace WindowsFormsApp1
             //마켓 초기화
             market = new Market();
             cardList = market.getMarketList();
+            form.marketImgInit(market.MarketPile);
 
             //덱 초기화
             deck = new Deck(market.estatePile, market.MoneyPile);
