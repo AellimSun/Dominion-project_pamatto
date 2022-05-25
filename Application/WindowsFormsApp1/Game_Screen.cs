@@ -57,18 +57,6 @@ namespace WindowsFormsApp1
             listBox1.Items.Add("player3");
             listBox1.Items.Add("player4");
 
-            //마켓에 이미지추가하기(Market.cs에서 하려고 하니 이 cs의 것이라 설정이 어려움)
-            pictureBox1.BackColor = Color.AliceBlue;
-            pictureBox2.BackColor = Color.AliceBlue;
-            pictureBox3.BackColor = Color.AliceBlue;
-            pictureBox4.BackColor = Color.AliceBlue;
-            pictureBox5.BackColor = Color.AliceBlue;
-            pictureBox6.BackColor = Color.AliceBlue;
-            pictureBox7.BackColor = Color.AliceBlue;
-            pictureBox8.BackColor = Color.AliceBlue;
-            pictureBox9.BackColor = Color.AliceBlue;
-            pictureBox10.BackColor = Color.AliceBlue;
-
             List<Card> moneyList = market.MoneyPile;
             List<Card> estateList = market.estatePile;
 
