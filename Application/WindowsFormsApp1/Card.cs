@@ -13,6 +13,7 @@ namespace WindowsFormsApp1
         public int price = 0;
         public int amount = 0;
         public string Name = "";
+        public string kind = "";
 
         public void setName(string Name)
         {
@@ -139,8 +140,7 @@ namespace WindowsFormsApp1
             {
                 this.attack = true;
             }
-            else
-            {
+            else{
                 this.attack = false;
             }
         }
@@ -176,19 +176,19 @@ namespace WindowsFormsApp1
             setName(key);
 
             int i = 0;
-            foreach (JToken j in jtoken)
+            foreach(JToken j in jtoken)
             { 
-                foreach (JToken j2 in j)
+                foreach(JToken j2 in j)
                 {
                     //효과이름(key값) 얻기위해 JProperty로 형변환
                     JProperty jp = j2.ToObject<JProperty>();
                     //효과이름 얻기
                     string subKey = jp.Name;
-                    setAmount(10);
+                    amount = 10;
+                    kind = "action";
 
                     //int 타입 멤버변수일 경우
-                    if (Array.IndexOf(ops, subKey) > -1)
-                    {
+                    if(Array.IndexOf(ops, subKey) > -1){
                         //int값이 들어가야하는 곳에서 n이 들어갈 때 -> 임시로 0으로 해놓기
                         if (jp.Value.ToString().Equals("n"))
                         {
@@ -209,11 +209,56 @@ namespace WindowsFormsApp1
 
     public class MoneyCard : Card
     {
-        private int money;
+        public int money;
+
+        public MoneyCard(string key, JToken jtoken)
+        {
+            Card card = new Card();
+            Name = key;
+            kind = "money";
+            int i = 0;
+
+            foreach (JToken j in jtoken)
+            {
+                foreach (JToken j2 in j)
+                {
+                    //효과이름(key값) 얻기위해 JProperty로 형변환
+                    JProperty jp = j2.ToObject<JProperty>();
+                    //효과이름 얻기
+                    string subKey = jp.Name;
+
+                    //subKey라는 스트링 변수의 값을 변수명으로 가진 변수에 값 세팅
+                    this.GetType().GetField(subKey).SetValue(this, Convert.ToInt32(jp.Value));
+                }
+            }
+        }
     }
 
     public class EstateCard : Card
     {
-        private int score;
+        public int score;
+
+        public EstateCard(string key, JToken jtoken)
+        {
+            Card card = new Card();
+            Name = key;
+            kind = "estate";
+
+            int i = 0;
+
+            foreach (JToken j in jtoken)
+            {
+                foreach (JToken j2 in j)
+                {
+                    //효과이름(key값) 얻기위해 JProperty로 형변환
+                    JProperty jp = j2.ToObject<JProperty>();
+                    //효과이름 얻기
+                    string subKey = jp.Name;
+
+                    //subKey라는 스트링 변수의 값을 변수명으로 가진 변수에 값 세팅
+                    this.GetType().GetField(subKey).SetValue(this, Convert.ToInt32(jp.Value));
+                }
+            }
+        }
     }
 }

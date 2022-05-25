@@ -1,0 +1,83 @@
+{
+	"action": {
+		"moat": {
+			"price": "2",
+			"add_Draw": "2",
+			"protect": "true"
+		},
+		"cellar": {
+			"price": "2",
+			"add_Action": "1",
+			"add_Draw": "n",
+			"goto_Grave": "n"
+		},
+		"merchant": {
+			"price": "3",
+			"add_Draw": "1",
+			"add_Money": "1"
+		},
+		"village": {
+			"price": "3",
+			"add_Draw": "1",
+			"add_Action": "2"
+		},
+		"workshop": {
+			"price": "3",
+			"gain_to_Deck": "1"
+		},
+		"remodel": {
+			"price": "4",
+			"goto_Trash": "1",
+			"gain_to_Deck": "1"
+		},
+		"smithy": {
+			"price": "4",
+			"add_Draw": "3"
+		},
+		"witch": {
+			"price": "5",
+			"add_Draw": "2",
+			"attack": "true"
+		},
+		"market": {
+			"price": "5",
+			"add_Draw": "1",
+			"add_Action": "1",
+			"add_Buy": "1"
+		},
+		"mine": {
+			"price": "5",
+			"goto_Trash": "1",
+			"gain_to_Deck": " 1",
+			"gain_to_Hand": "1"
+		}
+	},
+	"money": {
+		"cooper": {
+			"price": "0",
+			"money": "1"
+		},
+		"silver": {
+			"price": "3",
+			"money": "2"
+		},
+		"gold": {
+			"price": "6",
+			"money": "3"
+		}
+	},
+	"estate": {
+		"estate": {
+			"price": "2",
+			"score": "1"
+		},
+		"Duchy": {
+			"price": "5",
+			"score": "3"
+		},
+		"Province": {
+			"price": "8",
+			"score": "6"
+		}
+	}
+}
