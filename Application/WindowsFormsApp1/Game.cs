@@ -128,12 +128,49 @@ namespace WindowsFormsApp1
         }
         public Card buyCard(int i)
         {
-            int amount = cardList[i].amount;
-            market.SellCard(cardList[i]);
-            //deck.BuyCard(card);
-            //간단하게..?
+            if (gameTable.Coin >= cardList[i].price && gameTable.BuyNumber >= 1)
+            {
+                gameTable.Coin -= cardList[i].price;
+                gameTable.BuyNumber -= 1;
+                //int amount = cardList[i].amount;
+                market.SellCard(cardList[i]);
+                deck.BuyCard(cardList[i]);
+
+                form.changeABC(gameTable);
+            }
+
+            //if(gameTable.Coin >=)
 
             return cardList[i];
+        }
+
+        public Card buyCSCard(int i)
+        {
+            List<Card> list = null;
+            if (i < 3)
+            {
+                list = market.MoneyPile;
+            }
+            else
+            {
+                list = market.estatePile;
+                i = i - 3;
+            }
+            if (gameTable.Coin >= list[i].price && gameTable.BuyNumber >= 1)
+            {
+               
+                gameTable.Coin -= list[i].price;
+                gameTable.BuyNumber -= 1;
+                //int amount = cardList[i].amount;
+                market.SellCard(list[i]);
+                deck.BuyCard(list[i]);
+
+                form.changeABC(gameTable);
+            }
+
+            //if(gameTable.Coin >=)
+
+            return list[i];
         }
         //액션 등등
     }

@@ -41,6 +41,7 @@ namespace Dominion_Server
                     clients = new List<Client>();
                 }
             }
+
         }
 
         async static private void AddClient(TcpListener server, List<Client> clients)
@@ -223,7 +224,7 @@ namespace Dominion_Server
                     {
                         HASBODY = CONSTANTS.HAS_BODY,
                         MSGTYPE = CONSTANTS.GAME_START,
-                        BODYLEN = P_G.Body.GetSize()
+                        BODYLEN = (uint)P_G.Body.GetSize()
                     };
 
                     foreach (Client c in full_list)
@@ -310,7 +311,7 @@ namespace Dominion_Server
                                         MessageUtil.Send(full_list[i].stream, R_Msg);
                                         if ((R_Msg.Body as BodyAlertAction).ACTION == CONSTANTS.ATTACK)
                                         {
-                                            int CardNo = (R_Msg.Body as BodyAlertAction).CARD;
+                                            uint CardNo = (R_Msg.Body as BodyAlertAction).CARD;
                                             Message recv_res = MessageUtil.Receive(full_list[i].stream);
                                             switch (CardNo)
                                             {
@@ -386,7 +387,7 @@ namespace Dominion_Server
             // => 점수계산
 
             //점수를 저장 할 공간
-            int[] U_Score = new int[4];
+            uint[] U_Score = new uint[4];
 
 
             //1. 점수주세요->client
@@ -430,7 +431,7 @@ namespace Dominion_Server
             {
                 HASBODY = CONSTANTS.HAS_BODY,
                 MSGTYPE = CONSTANTS.TOTAL_SCORE_SEND,
-                BODYLEN = Score_Final.Body.GetSize()
+                BODYLEN = (uint)Score_Final.Body.GetSize()
             };
 
             //3. 점수 다시보내기 및 끊기

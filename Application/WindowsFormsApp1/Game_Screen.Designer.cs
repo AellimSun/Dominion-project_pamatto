@@ -51,13 +51,13 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.CSamount7 = new System.Windows.Forms.Label();
+            this.CSamount6 = new System.Windows.Forms.Label();
+            this.CSamount5 = new System.Windows.Forms.Label();
+            this.CSamount4 = new System.Windows.Forms.Label();
+            this.CSamount3 = new System.Windows.Forms.Label();
+            this.CSamount2 = new System.Windows.Forms.Label();
+            this.CSamount1 = new System.Windows.Forms.Label();
             this.pictureBox17 = new System.Windows.Forms.PictureBox();
             this.pictureBox15 = new System.Windows.Forms.PictureBox();
             this.pictureBox16 = new System.Windows.Forms.PictureBox();
@@ -423,13 +423,13 @@
             // 
             // groupBox7
             // 
-            this.groupBox7.Controls.Add(this.label11);
-            this.groupBox7.Controls.Add(this.label10);
-            this.groupBox7.Controls.Add(this.label8);
-            this.groupBox7.Controls.Add(this.label7);
-            this.groupBox7.Controls.Add(this.label6);
-            this.groupBox7.Controls.Add(this.label5);
-            this.groupBox7.Controls.Add(this.label4);
+            this.groupBox7.Controls.Add(this.CSamount7);
+            this.groupBox7.Controls.Add(this.CSamount6);
+            this.groupBox7.Controls.Add(this.CSamount5);
+            this.groupBox7.Controls.Add(this.CSamount4);
+            this.groupBox7.Controls.Add(this.CSamount3);
+            this.groupBox7.Controls.Add(this.CSamount2);
+            this.groupBox7.Controls.Add(this.CSamount1);
             this.groupBox7.Controls.Add(this.pictureBox17);
             this.groupBox7.Controls.Add(this.pictureBox15);
             this.groupBox7.Controls.Add(this.pictureBox16);
@@ -444,75 +444,75 @@
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "재물/사유지";
             // 
-            // label11
+            // CSamount7
             // 
-            this.label11.AutoSize = true;
-            this.label11.ForeColor = System.Drawing.Color.Red;
-            this.label11.Location = new System.Drawing.Point(15, 199);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(17, 12);
-            this.label11.TabIndex = 17;
-            this.label11.Text = "10";
+            this.CSamount7.AutoSize = true;
+            this.CSamount7.ForeColor = System.Drawing.Color.Red;
+            this.CSamount7.Location = new System.Drawing.Point(15, 199);
+            this.CSamount7.Name = "CSamount7";
+            this.CSamount7.Size = new System.Drawing.Size(17, 12);
+            this.CSamount7.TabIndex = 17;
+            this.CSamount7.Text = "10";
             // 
-            // label10
+            // CSamount6
             // 
-            this.label10.AutoSize = true;
-            this.label10.ForeColor = System.Drawing.Color.Red;
-            this.label10.Location = new System.Drawing.Point(133, 119);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(17, 12);
-            this.label10.TabIndex = 16;
-            this.label10.Text = "10";
+            this.CSamount6.AutoSize = true;
+            this.CSamount6.ForeColor = System.Drawing.Color.Red;
+            this.CSamount6.Location = new System.Drawing.Point(133, 119);
+            this.CSamount6.Name = "CSamount6";
+            this.CSamount6.Size = new System.Drawing.Size(17, 12);
+            this.CSamount6.TabIndex = 16;
+            this.CSamount6.Text = "10";
             // 
-            // label8
+            // CSamount5
             // 
-            this.label8.AutoSize = true;
-            this.label8.ForeColor = System.Drawing.Color.Red;
-            this.label8.Location = new System.Drawing.Point(70, 119);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(17, 12);
-            this.label8.TabIndex = 15;
-            this.label8.Text = "10";
+            this.CSamount5.AutoSize = true;
+            this.CSamount5.ForeColor = System.Drawing.Color.Red;
+            this.CSamount5.Location = new System.Drawing.Point(70, 119);
+            this.CSamount5.Name = "CSamount5";
+            this.CSamount5.Size = new System.Drawing.Size(17, 12);
+            this.CSamount5.TabIndex = 15;
+            this.CSamount5.Text = "10";
             // 
-            // label7
+            // CSamount4
             // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.Color.Red;
-            this.label7.Location = new System.Drawing.Point(14, 119);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(17, 12);
-            this.label7.TabIndex = 14;
-            this.label7.Text = "10";
+            this.CSamount4.AutoSize = true;
+            this.CSamount4.ForeColor = System.Drawing.Color.Red;
+            this.CSamount4.Location = new System.Drawing.Point(14, 119);
+            this.CSamount4.Name = "CSamount4";
+            this.CSamount4.Size = new System.Drawing.Size(17, 12);
+            this.CSamount4.TabIndex = 14;
+            this.CSamount4.Text = "10";
             // 
-            // label6
+            // CSamount3
             // 
-            this.label6.AutoSize = true;
-            this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(139, 33);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(17, 12);
-            this.label6.TabIndex = 13;
-            this.label6.Text = "10";
+            this.CSamount3.AutoSize = true;
+            this.CSamount3.ForeColor = System.Drawing.Color.Red;
+            this.CSamount3.Location = new System.Drawing.Point(139, 33);
+            this.CSamount3.Name = "CSamount3";
+            this.CSamount3.Size = new System.Drawing.Size(17, 12);
+            this.CSamount3.TabIndex = 13;
+            this.CSamount3.Text = "10";
             // 
-            // label5
+            // CSamount2
             // 
-            this.label5.AutoSize = true;
-            this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(76, 33);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(17, 12);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "10";
+            this.CSamount2.AutoSize = true;
+            this.CSamount2.ForeColor = System.Drawing.Color.Red;
+            this.CSamount2.Location = new System.Drawing.Point(76, 33);
+            this.CSamount2.Name = "CSamount2";
+            this.CSamount2.Size = new System.Drawing.Size(17, 12);
+            this.CSamount2.TabIndex = 12;
+            this.CSamount2.Text = "10";
             // 
-            // label4
+            // CSamount1
             // 
-            this.label4.AutoSize = true;
-            this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(15, 33);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(17, 12);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "10";
+            this.CSamount1.AutoSize = true;
+            this.CSamount1.ForeColor = System.Drawing.Color.Red;
+            this.CSamount1.Location = new System.Drawing.Point(15, 33);
+            this.CSamount1.Name = "CSamount1";
+            this.CSamount1.Size = new System.Drawing.Size(17, 12);
+            this.CSamount1.TabIndex = 11;
+            this.CSamount1.Text = "10";
             // 
             // pictureBox17
             // 
@@ -523,6 +523,7 @@
             this.pictureBox17.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox17.TabIndex = 7;
             this.pictureBox17.TabStop = false;
+            this.pictureBox17.Click += new System.EventHandler(this.CSClick);
             // 
             // pictureBox15
             // 
@@ -533,6 +534,7 @@
             this.pictureBox15.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox15.TabIndex = 6;
             this.pictureBox15.TabStop = false;
+            this.pictureBox15.Click += new System.EventHandler(this.CSClick);
             // 
             // pictureBox16
             // 
@@ -542,6 +544,7 @@
             this.pictureBox16.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox16.TabIndex = 5;
             this.pictureBox16.TabStop = false;
+            this.pictureBox16.Click += new System.EventHandler(this.CSClick);
             // 
             // pictureBox13
             // 
@@ -552,6 +555,7 @@
             this.pictureBox13.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox13.TabIndex = 3;
             this.pictureBox13.TabStop = false;
+            this.pictureBox13.Click += new System.EventHandler(this.CSClick);
             // 
             // pictureBox14
             // 
@@ -562,6 +566,7 @@
             this.pictureBox14.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox14.TabIndex = 4;
             this.pictureBox14.TabStop = false;
+            this.pictureBox14.Click += new System.EventHandler(this.CSClick);
             // 
             // pictureBox11
             // 
@@ -571,6 +576,7 @@
             this.pictureBox11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox11.TabIndex = 1;
             this.pictureBox11.TabStop = false;
+            this.pictureBox11.Click += new System.EventHandler(this.CSClick);
             // 
             // pictureBox12
             // 
@@ -580,6 +586,7 @@
             this.pictureBox12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox12.TabIndex = 2;
             this.pictureBox12.TabStop = false;
+            this.pictureBox12.Click += new System.EventHandler(this.CSClick);
             // 
             // groupBox9
             // 
@@ -1284,13 +1291,13 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label CSamount7;
+        private System.Windows.Forms.Label CSamount6;
+        private System.Windows.Forms.Label CSamount5;
+        private System.Windows.Forms.Label CSamount4;
+        private System.Windows.Forms.Label CSamount3;
+        private System.Windows.Forms.Label CSamount2;
+        private System.Windows.Forms.Label CSamount1;
         private System.Windows.Forms.PictureBox pictureBox17;
         private System.Windows.Forms.PictureBox pictureBox15;
         private System.Windows.Forms.PictureBox pictureBox16;
