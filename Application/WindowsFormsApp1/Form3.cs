@@ -15,7 +15,6 @@ namespace WindowsFormsApp1
         public Form3()
         {
             InitializeComponent();
-
         }
         private int duration = 16;
         int Qcount = 0;
@@ -32,7 +31,7 @@ namespace WindowsFormsApp1
         }
         async public void WaitingForGameStart()
         {
-            await Task.Run(() =>
+            await Task.Run(async () =>
             {
                 int res = Global.transHandler.Wait_Full_Queue(this);
                 if (res == 1)
@@ -42,9 +41,9 @@ namespace WindowsFormsApp1
                 }
                 else if (res == -1)
                 {   //큐나가기
-                    //this.Close();
+                    this.Close();
+                    return;
                 }
-
             });
         }
         public void ADD_P()
@@ -85,27 +84,22 @@ namespace WindowsFormsApp1
         {
             Game_Screen game_Screen = new Game_Screen();
             DB_ACCESS dB_ACCESS = new DB_ACCESS();
-            //Global.transHandler.Respond(1,Global.UserID);
-            
-            dB_ACCESS.SendLog(Global.UserID, "logging in");          //sending game login
-            game_Screen.Show();
-            this.Close();
+            int res = Global.transHandler.Respond(1, Global.ID_List);
+            if (res == 1)
+            {
+                dB_ACCESS.SendLog(Global.UserID, "logging in");          //sending game login
+                game_Screen.Show();
+                this.Close();
+            }
+            else if (res == -1)
+            {
+                MessageBox.Show("게임이 취소되었습니다.");
+                this.Close();
+            }
         }
         private void btnCancle_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("거절");
             Global.transHandler.Cancle_Matching();
-            //if (btnStart.Enabled == true)
-            //    Global.transHandler.Respond(-1, Global.ID_List);
-            //else
-            //{
-            //    Global.transHandler.Cancle_Matching();
-            //}
-        }
-        private void TextNumber_TextChanged(object sender, EventArgs e)
-        {
-            if (TextNumber.Text == "1")
-                WaitingForGameStart();
         }
         public TextBox setNumberTextBox()
         {

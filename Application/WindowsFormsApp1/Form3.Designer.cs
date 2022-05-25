@@ -50,7 +50,7 @@ namespace WindowsFormsApp1
             this.TextNumber.Size = new System.Drawing.Size(34, 22);
             this.TextNumber.TabIndex = 0;
             this.TextNumber.TabStop = false;
-            this.TextNumber.TextChanged += new System.EventHandler(this.TextNumber_TextChanged);
+            //this.TextNumber.TextChanged += new System.EventHandler(this.TextNumber_TextChanged);
             // 
             // WaitingLabel
             // 
@@ -120,7 +120,6 @@ namespace WindowsFormsApp1
             this.Load += new System.EventHandler(this.Form3_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

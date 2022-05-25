@@ -86,23 +86,27 @@ namespace WindowsFormsApp1
             while (true)
             {
                 Message recv = MessageUtil.Receive(Stream);
-                switch (recv.Header.MSGTYPE)
+                if (recv != null)
                 {
-                    case CONSTANTS.ADD_PLAYER:
-                        //f.setNumberTextBox().Text = Current_user.ToString();
-                        f.ADD_P();
-                        break;
-                    case CONSTANTS.SUB_PLAYER:
-                        //f.setNumberTextBox().Text = Current_user.ToString();
-                        f.SUB_P();
-                        break;
-                    case CONSTANTS.SUCCESS_CANCLE_MATCHING:
-                        return -1;
-                    case CONSTANTS.FULL_QUEUE:
-                        return 1;
-                    default:
-                        break;
+                    switch (recv.Header.MSGTYPE)
+                    {
+                        case CONSTANTS.ADD_PLAYER:
+                            //f.setNumberTextBox().Text = Current_user.ToString();
+                            f.ADD_P();
+                            break;
+                        case CONSTANTS.SUB_PLAYER:
+                            //f.setNumberTextBox().Text = Current_user.ToString();
+                            f.SUB_P();
+                            break;
+                        case CONSTANTS.SUCCESS_CANCLE_MATCHING:
+                            return -1;
+                        case CONSTANTS.FULL_QUEUE:
+                            return 1;
+                        default:
+                            break;
+                    }
                 }
+                else return 0;
             }
         }
         async public void Cancle_Matching()
@@ -120,7 +124,9 @@ namespace WindowsFormsApp1
                     HASBODY = CONSTANTS.HAS_BODY,
                     MSGTYPE = CONSTANTS.CANCLE_MATCHING,
                     BODYLEN = CNM.Body.GetSize()
-                };                
+                };
+
+                MessageUtil.Send(Stream, CNM);
             });
         }
         public int Respond(int Res, string[] ID_LIST)

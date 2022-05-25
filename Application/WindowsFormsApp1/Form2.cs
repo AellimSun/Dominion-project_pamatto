@@ -23,7 +23,6 @@ namespace WindowsFormsApp1
             if(textID.Text=="" || textPW.Text == "")
             {
                 MessageBox.Show("아이디나 패스워드를 입력해주세요!", "오류");
-
             }
             else
             {
@@ -34,6 +33,13 @@ namespace WindowsFormsApp1
                 this.textPW.Enabled = false;
                 this.startBTN.Enabled = false;
                 form3.ShowDialog();
+                this.textID.Text = "";
+                this.textPW.Text = "";
+                this.textID.Enabled = true;
+                this.textPW.Enabled = true;
+                this.startBTN.Enabled = true;
+
+
                 //this.Hide();
             }
             //this.Enabled = false;  비활성화
