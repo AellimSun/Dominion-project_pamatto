@@ -71,7 +71,7 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                    bool res = form.pictureBox27_SetImg();
+                    bool res = form.pictureBox_SetImg(idx);
 
                     if (res)
                     {
@@ -86,7 +86,7 @@ namespace WindowsFormsApp1
             {
                 if (!now.Equals("액션 종료"))
                 {
-                    bool res = form.pictureBox27_SetImg();
+                    bool res = form.pictureBox_SetImg(idx);
 
                     if (res)
                     {
@@ -122,7 +122,7 @@ namespace WindowsFormsApp1
         public Card buyCard(int i)
         {
             int amount = cardList[i].amount;
-            market.SellCard(cardList[0]);
+            market.SellCard(cardList[i]);
             //deck.BuyCard(card);
             //간단하게..?
 

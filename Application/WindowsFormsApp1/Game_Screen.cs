@@ -20,6 +20,10 @@ namespace WindowsFormsApp1
         DB_ACCESS dB;
         Market market;
         Deck deck;
+        PictureBox[] upper = null;
+        PictureBox[] lower = null;
+        PictureBox[] marketPics = null;
+        Label[] marketAmt = null;
 
         public Game_Screen()
         {
@@ -31,6 +35,20 @@ namespace WindowsFormsApp1
             game = new Game(this);
             market = game.market;
             deck = game.deck;
+
+            upper = new PictureBox[] { pictureBox27, pictureBox26, pictureBox25, pictureBox30,
+                pictureBox29, pictureBox28, pictureBox41, pictureBox42, pictureBox43, pictureBox44,
+                pictureBox45, pictureBox46, pictureBox47, pictureBox48, pictureBox49 };
+
+            lower = new PictureBox[] { pictureBox22, pictureBox21, pictureBox20, pictureBox19, 
+                pictureBox18, pictureBox31, pictureBox32, pictureBox33, pictureBox34, pictureBox35,
+                pictureBox36, pictureBox47, pictureBox38, pictureBox39, pictureBox40 };
+
+            marketPics = new PictureBox[] { pictureBox1, pictureBox2, pictureBox3, pictureBox4, 
+                pictureBox5, pictureBox6, pictureBox7, pictureBox8, pictureBox9, pictureBox10 };
+
+            marketAmt = new Label[] { amount1, amount2, amount3, amount4, amount5, amount6, amount7,
+                amount8, amount9, amount10 };
 
             //플레이어 리스트
             listBox1.Items.Clear();
@@ -98,37 +116,41 @@ namespace WindowsFormsApp1
             MessageBox.Show(content);
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void marketClick(object sender, EventArgs e)
         {
-            Card res = game.buyCard(0);
-            amount1.Text = res.amount.ToString();
+            PictureBox tmp = (PictureBox)sender;
+            string name = tmp.Name;
+
+            int i;
+            for(i = 0; i<marketPics.Length; i++)
+            {
+                if (name.Equals(marketPics[i].Name))
+                {
+                    break;
+                }
+            }
+
+            Card res = game.buyCard(i);
+            marketAmt[i].Text = res.amount.ToString();
 
             MessageBox.Show(res.Name + " 카드 1개를 구입하여 " + 
                 res.amount + "장 남았습니다.");
         }
 
-        private void pictureBox2_Click(object sender, EventArgs e)
+        public bool pictureBox_SetImg(int idx)
         {
-            Card res = game.buyCard(1);
-            amount1.Text = res.amount.ToString();
+            PictureBox obj = upper[idx];
+            PictureBox sbj = lower[idx];
 
-            MessageBox.Show(res.Name + " 카드 1개를 구입하여 " +
-                res.amount + "장 남았습니다.");
-        }
+            obj.Enabled = true;
+            sbj.Enabled = true;
+            obj.Visible = true;
+            sbj.Visible = true;
 
-        private void pictureBox22_Click(object sender, EventArgs e)
-        {
-            string now = button1.Text;
-
-            game.clickHand(now, 0);
-        }
-
-        public bool pictureBox27_SetImg()
-        {
-            if (pictureBox22.Image != null)
+            if (sbj.Image != null)
             {
-                pictureBox27.Image = pictureBox22.Image;
-                pictureBox22.Image = null;
+                obj.Image = sbj.Image;
+                sbj.Image = null;
 
                 return true;
             }
@@ -152,6 +174,25 @@ namespace WindowsFormsApp1
             {
                 button1.Text = "구매 종료";
             }
+        }
+
+        private void handClick(object sender, EventArgs e)
+        {
+            PictureBox tmp = (PictureBox)sender;
+            string name = tmp.Name;
+
+            int i;
+            for(i = 0; i<lower.Length; i++)
+            {
+                if (name.Equals(lower[i].Name))
+                {
+                    break;
+                }
+            }
+
+            string now = button1.Text;
+
+            game.clickHand(now, i);
         }
     }
     //public class market
