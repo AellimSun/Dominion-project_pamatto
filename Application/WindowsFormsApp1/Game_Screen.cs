@@ -27,6 +27,9 @@ namespace WindowsFormsApp1
         Label[] marketAmt = null;
         Label[] CSAmt = null;
 
+        public string clickMode = "market";
+        List<int> selected = new List<int>();
+
         public Game_Screen()
         {
             InitializeComponent();
@@ -140,11 +143,18 @@ namespace WindowsFormsApp1
                 }
             }
 
-            Card res = game.buyCard(i);
-            marketAmt[i].Text = res.amount.ToString();
+            if (clickMode.Equals("market"))
+            {
+                Card res = game.buyCard(i);
+                marketAmt[i].Text = res.amount.ToString();
 
-           // MessageBox.Show(res.Name + " 카드 1개를 구입하여 " +
-            //    res.amount + "장 남았습니다.");
+                // MessageBox.Show(res.Name + " 카드 1개를 구입하여 " +
+                //    res.amount + "장 남았습니다.");
+            }else if (clickMode.Equals("grave"))
+            {
+                MessageBox.Show("핸드에서 카드를 골라 버려야 합니다.");
+                return;
+            }
         }
 
         private void CSClick(object sender, EventArgs e)
@@ -153,13 +163,22 @@ namespace WindowsFormsApp1
             string name = tmp.Name;
 
             int i;
-            for(i=0;i<CSPics.Length;i++)
+            for (i = 0; i < CSPics.Length; i++)
             {
                 if (name.Equals(CSPics[i].Name))
                     break;
             }
-            Card res = game.buyCSCard(i);
-            CSAmt[i].Text = res.amount.ToString();
+
+            if (clickMode.Equals("market"))
+            {
+                Card res = game.buyCSCard(i);
+                CSAmt[i].Text = res.amount.ToString();
+            }
+            else if (clickMode.Equals("grave"))
+            {
+                MessageBox.Show("핸드에서 카드를 골라 버려야 합니다.");
+                return;
+            }
         }
 
         public bool pictureBox_SetImg(int idx)
@@ -191,16 +210,26 @@ namespace WindowsFormsApp1
                 button1.Text = "구매 종료";
                 game.gameTable.ActionNumber = 0;
                 changeABC(game.gameTable);
+            }else if(state.Equals("버리기 종료"))
+            {
+                if(selected.Count != 0)
+                {
+                    for(int j = 0; j < selected.Count; j++)
+                    {
+                        game.deck.GoToGrave(selected[j]);
+                    }
+                    game.deck.DrawToHand(selected.Count, this);
+                    selected.RemoveRange(0, selected.Count);
+                    clickMode = "market";
+                    turn_button1("액션 종료");
+                }
             }
         }
 
-        public void turn_button1()
+        public void turn_button1(string content)
         {
             string state = button1.Text;
-            if (state.Equals("액션 종료"))
-            {
-                button1.Text = "구매 종료";
-            }
+            button1.Text = content;
         }
 
         private void handClick(object sender, EventArgs e)
@@ -217,9 +246,18 @@ namespace WindowsFormsApp1
                 }
             }
 
-            string now = button1.Text;
+            if (clickMode.Equals("market"))
+            {
+                string now = button1.Text;
 
-            game.clickHand(now, i);
+                game.clickHand(now, i);
+            }else if (clickMode.Equals("grave"))
+            {
+                selected.Add(i);
+                lower[i].Image = null;
+                lower[i].Visible = false;
+                lower[i].Enabled = false;
+            }
         }
 
         public void marketImgInit(List<Card> marketlist)

@@ -153,7 +153,7 @@ namespace WindowsFormsApp1
             }
             Card tmp = null;
             for (int j = 0; j < 10; j++) {
-                if (actionlist[j].Name.Equals("smithy"))
+                if (actionlist[j].Name.Equals("cellar"))
                 {
                     tmp = actionlist[j];
                     break;
@@ -172,11 +172,8 @@ namespace WindowsFormsApp1
         }
         public void GoToGrave(int number)
         {
-            for (int i = 0; i < number; i++)
-            {
-                GraveDeck.Add(HandDeck[i]);
-                HandDeck.RemoveAt(i);
-            }
+            GraveDeck.Add(HandDeck[number]);
+            HandDeck[number] = null;
         }
         public void BuyCard(Card card)
         {
