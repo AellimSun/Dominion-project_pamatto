@@ -20,6 +20,7 @@ namespace WindowsFormsApp1
         DB_ACCESS dB;
         Market market;
         Deck deck;
+        
         PictureBox[] upper = null;
         PictureBox[] lower = null;
         PictureBox[] marketPics = null;
@@ -223,6 +224,11 @@ namespace WindowsFormsApp1
                 marketPics[i].Load(Directory.GetCurrentDirectory() + "\\" + marketlist[i].Name + ".png");
             }
         }
+        public void setLogBox(string message)
+        {
+            list_log.Items.Add(message);
+        }
+        
     }
     //public class market
     //{

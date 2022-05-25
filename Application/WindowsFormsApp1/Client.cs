@@ -33,6 +33,7 @@ namespace WindowsFormsApp1
 
     public class TransHandler
     {
+        private Game_Screen game_Screen;
         private IPEndPoint ServerAddress;
         private IPEndPoint ClientAddress;
         private TcpClient Client;
@@ -239,6 +240,7 @@ namespace WindowsFormsApp1
                                 case CONSTANTS.GET_CARD:
                                     int getcard_recv = (Alway_Listen.Body as BodyAlertAction).CARD;
                                     //해당 카드 번호 줄이는 메소드(매개변수 카드번호(<-getcard_recv))
+                                    
                                     break;
                                 case CONSTANTS.SCRAP_CARD:
                                     int scrap_recv = (Alway_Listen.Body as BodyAlertAction).CARD;
@@ -250,12 +252,15 @@ namespace WindowsFormsApp1
                     case CONSTANTS.LOG_SEND:
                         string log_recv = BitConverter.ToString((Alway_Listen.Body as BodyLogSend).LOG);
                         //로그 추가 메서드(매개변수 바이트 로그를 스트링으로 변환한 것 (<-log_recv))
+                        game_Screen.setLogBox(log_recv);  //로그 추가 메서드
                         break;
                     case CONSTANTS.SCORE_REQUEST:
                         Message my_score = new Message();
                         my_score.Body = new BodyScoreSend()
                         {
                             //Score = 스코어 계산하는 메서드 호출
+                            
+
                         };
                         my_score.Header = new Header()
                         {

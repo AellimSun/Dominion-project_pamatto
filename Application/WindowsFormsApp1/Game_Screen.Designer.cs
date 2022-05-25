@@ -46,6 +46,7 @@
             this.pictureBox21 = new System.Windows.Forms.PictureBox();
             this.pictureBox22 = new System.Windows.Forms.PictureBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.list_log = new System.Windows.Forms.ListBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.chatCon = new System.Windows.Forms.TextBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -118,7 +119,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.listBox2 = new System.Windows.Forms.ListBox();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox40)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox39)).BeginInit();
@@ -380,12 +380,22 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.listBox2);
+            this.groupBox4.Controls.Add(this.list_log);
             this.groupBox4.Location = new System.Drawing.Point(899, 32);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(199, 365);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
+            // 
+            // list_log
+            // 
+            this.list_log.BackColor = System.Drawing.SystemColors.Menu;
+            this.list_log.FormattingEnabled = true;
+            this.list_log.ItemHeight = 12;
+            this.list_log.Location = new System.Drawing.Point(0, 8);
+            this.list_log.Name = "list_log";
+            this.list_log.Size = new System.Drawing.Size(199, 352);
+            this.list_log.TabIndex = 0;
             // 
             // groupBox5
             // 
@@ -1178,16 +1188,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "액션 :";
             // 
-            // listBox2
-            // 
-            this.listBox2.BackColor = System.Drawing.SystemColors.Menu;
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.ItemHeight = 12;
-            this.listBox2.Location = new System.Drawing.Point(0, 8);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(199, 352);
-            this.listBox2.TabIndex = 0;
-            // 
             // Game_Screen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -1369,7 +1369,7 @@
         private System.Windows.Forms.PictureBox pictureBox41;
         private System.Windows.Forms.PictureBox pictureBox42;
         private System.Windows.Forms.PictureBox pictureBox43;
-        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.ListBox list_log;
     }
 }
 
