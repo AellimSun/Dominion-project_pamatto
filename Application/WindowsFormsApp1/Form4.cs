@@ -43,15 +43,12 @@ namespace WindowsFormsApp1
             }
             tm.Start();
         }
-
-       
+  
         public Form4()
         {
             InitializeComponent();
         }
         
-
-
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             Close();
