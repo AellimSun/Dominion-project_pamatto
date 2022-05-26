@@ -20,6 +20,8 @@ namespace WindowsFormsApp1
         DB_ACCESS dB;
         Market market;
         Deck deck;
+
+        private TransHandler transHandler;
         PictureBox[] upper = null;
         public PictureBox[] lower = null;
         PictureBox[] marketPics = null;
@@ -28,6 +30,7 @@ namespace WindowsFormsApp1
         Label[] CSAmt = null;
 
         public string clickMode = "market";
+
         List<int> selected = new List<int>();
 
         public Game_Screen()
@@ -262,8 +265,9 @@ namespace WindowsFormsApp1
                 {
                     for (int j = 0; j < selected.Count; j++)
                     {
-                        game.deck.GoToGrave(selected[j], "a");
+                        game.deck.GoToGrave(selected[j], "c");
                     }
+                    //game.deck.GoToGrave(selected[j - 1], "a");
                     //핸드덱 이미지 재정렬하는 메소드
                     setHandDeckImg(game.deck);
 
@@ -441,5 +445,33 @@ namespace WindowsFormsApp1
                 marketPics[i].Load(Directory.GetCurrentDirectory() + "\\" + marketlist[i].Name + ".png");
             }
         }
+        public void setLogBox(string message)
+        {
+            list_log.Items.Add(message);
+        }
+
+        public void Log_Handle()
+        {
+            /*transHandler.Log_Send(make);
+            make = Log_Recive();
+            setLogBox(make);*/
+        }
+
+        public void MakeString(string cardname, string cardaction)
+        {//무덤
+            string make="";
+            int i = 1;
+            if(cardaction == "u") make = Global.UserID + "(이)가 " + cardname + " 카드 사용.";
+            else if (cardaction == "m") make = Global.UserID + "(이)가" + selected.Count.ToString() + "카드 구입";
+
+            
+        }
+
+        public void MakeString ()
+        {
+            string make = "";
+            make = Global.UserID + "(이)가" + selected.Count.ToString() + "장 버림";
+        }
+        
     }
 }

@@ -248,6 +248,7 @@ namespace Dominion_Client
                     case CONSTANTS.LOG_SEND:
                         string log_recv = BitConverter.ToString((Alway_Listen.Body as BodyLogSend).LOG);
                         //로그 추가 메서드(매개변수 바이트 로그를 스트링으로 변환한 것 (<-log_recv))
+                        
                         break;
                     case CONSTANTS.SCORE_REQUEST:
                         Score_send(S);    //Score에 자기 점수 넣으면됨
