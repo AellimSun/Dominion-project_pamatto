@@ -138,7 +138,7 @@ namespace WindowsFormsApp1
                 if (DrawDeck.Count == 0)
                     Shuffle(DrawDeck);
             }
-        }*/
+        }
 
         public void DrawToHand(int i, Game_Screen g)
         {
