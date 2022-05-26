@@ -13,8 +13,7 @@
 		},
 		"merchant": {
 			"price": "3",
-			"add_Draw": "1",
-			"add_Money": "1"
+			"add_Draw": "1"
 		},
 		"village": {
 			"price": "3",
@@ -43,7 +42,8 @@
 			"price": "5",
 			"add_Draw": "1",
 			"add_Action": "1",
-			"add_Buy": "1"
+			"add_Buy": "1",
+			"add_Money": "1"
 		},
 		"mine": {
 			"price": "5",
