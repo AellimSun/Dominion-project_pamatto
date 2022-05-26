@@ -13,6 +13,7 @@ namespace WindowsFormsApp1
 {
     public partial class Form3 : Form
     {
+        private Game_Screen game_Screen;
         public Form3()
         {
             InitializeComponent();
@@ -21,6 +22,8 @@ namespace WindowsFormsApp1
         private void Form3_Load(object sender, EventArgs e)
         {
             btnStart.Enabled = false;
+            Global.ID_List = new string[4];
+
             Qcount = Global.transHandler.Start_Matching();
             if (Qcount == 1)
             {
@@ -42,30 +45,18 @@ namespace WindowsFormsApp1
                 if (res == 1)
                 {   //게임시작하실?
                     btnStart.Enabled = true;
-                    //int cnt = 8;
+                    //int cnt = 15;
                     //while(cnt > 0)
                     //{
                     //    timeLabel.Text = cnt.ToString();
                     //    await Task.Delay(1000);
                     //    cnt--;
                     //}
-                    int res2 = Global.transHandler.Respond(1, Global.ID_List);
-                    if (res2 == 1)
-                    {
-                        MessageBox.Show(Global.ID_List[0],Global.ID_List[1]);
-                        MessageBox.Show("게임이 시작됩니다.");
-                        this.Close();
-                    }
-                    else if (res2 == -1)
-                    {
-                        MessageBox.Show("게임이 취소되었습니다.");
-                        this.Close();
-                    }
-                    //starttest();
+                    
+                    starttest();
                 }
                 else if (res == -1)
                 {   //취소 버튼 클릭해서 응답받은 것
-                    MessageBox.Show("wait full queue 게임이 취소되었습니다.");
                     this.Close();
                     return;
                 }
@@ -91,9 +82,9 @@ namespace WindowsFormsApp1
             {
                 btnCancle.Enabled = false;
                 MessageBox.Show("게임이 시작됩니다.");
-                dB_ACCESS.SendDBLog("Game in");          //sending game login
+                //dB_ACCESS.SendDBLog("Game in");          //sending game login
                 game_Screen.Show();
-                this.Close();
+                this.Hide();
             }
             else if (res == -1)
             {
@@ -103,11 +94,11 @@ namespace WindowsFormsApp1
         }
         public void starttest()
         {
-            Game_Screen game_Screen = new Game_Screen();
+            game_Screen = new Game_Screen();
             int res = Global.transHandler.Respond(1, Global.ID_List);
             if (res == 1)
             {
-                MessageBox.Show("게임이 시작됩니다.");
+                //MessageBox.Show("게임이 시작됩니다.");
                 game_Screen.Show();
                 this.Close();
             }

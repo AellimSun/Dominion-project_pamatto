@@ -29,7 +29,9 @@ namespace WindowsFormsApp1
 
                 Global.UserID = textID.Text;
                 Global.transHandler = new TransHandler("127.0.0.1", 5542, Global.UserID);
-                /*엘림만 사용
+                /*엘림만 사용*/
+
+
                 Form3 form3 = new Form3();
                 this.textID.Enabled = false;
                 this.textPW.Enabled = false;
@@ -41,14 +43,14 @@ namespace WindowsFormsApp1
                 this.textID.Enabled = true;
                 this.textPW.Enabled = true;
                 this.startBTN.Enabled = true;
-                */
+                
 
 
                 //나중에 지우기
-                Game_Screen game_Screen = new Game_Screen();
+                //Game_Screen game_Screen = new Game_Screen();
                 this.Hide();
-                game_Screen.ShowDialog();
-                this.Close();
+                //game_Screen.ShowDialog();
+                //this.Close();
 
             }
             //this.Enabled = false;  비활성화

@@ -9,7 +9,6 @@ namespace WindowsFormsApp1
 {
     public class Deck : GameTable
     {
-        private Game_Screen game_Screen; 
         public List<Card> HandDeck;
         public List<Card> DrawDeck;
         public List<Card> GraveDeck;
@@ -159,7 +158,7 @@ namespace WindowsFormsApp1
 
         public void DrawToHand(int i, Game_Screen g)
         {
-            game_Screen.MakeString(i);
+            g.MakeString(i);
 
             while (0 < i)
             {
@@ -201,12 +200,12 @@ namespace WindowsFormsApp1
                 HandDeck.RemoveAt(i);
             }
         }
-        public void GoToGrave(int number, string mode)
+        public void GoToGrave(int number, string mode, Game_Screen g)
         {
             GraveDeck.Add(HandDeck[number]);
             //HandDeck[number] = null;
-            if(mode  == "u") game_Screen.MakeString(HandDeck[number].Name, mode);  //매개변수 추가
-            else if(mode == "a") game_Screen.MakeString();
+            if(mode  == "u") g.MakeString(HandDeck[number].Name, mode);  //매개변수 추가
+            else if(mode == "a") g.MakeString();
             HandDeck.RemoveAt(number);
             
         }

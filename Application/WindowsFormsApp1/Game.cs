@@ -89,7 +89,7 @@ namespace WindowsFormsApp1
                         MoneyCard moneyCard = (MoneyCard)deck.HandDeck[idx];
 
                         gameTable.Coin += moneyCard.money;
-                        deck.GoToGrave(idx, "u");
+                        deck.GoToGrave(idx, "u", form);
                         form.changeABC(gameTable);
                     }
                 }
@@ -105,7 +105,7 @@ namespace WindowsFormsApp1
                         string cardName = deck.HandDeck[idx].Name;
                         gameTable.ActionNumber -= 1;
                         ActionCard actionCard = (ActionCard)deck.HandDeck[idx];
-                        deck.GoToGrave(idx, "u");
+                        deck.GoToGrave(idx, "u", form);
                         useCard(actionCard);
                         form.changeABC(gameTable);
 

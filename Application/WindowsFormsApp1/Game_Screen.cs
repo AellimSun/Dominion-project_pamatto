@@ -21,7 +21,6 @@ namespace WindowsFormsApp1
         Market market;
         Deck deck;
 
-        private TransHandler transHandler;
         PictureBox[] upper = null;
         public PictureBox[] lower = null;
         PictureBox[] marketPics = null;
@@ -286,7 +285,7 @@ namespace WindowsFormsApp1
                 {
                     for (int j = 0; j < selected.Count; j++)
                     {
-                        game.deck.GoToGrave(selected[j], "a");
+                        game.deck.GoToGrave(selected[j], "a", this);
                     }
                     //핸드덱 이미지 재정렬하는 메소드
                     setHandDeckImg(game.deck);
@@ -434,8 +433,8 @@ namespace WindowsFormsApp1
         public void Log_Handle(string make)
         {
 
-            transHandler.Log_Send(make);
-            make = transHandler.Log_Receive();
+            Global.transHandler.Log_Send(make);
+            make = Global.transHandler.Log_Receive();
             setLogBox(make);
         }
 

@@ -152,7 +152,11 @@ namespace WindowsFormsApp1
                     };
                     break;
             }
+            MessageUtil.Send(Stream, Res_Msg);
+
             Message recv = MessageUtil.Receive(Stream);
+            if (recv == null)
+                return 1;
             switch (recv.Header.MSGTYPE)
             {
                 case CONSTANTS.GAME_START:
@@ -160,10 +164,9 @@ namespace WindowsFormsApp1
                     ID_LIST[1] = BitConverter.ToString((recv.Body as BodyGameStart).ID2);
                     ID_LIST[2] = BitConverter.ToString((recv.Body as BodyGameStart).ID3);
                     ID_LIST[3] = BitConverter.ToString((recv.Body as BodyGameStart).ID4);
+                    return 1;
 
-//                    return 1;
-
-//                case CONSTANTS.GAME_CANCLE:
+                case CONSTANTS.GAME_CANCLE:
 
                     return -1;
             }
