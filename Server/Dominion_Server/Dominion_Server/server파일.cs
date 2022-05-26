@@ -31,6 +31,7 @@ namespace Dominion_Server
             TcpListener server = new TcpListener(localAddress);
 
             server.Start();
+            Console.WriteLine("Dominion Server Start...");
             while (true)
             {
                 //4명 모이기 전까지 계속 돈다
