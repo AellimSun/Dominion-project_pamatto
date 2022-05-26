@@ -101,6 +101,13 @@ namespace WindowsFormsApp1
             this.deck = deck;
             List<Card> handList = deck.HandDeck;
 
+            for(int i = 0; i<lower.Length; i++)
+            {
+                lower[i].Image = null;
+                lower[i].Visible = false;
+                lower[i].Enabled = false;
+            }
+
             for(int i = 0; i < handList.Count; i++)
             {
                 lower[i].Load(Directory.GetCurrentDirectory() + "\\" + handList[i].Name + ".png");
@@ -138,12 +145,18 @@ namespace WindowsFormsApp1
             {
                 Card res = game.buyCard(i);
                 marketAmt[i].Text = res.amount.ToString();
-
-                // MessageBox.Show(res.Name + " 카드 1개를 구입하여 " +
-                //    res.amount + "장 남았습니다.");
             }else if (clickMode.Equals("grave"))
             {
-                MessageBox.Show("핸드에서 카드를 골라 버려야 합니다.");
+                MessageBox.Show("핸드에서 카드를 골라 버려야 합니다.\n원하지 않을 경우 효과 종료를 클릭해 주세요.");
+                return;
+            }else if (clickMode.Equals("actionEffectMode"))
+            {
+                Card res = game.notBuyCard(i);
+                marketAmt[i].Text = res.amount.ToString();
+            }
+            else if (clickMode.Equals("trash"))
+            {
+                MessageBox.Show("핸드에서 카드를 폐기해야 합니다.\n원하지 않을 경우 폐기 종료를 클릭해 주세요.");
                 return;
             }
         }
@@ -167,7 +180,17 @@ namespace WindowsFormsApp1
             }
             else if (clickMode.Equals("grave"))
             {
-                MessageBox.Show("핸드에서 카드를 골라 버려야 합니다.");
+                MessageBox.Show("핸드에서 카드를 골라 버려야 합니다.\n원하지 않을 경우 효과 종료를 클릭해 주세요.");
+                return;
+            }
+            else if (clickMode.Equals("actionEffectMode"))
+            {
+                Card res = game.notBuyCSCSCard(i);
+                CSAmt[i].Text = res.amount.ToString();
+            }
+            else if (clickMode.Equals("trash"))
+            {
+                MessageBox.Show("핸드에서 카드를 폐기해야 합니다.\n원하지 않을 경우 폐기 종료를 클릭해 주세요.");
                 return;
             }
         }
@@ -207,7 +230,7 @@ namespace WindowsFormsApp1
                 {
                     for(int j = 0; j < selected.Count; j++)
                     {
-                        game.deck.GoToGrave(selected[j]);
+                        game.deck.GoToGrave(selected[j], "a");
                     }
                     //핸드덱 이미지 재정렬하는 메소드
                     setHandDeckImg(game.deck);
@@ -215,6 +238,20 @@ namespace WindowsFormsApp1
                     game.deck.DrawToHand(selected.Count, this);
                     selected.RemoveRange(0, selected.Count);
                     clickMode = "market";
+                    turn_button1("액션 종료");
+                }
+            }else if(state.Equals("효과 종료") || state.Equals("폐기 종료"))
+            {
+                clickMode = "market";
+                game.gameTable.Coin = 0;
+                changeABC(game.gameTable);
+
+                if(game.gameTable.ActionNumber == 0)
+                {
+                    turn_button1("구매 종료");
+                }
+                else
+                {
                     turn_button1("액션 종료");
                 }
             }
@@ -244,12 +281,26 @@ namespace WindowsFormsApp1
                 string now = button1.Text;
 
                 game.clickHand(now, i);
-            }else if (clickMode.Equals("grave"))
+            } else if (clickMode.Equals("grave"))
             {
                 selected.Add(i);
                 lower[i].Image = null;
                 lower[i].Visible = false;
                 lower[i].Enabled = false;
+            } else if (clickMode.Equals("actionEffectMode"))
+            {
+                MessageBox.Show("구매하실 카드를 클릭해 주세요.\n원하지 않을 경우 효과 종료를 클릭해주세요.");
+            }
+            else if (clickMode.Equals("trash"))
+            {
+                game.gameTable.Coin = deck.HandDeck[i].price + 2;
+                changeABC(game.gameTable);
+                game.trash.gotoTrash(deck.HandDeck[i]);
+                deck.HandDeck.RemoveAt(i);
+
+                setHandDeckImg(deck);
+                clickMode = "actionEffectMode";
+                button1.Text = "효과 종료";
             }
         }
 
@@ -261,37 +312,4 @@ namespace WindowsFormsApp1
             }
         }
     }
-    //public class market
-    //{
-    //    Card[] marketCard;
-
-    //    public void add(int i)
-    //    {
-    //        marketCard[i].setAmount(10);
-    //    }
-    //    public Card sell(int i)
-    //    {
-    //        marketCard[i].minusAmount(1);
-    //        return marketCard[i];
-    //    }
-    //    public void setMarketCardList()
-    //    {
-    //        marketCard = new Card[10];
-    //        ActionCard card = new ActionCard("witch");
-    //        marketCard[0] = card;
-    //    }
-    //}
-    //public class hand
-    //{
-    //    Card[] cardList;
-    //    int i = 0;
-
-    //    public void add(Card card)
-    //    {
-    //        cardList[i++] = card;
-    //    }
-    //}
-
-    //게임 초기화 -> 10장 cardlist에 추가
-    //
 }

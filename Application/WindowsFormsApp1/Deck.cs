@@ -114,7 +114,7 @@ namespace WindowsFormsApp1
             DrawDeck = NewCards;
         }
 
-        public void DrawToHand()
+        /*public void DrawToHand()
         {
             while (HandDeck.Count < 6)
             {
@@ -123,7 +123,8 @@ namespace WindowsFormsApp1
                 if (DrawDeck.Count == 0)
                     Shuffle(DrawDeck);
             }
-        }
+        }*/
+
         public void DrawToHand(int i, Game_Screen g)
         {
             while (0 < i)
@@ -148,7 +149,7 @@ namespace WindowsFormsApp1
             }
             Card tmp = null;
             for (int j = 0; j < 10; j++) {
-                if (actionlist[j].Name.Equals("cellar"))
+                if (actionlist[j].Name.Equals("remodel"))
                 {
                     tmp = actionlist[j];
                     break;
@@ -165,7 +166,7 @@ namespace WindowsFormsApp1
                 HandDeck.RemoveAt(i);
             }
         }
-        public void GoToGrave(int number)
+        public void GoToGrave(int number, string mode)
         {
             GraveDeck.Add(HandDeck[number]);
             //HandDeck[number] = null;
