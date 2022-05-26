@@ -129,8 +129,23 @@ namespace WindowsFormsApp1
             }
             DrawDeck = NewCards;
         }
+        public bool ShowDrawDeck()                 //검증필요. 옵저버 패턴은 도저히 모르겠음.
+        {
 
-        /*public void DrawToHand()
+            if (DrawDeck.Count == 0)
+                return false;
+            else
+                return true;
+        }
+        public bool ShowGraveDeck()
+        { 
+            if (GraveDeck.Count == 0)
+               return false;
+            else
+                return true;
+
+        }
+        public void DrawToHand()
         {
             while (HandDeck.Count < 6)
             {
@@ -139,7 +154,8 @@ namespace WindowsFormsApp1
                 if (DrawDeck.Count == 0)
                     Shuffle(DrawDeck);
             }
-        }*/
+            
+        }
 
         public void DrawToHand(int i, Game_Screen g)
         {
@@ -165,7 +181,7 @@ namespace WindowsFormsApp1
             }
             Card tmp = null;
             for (int j = 0; j < 10; j++) {
-                if (actionlist[j].Name.Equals("mine"))
+                if (actionlist[j].Name.Equals("market"))
                 {
                     tmp = actionlist[j];
                     break;
