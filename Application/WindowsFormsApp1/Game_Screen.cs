@@ -196,18 +196,20 @@ namespace WindowsFormsApp1
         private void button1_Click(object sender, EventArgs e)
         {
             string state = button1.Text;
+
             if (state.Equals("액션 종료"))
             {
                 button1.Text = "구매 종료";
                 game.gameTable.ActionNumber = 0;
                 changeABC(game.gameTable);
-            }else if(state.Equals("버리기 종료"))
+            }
+            else if (state.Equals("버리기 종료"))
             {
-                if(selected.Count != 0)
+                if (selected.Count != 0)
                 {
-                    for(int j = 0; j < selected.Count; j++)
+                    for (int j = 0; j < selected.Count; j++)
                     {
-                        game.deck.GoToGrave(selected[j]);
+                        game.deck.GoToGrave(selected[j], "a");
                     }
                     //핸드덱 이미지 재정렬하는 메소드
                     setHandDeckImg(game.deck);
@@ -216,6 +218,38 @@ namespace WindowsFormsApp1
                     selected.RemoveRange(0, selected.Count);
                     clickMode = "market";
                     turn_button1("액션 종료");
+                }
+            }
+            else if (state.Equals("효과 종료") || state.Equals("폐기 종료"))
+            {
+                clickMode = "market";
+                game.gameTable.Coin = 0;
+                changeABC(game.gameTable);
+
+                if (game.gameTable.ActionNumber == 0)
+                {
+                    turn_button1("구매 종료");
+                }
+                else
+                {
+                    turn_button1("액션 종료");
+                }
+            }
+            else if (state.Equals("구매 종료"))
+            {
+                //턴 종료인가?
+                if (!market.Game_Over())
+                {
+                    //Global.transHandler.Turn_end();
+                    button1.Text = "액션 종료";
+                    //버튼 비활성화
+                    //button1.Enabled = false;
+                }
+                //게임 종료
+                else
+                {
+                    Global.transHandler.Game_End();
+
                 }
             }
         }

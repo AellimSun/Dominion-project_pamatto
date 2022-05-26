@@ -165,7 +165,7 @@ namespace WindowsFormsApp1
                 HandDeck.RemoveAt(i);
             }
         }
-        public void GoToGrave(int number)
+        public void GoToGrave(int number, string a)
         {
             GraveDeck.Add(HandDeck[number]);
             //HandDeck[number] = null;
