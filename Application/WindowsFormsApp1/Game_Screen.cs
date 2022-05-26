@@ -158,6 +158,10 @@ namespace WindowsFormsApp1
             {
                 MessageBox.Show("핸드에서 카드를 폐기해야 합니다.\n원하지 않을 경우 폐기 종료를 클릭해 주세요.");
                 return;
+            }else if (clickMode.Equals("moneyTrash"))
+            {
+                MessageBox.Show("핸드에서 재물 카드를 폐기해야 합니다.\n원하지 않을 경우 폐기 종료를 클릭해 주세요.");
+                return;
             }
         }
 
@@ -191,6 +195,11 @@ namespace WindowsFormsApp1
             else if (clickMode.Equals("trash"))
             {
                 MessageBox.Show("핸드에서 카드를 폐기해야 합니다.\n원하지 않을 경우 폐기 종료를 클릭해 주세요.");
+                return;
+            }
+            else if (clickMode.Equals("moneyTrash"))
+            {
+                MessageBox.Show("핸드에서 재물 카드를 폐기해야 합니다.\n원하지 않을 경우 폐기 종료를 클릭해 주세요.");
                 return;
             }
         }
@@ -301,6 +310,36 @@ namespace WindowsFormsApp1
                 setHandDeckImg(deck);
                 clickMode = "actionEffectMode";
                 button1.Text = "효과 종료";
+            }
+            else if (clickMode.Equals("moneyTrash"))
+            {
+                string cardName = deck.HandDeck[i].Name;
+                int idx;
+
+                if (cardName.Equals("copper")) idx = 1;
+                else if (cardName.Equals("silver")) idx = 2;
+                else
+                {
+                    MessageBox.Show("동과 은 중에서만 선택 가능합니다.");
+                    return;
+                }
+
+                game.trash.gotoTrash(deck.HandDeck[i]);
+                deck.HandDeck.RemoveAt(i);
+
+                Card res = game.gainCSCardToHand(idx);
+                CSAmt[idx].Text = res.amount.ToString();
+
+                setHandDeckImg(deck);
+                clickMode = "market";
+                if (game.gameTable.ActionNumber == 0)
+                {
+                    turn_button1("구매 종료");
+                }
+                else
+                {
+                    turn_button1("액션 종료");
+                }
             }
         }
 

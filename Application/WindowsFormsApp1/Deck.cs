@@ -149,7 +149,7 @@ namespace WindowsFormsApp1
             }
             Card tmp = null;
             for (int j = 0; j < 10; j++) {
-                if (actionlist[j].Name.Equals("remodel"))
+                if (actionlist[j].Name.Equals("mine"))
                 {
                     tmp = actionlist[j];
                     break;
@@ -177,8 +177,9 @@ namespace WindowsFormsApp1
             GraveDeck.Add(card);
         }
 
-        public void DeckInit()
+        public void gainCardToHand(Card card)
         {
+            HandDeck.Add(card);
         }
     }
 }
