@@ -32,6 +32,7 @@ namespace Dominion_Server
             TcpListener server = new TcpListener(localAddress);
 
             server.Start();
+            Console.WriteLine("Dominion Server Start...");
             while (true)
             {
                 //4명 모이기 전까지 계속 돈다
@@ -312,7 +313,7 @@ namespace Dominion_Server
                                         MessageUtil.Send(full_list[i].stream, R_Msg);
                                         if ((R_Msg.Body as BodyAlertAction).ACTION == CONSTANTS.ATTACK)
                                         {
-                                            int CardNo = (R_Msg.Body as BodyAlertAction).CARD;
+                                            uint CardNo = (uint)(R_Msg.Body as BodyAlertAction).CARD;
                                             Message recv_res = MessageUtil.Receive(full_list[i].stream);
                                             switch (CardNo)
                                             {
@@ -414,7 +415,7 @@ namespace Dominion_Server
                 
                 if(Score_Rec.Header.MSGTYPE == CONSTANTS.SCORE_SEND)
                 {
-                    U_Score[i] = (Score_Rec.Body as BodyScoreSend).SCORE;
+                    U_Score[i] = (uint)(Score_Rec.Body as BodyScoreSend).SCORE;
                 }
                                 
             }
@@ -422,17 +423,17 @@ namespace Dominion_Server
             Message Score_Final = new Message();
             Score_Final.Body = new BodyTotalScoreSend()
             {
-                SCORE1 = U_Score[0],
-                SCORE2 = U_Score[1],
-                SCORE3 = U_Score[2],
-                SCORE4 = U_Score[3]
+                SCORE1 = (int)U_Score[0],
+                SCORE2 = (int)U_Score[1],
+                SCORE3 = (int)U_Score[2],
+                SCORE4 = (int)U_Score[3]
             };
 
             Score_Final.Header = new Header()
             {
                 HASBODY = CONSTANTS.HAS_BODY,
                 MSGTYPE = CONSTANTS.TOTAL_SCORE_SEND,
-                BODYLEN = Score_Final.Body.GetSize()
+                BODYLEN = (int)Score_Final.Body.GetSize()
             };
 
             //3. 점수 다시보내기 및 끊기

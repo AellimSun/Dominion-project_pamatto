@@ -9,12 +9,28 @@ namespace WindowsFormsApp1
 {
     public class Deck : GameTable
     {
+        private Game_Screen game_Screen; 
         public List<Card> HandDeck;
         public List<Card> DrawDeck;
         public List<Card> GraveDeck;
         //private List<Card> MerketDeck;
 
         private Random random = new Random();
+
+        public void Hand_To_Grave()
+        {
+            //HandDeck 리스트를 모두 탐색하면서 하나하나씩 GraveDeck 리스트에 추가
+            foreach (Card item in HandDeck)
+            {
+                GraveDeck.Add(item);
+            }
+
+            //HanDeck 리스트를 모두 삭제
+            HandDeck.Clear();
+
+            //복구해서 디자인 어쩌구저쩌구 싹다 밀어버리기
+        }
+
 
         public Deck(List<Card> estatelist, List<Card> moneylist, Game_Screen g)
         {
@@ -170,7 +186,10 @@ namespace WindowsFormsApp1
         {
             GraveDeck.Add(HandDeck[number]);
             //HandDeck[number] = null;
+            if(mode  == "u") game_Screen.MakeString(HandDeck[number].Name, mode);  //매개변수 추가
+            else if(mode == "a") game_Screen.MakeString();
             HandDeck.RemoveAt(number);
+            
         }
         public void BuyCard(Card card)
         {

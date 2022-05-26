@@ -11,17 +11,19 @@ using System.IO;
 
 namespace WindowsFormsApp1
 {
-    //마녀 카드 등장 이펙트
-    public partial class Form5 : Form
+    public partial class Form6 : Form
     {
-        public Form5()
+        
+        public Form6(Image img)
         {
+            
             InitializeComponent();
+            pictureBox1.Image = img;
         }
 
-        private void Form5_Load(object sender, EventArgs e)
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
-            pictureBox1.Load(Directory.GetCurrentDirectory() + ("\\effect.gif"));
+            Close();
         }
     }
 }

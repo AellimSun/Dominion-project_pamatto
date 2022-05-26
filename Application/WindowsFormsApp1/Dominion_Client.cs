@@ -8,63 +8,8 @@ using System.Net.Sockets;
 using System.Threading;
 using DTL;
 
-namespace Dominion_Client
+namespace WindowsFormsApp1
 {
-    internal class Dominion_Client
-    {
-        static void Main(string[] args)
-        {   
-            //TEST
-
-            int A = 0;
-            string[] OID = new string[4];
-            string myID="";
-            int myScore = 0;
-            int[] TotalScore = new int[4];
-            string B;
-            Random ran = new Random();
-            myID += (char)ran.Next('a', 'z');   //가상 아이디 :: test용
-            myScore = ran.Next(100);
-            TransHandler t = new TransHandler("127.0.0.1", 5542, myID);
-            Console.WriteLine(myID);
-            t.Start_Matching();
-            if (t.Wait_Full_Queue(A) == 0)  //client 4개 가상으로 생성 후 큐 확인
-            {
-                Console.WriteLine("ERROR!");
-                return;
-            }
-            int res = t.Respond(1, OID);
-            if (res == -1)
-            {
-                Console.WriteLine("방폭!");
-                return;
-            }
-            else if (res == 0)
-            {
-                Console.WriteLine("ERROR!");
-                return;
-            }
-            if(res == 1)
-                Console.WriteLine("게임 시작!");
-            while (true)
-            {
-                if (t.Game_Listener(false, myScore, TotalScore) == -1) break;
-                Console.WriteLine("내 턴!");
-                B = Console.ReadLine();
-                if(B=="T")
-                    t.Turn_end();
-                if (B == "E")
-                {
-                    t.Game_End(myScore);
-                    t.Recv_Total_Score(TotalScore);
-                    break;
-                }
-            }
-            Console.WriteLine("{0} {1} {2} {3}",TotalScore[0],TotalScore[1],TotalScore[2],TotalScore[3]);
-
-        }
-    }
-
     public class TransHandler
     {
         private IPEndPoint ServerAddress;
@@ -198,8 +143,7 @@ namespace Dominion_Client
 
             return 0;
         }
-
-        public int Game_Listener(bool Hyeaja, int S, int[] TS)  //내 차례가 아닐 때 수신대기하는 메서드  테스트용 수정필!
+        public int Game_Listener()  //내 차례가 아닐 때 수신대기하는 메서드
         {
             while (true)
             {
@@ -218,19 +162,19 @@ namespace Dominion_Client
                                     {
                                         case 00: //마녀 번호 입력해야됨
                                             //마녀 사용 이펙트 호출
-                                            if (Hyeaja)
-                                            {
-                                                //방어 이펙트 호출
-                                                //Log_Send(Defence_Log);  Defence_Log에 방어 성공 로그 입력
-                                            }
-                                            else
-                                            {
-                                                //저주 획득 이펙트 호출
-                                                //저주 카드 개수 줄이는 메서드 호출
+                                            //if (Hyeaja)
+                                            //{
+                                            //    //방어 이펙트 호출
+                                            //    //Log_Send(Defence_Log);  Defence_Log에 방어 성공 로그 입력
+                                            //}
+                                            //else
+                                            //{
+                                            //    //저주 획득 이펙트 호출
+                                            //    //저주 카드 개수 줄이는 메서드 호출
 
-                                                //Get_Card(Curse_No); Curse_No에 저주 카드 번호 입력
-                                                //Log_Send(Curse_Get_Log); Curse_Get_Log에 저주 카드 획득 로그 입력
-                                            }
+                                            //    //Get_Card(Curse_No); Curse_No에 저주 카드 번호 입력
+                                            //    //Log_Send(Curse_Get_Log); Curse_Get_Log에 저주 카드 획득 로그 입력
+                                            //}
                                             break;
                                     }
                                     break;
@@ -248,17 +192,15 @@ namespace Dominion_Client
                     case CONSTANTS.LOG_SEND:
                         string log_recv = BitConverter.ToString((Alway_Listen.Body as BodyLogSend).LOG);
                         //로그 추가 메서드(매개변수 바이트 로그를 스트링으로 변환한 것 (<-log_recv))
-                        
                         break;
                     case CONSTANTS.SCORE_REQUEST:
-                        Score_send(S);    //Score에 자기 점수 넣으면됨
-                        Recv_Total_Score(TS);     //Total_Score에 모두의 점수 받을 int형 배열 입력
+                        //Score_send(Score);    //Score에 자기 점수 넣으면됨
+                        //Recv_Total_Score(Total_Score);     //Total_Score에 모두의 점수 받을 int형 배열 입력
                         //출력 메서드 호출 (매개변수 all_score)
                         return -1;
                 }
             }
         }
-
         public void Attack(int Card_Num)
         {
             Message Amsg = new Message();
@@ -334,7 +276,17 @@ namespace Dominion_Client
             };
             MessageUtil.Send(Stream, LSmsg);
         }
-        public void Game_End(int S) //테스트용 수정 필
+        public string Log_Receive()
+        {
+            Message LRmsg = MessageUtil.Receive(Stream);
+            if (LRmsg.Header.MSGTYPE == CONSTANTS.LOG_SEND)
+            {
+                string log = Encoding.UTF8.GetString((LRmsg.Body as BodyLogSend).LOG);
+                return log;
+            }
+            return null;
+        }
+        public void Game_End(int myScore)
         {
             Message GEmsg = new Message();
             GEmsg.Body = null;
@@ -351,7 +303,7 @@ namespace Dominion_Client
             {
                 return;
             }
-            Score_send(S);
+            Score_send(myScore);
         }
         public void Score_send(int Score)
         {
@@ -375,6 +327,8 @@ namespace Dominion_Client
             all_score[1] = (int)(All_Score.Body as BodyTotalScoreSend).SCORE2;
             all_score[2] = (int)(All_Score.Body as BodyTotalScoreSend).SCORE3;
             all_score[3] = (int)(All_Score.Body as BodyTotalScoreSend).SCORE4;
+
+
         }
     }
 }

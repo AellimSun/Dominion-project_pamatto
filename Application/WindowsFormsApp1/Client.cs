@@ -161,9 +161,9 @@ namespace WindowsFormsApp1
                     ID_LIST[2] = BitConverter.ToString((recv.Body as BodyGameStart).ID3);
                     ID_LIST[3] = BitConverter.ToString((recv.Body as BodyGameStart).ID4);
 
-                    return 1;
+//                    return 1;
 
-                case CONSTANTS.GAME_CANCLE:
+//                case CONSTANTS.GAME_CANCLE:
 
                     return -1;
             }

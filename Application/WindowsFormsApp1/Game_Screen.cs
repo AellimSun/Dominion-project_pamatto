@@ -20,14 +20,17 @@ namespace WindowsFormsApp1
         DB_ACCESS dB;
         Market market;
         Deck deck;
+
+        private TransHandler transHandler;
         PictureBox[] upper = null;
-        PictureBox[] lower = null;
+        public PictureBox[] lower = null;
         PictureBox[] marketPics = null;
         PictureBox[] CSPics = null;
         Label[] marketAmt = null;
         Label[] CSAmt = null;
 
         public string clickMode = "market";
+
         List<int> selected = new List<int>();
 
         public Game_Screen()
@@ -77,7 +80,7 @@ namespace WindowsFormsApp1
             pictureBox13.Load(Directory.GetCurrentDirectory() + "\\duchy.png");
             pictureBox15.Load(Directory.GetCurrentDirectory() + "\\province.png");
             pictureBox17.Load(Directory.GetCurrentDirectory() + "\\curse.png");
-            //456781011
+            
             CSamount1.Text = moneyList[0].amount.ToString();
             CSamount2.Text = moneyList[1].amount.ToString();
             CSamount3.Text = moneyList[2].amount.ToString();
@@ -129,17 +132,19 @@ namespace WindowsFormsApp1
 
         private void marketClick(object sender, EventArgs e)
         {
-            PictureBox tmp = (PictureBox)sender;
-            string name = tmp.Name;
-
-            int i;
-            for (i = 0; i < marketPics.Length; i++)
+            if ((e as MouseEventArgs).Button == MouseButtons.Left)
             {
-                if (name.Equals(marketPics[i].Name))
+                PictureBox tmp = (PictureBox)sender;
+                string name = tmp.Name;
+
+                int i;
+                for (i = 0; i < marketPics.Length; i++)
                 {
-                    break;
+                    if (name.Equals(marketPics[i].Name))
+                    {
+                        break;
+                    }
                 }
-            }
 
             if (clickMode.Equals("market"))
             {
@@ -167,15 +172,17 @@ namespace WindowsFormsApp1
 
         private void CSClick(object sender, EventArgs e)
         {
-            PictureBox tmp = (PictureBox)sender;
-            string name = tmp.Name;
-
-            int i;
-            for (i = 0; i < CSPics.Length; i++)
+            if ((e as MouseEventArgs).Button == MouseButtons.Left)
             {
-                if (name.Equals(CSPics[i].Name))
-                    break;
-            }
+                PictureBox tmp = (PictureBox)sender;
+                string name = tmp.Name;
+
+                int i;
+                for (i = 0; i < CSPics.Length; i++)
+                {
+                    if (name.Equals(CSPics[i].Name))
+                        break;
+                }
 
             if (clickMode.Equals("market"))
             {
@@ -184,22 +191,7 @@ namespace WindowsFormsApp1
             }
             else if (clickMode.Equals("grave"))
             {
-                MessageBox.Show("핸드에서 카드를 골라 버려야 합니다.\n원하지 않을 경우 효과 종료를 클릭해 주세요.");
-                return;
-            }
-            else if (clickMode.Equals("actionEffectMode"))
-            {
-                Card res = game.notBuyCSCSCard(i);
-                CSAmt[i].Text = res.amount.ToString();
-            }
-            else if (clickMode.Equals("trash"))
-            {
-                MessageBox.Show("핸드에서 카드를 폐기해야 합니다.\n원하지 않을 경우 폐기 종료를 클릭해 주세요.");
-                return;
-            }
-            else if (clickMode.Equals("moneyTrash"))
-            {
-                MessageBox.Show("핸드에서 재물 카드를 폐기해야 합니다.\n원하지 않을 경우 폐기 종료를 클릭해 주세요.");
+                MessageBox.Show("핸드에서 카드를 골라 버려야 합니다.");
                 return;
             }
         }
@@ -225,22 +217,46 @@ namespace WindowsFormsApp1
             return false;
         }
 
+        private int Sum_Score(Card item, int s)
+        {
+            if (item.Name.Equals("duchy"))
+            {
+                s += 3;
+            }
+            else if (item.Name.Equals("estate"))
+            {
+                s += 1;
+            }
+            else if (item.Name.Equals("province"))
+            {
+                s += 6;
+            }
+            else if (item.Name.Equals("curse"))
+            {
+                s -= 1;
+            }
+            return s;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             string state = button1.Text;
+
             if (state.Equals("액션 종료"))
             {
                 button1.Text = "구매 종료";
                 game.gameTable.ActionNumber = 0;
                 changeABC(game.gameTable);
-            }else if(state.Equals("버리기 종료"))
+            }
+            else if (state.Equals("버리기 종료"))
             {
-                if(selected.Count != 0)
+                if (selected.Count != 0)
                 {
-                    for(int j = 0; j < selected.Count; j++)
+                    for (int j = 0; j < selected.Count; j++)
                     {
-                        game.deck.GoToGrave(selected[j], "a");
+                        game.deck.GoToGrave(selected[j], "c");
                     }
+                    //game.deck.GoToGrave(selected[j - 1], "a");
                     //핸드덱 이미지 재정렬하는 메소드
                     setHandDeckImg(game.deck);
 
@@ -264,6 +280,73 @@ namespace WindowsFormsApp1
                     turn_button1("액션 종료");
                 }
             }
+            else if (state.Equals("효과 종료") || state.Equals("폐기 종료"))
+            {
+                clickMode = "market";
+                game.gameTable.Coin = 0;
+                changeABC(game.gameTable);
+
+                if (game.gameTable.ActionNumber == 0)
+                {
+                    turn_button1("구매 종료");
+                }
+                else
+                {
+                    turn_button1("액션 종료");
+                }
+            }
+            else if (state.Equals("구매 종료"))
+            {
+                //턴 종료
+                if (!market.Game_Over())
+                {
+                    //Global.transHandler.Turn_end();
+                    button1.Text = "액션 종료";
+                    //버튼 비활성화
+                    //button1.Enabled = false;
+                }
+                //게임 종료
+                else
+                {
+                    int myScore = 0;
+                    //행위 덱은 클릭 즉시 무덤덱으로 보내지므로, AB영역 이미지를 NULL전환만 하면 됨
+
+                    //winform 디자인 어쩌구저쩌구 싹다 밀어버리기
+                    foreach (PictureBox item in lower)
+                    {
+                        item.Image = null;
+                    }
+
+                    //핸드 덱 -> 무덤 덱으로 보내기
+                    deck.Hand_To_Grave();
+
+                    //무덤덱에서 승점 구해오기
+                    foreach (Card item in deck.GraveDeck)
+                    {
+                        myScore += Sum_Score(item, myScore);
+                    }
+
+                    //드로우덱에서 승점 구해오기
+                    foreach (Card item in deck.DrawDeck)
+                    {
+                        myScore += Sum_Score(item, myScore);
+                    }
+
+                    //내 점수 전달
+                    Global.transHandler.Game_End(myScore);
+
+                    //모든 유저 점수 집계
+                    int[] All_Player_Score = new int[4];
+                    Global.transHandler.Recv_Total_Score(All_Player_Score);
+
+                    //모든 유저 점수 출력 후 게임 최종 종료
+
+
+                    //로그인창으로 가기
+
+
+                }
+            }
         }
 
         public void turn_button1(string content)
@@ -271,58 +354,55 @@ namespace WindowsFormsApp1
             button1.Text = content;
         }
 
+        //private void Market_CS_RightClick(object sender, EventArgs e)
+        //{
+        //    PictureBox tmp = (PictureBox)sender;
+        //    string name = tmp.Name;
+           
+        //    int i = 0;
+        //    for (i = 0; i < marketPics.Length; i++)
+        //    {
+        //        if (name.Equals(marketPics[i].Name))
+        //        {
+        //            break;
+        //        }
+        //        else if(name.Equals(CSPics[i].Name))
+        //        {
+        //            break;
+        //        }
+        //    }
+
+        //}
+
         private void handClick(object sender, EventArgs e)
         {
-            PictureBox tmp = (PictureBox)sender;
-            string name = tmp.Name;
-
-            int i;
-            for (i = 0; i < lower.Length; i++)
+            if ((e as MouseEventArgs).Button == MouseButtons.Left)
             {
-                if (name.Equals(lower[i].Name))
+                PictureBox tmp = (PictureBox)sender;
+                string name = tmp.Name;
+
+                int i;
+                for (i = 0; i < lower.Length; i++)
                 {
-                    break;
+                    if (name.Equals(lower[i].Name))
+                    {
+                        break;
+                    }
                 }
-            }
 
-            if (clickMode.Equals("market"))
-            {
-                string now = button1.Text;
+                if (clickMode.Equals("market"))
+                {
+                    string now = button1.Text;
 
                 game.clickHand(now, i);
-            } else if (clickMode.Equals("grave"))
+            }else if (clickMode.Equals("grave"))
             {
                 selected.Add(i);
                 lower[i].Image = null;
                 lower[i].Visible = false;
                 lower[i].Enabled = false;
-            } else if (clickMode.Equals("actionEffectMode"))
-            {
-                MessageBox.Show("구매하실 카드를 클릭해 주세요.\n원하지 않을 경우 효과 종료를 클릭해주세요.");
             }
-            else if (clickMode.Equals("trash"))
-            {
-                game.gameTable.Coin = deck.HandDeck[i].price + 2;
-                changeABC(game.gameTable);
-                game.trash.gotoTrash(deck.HandDeck[i]);
-                deck.HandDeck.RemoveAt(i);
-
-                setHandDeckImg(deck);
-                clickMode = "actionEffectMode";
-                button1.Text = "효과 종료";
-            }
-            else if (clickMode.Equals("moneyTrash"))
-            {
-                string cardName = deck.HandDeck[i].Name;
-                int idx;
-
-                if (cardName.Equals("copper")) idx = 1;
-                else if (cardName.Equals("silver")) idx = 2;
-                else
-                {
-                    MessageBox.Show("동과 은 중에서만 선택 가능합니다.");
-                    return;
-                }
+        }
 
                 game.trash.gotoTrash(deck.HandDeck[i]);
                 deck.HandDeck.RemoveAt(i);
@@ -350,5 +430,39 @@ namespace WindowsFormsApp1
                 marketPics[i].Load(Directory.GetCurrentDirectory() + "\\" + marketlist[i].Name + ".png");
             }
         }
+        private void rightclick (PictureBox sender)
+        {
+            Form6 f6 = new Form6(sender.Image);
+
+            f6.ShowDialog();
+        }
+        public void setLogBox(string message)
+        {
+            list_log.Items.Add(message);
+        }
+
+        public void Log_Handle()
+        {
+            /*transHandler.Log_Send(make);
+            make = Log_Recive();
+            setLogBox(make);*/
+        }
+
+        public void MakeString(string cardname, string cardaction)
+        {//무덤
+            string make="";
+            int i = 1;
+            if(cardaction == "u") make = Global.UserID + "(이)가 " + cardname + " 카드 사용.";
+            else if (cardaction == "m") make = Global.UserID + "(이)가" + selected.Count.ToString() + "카드 구입";
+
+            
+        }
+
+        public void MakeString ()
+        {
+            string make = "";
+            make = Global.UserID + "(이)가" + selected.Count.ToString() + "장 버림";
+        }
+        
     }
 }
