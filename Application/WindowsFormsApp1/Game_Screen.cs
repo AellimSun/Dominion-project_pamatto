@@ -244,7 +244,8 @@ namespace WindowsFormsApp1
                 string now = button1.Text;
 
                 game.clickHand(now, i);
-            }else if (clickMode.Equals("grave"))
+            }
+            else if (clickMode.Equals("grave"))
             {
                 selected.Add(i);
                 lower[i].Image = null;
