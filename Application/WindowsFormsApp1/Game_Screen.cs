@@ -89,8 +89,34 @@ namespace WindowsFormsApp1
             CSamount5.Text = estateList[1].amount.ToString();
             CSamount6.Text = estateList[2].amount.ToString();
             CSamount7.Text = estateList[3].amount.ToString();
-        }
 
+            pictureBoxTF();
+        }
+        /*public void ShowDeck(Deck deck)                 //검증필요. 옵저버 패턴은 도저히 모르겠음.
+        {
+
+            this.deck = deck;
+
+            if (deck.DrawDeck.Count == 0)
+                pictureBox123.Visible = false;
+            else
+                pictureBox123.Visible = true;
+
+            if (deck.GraveDeck.Count == 0)
+                pictureBox124.Visible = false;
+            else
+                pictureBox124.Visible = true;
+
+        }*/
+
+        public void pictureBoxTF()
+        {
+            pictureBox123.Visible = deck.ShowDrawDeck();
+            pictureBox124.Visible = deck.ShowGraveDeck();
+            label7.Visible = deck.ShowGraveDeck();
+            label4.Text = deck.DrawDeck.Count.ToString();
+            label7.Text = deck.GraveDeck.Count.ToString();
+        }
         public void changeABC(GameTable gameTable)
         {
             label1.Text = "액션 : " + gameTable.ActionNumber;
@@ -172,6 +198,8 @@ namespace WindowsFormsApp1
                     return;
                 }
             }
+
+            MakeString(name, "m");
         }
 
         private void CSClick(object sender, EventArgs e)
@@ -267,6 +295,7 @@ namespace WindowsFormsApp1
                     setHandDeckImg(game.deck);
 
                     game.deck.DrawToHand(selected.Count, this);
+                    pictureBoxTF();
                     selected.RemoveRange(0, selected.Count);
                     clickMode = "market";
                     turn_button1("액션 종료");
@@ -352,6 +381,17 @@ namespace WindowsFormsApp1
 
 
                 }
+            }
+        }
+               
+            }
+            else if (state.Equals("구매 종료"))
+            {
+                //Global.transHandler.Turn_end();       서버 연결하면 주석 해제
+                button1.Text = "액션 종료";
+                //버튼 비활성화
+                button1.Enabled = false;
+
             }
         }
 
@@ -472,27 +512,38 @@ namespace WindowsFormsApp1
             list_log.Items.Add(message);
         }
 
-        public void Log_Handle()
+        public void Log_Handle(string make)
         {
-            /*transHandler.Log_Send(make);
-            make = Log_Recive();
-            setLogBox(make);*/
+
+            transHandler.Log_Send(make);
+            make = transHandler.Log_Receive();
+            setLogBox(make);
         }
 
         public void MakeString(string cardname, string cardaction)
-        {//무덤
-            string make="";
-            int i = 1;
+        {
+            //무덤
+            string make = "";
             if(cardaction == "u") make = Global.UserID + "(이)가 " + cardname + " 카드 사용.";
-            else if (cardaction == "m") make = Global.UserID + "(이)가" + selected.Count.ToString() + "카드 구입";
+            else if (cardaction == "m") make = Global.UserID + "(이)가" + cardname + "카드 구입.";
 
-            
+            Log_Handle(make);
+        }
+
+        public void MakeString(int dCount)
+        {
+            string make = "";
+            make = Global.UserID + "(이)가 " + dCount.ToString() + "장 드로우";
+            Log_Handle(make);
+
         }
 
         public void MakeString ()
         {
             string make = "";
             make = Global.UserID + "(이)가" + selected.Count.ToString() + "장 버림";
+            Log_Handle(make);
+
         }
         
     }

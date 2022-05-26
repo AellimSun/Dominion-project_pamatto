@@ -29,8 +29,8 @@ namespace WindowsFormsApp1
             form.marketImgInit(market.MarketPile);
 
             //덱 초기화
-            deck = new Deck(market.estatePile, market.MoneyPile, form);
-            //deck = new Deck(market.estatePile, market.MoneyPile, market.MarketPile);   // 지워야됨
+            //deck = new Deck(market.estatePile, market.MoneyPile, form);
+            deck = new Deck(market.estatePile, market.MoneyPile, market.MarketPile);   // 지워야됨
             gameTable = new GameTable();
             trash = new Trash();
 
@@ -89,6 +89,7 @@ namespace WindowsFormsApp1
                         MoneyCard moneyCard = (MoneyCard)deck.HandDeck[idx];
 
                         gameTable.Coin += moneyCard.money;
+                        deck.GoToGrave(idx, "u");
                         form.changeABC(gameTable);
                     }
                 }
@@ -104,7 +105,6 @@ namespace WindowsFormsApp1
                         string cardName = deck.HandDeck[idx].Name;
                         gameTable.ActionNumber -= 1;
                         ActionCard actionCard = (ActionCard)deck.HandDeck[idx];
-                        form.printMessageBox(string.Format("{0}",actionCard.add_Draw));
                         deck.GoToGrave(idx, "u");
                         useCard(actionCard);
                         form.changeABC(gameTable);
@@ -177,6 +177,7 @@ namespace WindowsFormsApp1
                 //int amount = cardList[i].amount;
                 market.SellCard(cardList[i]);
                 deck.BuyCard(cardList[i]);
+                form.pictureBoxTF();
 
                 form.changeABC(gameTable);
             }
@@ -193,7 +194,7 @@ namespace WindowsFormsApp1
                 gameTable.Coin = 0;
                 market.SellCard(cardList[i]);
                 deck.BuyCard(cardList[i]);
-
+                form.pictureBoxTF();
                 form.changeABC(gameTable);
 
                 form.clickMode = "market";
@@ -230,7 +231,7 @@ namespace WindowsFormsApp1
                 //int amount = cardList[i].amount;
                 market.SellCard(list[i]);
                 deck.BuyCard(list[i]);
-
+                form.pictureBoxTF();
                 form.changeABC(gameTable);
             }
 
@@ -255,7 +256,7 @@ namespace WindowsFormsApp1
                 gameTable.Coin = 0;
                 market.SellCard(cardList[i]);
                 deck.BuyCard(cardList[i]);
-
+                form.pictureBoxTF();
                 form.changeABC(gameTable);
 
                 form.clickMode = "market";
