@@ -109,8 +109,8 @@ namespace WindowsFormsApp1
                         useCard(actionCard);
                         form.changeABC(gameTable);
 
-                        if (gameTable.ActionNumber <= 0 
-                            && !cardName.Equals("workshop") && !cardName.Equals("remodel"))
+                        if (gameTable.ActionNumber <= 0 && !cardName.Equals("workshop") 
+                            && !cardName.Equals("remodel") && !cardName.Equals("mine"))
                         {
                             form.turn_button1("구매 종료");
                         }
@@ -158,6 +158,10 @@ namespace WindowsFormsApp1
             }else if (card.Name.Equals("remodel"))
             {
                 form.clickMode = "trash";
+                form.turn_button1("폐기 종료");
+            }else if (card.Name.Equals("mine"))
+            {
+                form.clickMode = "moneyTrash";
                 form.turn_button1("폐기 종료");
             }
 
@@ -266,6 +270,25 @@ namespace WindowsFormsApp1
             }
 
             //if(gameTable.Coin >=)
+
+            return list[i];
+        }
+
+        public Card gainCSCardToHand(int i)
+        {
+            List<Card> list = null;
+            if (i < 3)
+            {
+                list = market.MoneyPile;
+            }
+            else
+            {
+                list = market.estatePile;
+                i = i - 3;
+            }
+
+            market.SellCard(list[i]);
+            deck.gainCardToHand(list[i]);
 
             return list[i];
         }
