@@ -21,7 +21,7 @@ namespace WindowsFormsApp1
         Market market;
         Deck deck;
         PictureBox[] upper = null;
-        PictureBox[] lower = null;
+        public PictureBox[] lower = null;
         PictureBox[] marketPics = null;
         PictureBox[] CSPics = null;
         Label[] marketAmt = null;
@@ -225,6 +225,27 @@ namespace WindowsFormsApp1
             return false;
         }
 
+        private int Sum_Score(Card item, int s)
+        {
+            if (item.Name.Equals("duchy"))
+            {
+                s += 3;
+            }
+            else if (item.Name.Equals("estate"))
+            {
+                s += 1;
+            }
+            else if (item.Name.Equals("province"))
+            {
+                s += 6;
+            }
+            else if (item.Name.Equals("curse"))
+            {
+                s -= 1;
+            }
+            return s;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             string state = button1.Text;
@@ -283,7 +304,7 @@ namespace WindowsFormsApp1
             }
             else if (state.Equals("구매 종료"))
             {
-                //턴 종료인가?
+                //턴 종료
                 if (!market.Game_Over())
                 {
                     //Global.transHandler.Turn_end();
@@ -294,7 +315,42 @@ namespace WindowsFormsApp1
                 //게임 종료
                 else
                 {
-                    Global.transHandler.Game_End();
+                    int myScore = 0;
+                    //행위 덱은 클릭 즉시 무덤덱으로 보내지므로, AB영역 이미지를 NULL전환만 하면 됨
+
+                    //winform 디자인 어쩌구저쩌구 싹다 밀어버리기
+                    foreach (PictureBox item in lower)
+                    {
+                        item.Image = null;
+                    }
+
+                    //핸드 덱 -> 무덤 덱으로 보내기
+                    deck.Hand_To_Grave();
+
+                    //무덤덱에서 승점 구해오기
+                    foreach (Card item in deck.GraveDeck)
+                    {
+                        myScore += Sum_Score(item, myScore);
+                    }
+
+                    //드로우덱에서 승점 구해오기
+                    foreach (Card item in deck.DrawDeck)
+                    {
+                        myScore += Sum_Score(item, myScore);
+                    }
+
+                    //내 점수 전달
+                    Global.transHandler.Game_End(myScore);
+
+                    //모든 유저 점수 집계
+                    int[] All_Player_Score = new int[4];
+                    Global.transHandler.Recv_Total_Score(All_Player_Score);
+
+                    //모든 유저 점수 출력 후 게임 최종 종료
+
+
+                    //로그인창으로 가기
+
 
                 }
             }

@@ -57,6 +57,7 @@
     <Compile Include="Client.cs" />
     <Compile Include="DB_ACCESS.cs" />
     <Compile Include="Deck.cs" />
+    <Compile Include="Dominion_Client.cs" />
     <Compile Include="Form3.cs">
       <SubType>Form</SubType>
     </Compile>
