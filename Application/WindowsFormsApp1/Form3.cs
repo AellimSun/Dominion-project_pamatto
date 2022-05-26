@@ -45,15 +45,13 @@ namespace WindowsFormsApp1
                 if (res == 1)
                 {   //게임시작하실?
                     btnStart.Enabled = true;
-                    //int cnt = 15;
-                    //while(cnt > 0)
-                    //{
-                    //    timeLabel.Text = cnt.ToString();
-                    //    await Task.Delay(1000);
-                    //    cnt--;
-                    //}
-                    
-                    starttest();
+                    int cnt = 15;
+                    while(cnt > 0)
+                    {
+                        timeLabel.Text = cnt.ToString();
+                        await Task.Delay(1000);
+                        cnt--;
+                    }
                 }
                 else if (res == -1)
                 {   //취소 버튼 클릭해서 응답받은 것
@@ -84,7 +82,7 @@ namespace WindowsFormsApp1
                 MessageBox.Show("게임이 시작됩니다.");
                 //dB_ACCESS.SendDBLog("Game in");          //sending game login
                 game_Screen.Show();
-                this.Hide();
+                this.Close();
             }
             else if (res == -1)
             {

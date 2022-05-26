@@ -160,10 +160,10 @@ namespace WindowsFormsApp1
             switch (recv.Header.MSGTYPE)
             {
                 case CONSTANTS.GAME_START:
-                    ID_LIST[0] = BitConverter.ToString((recv.Body as BodyGameStart).ID1);
-                    ID_LIST[1] = BitConverter.ToString((recv.Body as BodyGameStart).ID2);
-                    ID_LIST[2] = BitConverter.ToString((recv.Body as BodyGameStart).ID3);
-                    ID_LIST[3] = BitConverter.ToString((recv.Body as BodyGameStart).ID4);
+                    ID_LIST[0] = Encoding.Default.GetString((recv.Body as BodyGameStart).ID1);
+                    ID_LIST[1] = Encoding.Default.GetString((recv.Body as BodyGameStart).ID2);
+                    ID_LIST[2] = Encoding.Default.GetString((recv.Body as BodyGameStart).ID3);
+                    ID_LIST[3] = Encoding.Default.GetString((recv.Body as BodyGameStart).ID4);
                     return 1;
 
                 case CONSTANTS.GAME_CANCLE:

@@ -28,7 +28,7 @@ namespace WindowsFormsApp1
             {
 
                 Global.UserID = textID.Text;
-                Global.transHandler = new TransHandler("127.0.0.1", 5542, Global.UserID);
+                Global.transHandler = new TransHandler("210.119.12.76", 5542, Global.UserID);
                 /*엘림만 사용*/
 
 

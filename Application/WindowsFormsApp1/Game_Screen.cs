@@ -64,10 +64,10 @@ namespace WindowsFormsApp1
 
             //플레이어 리스트
             listBox1.Items.Clear();
-            listBox1.Items.Add("player1");
-            listBox1.Items.Add("player2");
-            listBox1.Items.Add("player3");
-            listBox1.Items.Add("player4");
+            listBox1.Items.Add(Global.ID_List[0]);
+            listBox1.Items.Add(Global.ID_List[1]);
+            listBox1.Items.Add(Global.ID_List[2]);
+            listBox1.Items.Add(Global.ID_List[3]);
 
             List<Card> moneyList = market.MoneyPile;
             List<Card> estateList = market.estatePile;
