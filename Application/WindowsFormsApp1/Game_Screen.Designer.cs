@@ -46,6 +46,7 @@
             this.pictureBox21 = new System.Windows.Forms.PictureBox();
             this.pictureBox22 = new System.Windows.Forms.PictureBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.list_log = new System.Windows.Forms.ListBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.chatCon = new System.Windows.Forms.TextBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -134,6 +135,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox20)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox21)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox22)).BeginInit();
+            this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
@@ -384,6 +386,16 @@
             this.groupBox4.Size = new System.Drawing.Size(199, 365);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
+            // 
+            // list_log
+            // 
+            this.list_log.BackColor = System.Drawing.SystemColors.Menu;
+            this.list_log.FormattingEnabled = true;
+            this.list_log.ItemHeight = 12;
+            this.list_log.Location = new System.Drawing.Point(0, 8);
+            this.list_log.Name = "list_log";
+            this.list_log.Size = new System.Drawing.Size(199, 352);
+            this.list_log.TabIndex = 0;
             // 
             // groupBox5
             // 
@@ -1210,6 +1222,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox20)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox21)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox22)).EndInit();
+            this.groupBox4.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox6.ResumeLayout(false);
@@ -1356,6 +1369,7 @@
         private System.Windows.Forms.PictureBox pictureBox41;
         private System.Windows.Forms.PictureBox pictureBox42;
         private System.Windows.Forms.PictureBox pictureBox43;
+        private System.Windows.Forms.ListBox list_log;
     }
 }
 
