@@ -886,7 +886,7 @@
             this.groupBox10.Size = new System.Drawing.Size(600, 145);
             this.groupBox10.TabIndex = 10;
             this.groupBox10.TabStop = false;
-            this.groupBox10.Text = "내 엑션/바이";
+            this.groupBox10.Text = "내 액션/바이";
             // 
             // pictureBox53
             // 

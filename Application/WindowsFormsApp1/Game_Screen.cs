@@ -95,16 +95,30 @@ namespace WindowsFormsApp1
             CSamount6.Text = estateList[2].amount.ToString();
             CSamount7.Text = estateList[3].amount.ToString();
 
-            if (deck.DrawDeck.Count == 0)
-            {
-                pictureBox123.Visible = false;
-            }
-            if(deck.GraveDeck.Count !=0)
-            {
-                pictureBox124.Visible = true;
-            }
+           
         }
+        /*public void ShowDeck(Deck deck)                 //검증필요. 옵저버 패턴은 도저히 모르겠음.
+        {
 
+            this.deck = deck;
+
+            if (deck.DrawDeck.Count == 0)
+                pictureBox123.Visible = false;
+            else
+                pictureBox123.Visible = true;
+
+            if (deck.GraveDeck.Count == 0)
+                pictureBox124.Visible = false;
+            else
+                pictureBox124.Visible = true;
+
+        }*/
+
+        public void pictureBoxTF()
+        {
+            pictureBox123.Visible = deck.ShowDrawDeck();
+            pictureBox124.Visible = deck.ShowGraveDeck();
+        }
         public void changeABC(GameTable gameTable)
         {
             label1.Text = "액션 : " + gameTable.ActionNumber;
@@ -197,10 +211,10 @@ namespace WindowsFormsApp1
             }
             else if (state.Equals("구매 종료"))
             {
-                //Global.transHandler.Turn_end();
+                //Global.transHandler.Turn_end();       서버 연결하면 주석 해제
                 button1.Text = "액션 종료";
                 //버튼 비활성화
-                //button1.Enabled = false;
+                button1.Enabled = false;
                 
             }
         }
@@ -242,7 +256,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        
+       
     }
     //public class market
     //{
