@@ -12,7 +12,7 @@ namespace WindowsFormsApp1
     class DB_ACCESS
     {
         private SqlConnection Con;
-        public void SendLog(string player, string GameLog)
+        public void SendDBLog(string player, string GameLog)
         {
             string send_string = GameLog;
             try

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Timers;
 
 namespace WindowsFormsApp1
 {
@@ -16,7 +17,6 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
         }
-        private int duration = 16;
         int Qcount = 0;
         private void Form3_Load(object sender, EventArgs e)
         {
@@ -26,7 +26,8 @@ namespace WindowsFormsApp1
             {
                 //DB에 방 이름 생성 CreateGameName();
             }
-            TextNumber.Text = Qcount.ToString();
+            timeLabel.Text = "0";
+            numLabel.Text = Qcount.ToString();
             WaitingForGameStart();
         }
         async public void WaitingForGameStart()
@@ -37,10 +38,18 @@ namespace WindowsFormsApp1
                 if (res == 1)
                 {   //게임시작하실?
                     btnStart.Enabled = true;
-                    ShowCountDown();
+                    int cnt = 8;
+                    while(cnt > 0)
+                    {
+                        timeLabel.Text = cnt.ToString();
+                        await Task.Delay(1000);
+                        cnt--;
+                    }
+                    starttest();
                 }
                 else if (res == -1)
-                {   //큐나가기
+                {   //취소 버튼 클릭해서 응답받은 것
+                    MessageBox.Show("wait full queue 게임이 취소되었습니다.");
                     this.Close();
                     return;
                 }
@@ -49,36 +58,15 @@ namespace WindowsFormsApp1
         public void ADD_P()
         {
             Qcount++;
-            TextNumber.Text = Qcount.ToString();
+            numLabel.Text = Qcount.ToString();
         }
         public void SUB_P()
         {
             Qcount--;
-            TextNumber.Text = Qcount.ToString();
-        }
-        public void ShowCountDown()
-        {
-            timer1 = new System.Windows.Forms.Timer();
-            timer1.Tick += new EventHandler(count_down);
-            timer1.Interval = 1000;
-            timer1.Start();
-        }
-        private void count_down(object sender, EventArgs e)
-        {
-            if (duration == 0)
-            {
-                timer1.Stop();
-                Global.transHandler.Respond(-1,Global.ID_List);
-            }
-            else if (duration > 0)
-            {
-                duration--;
-                TimeText.Text = duration.ToString();
-            }
+            numLabel.Text = Qcount.ToString();
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-            //TimeText.Text = DateTime.Now.ToLongTimeString();
         }
         private void btnStart_Click(object sender, EventArgs e)
         {
@@ -87,7 +75,24 @@ namespace WindowsFormsApp1
             int res = Global.transHandler.Respond(1, Global.ID_List);
             if (res == 1)
             {
-                dB_ACCESS.SendLog(Global.UserID, "logging in");          //sending game login
+                MessageBox.Show("게임이 시작됩니다.");
+                dB_ACCESS.SendDBLog(Global.UserID, "Game in");          //sending game login
+                game_Screen.Show();
+                this.Close();
+            }
+            else if (res == -1)
+            {
+                MessageBox.Show("게임이 취소되었습니다.");
+                this.Close();
+            }
+        }
+        public void starttest()
+        {
+            Game_Screen game_Screen = new Game_Screen();
+            int res = Global.transHandler.Respond(1, Global.ID_List);
+            if (res == 1)
+            {
+                MessageBox.Show("게임이 시작됩니다.");
                 game_Screen.Show();
                 this.Close();
             }
@@ -99,11 +104,10 @@ namespace WindowsFormsApp1
         }
         private void btnCancle_Click(object sender, EventArgs e)
         {
-            Global.transHandler.Cancle_Matching();
-        }
-        public TextBox setNumberTextBox()
-        {
-            return TextNumber;
+            if (btnStart.Enabled == true)
+                Global.transHandler.Respond(-1, Global.ID_List);
+            else
+                Global.transHandler.Cancle_Matching();
         }
     }
 }
