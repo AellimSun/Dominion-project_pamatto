@@ -87,7 +87,7 @@ namespace WindowsFormsApp1
             CSamount6.Text = estateList[2].amount.ToString();
             CSamount7.Text = estateList[3].amount.ToString();
 
-           
+            pictureBoxTF();
         }
         /*public void ShowDeck(Deck deck)                 //검증필요. 옵저버 패턴은 도저히 모르겠음.
         {
@@ -110,6 +110,9 @@ namespace WindowsFormsApp1
         {
             pictureBox123.Visible = deck.ShowDrawDeck();
             pictureBox124.Visible = deck.ShowGraveDeck();
+            label7.Visible = deck.ShowGraveDeck();
+            label4.Text = deck.DrawDeck.Count.ToString();
+            label7.Text = deck.GraveDeck.Count.ToString();
         }
         public void changeABC(GameTable gameTable)
         {
@@ -268,6 +271,7 @@ namespace WindowsFormsApp1
                     setHandDeckImg(game.deck);
 
                     game.deck.DrawToHand(selected.Count, this);
+                    pictureBoxTF();
                     selected.RemoveRange(0, selected.Count);
                     clickMode = "market";
                     turn_button1("액션 종료");
@@ -286,6 +290,15 @@ namespace WindowsFormsApp1
                 {
                     turn_button1("액션 종료");
                 }
+               
+            }
+            else if (state.Equals("구매 종료"))
+            {
+                //Global.transHandler.Turn_end();       서버 연결하면 주석 해제
+                button1.Text = "액션 종료";
+                //버튼 비활성화
+                button1.Enabled = false;
+
             }
         }
 
