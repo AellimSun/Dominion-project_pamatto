@@ -107,21 +107,24 @@ namespace WindowsFormsApp1
             label3.Text = "재물 : " + gameTable.Coin;
         }
 
+        //핸드덱 이미지 재정렬(or 초기세팅)하는 메소드
         public void setHandDeckImg(Deck deck)
         {
             this.deck = deck;
-
             List<Card> handList = deck.HandDeck;
-            pictureBox22.Load(Directory.GetCurrentDirectory() + "\\" + handList[0].Name + ".png");
-            pictureBox21.Load(Directory.GetCurrentDirectory() + "\\" + handList[1].Name + ".png");
-            pictureBox20.Load(Directory.GetCurrentDirectory() + "\\" + handList[2].Name + ".png");
-            pictureBox19.Load(Directory.GetCurrentDirectory() + "\\" + handList[3].Name + ".png");
-            pictureBox18.Load(Directory.GetCurrentDirectory() + "\\" + handList[4].Name + ".png");
-            pictureBox31.Load(Directory.GetCurrentDirectory() + "\\" + handList[5].Name + ".png");      //삭제해야됨
-            pictureBox31.Visible = true; //삭제해야됨
-            pictureBox31.Enabled = true; //삭제해야됨
 
+            for(int i = 0; i < handList.Count; i++)
+            {
+                lower[i].Load(Directory.GetCurrentDirectory() + "\\" + handList[i].Name + ".png");
+                lower[i].Visible = true;
+                lower[i].Enabled = true;
+            }
             button1.Text = "액션 종료";
+            for (int j = 0; j < deck.DrawDeck.Count; j++)
+            {
+                Console.WriteLine(deck.DrawDeck[j].Name);
+            }
+            Console.WriteLine();
         }
 
         public void printMessageBox(string content)
@@ -218,6 +221,9 @@ namespace WindowsFormsApp1
                     {
                         game.deck.GoToGrave(selected[j]);
                     }
+                    //핸드덱 이미지 재정렬하는 메소드
+                    setHandDeckImg(game.deck);
+
                     game.deck.DrawToHand(selected.Count, this);
                     selected.RemoveRange(0, selected.Count);
                     clickMode = "market";
@@ -228,7 +234,6 @@ namespace WindowsFormsApp1
 
         public void turn_button1(string content)
         {
-            string state = button1.Text;
             button1.Text = content;
         }
 

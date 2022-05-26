@@ -29,8 +29,8 @@ namespace WindowsFormsApp1
             form.marketImgInit(market.MarketPile);
 
             //덱 초기화
-            //deck = new Deck(market.estatePile, market.MoneyPile);
-            deck = new Deck(market.estatePile, market.MoneyPile, market.MarketPile);   // 지워야됨
+            deck = new Deck(market.estatePile, market.MoneyPile, form);
+            //deck = new Deck(market.estatePile, market.MoneyPile, market.MarketPile);   // 지워야됨
             gameTable = new GameTable();
             trash = new Trash();
 
@@ -104,6 +104,7 @@ namespace WindowsFormsApp1
                         gameTable.ActionNumber -= 1;
                         ActionCard actionCard = (ActionCard)deck.HandDeck[idx];
                         form.printMessageBox(string.Format("{0}",actionCard.add_Draw));
+                        deck.GoToGrave(idx);
                         useCard(actionCard);
                         form.changeABC(gameTable);
 

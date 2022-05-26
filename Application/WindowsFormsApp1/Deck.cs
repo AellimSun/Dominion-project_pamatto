@@ -129,17 +129,12 @@ namespace WindowsFormsApp1
             while (0 < i)
             {
                 HandDeck.Add(DrawDeck[0]);
-                g.getLower()[HandDeck.Count - 1].Load(Directory.GetCurrentDirectory() + "\\" + HandDeck[HandDeck.Count - 1].Name + ".png");
-                g.getLower()[HandDeck.Count - 1].Visible = true;
-                g.getLower()[HandDeck.Count - 1].Enabled = true;
-                //pictureBox31.Load(Directory.GetCurrentDirectory() + "\\" + handList[5].Name + ".png");
-                //pictureBox31.Visible = true; 
                 DrawDeck.RemoveAt(0);
                 if (DrawDeck.Count == 0)
                     Shuffle(DrawDeck);
                 i--;
             }
-            
+            g.setHandDeckImg(this);
         }
         public void DrawToHand(int i, List<Card> actionlist)        //지워야됨
         {
@@ -173,7 +168,8 @@ namespace WindowsFormsApp1
         public void GoToGrave(int number)
         {
             GraveDeck.Add(HandDeck[number]);
-            HandDeck[number] = null;
+            //HandDeck[number] = null;
+            HandDeck.RemoveAt(number);
         }
         public void BuyCard(Card card)
         {
