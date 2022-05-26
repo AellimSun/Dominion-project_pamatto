@@ -194,6 +194,8 @@ namespace WindowsFormsApp1
                 MessageBox.Show("핸드에서 재물 카드를 폐기해야 합니다.\n원하지 않을 경우 폐기 종료를 클릭해 주세요.");
                 return;
             }
+
+            MakeString(name, "m");
         }
 
         private void CSClick(object sender, EventArgs e)
@@ -479,27 +481,39 @@ namespace WindowsFormsApp1
             list_log.Items.Add(message);
         }
 
-        public void Log_Handle()
+        public void Log_Handle(string make)
         {
-            /*transHandler.Log_Send(make);
-            make = Log_Recive();
-            setLogBox(make);*/
+
+            transHandler.Log_Send(make);
+            make = transHandler.Log_Receive();
+            setLogBox(make);
         }
 
         public void MakeString(string cardname, string cardaction)
-        {//무덤
-            string make="";
-            int i = 1;
+        {
+            //무덤
+            string make = "";
             if(cardaction == "u") make = Global.UserID + "(이)가 " + cardname + " 카드 사용.";
-            else if (cardaction == "m") make = Global.UserID + "(이)가" + selected.Count.ToString() + "카드 구입";
+            else if (cardaction == "m") make = Global.UserID + "(이)가" + cardname + "카드 구입.";
 
-            
+            Log_Handle(make);
+        }
+
+        public void MakeString(int dCount)
+        {
+            string make = "";
+            make = Global.UserID + "(이)가 " + dCount.ToString() + "장 드로우";
+            Log_Handle(make);
+
         }
 
         public void MakeString ()
         {
             string make = "";
             make = Global.UserID + "(이)가" + selected.Count.ToString() + "장 버림";
+            Log_Handle(make);
+
         }
+        
     }
 }

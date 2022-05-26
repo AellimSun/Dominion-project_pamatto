@@ -159,6 +159,8 @@ namespace WindowsFormsApp1
 
         public void DrawToHand(int i, Game_Screen g)
         {
+            game_Screen.MakeString(i);
+
             while (0 < i)
             {
                 HandDeck.Add(DrawDeck[0]);
@@ -168,6 +170,7 @@ namespace WindowsFormsApp1
                 i--;
             }
             g.setHandDeckImg(this);
+
         }
         public void DrawToHand(int i, List<Card> actionlist)        //지워야됨
         {
