@@ -43,10 +43,13 @@ namespace WindowsFormsApp1
                 this.startBTN.Enabled = true;
                 */
 
+
                 //나중에 지우기
                 Game_Screen game_Screen = new Game_Screen();
-                game_Screen.Show();
                 this.Hide();
+                game_Screen.ShowDialog();
+                this.Close();
+
             }
             //this.Enabled = false;  비활성화
             //this.Visible = false;  안보이게
