@@ -80,7 +80,7 @@ namespace WindowsFormsApp1
             pictureBox13.Load(Directory.GetCurrentDirectory() + "\\duchy.png");
             pictureBox15.Load(Directory.GetCurrentDirectory() + "\\province.png");
             pictureBox17.Load(Directory.GetCurrentDirectory() + "\\curse.png");
-            //456781011
+            
             CSamount1.Text = moneyList[0].amount.ToString();
             CSamount2.Text = moneyList[1].amount.ToString();
             CSamount3.Text = moneyList[2].amount.ToString();
@@ -132,17 +132,19 @@ namespace WindowsFormsApp1
 
         private void marketClick(object sender, EventArgs e)
         {
-            PictureBox tmp = (PictureBox)sender;
-            string name = tmp.Name;
-
-            int i;
-            for (i = 0; i < marketPics.Length; i++)
+            if ((e as MouseEventArgs).Button == MouseButtons.Left)
             {
-                if (name.Equals(marketPics[i].Name))
+                PictureBox tmp = (PictureBox)sender;
+                string name = tmp.Name;
+
+                int i;
+                for (i = 0; i < marketPics.Length; i++)
                 {
-                    break;
+                    if (name.Equals(marketPics[i].Name))
+                    {
+                        break;
+                    }
                 }
-            }
 
             if (clickMode.Equals("market"))
             {
@@ -170,15 +172,17 @@ namespace WindowsFormsApp1
 
         private void CSClick(object sender, EventArgs e)
         {
-            PictureBox tmp = (PictureBox)sender;
-            string name = tmp.Name;
-
-            int i;
-            for (i = 0; i < CSPics.Length; i++)
+            if ((e as MouseEventArgs).Button == MouseButtons.Left)
             {
-                if (name.Equals(CSPics[i].Name))
-                    break;
-            }
+                PictureBox tmp = (PictureBox)sender;
+                string name = tmp.Name;
+
+                int i;
+                for (i = 0; i < CSPics.Length; i++)
+                {
+                    if (name.Equals(CSPics[i].Name))
+                        break;
+                }
 
             if (clickMode.Equals("market"))
             {
@@ -187,22 +191,7 @@ namespace WindowsFormsApp1
             }
             else if (clickMode.Equals("grave"))
             {
-                MessageBox.Show("핸드에서 카드를 골라 버려야 합니다.\n원하지 않을 경우 효과 종료를 클릭해 주세요.");
-                return;
-            }
-            else if (clickMode.Equals("actionEffectMode"))
-            {
-                Card res = game.notBuyCSCSCard(i);
-                CSAmt[i].Text = res.amount.ToString();
-            }
-            else if (clickMode.Equals("trash"))
-            {
-                MessageBox.Show("핸드에서 카드를 폐기해야 합니다.\n원하지 않을 경우 폐기 종료를 클릭해 주세요.");
-                return;
-            }
-            else if (clickMode.Equals("moneyTrash"))
-            {
-                MessageBox.Show("핸드에서 재물 카드를 폐기해야 합니다.\n원하지 않을 경우 폐기 종료를 클릭해 주세요.");
+                MessageBox.Show("핸드에서 카드를 골라 버려야 합니다.");
                 return;
             }
         }
@@ -365,59 +354,55 @@ namespace WindowsFormsApp1
             button1.Text = content;
         }
 
+        //private void Market_CS_RightClick(object sender, EventArgs e)
+        //{
+        //    PictureBox tmp = (PictureBox)sender;
+        //    string name = tmp.Name;
+           
+        //    int i = 0;
+        //    for (i = 0; i < marketPics.Length; i++)
+        //    {
+        //        if (name.Equals(marketPics[i].Name))
+        //        {
+        //            break;
+        //        }
+        //        else if(name.Equals(CSPics[i].Name))
+        //        {
+        //            break;
+        //        }
+        //    }
+
+        //}
+
         private void handClick(object sender, EventArgs e)
         {
-            PictureBox tmp = (PictureBox)sender;
-            string name = tmp.Name;
-
-            int i;
-            for (i = 0; i < lower.Length; i++)
+            if ((e as MouseEventArgs).Button == MouseButtons.Left)
             {
-                if (name.Equals(lower[i].Name))
+                PictureBox tmp = (PictureBox)sender;
+                string name = tmp.Name;
+
+                int i;
+                for (i = 0; i < lower.Length; i++)
                 {
-                    break;
+                    if (name.Equals(lower[i].Name))
+                    {
+                        break;
+                    }
                 }
-            }
 
-            if (clickMode.Equals("market"))
-            {
-                string now = button1.Text;
+                if (clickMode.Equals("market"))
+                {
+                    string now = button1.Text;
 
                 game.clickHand(now, i);
-            }
-            else if (clickMode.Equals("grave"))
+            }else if (clickMode.Equals("grave"))
             {
                 selected.Add(i);
                 lower[i].Image = null;
                 lower[i].Visible = false;
                 lower[i].Enabled = false;
-            } else if (clickMode.Equals("actionEffectMode"))
-            {
-                MessageBox.Show("구매하실 카드를 클릭해 주세요.\n원하지 않을 경우 효과 종료를 클릭해주세요.");
             }
-            else if (clickMode.Equals("trash"))
-            {
-                game.gameTable.Coin = deck.HandDeck[i].price + 2;
-                changeABC(game.gameTable);
-                game.trash.gotoTrash(deck.HandDeck[i]);
-                deck.HandDeck.RemoveAt(i);
-
-                setHandDeckImg(deck);
-                clickMode = "actionEffectMode";
-                button1.Text = "효과 종료";
-            }
-            else if (clickMode.Equals("moneyTrash"))
-            {
-                string cardName = deck.HandDeck[i].Name;
-                int idx;
-
-                if (cardName.Equals("copper")) idx = 1;
-                else if (cardName.Equals("silver")) idx = 2;
-                else
-                {
-                    MessageBox.Show("동과 은 중에서만 선택 가능합니다.");
-                    return;
-                }
+        }
 
                 game.trash.gotoTrash(deck.HandDeck[i]);
                 deck.HandDeck.RemoveAt(i);
@@ -444,6 +429,12 @@ namespace WindowsFormsApp1
             {
                 marketPics[i].Load(Directory.GetCurrentDirectory() + "\\" + marketlist[i].Name + ".png");
             }
+        }
+        private void rightclick (PictureBox sender)
+        {
+            Form6 f6 = new Form6(sender.Image);
+
+            f6.ShowDialog();
         }
         public void setLogBox(string message)
         {
