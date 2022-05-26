@@ -26,21 +26,27 @@ namespace WindowsFormsApp1
             }
             else
             {
+
                 Global.UserID = textID.Text;
                 Global.transHandler = new TransHandler("127.0.0.1", 5542, Global.UserID);
+                /*엘림만 사용
                 Form3 form3 = new Form3();
                 this.textID.Enabled = false;
                 this.textPW.Enabled = false;
                 this.startBTN.Enabled = false;
-                form3.ShowDialog();
+                
+                form3.ShowDialog();                   
                 this.textID.Text = "";
                 this.textPW.Text = "";
                 this.textID.Enabled = true;
                 this.textPW.Enabled = true;
                 this.startBTN.Enabled = true;
+                */
 
-
-                //this.Hide();
+                //나중에 지우기
+                Game_Screen game_Screen = new Game_Screen();
+                game_Screen.Show();
+                this.Hide();
             }
             //this.Enabled = false;  비활성화
             //this.Visible = false;  안보이게
