@@ -46,7 +46,6 @@
             this.pictureBox21 = new System.Windows.Forms.PictureBox();
             this.pictureBox22 = new System.Windows.Forms.PictureBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.list_log = new System.Windows.Forms.ListBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.chatCon = new System.Windows.Forms.TextBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -67,8 +66,12 @@
             this.pictureBox11 = new System.Windows.Forms.PictureBox();
             this.pictureBox12 = new System.Windows.Forms.PictureBox();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.pictureBox124 = new System.Windows.Forms.PictureBox();
             this.pictureBox123 = new System.Windows.Forms.PictureBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.amount10 = new System.Windows.Forms.Label();
             this.amount9 = new System.Windows.Forms.Label();
@@ -119,10 +122,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.list_log = new System.Windows.Forms.ListBox();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox40)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox39)).BeginInit();
@@ -385,21 +385,12 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.list_log);
             this.groupBox4.Location = new System.Drawing.Point(899, 32);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(199, 365);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
-            // 
-            // list_log
-            // 
-            this.list_log.BackColor = System.Drawing.SystemColors.Menu;
-            this.list_log.FormattingEnabled = true;
-            this.list_log.ItemHeight = 12;
-            this.list_log.Location = new System.Drawing.Point(0, 8);
-            this.list_log.Name = "list_log";
-            this.list_log.Size = new System.Drawing.Size(199, 352);
-            this.list_log.TabIndex = 0;
             // 
             // groupBox5
             // 
@@ -619,6 +610,27 @@
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "덱";
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.Color.Red;
+            this.label7.Location = new System.Drawing.Point(120, 16);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(17, 12);
+            this.label7.TabIndex = 19;
+            this.label7.Text = "10";
+            this.label7.Visible = false;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.Color.Red;
+            this.label4.Location = new System.Drawing.Point(18, 16);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(17, 12);
+            this.label4.TabIndex = 18;
+            this.label4.Text = "10";
+            // 
             // pictureBox124
             // 
             this.pictureBox124.Image = global::WindowsFormsApp1.Properties.Resources.back;
@@ -638,6 +650,24 @@
             this.pictureBox123.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox123.TabIndex = 7;
             this.pictureBox123.TabStop = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(116, 92);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(70, 12);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Grave Deck";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(15, 92);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(66, 12);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Draw Deck";
             // 
             // groupBox1
             // 
@@ -877,7 +907,6 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.marketClick);
-            
             // 
             // groupBox10
             // 
@@ -1199,44 +1228,14 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "액션 :";
             // 
-            // label5
+            // list_log
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(15, 92);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(66, 12);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Draw Deck";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(116, 92);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(70, 12);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "Grave Deck";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(18, 16);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(17, 12);
-            this.label4.TabIndex = 18;
-            this.label4.Text = "10";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.Color.Red;
-            this.label7.Location = new System.Drawing.Point(120, 16);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(17, 12);
-            this.label7.TabIndex = 19;
-            this.label7.Text = "10";
-            this.label7.Visible = false;
+            this.list_log.FormattingEnabled = true;
+            this.list_log.ItemHeight = 12;
+            this.list_log.Location = new System.Drawing.Point(6, 17);
+            this.list_log.Name = "list_log";
+            this.list_log.Size = new System.Drawing.Size(187, 340);
+            this.list_log.TabIndex = 0;
             // 
             // Game_Screen
             // 
@@ -1424,6 +1423,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ListBox list_log;
     }
 }
 

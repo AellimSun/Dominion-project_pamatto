@@ -197,9 +197,8 @@ namespace WindowsFormsApp1
                     MessageBox.Show("핸드에서 재물 카드를 폐기해야 합니다.\n원하지 않을 경우 폐기 종료를 클릭해 주세요.");
                     return;
                 }
+                MakeString(name, "m");
             }
-
-            MakeString(name, "m");
         }
 
         private void CSClick(object sender, EventArgs e)
@@ -275,7 +274,6 @@ namespace WindowsFormsApp1
         private void button1_Click(object sender, EventArgs e)
         {
             string state = button1.Text;
-
             if (state.Equals("액션 종료"))
             {
                 button1.Text = "구매 종료";
@@ -288,30 +286,14 @@ namespace WindowsFormsApp1
                 {
                     for (int j = 0; j < selected.Count; j++)
                     {
-                        game.deck.GoToGrave(selected[j], "c");
+                        game.deck.GoToGrave(selected[j], "a");
                     }
-                    //game.deck.GoToGrave(selected[j - 1], "a");
                     //핸드덱 이미지 재정렬하는 메소드
                     setHandDeckImg(game.deck);
 
                     game.deck.DrawToHand(selected.Count, this);
-                    pictureBoxTF();
                     selected.RemoveRange(0, selected.Count);
                     clickMode = "market";
-                    turn_button1("액션 종료");
-                }
-            }else if(state.Equals("효과 종료") || state.Equals("폐기 종료"))
-            {
-                clickMode = "market";
-                game.gameTable.Coin = 0;
-                changeABC(game.gameTable);
-
-                if(game.gameTable.ActionNumber == 0)
-                {
-                    turn_button1("구매 종료");
-                }
-                else
-                {
                     turn_button1("액션 종료");
                 }
             }
@@ -329,69 +311,6 @@ namespace WindowsFormsApp1
                 {
                     turn_button1("액션 종료");
                 }
-            }
-            else if (state.Equals("구매 종료"))
-            {
-                //턴 종료
-                if (!market.Game_Over())
-                {
-                    //Global.transHandler.Turn_end();
-                    button1.Text = "액션 종료";
-                    //버튼 비활성화
-                    //button1.Enabled = false;
-                }
-                //게임 종료
-                else
-                {
-                    int myScore = 0;
-                    //행위 덱은 클릭 즉시 무덤덱으로 보내지므로, AB영역 이미지를 NULL전환만 하면 됨
-
-                    //winform 디자인 어쩌구저쩌구 싹다 밀어버리기
-                    foreach (PictureBox item in lower)
-                    {
-                        item.Image = null;
-                    }
-
-                    //핸드 덱 -> 무덤 덱으로 보내기
-                    deck.Hand_To_Grave();
-
-                    //무덤덱에서 승점 구해오기
-                    foreach (Card item in deck.GraveDeck)
-                    {
-                        myScore += Sum_Score(item, myScore);
-                    }
-
-                    //드로우덱에서 승점 구해오기
-                    foreach (Card item in deck.DrawDeck)
-                    {
-                        myScore += Sum_Score(item, myScore);
-                    }
-
-                    //내 점수 전달
-                    Global.transHandler.Game_End(myScore);
-
-                    //모든 유저 점수 집계
-                    int[] All_Player_Score = new int[4];
-                    Global.transHandler.Recv_Total_Score(All_Player_Score);
-
-                    //모든 유저 점수 출력 후 게임 최종 종료
-
-
-                    //로그인창으로 가기
-
-
-                }
-            }
-        }
-               
-            }
-            else if (state.Equals("구매 종료"))
-            {
-                //Global.transHandler.Turn_end();       서버 연결하면 주석 해제
-                button1.Text = "액션 종료";
-                //버튼 비활성화
-                button1.Enabled = false;
-
             }
         }
 

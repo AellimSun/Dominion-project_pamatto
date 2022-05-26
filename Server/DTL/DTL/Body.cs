@@ -30,11 +30,11 @@ namespace DTL
     }
     public class BodyInsertQueue : ISerializable
     {
-        public uint UserCount;
+        public int UserCount;
         public BodyInsertQueue() { }
         public BodyInsertQueue(byte[] bytes)
         {
-            UserCount = BitConverter.ToUInt32(bytes, 0);
+            UserCount = BitConverter.ToInt32(bytes, 0);
         }
         public byte[] GetBytes()
         {
@@ -103,13 +103,13 @@ namespace DTL
 
     public class BodyAlertAction : ISerializable
     {
-        public uint ACTION;
-        public uint CARD;
+        public int ACTION;
+        public int CARD;
         public BodyAlertAction() { }
         public BodyAlertAction(byte[] bytes)
         {
-            ACTION = BitConverter.ToUInt32(bytes, 0);
-            CARD = BitConverter.ToUInt32(bytes, 4);
+            ACTION = BitConverter.ToInt32(bytes, 0);
+            CARD = BitConverter.ToInt32(bytes, 4);
         }
         public byte[] GetBytes()
         {
@@ -149,11 +149,11 @@ namespace DTL
 
     public class BodyScoreSend : ISerializable
     {
-        public uint SCORE;
+        public int SCORE;
         public BodyScoreSend() { }
         public BodyScoreSend(byte[] bytes)
         {
-            SCORE = BitConverter.ToUInt32(bytes, 0);
+            SCORE = BitConverter.ToInt32(bytes, 0);
         }
         public byte[] GetBytes()
         {
@@ -170,17 +170,17 @@ namespace DTL
 
     public class BodyTotalScoreSend : ISerializable
     {
-        public uint SCORE1;
-        public uint SCORE2;
-        public uint SCORE3;
-        public uint SCORE4;
+        public int SCORE1;
+        public int SCORE2;
+        public int SCORE3;
+        public int SCORE4;
         public BodyTotalScoreSend() { }
         public BodyTotalScoreSend(byte[] bytes)
         {
-            SCORE1 = BitConverter.ToUInt32(bytes, 0);
-            SCORE2 = BitConverter.ToUInt32(bytes, 4);
-            SCORE3 = BitConverter.ToUInt32(bytes, 8);
-            SCORE4 = BitConverter.ToUInt32(bytes, 12);
+            SCORE1 = BitConverter.ToInt32(bytes, 0);
+            SCORE2 = BitConverter.ToInt32(bytes, 4);
+            SCORE3 = BitConverter.ToInt32(bytes, 8);
+            SCORE4 = BitConverter.ToInt32(bytes, 12);
         }
         public byte[] GetBytes()
         {

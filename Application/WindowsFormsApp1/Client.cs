@@ -363,6 +363,16 @@ namespace WindowsFormsApp1
             };
             MessageUtil.Send(Stream, LSmsg);
         }
+        public string Log_Receive()
+        {
+            Message LRmsg = MessageUtil.Receive(Stream);
+            if (LRmsg.Header.MSGTYPE == CONSTANTS.LOG_SEND)
+            {
+                string log = Encoding.UTF8.GetString((LRmsg.Body as BodyLogSend).LOG);
+                return log;
+            }
+            return null;
+        }
         public void Game_End()
         {
             Message GEmsg = new Message();
