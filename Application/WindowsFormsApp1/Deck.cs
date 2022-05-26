@@ -9,6 +9,7 @@ namespace WindowsFormsApp1
 {
     public class Deck : GameTable
     {
+        private Game_Screen game_Screen; 
         public List<Card> HandDeck;
         public List<Card> DrawDeck;
         public List<Card> GraveDeck;
@@ -170,7 +171,10 @@ namespace WindowsFormsApp1
         {
             GraveDeck.Add(HandDeck[number]);
             //HandDeck[number] = null;
+            if(mode  == "u") game_Screen.MakeString(HandDeck[number].Name, mode);  //매개변수 추가
+            else if(mode == "a") game_Screen.MakeString();
             HandDeck.RemoveAt(number);
+            
         }
         public void BuyCard(Card card)
         {
