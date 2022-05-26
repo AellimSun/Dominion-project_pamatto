@@ -23,13 +23,19 @@ namespace WindowsFormsApp1
         PictureBox[] upper = null;
         PictureBox[] lower = null;
         PictureBox[] marketPics = null;
+        PictureBox[] CSPics = null;
         Label[] marketAmt = null;
+        Label[] CSAmt = null;
+
+        public string clickMode = "market";
+        List<int> selected = new List<int>();
 
         public Game_Screen()
         {
             InitializeComponent();
         }
 
+        public PictureBox[] getLower() { return lower; }
         private void Form1_Load(object sender, EventArgs e)
         {
             upper = new PictureBox[] { pictureBox27, pictureBox26, pictureBox25, pictureBox30,
@@ -46,6 +52,10 @@ namespace WindowsFormsApp1
             marketPics = new PictureBox[] { pictureBox1, pictureBox2, pictureBox3, pictureBox4,
                 pictureBox5, pictureBox6, pictureBox7, pictureBox8, pictureBox9, pictureBox10 };
 
+            CSPics = new PictureBox[] { pictureBox12, pictureBox11, pictureBox16, pictureBox14, pictureBox13, pictureBox15, pictureBox17 };
+
+            CSAmt = new Label[] { CSamount1, CSamount2, CSamount3, CSamount4, CSamount5, CSamount6, CSamount7 };
+           
             game = new Game(this);
             market = game.market;
             deck = game.deck;
@@ -56,18 +66,6 @@ namespace WindowsFormsApp1
             listBox1.Items.Add("player2");
             listBox1.Items.Add("player3");
             listBox1.Items.Add("player4");
-
-            //마켓에 이미지추가하기(Market.cs에서 하려고 하니 이 cs의 것이라 설정이 어려움)
-            pictureBox1.BackColor = Color.AliceBlue;
-            pictureBox2.BackColor = Color.AliceBlue;
-            pictureBox3.BackColor = Color.AliceBlue;
-            pictureBox4.BackColor = Color.AliceBlue;
-            pictureBox5.BackColor = Color.AliceBlue;
-            pictureBox6.BackColor = Color.AliceBlue;
-            pictureBox7.BackColor = Color.AliceBlue;
-            pictureBox8.BackColor = Color.AliceBlue;
-            pictureBox9.BackColor = Color.AliceBlue;
-            pictureBox10.BackColor = Color.AliceBlue;
 
             List<Card> moneyList = market.MoneyPile;
             List<Card> estateList = market.estatePile;
@@ -80,14 +78,14 @@ namespace WindowsFormsApp1
             pictureBox15.Load(Directory.GetCurrentDirectory() + "\\province.png");
             pictureBox17.Load(Directory.GetCurrentDirectory() + "\\curse.png");
             //456781011
-            label4.Text = moneyList[0].amount.ToString();
-            label5.Text = moneyList[1].amount.ToString();
-            label6.Text = moneyList[2].amount.ToString();
+            CSamount1.Text = moneyList[0].amount.ToString();
+            CSamount2.Text = moneyList[1].amount.ToString();
+            CSamount3.Text = moneyList[2].amount.ToString();
 
-            label7.Text = estateList[0].amount.ToString();
-            label8.Text = estateList[1].amount.ToString();
-            label10.Text = estateList[2].amount.ToString();
-            label11.Text = estateList[3].amount.ToString();
+            CSamount4.Text = estateList[0].amount.ToString();
+            CSamount5.Text = estateList[1].amount.ToString();
+            CSamount6.Text = estateList[2].amount.ToString();
+            CSamount7.Text = estateList[3].amount.ToString();
         }
 
         public void changeABC(GameTable gameTable)
@@ -97,18 +95,31 @@ namespace WindowsFormsApp1
             label3.Text = "재물 : " + gameTable.Coin;
         }
 
+        //핸드덱 이미지 재정렬(or 초기세팅)하는 메소드
         public void setHandDeckImg(Deck deck)
         {
             this.deck = deck;
-
             List<Card> handList = deck.HandDeck;
-            pictureBox22.Load(Directory.GetCurrentDirectory() + "\\" + handList[0].Name + ".png");
-            pictureBox21.Load(Directory.GetCurrentDirectory() + "\\" + handList[1].Name + ".png");
-            pictureBox20.Load(Directory.GetCurrentDirectory() + "\\" + handList[2].Name + ".png");
-            pictureBox19.Load(Directory.GetCurrentDirectory() + "\\" + handList[3].Name + ".png");
-            pictureBox18.Load(Directory.GetCurrentDirectory() + "\\" + handList[4].Name + ".png");
 
+            for(int i = 0; i<lower.Length; i++)
+            {
+                lower[i].Image = null;
+                lower[i].Visible = false;
+                lower[i].Enabled = false;
+            }
+
+            for(int i = 0; i < handList.Count; i++)
+            {
+                lower[i].Load(Directory.GetCurrentDirectory() + "\\" + handList[i].Name + ".png");
+                lower[i].Visible = true;
+                lower[i].Enabled = true;
+            }
             button1.Text = "액션 종료";
+            for (int j = 0; j < deck.DrawDeck.Count; j++)
+            {
+                Console.WriteLine(deck.DrawDeck[j].Name);
+            }
+            Console.WriteLine();
         }
 
         public void printMessageBox(string content)
@@ -130,11 +141,67 @@ namespace WindowsFormsApp1
                 }
             }
 
-            Card res = game.buyCard(i);
-            marketAmt[i].Text = res.amount.ToString();
+            if (clickMode.Equals("market"))
+            {
+                Card res = game.buyCard(i);
+                marketAmt[i].Text = res.amount.ToString();
+            }else if (clickMode.Equals("grave"))
+            {
+                MessageBox.Show("핸드에서 카드를 골라 버려야 합니다.\n원하지 않을 경우 효과 종료를 클릭해 주세요.");
+                return;
+            }else if (clickMode.Equals("actionEffectMode"))
+            {
+                Card res = game.notBuyCard(i);
+                marketAmt[i].Text = res.amount.ToString();
+            }
+            else if (clickMode.Equals("trash"))
+            {
+                MessageBox.Show("핸드에서 카드를 폐기해야 합니다.\n원하지 않을 경우 폐기 종료를 클릭해 주세요.");
+                return;
+            }else if (clickMode.Equals("moneyTrash"))
+            {
+                MessageBox.Show("핸드에서 재물 카드를 폐기해야 합니다.\n원하지 않을 경우 폐기 종료를 클릭해 주세요.");
+                return;
+            }
+        }
 
-            MessageBox.Show(res.Name + " 카드 1개를 구입하여 " +
-                res.amount + "장 남았습니다.");
+        private void CSClick(object sender, EventArgs e)
+        {
+            PictureBox tmp = (PictureBox)sender;
+            string name = tmp.Name;
+
+            int i;
+            for (i = 0; i < CSPics.Length; i++)
+            {
+                if (name.Equals(CSPics[i].Name))
+                    break;
+            }
+
+            if (clickMode.Equals("market"))
+            {
+                Card res = game.buyCSCard(i);
+                CSAmt[i].Text = res.amount.ToString();
+            }
+            else if (clickMode.Equals("grave"))
+            {
+                MessageBox.Show("핸드에서 카드를 골라 버려야 합니다.\n원하지 않을 경우 효과 종료를 클릭해 주세요.");
+                return;
+            }
+            else if (clickMode.Equals("actionEffectMode"))
+            {
+                Card res = game.notBuyCSCSCard(i);
+                CSAmt[i].Text = res.amount.ToString();
+            }
+            else if (clickMode.Equals("trash"))
+            {
+                MessageBox.Show("핸드에서 카드를 폐기해야 합니다.\n원하지 않을 경우 폐기 종료를 클릭해 주세요.");
+                return;
+            }
+            else if (clickMode.Equals("moneyTrash"))
+            {
+                MessageBox.Show("핸드에서 재물 카드를 폐기해야 합니다.\n원하지 않을 경우 폐기 종료를 클릭해 주세요.");
+                return;
+            }
         }
 
         public bool pictureBox_SetImg(int idx)
@@ -164,16 +231,44 @@ namespace WindowsFormsApp1
             if (state.Equals("액션 종료"))
             {
                 button1.Text = "구매 종료";
+                game.gameTable.ActionNumber = 0;
+                changeABC(game.gameTable);
+            }else if(state.Equals("버리기 종료"))
+            {
+                if(selected.Count != 0)
+                {
+                    for(int j = 0; j < selected.Count; j++)
+                    {
+                        game.deck.GoToGrave(selected[j], "a");
+                    }
+                    //핸드덱 이미지 재정렬하는 메소드
+                    setHandDeckImg(game.deck);
+
+                    game.deck.DrawToHand(selected.Count, this);
+                    selected.RemoveRange(0, selected.Count);
+                    clickMode = "market";
+                    turn_button1("액션 종료");
+                }
+            }else if(state.Equals("효과 종료") || state.Equals("폐기 종료"))
+            {
+                clickMode = "market";
+                game.gameTable.Coin = 0;
+                changeABC(game.gameTable);
+
+                if(game.gameTable.ActionNumber == 0)
+                {
+                    turn_button1("구매 종료");
+                }
+                else
+                {
+                    turn_button1("액션 종료");
+                }
             }
         }
 
-        public void turn_button1()
+        public void turn_button1(string content)
         {
-            string state = button1.Text;
-            if (state.Equals("액션 종료"))
-            {
-                button1.Text = "구매 종료";
-            }
+            button1.Text = content;
         }
 
         private void handClick(object sender, EventArgs e)
@@ -190,9 +285,62 @@ namespace WindowsFormsApp1
                 }
             }
 
-            string now = button1.Text;
+            if (clickMode.Equals("market"))
+            {
+                string now = button1.Text;
 
-            game.clickHand(now, i);
+                game.clickHand(now, i);
+            } else if (clickMode.Equals("grave"))
+            {
+                selected.Add(i);
+                lower[i].Image = null;
+                lower[i].Visible = false;
+                lower[i].Enabled = false;
+            } else if (clickMode.Equals("actionEffectMode"))
+            {
+                MessageBox.Show("구매하실 카드를 클릭해 주세요.\n원하지 않을 경우 효과 종료를 클릭해주세요.");
+            }
+            else if (clickMode.Equals("trash"))
+            {
+                game.gameTable.Coin = deck.HandDeck[i].price + 2;
+                changeABC(game.gameTable);
+                game.trash.gotoTrash(deck.HandDeck[i]);
+                deck.HandDeck.RemoveAt(i);
+
+                setHandDeckImg(deck);
+                clickMode = "actionEffectMode";
+                button1.Text = "효과 종료";
+            }
+            else if (clickMode.Equals("moneyTrash"))
+            {
+                string cardName = deck.HandDeck[i].Name;
+                int idx;
+
+                if (cardName.Equals("copper")) idx = 1;
+                else if (cardName.Equals("silver")) idx = 2;
+                else
+                {
+                    MessageBox.Show("동과 은 중에서만 선택 가능합니다.");
+                    return;
+                }
+
+                game.trash.gotoTrash(deck.HandDeck[i]);
+                deck.HandDeck.RemoveAt(i);
+
+                Card res = game.gainCSCardToHand(idx);
+                CSAmt[idx].Text = res.amount.ToString();
+
+                setHandDeckImg(deck);
+                clickMode = "market";
+                if (game.gameTable.ActionNumber == 0)
+                {
+                    turn_button1("구매 종료");
+                }
+                else
+                {
+                    turn_button1("액션 종료");
+                }
+            }
         }
 
         public void marketImgInit(List<Card> marketlist)
@@ -203,37 +351,4 @@ namespace WindowsFormsApp1
             }
         }
     }
-    //public class market
-    //{
-    //    Card[] marketCard;
-
-    //    public void add(int i)
-    //    {
-    //        marketCard[i].setAmount(10);
-    //    }
-    //    public Card sell(int i)
-    //    {
-    //        marketCard[i].minusAmount(1);
-    //        return marketCard[i];
-    //    }
-    //    public void setMarketCardList()
-    //    {
-    //        marketCard = new Card[10];
-    //        ActionCard card = new ActionCard("witch");
-    //        marketCard[0] = card;
-    //    }
-    //}
-    //public class hand
-    //{
-    //    Card[] cardList;
-    //    int i = 0;
-
-    //    public void add(Card card)
-    //    {
-    //        cardList[i++] = card;
-    //    }
-    //}
-
-    //게임 초기화 -> 10장 cardlist에 추가
-    //
 }

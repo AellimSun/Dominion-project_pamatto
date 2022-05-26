@@ -189,7 +189,9 @@ namespace WindowsFormsApp1
                                     switch ((Alway_Listen.Body as BodyAlertAction).CARD)
                                     {
                                         case 00: //마녀 번호 입력해야됨
-                                            //마녀 사용 이펙트 호출
+                                            //마녀 사용 이펙트 호출 
+                                            //Form4 f4 = new Form4();
+                                            //f4.Show();
                                             if (Hyeaja)
                                             {
                                                 //방어 이펙트 호출
