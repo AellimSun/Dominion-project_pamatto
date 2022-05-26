@@ -9,6 +9,8 @@ namespace WindowsFormsApp1
     class Game
     {
         int score = 0;
+        int silverUsed = 0;             //상인카드를 위해 은 카드를 사용한적 있는지 체크하는 변수
+        bool merchantUsed = false;      //이번턴에 상인카드를 사용했었는지 체크하는 변수 !!!!!!!!!!턴 끝날때 꼭 false로 다시 바꿔줄것!!!!!!!!!!
         Game_Screen form;
         public Market market;
         public List<Card> cardList;
@@ -27,7 +29,8 @@ namespace WindowsFormsApp1
             form.marketImgInit(market.MarketPile);
 
             //덱 초기화
-            deck = new Deck(market.estatePile, market.MoneyPile);
+            deck = new Deck(market.estatePile, market.MoneyPile, form);
+            //deck = new Deck(market.estatePile, market.MoneyPile, market.MarketPile);   // 지워야됨
             gameTable = new GameTable();
             trash = new Trash();
 
@@ -66,6 +69,13 @@ namespace WindowsFormsApp1
             }
             else if (deck.HandDeck[idx].kind.Equals("money"))
             {
+                //상인카드를 위해 은 카드를 사용한적 있는지 체크
+                if (silverUsed == 0 && deck.HandDeck[idx].Name.Equals("silver") && merchantUsed)
+                {
+                    silverUsed++;
+                    gameTable.Coin++;
+                }
+
                 if (now.Equals("액션 종료"))
                 {
                     form.printMessageBox("지금은 액션 카드만 선택할 수 있습니다. \n액션을 사용하지 않는다면 액션 종료를 눌러주세요.");
@@ -85,18 +95,22 @@ namespace WindowsFormsApp1
             }
             else if (deck.HandDeck[idx].kind.Equals("action"))
             {
-                if (!now.Equals("액션 종료"))
+                if (now.Equals("액션 종료"))
                 {
                     bool res = form.pictureBox_SetImg(idx);
 
                     if (res)
                     {
                         gameTable.ActionNumber -= 1;
+                        ActionCard actionCard = (ActionCard)deck.HandDeck[idx];
+                        form.printMessageBox(string.Format("{0}",actionCard.add_Draw));
+                        deck.GoToGrave(idx);
+                        useCard(actionCard);
                         form.changeABC(gameTable);
 
                         if (gameTable.ActionNumber <= 0)
                         {
-                            form.turn_button1();
+                            form.turn_button1("구매 종료");
                         }
                     }
                 }
@@ -116,9 +130,29 @@ namespace WindowsFormsApp1
                 gameTable.Coin += card.add_Money;
             if (card.goto_Grave != 0)
                 deck.GoToGrave(card.goto_Grave);
-            //if (card.attack == true)
+            if (card.add_Draw != 0)
+                deck.DrawToHand(card.add_Draw, form);
+            if (card.attack)
+            {
+                //어택내용을 서버로 넘기나?
+            }
+
+            //예외사항이 있는 카드들
+
+            //상인
+            if (card.Name.Equals("merchant"))
+            {
+                merchantUsed = true;
+            }
+            //작업
+            if (card.Name.Equals("cellar"))
+            {
+                form.clickMode = "grave";
+                form.turn_button1("버리기 종료");
+            }
 
             //ShowTable에 보여지는 UI관련 메소드
+            form.changeABC(gameTable);
         }
         public Card buyCard(int i)
         {
