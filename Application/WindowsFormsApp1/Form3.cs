@@ -24,6 +24,10 @@ namespace WindowsFormsApp1
             Qcount = Global.transHandler.Start_Matching();
             if (Qcount == 1)
             {
+                DateTime now = DateTime.Now;
+
+                //DB_ACCESS dB_ACCESS = new DB_ACCESS();
+                //dB_ACCESS.SendDBLog();
                 //DB에 방 이름 생성 CreateGameName();
             }
             timeLabel.Text = "0";
@@ -85,7 +89,7 @@ namespace WindowsFormsApp1
             if (res == 1)
             {
                 MessageBox.Show("게임이 시작됩니다.");
-                dB_ACCESS.SendDBLog(Global.UserID, "Game in");          //sending game login
+                dB_ACCESS.SendDBLog("Game in");          //sending game login
                 game_Screen.Show();
                 this.Close();
             }
