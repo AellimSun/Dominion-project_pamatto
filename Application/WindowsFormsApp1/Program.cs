@@ -13,7 +13,7 @@ namespace WindowsFormsApp1
     {
         public static string UserID;
         public static TransHandler transHandler;
-        public static string[] ID_List;
+        public static string[] ID_List = { "","","",""};
     }
 
     internal static class Program

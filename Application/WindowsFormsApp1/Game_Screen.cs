@@ -90,6 +90,7 @@ namespace WindowsFormsApp1
             CSamount7.Text = estateList[3].amount.ToString();
 
             pictureBoxTF();
+            button1.Text = "액션 종료";
         }
         /*public void ShowDeck(Deck deck)                 //검증필요. 옵저버 패턴은 도저히 모르겠음.
         {
@@ -142,7 +143,7 @@ namespace WindowsFormsApp1
                 lower[i].Visible = true;
                 lower[i].Enabled = true;
             }
-            button1.Text = "액션 종료";
+            //button1.Text = "액션 종료";
             for (int j = 0; j < deck.DrawDeck.Count; j++)
             {
                 Console.WriteLine(deck.DrawDeck[j].Name);
@@ -440,9 +441,8 @@ namespace WindowsFormsApp1
 
         public void Log_Handle(string make)
         {
-
-            Global.transHandler.Log_Send(make);
-            make = Global.transHandler.Log_Receive();
+            //Global.transHandler.Log_Send(make);
+            //make = Global.transHandler.Log_Receive();
             setLogBox(make);
         }
 

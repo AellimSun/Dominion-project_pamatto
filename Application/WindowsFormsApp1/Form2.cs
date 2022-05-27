@@ -24,6 +24,14 @@ namespace WindowsFormsApp1
             {
                 MessageBox.Show("아이디나 패스워드를 입력해주세요!", "오류");
             }
+            else if(textID.Text == "1111")
+            {
+                Game_Screen game_Screen = new Game_Screen();
+                this.Hide();
+                game_Screen.Show();
+                //this.Close();
+
+            }
             else
             {
 

@@ -91,6 +91,8 @@ namespace WindowsFormsApp1
                         gameTable.Coin += moneyCard.money;
                         deck.GoToGrave(idx, "u", form);
                         form.changeABC(gameTable);
+                        form.pictureBoxTF();
+                        form.setHandDeckImg(deck);
                     }
                 }
             }
@@ -108,6 +110,8 @@ namespace WindowsFormsApp1
                         deck.GoToGrave(idx, "u", form);
                         useCard(actionCard);
                         form.changeABC(gameTable);
+                        form.pictureBoxTF();
+                        form.setHandDeckImg(deck);
 
                         if (gameTable.ActionNumber <= 0 && !cardName.Equals("workshop") 
                             && !cardName.Equals("remodel") && !cardName.Equals("mine"))
