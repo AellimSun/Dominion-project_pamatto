@@ -227,6 +227,10 @@ namespace WindowsFormsApp1
                     return;
                 }
             }
+            else if ((e as MouseEventArgs).Button == MouseButtons.Right)
+            {
+                rightclick((PictureBox)sender);
+            }
         }
 
         private void CSClick(object sender, EventArgs e)
@@ -311,6 +315,7 @@ namespace WindowsFormsApp1
                 button1.Text = "Buy End";
                 game.gameTable.ActionNumber = 0;
                 changeABC(game.gameTable);
+                return;
             }
             else if (state.Equals("Throw End"))
             {
@@ -328,6 +333,7 @@ namespace WindowsFormsApp1
                     clickMode = "market";
                     turn_button1("Action End");
                 }
+                return;
             }
             else if (state.Equals("Effect End") || state.Equals("Scrap End"))
             {
@@ -343,6 +349,7 @@ namespace WindowsFormsApp1
                 {
                     turn_button1("Action End");
                 }
+                return;
             }
             else if (state.Equals("Buy End"))
             {
@@ -353,11 +360,20 @@ namespace WindowsFormsApp1
                     button1.Text = "Action End";
                     //버튼 비활성화
                     button1.Enabled = false;
-                    deck.Hand_To_Grave();
+                    deck.Clear();
                     deck.DrawToHand(5, this);
+                    pictureBoxTF();
+
+                    foreach (PictureBox item in upper)
+                    {
+                        item.Image = null;
+                        item.Visible = false;
+                        item.Enabled = false;
+                    }
 
                     Listen_Method();
-                    
+                    game.gameTable.initGameTable();
+                    changeABC(game.gameTable);
                 }
                 //게임 종료
                 else
@@ -365,6 +381,7 @@ namespace WindowsFormsApp1
                     //내 점수 전달
                     Finish_Game();
                 }
+                return;
             }
         }
         private int My_Score()
@@ -557,7 +574,10 @@ namespace WindowsFormsApp1
         }
         public void setLogBox(string message)
         {
-            list_log.Items.Add(message);
+            if(message != null)
+            {
+                list_log.Items.Add(message);
+            }
         }
 
         public void Log_Handle(string make)
@@ -632,6 +652,7 @@ namespace WindowsFormsApp1
                     {
                         switch (flag)
                         {
+
                             //상대가 공격했음
                             case 2:
                                 //해자가 있냐?
@@ -666,6 +687,7 @@ namespace WindowsFormsApp1
 
                             //상대가 먹었음 -> 시장의 카드를 줄임
                             case 3:
+                                setLogBox(Card_Name);
                                 Label[] Ptmp = new Label[CSAmt.Length + marketAmt.Length];
                                 Card[] Ctmp = new Card[market.MarketPile.Count + market.MoneyPile.Count + market.estatePile.Count];
                                 //Label 및 Ctmp 정의
@@ -701,7 +723,6 @@ namespace WindowsFormsApp1
                                         break;
                                     }
                                 }
-
                                 break;
                             //상대가 폐기했음 -> 시장의 카드를 줄임
                             case 4:

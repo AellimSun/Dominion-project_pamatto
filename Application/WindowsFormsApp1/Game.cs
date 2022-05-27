@@ -29,8 +29,8 @@ namespace WindowsFormsApp1
             form.marketImgInit(market.MarketPile);
 
             //덱 초기화
-            //deck = new Deck(market.estatePile, market.MoneyPile, form);
-            deck = new Deck(market.estatePile, market.MoneyPile, market.MarketPile);   // 지워야됨
+            deck = new Deck(market.estatePile, market.MoneyPile, form);
+            //deck = new Deck(market.estatePile, market.MoneyPile, market.MarketPile);   // 지워야됨
             gameTable = new GameTable();
             trash = new Trash();
 

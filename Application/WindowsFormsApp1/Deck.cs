@@ -113,7 +113,7 @@ namespace WindowsFormsApp1
                 estatelist[j].amount -= 1;
             }
 
-            Shuffle(DrawDeck);
+            Shuffle(GraveDeck);
             DrawToHand(5,actionlist);
         }       //지워야됨
 
@@ -162,10 +162,10 @@ namespace WindowsFormsApp1
 
             while (0 < i)
             {
+                if (DrawDeck.Count == 0)
+                    Shuffle(GraveDeck);
                 HandDeck.Add(DrawDeck[0]);
                 DrawDeck.RemoveAt(0);
-                if (DrawDeck.Count == 0)
-                    Shuffle(DrawDeck);
                 i--;
             }
             g.setHandDeckImg(this);
@@ -175,10 +175,10 @@ namespace WindowsFormsApp1
         {
             while (0 < i)
             {
-                HandDeck.Add(DrawDeck[0]);
-                DrawDeck.RemoveAt(0);
                 if (DrawDeck.Count == 0)
                     Shuffle(DrawDeck);
+                HandDeck.Add(DrawDeck[0]);
+                DrawDeck.RemoveAt(0);
                 i--;
             }
             Card tmp = null;

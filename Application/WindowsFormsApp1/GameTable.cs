@@ -19,7 +19,12 @@ namespace WindowsFormsApp1
             Coin = 0;
         }
 
-        
+        public void initGameTable()
+        {
+            ActionNumber = 1;
+            BuyNumber = 1;
+            Coin = 0;
+        }
 
     }
 }
