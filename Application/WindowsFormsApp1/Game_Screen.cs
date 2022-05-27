@@ -172,7 +172,7 @@ namespace WindowsFormsApp1
                 lower[i].Visible = true;
                 lower[i].Enabled = true;
             }
-            //button1.Text = "액션 종료";
+            //button1.Text = "Action End";
             for (int j = 0; j < deck.DrawDeck.Count; j++)
             {
                 Console.WriteLine(deck.DrawDeck[j].Name);
@@ -306,7 +306,7 @@ namespace WindowsFormsApp1
         private void button1_Click(object sender, EventArgs e)
         {
             string state = button1.Text;
-            if (state.Equals("액션 종료"))
+            if (state.Equals("Action End"))
             {
                 button1.Text = "Buy End";
                 game.gameTable.ActionNumber = 0;
@@ -326,10 +326,10 @@ namespace WindowsFormsApp1
                     game.deck.DrawToHand(selected.Count, this);
                     selected.RemoveRange(0, selected.Count);
                     clickMode = "market";
-                    turn_button1("액션 종료");
+                    turn_button1("Action End");
                 }
             }
-            else if (state.Equals("효과 종료") || state.Equals("폐기 종료"))
+            else if (state.Equals("Effect End") || state.Equals("Scrap End"))
             {
                 clickMode = "market";
                 game.gameTable.Coin = 0;
@@ -350,7 +350,7 @@ namespace WindowsFormsApp1
                 if (!market.Game_Over())
                 {
                     Global.transHandler.Turn_end();
-                    button1.Text = "액션 종료";
+                    button1.Text = "Action End";
                     //버튼 비활성화
                     button1.Enabled = false;
                     Listen_Method();

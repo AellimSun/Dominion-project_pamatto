@@ -76,9 +76,9 @@ namespace WindowsFormsApp1
                     gameTable.Coin++;
                 }
 
-                if (now.Equals("액션 종료"))
+                if (now.Equals("Action End"))
                 {
-                    form.printMessageBox("지금은 액션 카드만 선택할 수 있습니다. \n액션을 사용하지 않는다면 액션 종료를 눌러주세요.");
+                    form.printMessageBox("지금은 액션 카드만 선택할 수 있습니다. \n액션을 사용하지 않는다면 Action End를 눌러주세요.");
                 }
                 else
                 {
@@ -98,7 +98,7 @@ namespace WindowsFormsApp1
             }
             else if (deck.HandDeck[idx].kind.Equals("action"))
             {
-                if (now.Equals("액션 종료"))
+                if (now.Equals("Action End"))
                 {
                     bool res = form.pictureBox_SetImg(idx);
 
@@ -116,13 +116,13 @@ namespace WindowsFormsApp1
                         if (gameTable.ActionNumber <= 0 && !cardName.Equals("workshop") 
                             && !cardName.Equals("remodel") && !cardName.Equals("mine"))
                         {
-                            form.turn_button1("구매 종료");
+                            form.turn_button1("Action End");
                         }
                     }
                 }
                 else
                 {
-                    form.printMessageBox("지금은 재화 카드만 선택할 수 있습니다. \n재화를 사용하지 않는다면 구매 종료를 눌러주세요.");
+                    form.printMessageBox("지금은 재화 카드만 선택할 수 있습니다. \n재화를 사용하지 않는다면 Action End를 눌러주세요.");
                 }
             }
         }
@@ -152,21 +152,21 @@ namespace WindowsFormsApp1
             else if (card.Name.Equals("cellar"))
             {
                 form.clickMode = "grave";
-                form.turn_button1("버리기 종료");
+                form.turn_button1("Throw End");
             }
             else if (card.Name.Equals("workshop"))
             {
                 form.clickMode = "actionEffectMode";
-                form.turn_button1("효과 종료");
+                form.turn_button1("Effect End");
                 gameTable.Coin = 4;
             }else if (card.Name.Equals("remodel"))
             {
                 form.clickMode = "trash";
-                form.turn_button1("폐기 종료");
+                form.turn_button1("Scrap End");
             }else if (card.Name.Equals("mine"))
             {
                 form.clickMode = "moneyTrash";
-                form.turn_button1("폐기 종료");
+                form.turn_button1("Scrap End");
             }
 
             //ShowTable에 보여지는 UI관련 메소드
@@ -205,11 +205,11 @@ namespace WindowsFormsApp1
                 form.clickMode = "market";
                 if (gameTable.ActionNumber == 0)
                 {
-                    form.turn_button1("구매 종료");
+                    form.turn_button1("Action End");
                 }
                 else
                 {
-                    form.turn_button1("액션 종료");
+                    form.turn_button1("Action End");
                 }
             }
 
@@ -269,11 +269,11 @@ namespace WindowsFormsApp1
                 form.clickMode = "market";
                 if (gameTable.ActionNumber == 0)
                 {
-                    form.turn_button1("구매 종료");
+                    form.turn_button1("Action End");
                 }
                 else
                 {
-                    form.turn_button1("액션 종료");
+                    form.turn_button1("Action End");
                 }
             }
 
