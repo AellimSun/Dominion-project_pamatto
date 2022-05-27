@@ -612,9 +612,9 @@
             this.groupBox9.Controls.Add(this.pictureBox123);
             this.groupBox9.Controls.Add(this.label6);
             this.groupBox9.Controls.Add(this.label5);
-            this.groupBox9.Location = new System.Drawing.Point(13, 521);
+            this.groupBox9.Location = new System.Drawing.Point(13, 501);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(199, 110);
+            this.groupBox9.Size = new System.Drawing.Size(199, 140);
             this.groupBox9.TabIndex = 8;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "덱";
@@ -623,7 +623,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.ForeColor = System.Drawing.Color.Red;
-            this.label7.Location = new System.Drawing.Point(120, 16);
+            this.label7.Location = new System.Drawing.Point(123, 27);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(17, 12);
             this.label7.TabIndex = 19;
@@ -634,7 +634,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(18, 16);
+            this.label4.Location = new System.Drawing.Point(21, 27);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(17, 12);
             this.label4.TabIndex = 18;
@@ -642,8 +642,7 @@
             // 
             // pictureBox124
             // 
-            this.pictureBox124.Image = global::WindowsFormsApp1.Properties.Resources.back;
-            this.pictureBox124.Location = new System.Drawing.Point(121, 15);
+            this.pictureBox124.Location = new System.Drawing.Point(121, 24);
             this.pictureBox124.Name = "pictureBox124";
             this.pictureBox124.Size = new System.Drawing.Size(56, 75);
             this.pictureBox124.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -652,8 +651,7 @@
             // 
             // pictureBox123
             // 
-            this.pictureBox123.Image = global::WindowsFormsApp1.Properties.Resources.back;
-            this.pictureBox123.Location = new System.Drawing.Point(19, 15);
+            this.pictureBox123.Location = new System.Drawing.Point(19, 24);
             this.pictureBox123.Name = "pictureBox123";
             this.pictureBox123.Size = new System.Drawing.Size(56, 75);
             this.pictureBox123.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -663,7 +661,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(116, 92);
+            this.label6.Location = new System.Drawing.Point(111, 116);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(70, 12);
             this.label6.TabIndex = 0;
@@ -672,7 +670,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(15, 92);
+            this.label5.Location = new System.Drawing.Point(10, 116);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(66, 12);
             this.label5.TabIndex = 0;
@@ -700,6 +698,7 @@
             this.groupBox1.Controls.Add(this.pictureBox2);
             this.groupBox1.Controls.Add(this.pictureBox6);
             this.groupBox1.Controls.Add(this.pictureBox1);
+            this.groupBox1.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.groupBox1.Location = new System.Drawing.Point(269, 32);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(600, 247);
@@ -1206,9 +1205,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(232, 20);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(37, 12);
+            this.label3.Size = new System.Drawing.Size(68, 12);
             this.label3.TabIndex = 2;
-            this.label3.Text = "재물 :";
+            this.label3.Text = "Treasure : ";
             // 
             // button1
             // 
@@ -1225,18 +1224,18 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(135, 20);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(37, 12);
+            this.label2.Size = new System.Drawing.Size(39, 12);
             this.label2.TabIndex = 0;
-            this.label2.Text = "바이 :";
+            this.label2.Text = "Buy : ";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(45, 20);
+            this.label1.Location = new System.Drawing.Point(35, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(37, 12);
+            this.label1.Size = new System.Drawing.Size(52, 12);
             this.label1.TabIndex = 0;
-            this.label1.Text = "액션 :";
+            this.label1.Text = "Action : ";
             // 
             // Game_Screen
             // 
