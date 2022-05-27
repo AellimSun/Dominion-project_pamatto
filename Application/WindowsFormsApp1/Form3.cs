@@ -13,7 +13,6 @@ namespace WindowsFormsApp1
 {
     public partial class Form3 : Form
     {
-        private Game_Screen game_Screen;
         public Form3()
         {
             InitializeComponent();
@@ -75,7 +74,7 @@ namespace WindowsFormsApp1
             btnStart.Enabled = false;
             Game_Screen game_Screen = new Game_Screen();
             DB_ACCESS dB_ACCESS = new DB_ACCESS();
-            int res = Global.transHandler.Respond(1, Global.ID_List);
+            int res = Global.transHandler.Respond(1, Global.ID_List, Global.HostNum);
             if (res == 1)
             {
                 btnCancle.Enabled = false;
@@ -90,28 +89,32 @@ namespace WindowsFormsApp1
                 this.Close();
             }
         }
-        public void starttest()
-        {
-            game_Screen = new Game_Screen();
-            int res = Global.transHandler.Respond(1, Global.ID_List);
-            if (res == 1)
-            {
-                //MessageBox.Show("게임이 시작됩니다.");
-                game_Screen.Show();
-                this.Close();
-            }
-            else if (res == -1)
-            {
-                MessageBox.Show("게임이 취소되었습니다.");
-                this.Close();
-            }
-        }
         private void btnCancle_Click(object sender, EventArgs e)
         {
             if (btnStart.Enabled == true)
-                Global.transHandler.Respond(-1, Global.ID_List);
+            {
+                Global.transHandler.Respond(-1, Global.ID_List, Global.HostNum);
+                MessageBox.Show("게임이 취소되었습니다.");
+                this.Close();
+            }
             else
                 Global.transHandler.Cancle_Matching();
         }
+        //public void starttest()
+        //{
+        //    game_Screen = new Game_Screen();
+        //    int res = Global.transHandler.Respond(1, Global.ID_List);
+        //    if (res == 1)
+        //    {
+        //        //MessageBox.Show("게임이 시작됩니다.");
+        //        game_Screen.Show();
+        //        this.Close();
+        //    }
+        //    else if (res == -1)
+        //    {
+        //        MessageBox.Show("게임이 취소되었습니다.");
+        //        this.Close();
+        //    }
+        //}
     }
 }

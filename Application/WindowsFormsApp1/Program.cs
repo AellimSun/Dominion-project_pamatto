@@ -12,6 +12,7 @@ namespace WindowsFormsApp1
     public static class Global
     {
         public static string UserID;
+        public static int HostNum;
         public static TransHandler transHandler;
         public static string[] ID_List = { "","","",""};
     }

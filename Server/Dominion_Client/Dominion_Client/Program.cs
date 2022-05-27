@@ -125,6 +125,7 @@ namespace Dominion_Client
                     break;
             }
             MessageUtil.Send(Stream, Res_Msg);
+
             Message recv = MessageUtil.Receive(Stream);
             switch (recv.Header.MSGTYPE)
             {

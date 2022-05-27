@@ -44,22 +44,14 @@ namespace WindowsFormsApp1
                 this.textID.Enabled = false;
                 this.textPW.Enabled = false;
                 this.startBTN.Enabled = false;
-                
+
                 form3.ShowDialog();                   
                 this.textID.Text = "";
                 this.textPW.Text = "";
                 this.textID.Enabled = true;
                 this.textPW.Enabled = true;
                 this.startBTN.Enabled = true;
-                
-
-
-                //나중에 지우기
-                //Game_Screen game_Screen = new Game_Screen();
-                this.Hide();
-                //game_Screen.ShowDialog();
-                //this.Close();
-
+                this.Show();
             }
             //this.Enabled = false;  비활성화
             //this.Visible = false;  안보이게

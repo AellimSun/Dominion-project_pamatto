@@ -129,7 +129,7 @@ namespace WindowsFormsApp1
                 MessageUtil.Send(Stream, CNM);
             });
         }
-        public int Respond(int Res, string[] ID_LIST)
+        public int Respond(int Res, string[] ID_LIST, int Host_Number)
         {
             Message Res_Msg = new Message();
             Res_Msg.Body = null;
@@ -155,8 +155,6 @@ namespace WindowsFormsApp1
             MessageUtil.Send(Stream, Res_Msg);
 
             Message recv = MessageUtil.Receive(Stream);
-            if (recv == null)
-                return 1;
             switch (recv.Header.MSGTYPE)
             {
                 case CONSTANTS.GAME_START:
@@ -164,6 +162,8 @@ namespace WindowsFormsApp1
                     ID_LIST[1] = Encoding.Default.GetString((recv.Body as BodyGameStart).ID2);
                     ID_LIST[2] = Encoding.Default.GetString((recv.Body as BodyGameStart).ID3);
                     ID_LIST[3] = Encoding.Default.GetString((recv.Body as BodyGameStart).ID4);
+                    Host_Number = (recv.Body as BodyGameStart).HostNumber;
+
                     return 1;
 
                 case CONSTANTS.GAME_CANCLE:
@@ -174,130 +174,49 @@ namespace WindowsFormsApp1
             return 0;
         }
 
-        public void Game_Listener(bool Hyeaja)  //내 차례가 아닐 때 수신대기하는 메서드
+        public int Game_Listener(string Card_Name, string Log)
         {
-            while (true)
+            Message Alway_Listen = MessageUtil.Receive(Stream);
+            switch (Alway_Listen.Header.MSGTYPE)
             {
-                Message Alway_Listen = MessageUtil.Receive(Stream);
-
-                switch (Alway_Listen.Header.MSGTYPE)
-                {
-                    case CONSTANTS.TURN_SEND:
-                        return;
-                    case CONSTANTS.ALERT_ACTION:
+                case CONSTANTS.TURN_SEND:
+                    return 1;
+                case CONSTANTS.ALERT_ACTION:
+                    {
+                        Card_Name = Encoding.Default.GetString((Alway_Listen.Body as BodyAlertAction).CARD);
+                        switch ((Alway_Listen.Body as BodyAlertAction).ACTION)
                         {
-                            switch ((Alway_Listen.Body as BodyAlertAction).ACTION)
-                            {
-                                case CONSTANTS.ATTACK:
-                                    switch ((Alway_Listen.Body as BodyAlertAction).CARD)
-                                    {
-                                        case 00: //마녀 번호 입력해야됨
-                                            //마녀 사용 이펙트 호출 
-                                            //Form4 f4 = new Form4();
-                                            //f4.Show();
-                                            if (Hyeaja)
-                                            {
-                                                //방어 이펙트 호출
-                                                Message Send_Log = new Message();
-                                                Send_Log.Body = new BodyLogSend()
-                                                {
-                                                    //해자카드에 대한 로그 정의를 확실히 한 후 추가
-                                                    //LOG = 
-                                                };
-                                                Send_Log.Header = new Header()
-                                                {
-                                                    HASBODY = CONSTANTS.HAS_BODY,
-                                                    MSGTYPE = CONSTANTS.LOG_SEND,
-                                                    BODYLEN = Send_Log.Body.GetSize()
-                                                };
-                                                MessageUtil.Send(Stream, Send_Log);
-                                            }
-                                            else
-                                            {
-                                                //저주 획득 이펙트 호출
-                                                //저주 카드 개수 줄이는 메서드 호출
-
-                                                Message GetCard = new Message();
-                                                GetCard.Body = new BodyAlertAction()
-                                                {
-                                                    ACTION = CONSTANTS.GET_CARD,
-                                                    CARD = 01       //저주 카드 번호 입력 필요함
-                                                };
-                                                GetCard.Header = new Header()
-                                                {
-                                                    HASBODY = CONSTANTS.HAS_BODY,
-                                                    MSGTYPE = CONSTANTS.ALERT_ACTION,
-                                                    BODYLEN = GetCard.Body.GetSize()
-                                                };
-
-                                                Message Send_Log = new Message();
-                                                Send_Log.Body = new BodyLogSend()
-                                                {
-                                                    //저주카드에 대한 로그 정의를 확실히 한 후 추가
-                                                    //LOG = 
-                                                };
-                                                Send_Log.Header = new Header()
-                                                {
-                                                    HASBODY = CONSTANTS.HAS_BODY,
-                                                    MSGTYPE = CONSTANTS.LOG_SEND,
-                                                    BODYLEN = Send_Log.Body.GetSize()
-                                                };
-
-                                                MessageUtil.Send(Stream, GetCard);
-                                                MessageUtil.Send(Stream, Send_Log);
-                                            }
-                                            break;
-                                    }
-                                    break;
-                                case CONSTANTS.GET_CARD:
-                                    int getcard_recv = (Alway_Listen.Body as BodyAlertAction).CARD;
-                                    //해당 카드 번호 줄이는 메소드(매개변수 카드번호(<-getcard_recv))
-                                    break;
-                                case CONSTANTS.SCRAP_CARD:
-                                    int scrap_recv = (Alway_Listen.Body as BodyAlertAction).CARD;
-                                    //폐기장에 해당 카드 번호 추가하는 메소드 (매개변수 카드번호(<-scrap_recv))
-                                    break;
-                            }
+                            case CONSTANTS.ATTACK:
+                                return 2;
+                            case CONSTANTS.GET_CARD:
+                                return 3;
+                            case CONSTANTS.SCRAP_CARD:
+                                return 4;
                         }
-                        break;
-                    case CONSTANTS.LOG_SEND:
-                        string log_recv = BitConverter.ToString((Alway_Listen.Body as BodyLogSend).LOG);
-                        //로그 추가 메서드(매개변수 바이트 로그를 스트링으로 변환한 것 (<-log_recv))
-                        break;
-                    case CONSTANTS.SCORE_REQUEST:
-                        Message my_score = new Message();
-                        my_score.Body = new BodyScoreSend()
-                        {
-                            //Score = 스코어 계산하는 메서드 호출
-                        };
-                        my_score.Header = new Header()
-                        {
-                            HASBODY = CONSTANTS.HAS_BODY,
-                            MSGTYPE = CONSTANTS.SCORE_SEND,
-                            BODYLEN = my_score.Body.GetSize()
-                        };
-                        MessageUtil.Send(Stream, my_score);
+                    }
+                    return -1;
+                case CONSTANTS.LOG_SEND:
+                    Log = BitConverter.ToString((Alway_Listen.Body as BodyLogSend).LOG);
+                    return 5;
+                case CONSTANTS.SCORE_REQUEST:
+                    return 6;
 
-                        Message All_Score = MessageUtil.Receive(Stream);
-                        int[] all_score = new int[4];
-                        all_score[0] = (int)(All_Score.Body as BodyTotalScoreSend).SCORE1;
-                        all_score[1] = (int)(All_Score.Body as BodyTotalScoreSend).SCORE2;
-                        all_score[2] = (int)(All_Score.Body as BodyTotalScoreSend).SCORE3;
-                        all_score[3] = (int)(All_Score.Body as BodyTotalScoreSend).SCORE4;
-
-                        //출력 메서드 호출 (매개변수 all_score)
-                        break;
-                }
+                default:
+                    return -1;
             }
+
         }
 
-        public void Attack(int Card_Num)
+        public void Attack(string Card_Name)
         {
+            byte[] cbyte = new byte[21];
+            byte[] tmp = Encoding.Default.GetBytes(Card_Name);
+            Array.Copy(tmp, 0, cbyte, 0, 21);
             Message Amsg = new Message();
             Amsg.Body = new BodyAlertAction()
             {
                 ACTION = CONSTANTS.ATTACK,
-                CARD = Card_Num
+                CARD = cbyte
             };
             Amsg.Header = new Header()
             {
@@ -307,13 +226,16 @@ namespace WindowsFormsApp1
             };
             MessageUtil.Send(Stream, Amsg);
         }
-        public void Get_Card(int Card_Num)
+        public void Get_Card(string Card_Name)
         {
+            byte[] cbyte = new byte[21];
+            byte[] tmp = Encoding.Default.GetBytes(Card_Name);
+            Array.Copy(tmp, 0, cbyte, 0, 21);
             Message GCmsg = new Message();
             GCmsg.Body = new BodyAlertAction()
             {
                 ACTION = CONSTANTS.GET_CARD,
-                CARD = Card_Num
+                CARD = cbyte
             };
             GCmsg.Header = new Header()
             {
@@ -323,13 +245,16 @@ namespace WindowsFormsApp1
             };
             MessageUtil.Send(Stream, GCmsg);
         }
-        public void Scrap_Card(int Card_Num)
+        public void Scrap_Card(string Card_Name)
         {
+            byte[] cbyte = new byte[21];
+            byte[] tmp = Encoding.Default.GetBytes(Card_Name);
+            Array.Copy(tmp, 0, cbyte, 0, 21);
             Message SCmsg = new Message();
             SCmsg.Body = new BodyAlertAction()
             {
                 ACTION = CONSTANTS.SCRAP_CARD,
-                CARD = Card_Num
+                CARD = cbyte
             };
             SCmsg.Header = new Header()
             {
@@ -376,7 +301,7 @@ namespace WindowsFormsApp1
             }
             return null;
         }
-        public void Game_End()
+        public void Game_End(int Score)
         {
             Message GEmsg = new Message();
             GEmsg.Body = null;
@@ -387,6 +312,13 @@ namespace WindowsFormsApp1
                 BODYLEN = 0
             };
             MessageUtil.Send(Stream, GEmsg);
+
+            Message RSmsg = MessageUtil.Receive(Stream);
+            if (RSmsg.Header.MSGTYPE != CONSTANTS.SCORE_REQUEST)
+            {
+                return;
+            }
+            Score_send(Score);
         }
         public void Score_send(int Score)
         {
@@ -402,6 +334,14 @@ namespace WindowsFormsApp1
                 BODYLEN = SSmsg.Body.GetSize()
             };
             MessageUtil.Send(Stream, SSmsg);
+        }
+        public void Recv_Total_Score(int[] all_score)
+        {
+            Message All_Score = MessageUtil.Receive(Stream);
+            all_score[0] = (int)(All_Score.Body as BodyTotalScoreSend).SCORE1;
+            all_score[1] = (int)(All_Score.Body as BodyTotalScoreSend).SCORE2;
+            all_score[2] = (int)(All_Score.Body as BodyTotalScoreSend).SCORE3;
+            all_score[3] = (int)(All_Score.Body as BodyTotalScoreSend).SCORE4;
         }
     }
 }
