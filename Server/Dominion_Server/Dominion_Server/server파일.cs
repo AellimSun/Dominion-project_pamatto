@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -39,7 +39,7 @@ namespace Dominion_Server
                 AddClient(server, clients, host_number);
                 if (clients.Count == 4)
                 {
-                    Create_Game(clients, host_number);
+                    Create_Game(clients, host_number++);
                     clients = new List<Client>();
                 }
             }
@@ -220,19 +220,20 @@ namespace Dominion_Server
                 }
                 if (Ready)
                 {
-                    byte[] bytes = new byte[44];
-                    for (int i = 0; i < 4; i++)
-                    {
-                        byte[] tmp = Encoding.ASCII.GetBytes(clients[i].ID);
-                        Array.Copy(tmp, 0, bytes, 11 * i, 11);
-                    }
                     Message P_G = new Message();
-                    P_G.Body = new BodyGameStart(bytes);
+                    P_G.Body = new BodyGameStart()
+                    {
+                        ID1 = Encoding.ASCII.GetBytes(full_list[0].ID),
+                        ID2 = Encoding.ASCII.GetBytes(full_list[1].ID),
+                        ID3 = Encoding.ASCII.GetBytes(full_list[2].ID),
+                        ID4 = Encoding.ASCII.GetBytes(full_list[3].ID),
+                        HostNumber = this_host_number
+                    };
                     P_G.Header = new Header()
                     {
                         HASBODY = CONSTANTS.HAS_BODY,
                         MSGTYPE = CONSTANTS.GAME_START,
-                        BODYLEN = (int)P_G.Body.GetSize()
+                        BODYLEN = P_G.Body.GetSize()
                     };
 
                     foreach (Client c in full_list)
@@ -320,11 +321,11 @@ namespace Dominion_Server
                                         MessageUtil.Send(full_list[i].stream, R_Msg);
                                         if ((R_Msg.Body as BodyAlertAction).ACTION == CONSTANTS.ATTACK)
                                         {
-                                            uint CardNo = (uint)(R_Msg.Body as BodyAlertAction).CARD;
+                                            string CardName = Encoding.Default.GetString((R_Msg.Body as BodyAlertAction).CARD);
                                             Message recv_res = MessageUtil.Receive(full_list[i].stream);
-                                            switch (CardNo)
+                                            switch (CardName)
                                             {
-                                                case 00:        //이후 여기에 마녀 번호 입력
+                                                case "witch":
                                                     if (recv_res.Header.MSGTYPE == CONSTANTS.ALERT_ACTION)
                                                     {
                                                         //해자가 없다면 저주 카드 획득 메시지를 날리므로
@@ -396,7 +397,7 @@ namespace Dominion_Server
             // => 점수계산
 
             //점수를 저장 할 공간
-            uint[] U_Score = new uint[4];
+            int[] U_Score = new int[4];
 
 
             //1. 점수주세요->client
@@ -422,7 +423,7 @@ namespace Dominion_Server
 
                 if (Score_Rec.Header.MSGTYPE == CONSTANTS.SCORE_SEND)
                 {
-                    U_Score[i] = (uint)(Score_Rec.Body as BodyScoreSend).SCORE;
+                    U_Score[i] = (Score_Rec.Body as BodyScoreSend).SCORE;
                 }
 
             }
@@ -430,17 +431,17 @@ namespace Dominion_Server
             Message Score_Final = new Message();
             Score_Final.Body = new BodyTotalScoreSend()
             {
-                SCORE1 = (int)U_Score[0],
-                SCORE2 = (int)U_Score[1],
-                SCORE3 = (int)U_Score[2],
-                SCORE4 = (int)U_Score[3]
+                SCORE1 = U_Score[0],
+                SCORE2 = U_Score[1],
+                SCORE3 = U_Score[2],
+                SCORE4 = U_Score[3]
             };
 
             Score_Final.Header = new Header()
             {
                 HASBODY = CONSTANTS.HAS_BODY,
                 MSGTYPE = CONSTANTS.TOTAL_SCORE_SEND,
-                BODYLEN = (int)Score_Final.Body.GetSize()
+                BODYLEN = Score_Final.Body.GetSize()
             };
 
             //3. 점수 다시보내기 및 끊기
@@ -452,9 +453,6 @@ namespace Dominion_Server
                 c.client.Close();
 
             }
-
-
         }
-
     }
 }
