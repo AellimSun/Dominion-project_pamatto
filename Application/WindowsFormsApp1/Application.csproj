@@ -82,6 +82,12 @@
     <Compile Include="Form6.Designer.cs">
       <DependentUpon>Form6.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form7.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form7.Designer.cs">
+      <DependentUpon>Form7.cs</DependentUpon>
+    </Compile>
     <Compile Include="Game.cs" />
     <Compile Include="GameTable.cs" />
     <Compile Include="Game_Screen.cs">
@@ -112,6 +118,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form6.resx">
       <DependentUpon>Form6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form7.resx">
+      <DependentUpon>Form7.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Game_Screen.resx">
       <DependentUpon>Game_Screen.cs</DependentUpon>
@@ -145,6 +154,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\Debug\back.png" />
+    <None Include="bin\Debug\KakaoTalk_20220523_212446275.jpg" />
+    <None Include="bin\Debug\배경.jpg" />
+    <None Include="bin\Debug\배경1.jpg" />
+    <None Include="bin\Debug\배경2.jpg" />
     <Content Include="정리.txt" />
   </ItemGroup>
   <ItemGroup>
