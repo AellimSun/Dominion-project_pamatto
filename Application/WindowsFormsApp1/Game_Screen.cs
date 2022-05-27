@@ -28,6 +28,7 @@ namespace WindowsFormsApp1
         Label[] marketAmt = null;
         Label[] CSAmt = null;
 
+
         public string clickMode = "market";
 
         List<int> selected = new List<int>();
@@ -199,6 +200,10 @@ namespace WindowsFormsApp1
                 }
                 MakeString(name, "m");
             }
+            else if ((e as MouseEventArgs).Button == MouseButtons.Right)
+            {
+                rightclick((PictureBox)sender);
+            }
         }
 
         private void CSClick(object sender, EventArgs e)
@@ -226,6 +231,10 @@ namespace WindowsFormsApp1
                     return;
                 }
 
+            }
+            else if ((e as MouseEventArgs).Button == MouseButtons.Right)
+            {
+                rightclick((PictureBox)sender);
             }
         }
 
@@ -327,98 +336,87 @@ namespace WindowsFormsApp1
             button1.Text = content;
         }
 
-        //private void Market_CS_RightClick(object sender, EventArgs e)
-        //{
-        //    PictureBox tmp = (PictureBox)sender;
-        //    string name = tmp.Name;
-
-        //    int i = 0;
-        //    for (i = 0; i < marketPics.Length; i++)
-        //    {
-        //        if (name.Equals(marketPics[i].Name))
-        //        {
-        //            break;
-        //        }
-        //        else if(name.Equals(CSPics[i].Name))
-        //        {
-        //            break;
-        //        }
-        //    }
-
-        //}
 
         private void handClick(object sender, EventArgs e)
         {
-            PictureBox tmp = (PictureBox)sender;
-            string name = tmp.Name;
-
-            int i;
-            for (i = 0; i < lower.Length; i++)
+            if ((e as MouseEventArgs).Button == MouseButtons.Left)
             {
-                if (name.Equals(lower[i].Name))
+                PictureBox tmp = (PictureBox)sender;
+                string name = tmp.Name;
+
+                int i;
+                for (i = 0; i < lower.Length; i++)
                 {
-                    break;
-                }
-            }
-
-            if (clickMode.Equals("market"))
-            {
-                string now = button1.Text;
-
-                game.clickHand(now, i);
-            }
-            else if (clickMode.Equals("grave"))
-            {
-                selected.Add(i);
-                lower[i].Image = null;
-                lower[i].Visible = false;
-                lower[i].Enabled = false;
-            }
-            else if (clickMode.Equals("actionEffectMode"))
-            {
-                MessageBox.Show("구매하실 카드를 클릭해 주세요.\n원하지 않을 경우 효과 종료를 클릭해주세요.");
-            }
-            else if (clickMode.Equals("trash"))
-            {
-                game.gameTable.Coin = deck.HandDeck[i].price + 2;
-                changeABC(game.gameTable);
-                game.trash.gotoTrash(deck.HandDeck[i]);
-                deck.HandDeck.RemoveAt(i);
-
-                setHandDeckImg(deck);
-                clickMode = "actionEffectMode";
-                button1.Text = "효과 종료";
-            }
-            else if (clickMode.Equals("moneyTrash"))
-            {
-                string cardName = deck.HandDeck[i].Name;
-                int idx;
-
-                if (cardName.Equals("copper")) idx = 1;
-                else if (cardName.Equals("silver")) idx = 2;
-                else
-                {
-                    MessageBox.Show("동과 은 중에서만 선택 가능합니다.");
-                    return;
+                    if (name.Equals(lower[i].Name))
+                    {
+                        break;
+                    }
                 }
 
-                game.trash.gotoTrash(deck.HandDeck[i]);
-                deck.HandDeck.RemoveAt(i);
-
-                Card res = game.gainCSCardToHand(idx);
-                CSAmt[idx].Text = res.amount.ToString();
-
-                setHandDeckImg(deck);
-                clickMode = "market";
-                if (game.gameTable.ActionNumber == 0)
+                if (clickMode.Equals("market"))
                 {
-                    turn_button1("구매 종료");
+                    string now = button1.Text;
+
+                    game.clickHand(now, i);
                 }
-                else
+                else if (clickMode.Equals("grave"))
                 {
-                    turn_button1("액션 종료");
+                    selected.Add(i);
+                    lower[i].Image = null;
+                    lower[i].Visible = false;
+                    lower[i].Enabled = false;
+                }
+                else if (clickMode.Equals("actionEffectMode"))
+                {
+                    MessageBox.Show("구매하실 카드를 클릭해 주세요.\n원하지 않을 경우 효과 종료를 클릭해주세요.");
+                }
+                else if (clickMode.Equals("trash"))
+                {
+                    game.gameTable.Coin = deck.HandDeck[i].price + 2;
+                    changeABC(game.gameTable);
+                    game.trash.gotoTrash(deck.HandDeck[i]);
+                    deck.HandDeck.RemoveAt(i);
+
+                    setHandDeckImg(deck);
+                    clickMode = "actionEffectMode";
+                    button1.Text = "효과 종료";
+                }
+                else if (clickMode.Equals("moneyTrash"))
+                {
+                    string cardName = deck.HandDeck[i].Name;
+                    int idx;
+
+                    if (cardName.Equals("copper")) idx = 1;
+                    else if (cardName.Equals("silver")) idx = 2;
+                    else
+                    {
+                        MessageBox.Show("동과 은 중에서만 선택 가능합니다.");
+                        return;
+                    }
+
+                    game.trash.gotoTrash(deck.HandDeck[i]);
+                    deck.HandDeck.RemoveAt(i);
+
+                    Card res = game.gainCSCardToHand(idx);
+                    CSAmt[idx].Text = res.amount.ToString();
+
+                    setHandDeckImg(deck);
+                    clickMode = "market";
+                    if (game.gameTable.ActionNumber == 0)
+                    {
+                        turn_button1("구매 종료");
+                    }
+                    else
+                    {
+                        turn_button1("액션 종료");
+                    }
                 }
             }
+            else if((e as MouseEventArgs).Button == MouseButtons.Right)
+            {
+                rightclick((PictureBox)sender);
+            }
+            
         }
 
         public void marketImgInit(List<Card> marketlist)
@@ -479,6 +477,12 @@ namespace WindowsFormsApp1
             Log_Handle(make);
 
         }
-        
+
+        private void pictureBox25_Click(object sender, EventArgs e)
+        {
+            PictureBox tmp = (PictureBox)sender;
+            tmp.Enabled = false;
+            rightclick(tmp);
+        }
     }
 }
