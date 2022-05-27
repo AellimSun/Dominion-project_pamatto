@@ -577,6 +577,7 @@ namespace WindowsFormsApp1
             if(message != null)
             {
                 list_log.Items.Add(message);
+                list_log.SelectedIndex = list_log.Items.Count - 1;
             }
         }
 
