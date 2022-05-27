@@ -13,6 +13,7 @@ namespace WindowsFormsApp1
 {
     public partial class Form3 : Form
     {
+        private bool Responded;
         public Form3()
         {
             InitializeComponent();
@@ -51,9 +52,19 @@ namespace WindowsFormsApp1
                         await Task.Delay(1000);
                         cnt--;
                     }
+                    if (!Responded)
+                    {
+                        Global.transHandler.Respond(-1, Global.ID_List, Global.HostNum);
+                        MessageBox.Show("게임을 거절하였습니다.");
+                        Global.transHandler.disconn();
+                        this.DialogResult = DialogResult.Cancel;
+                        this.Close();
+                    }
                 }
                 else if (res == -1)
-                {   //취소 버튼 클릭해서 응답받은 것
+                {
+                    Global.transHandler.disconn();
+                    this.DialogResult = DialogResult.Cancel;
                     this.Close();
                     return;
                 }
@@ -71,6 +82,7 @@ namespace WindowsFormsApp1
         }
         private void btnStart_Click(object sender, EventArgs e)
         {
+            Responded = true;
             btnStart.Enabled = false;
             Game_Screen game_Screen;
             DB_ACCESS dB_ACCESS = new DB_ACCESS();
@@ -81,14 +93,20 @@ namespace WindowsFormsApp1
                 game_Screen = new Game_Screen();
                 //MessageBox.Show("게임이 시작됩니다.");
                 //dB_ACCESS.SendDBLog("Game in");          //sending game login
-
-                game_Screen.Show();
                 //game_Screen.LogTest();
-                this.Close();
+
+                this.Hide();
+                if (game_Screen.ShowDialog()==DialogResult.OK)
+                {
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
             }
             else if (res == -1)
             {
-                MessageBox.Show("게임이 취소되었습니다.");
+                MessageBox.Show("누군가가 게임을 거절하였습니다.");
+                Global.transHandler.disconn();
+                this.DialogResult = DialogResult.Cancel;
                 this.Close();
             }
         }
@@ -96,12 +114,18 @@ namespace WindowsFormsApp1
         {
             if (btnStart.Enabled == true)
             {
+                Responded = true;
                 Global.transHandler.Respond(-1, Global.ID_List, Global.HostNum);
-                MessageBox.Show("게임이 취소되었습니다.");
+                MessageBox.Show("게임을 거절하였습니다.");
+                Global.transHandler.disconn();
+                this.DialogResult = DialogResult.Cancel;
                 this.Close();
             }
             else
+            {
+                MessageBox.Show("대기열을 취소하였습니다.");
                 Global.transHandler.Cancle_Matching();
+            }
         }
         //public void starttest()
         //{
