@@ -70,13 +70,7 @@ namespace WindowsFormsApp1
             this.listBox50.FormattingEnabled = true;
             this.listBox50.ItemHeight = 12;
             this.listBox50.Items.AddRange(new object[] {
-            "1등",
-            "",
-            "2등",
-            "",
-            "3등",
-            "",
-            "4등"});
+            " "});
             this.listBox50.Location = new System.Drawing.Point(15, 95);
             this.listBox50.Name = "listBox50";
             this.listBox50.Size = new System.Drawing.Size(175, 136);
