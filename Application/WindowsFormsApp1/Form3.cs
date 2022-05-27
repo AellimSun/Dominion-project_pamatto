@@ -81,6 +81,7 @@ namespace WindowsFormsApp1
                 game_Screen = new Game_Screen();
                 //MessageBox.Show("게임이 시작됩니다.");
                 //dB_ACCESS.SendDBLog("Game in");          //sending game login
+
                 game_Screen.Show();
                 //game_Screen.LogTest();
                 this.Close();

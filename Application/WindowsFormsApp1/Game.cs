@@ -279,6 +279,17 @@ namespace WindowsFormsApp1
             return list[i];
         }
 
+        public Card gainCurse()
+        {
+            gameTable.Coin = 0;
+            market.SellCard(market.estatePile[3]);
+            deck.BuyCard(market.estatePile[3]);
+            form.pictureBoxTF();
+            form.changeABC(gameTable);
+            return market.estatePile[3];
+        }
+
+
         public Card gainCSCardToHand(int i)
         {
             List<Card> list = null;
