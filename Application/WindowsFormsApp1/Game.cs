@@ -184,6 +184,7 @@ namespace WindowsFormsApp1
                 form.pictureBoxTF();
 
                 form.changeABC(gameTable);
+                form.MakeString(market.MarketPile[i].Name, "m");
             }
 
             //if(gameTable.Coin >=)
@@ -237,6 +238,8 @@ namespace WindowsFormsApp1
                 deck.BuyCard(list[i]);
                 form.pictureBoxTF();
                 form.changeABC(gameTable);
+
+                form.MakeString(list[i].Name, "m");
             }
 
             //if(gameTable.Coin >=)

@@ -225,7 +225,6 @@ namespace WindowsFormsApp1
                     MessageBox.Show("핸드에서 재물 카드를 폐기해야 합니다.\n원하지 않을 경우 폐기 종료를 클릭해 주세요.");
                     return;
                 }
-                MakeString(name, "m");
             }
         }
 
@@ -306,7 +305,7 @@ namespace WindowsFormsApp1
         private void button1_Click(object sender, EventArgs e)
         {
             string state = button1.Text;
-            if (state.Equals("Action End"))
+            if (state.Equals("액션 종료"))
             {
                 button1.Text = "구매 종료";
                 game.gameTable.ActionNumber = 0;
@@ -326,10 +325,10 @@ namespace WindowsFormsApp1
                     game.deck.DrawToHand(selected.Count, this);
                     selected.RemoveRange(0, selected.Count);
                     clickMode = "market";
-                    turn_button1("Action End");
+                    turn_button1("액션 종료");
                 }
             }
-            else if (state.Equals("효과 종료") || state.Equals("폐기 End"))
+            else if (state.Equals("효과 종료") || state.Equals("폐기 종료"))
             {
                 clickMode = "market";
                 game.gameTable.Coin = 0;
@@ -349,7 +348,7 @@ namespace WindowsFormsApp1
                 //턴 종료
                 if (!market.Game_Over())
                 {
-                    //Global.transHandler.Turn_end();
+                    Global.transHandler.Turn_end();
                     button1.Text = "액션 종료";
                     //버튼 비활성화
                     button1.Enabled = false;
@@ -616,10 +615,12 @@ namespace WindowsFormsApp1
 
                 while (true)
                 {
-                    int flag = Global.transHandler.Game_Listener(Card_Name, Log);
+                    int flag = Global.transHandler.Game_Listener(ref Card_Name, ref Log);
 
                     if (flag == 1)
                     {
+                        button1.Enabled = true;
+                        setLogBox("Your Turn!");
                         break;
                     }
                     else
@@ -704,7 +705,7 @@ namespace WindowsFormsApp1
                                 break;
                             //상대방한테 로그 받음 -> textbox 로그 추가
                             case 5:
-                                Log_Handle(Log);
+                                setLogBox(Log);
                                 break;
                             //상대방이 게임 종료 시켰음 -> 내 점수 집계 -> Score_send -> (전체 점수 집계 -> 결과 출력 -> Main Form으로 복귀)
                             case 6:
