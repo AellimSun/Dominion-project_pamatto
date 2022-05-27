@@ -145,6 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\Debug\back.png" />
+    <None Include="Resources\destination-4678741_960_720.jpg" />
     <Content Include="정리.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
