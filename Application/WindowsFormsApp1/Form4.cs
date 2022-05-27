@@ -11,6 +11,7 @@ using System.IO;
 
 namespace WindowsFormsApp1
 {
+    // 마녀 카드 서서히 등장
     public partial class Form4 : Form
     {
         protected override void OnShown(EventArgs e)
@@ -53,6 +54,7 @@ namespace WindowsFormsApp1
         {
             Close();
         }
+        //마녀 카드 등장 이펙트 폼
         Form5 f5 = new Form5();
 
         private void Form4_Load(object sender, EventArgs e)

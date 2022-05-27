@@ -16,6 +16,21 @@ namespace WindowsFormsApp1
 
         private Random random = new Random();
 
+        public void Hand_To_Grave()
+        {
+            //HandDeck 리스트를 모두 탐색하면서 하나하나씩 GraveDeck 리스트에 추가
+            foreach (Card item in HandDeck)
+            {
+                GraveDeck.Add(item);
+            }
+
+            //HanDeck 리스트를 모두 삭제
+            HandDeck.Clear();
+
+            //복구해서 디자인 어쩌구저쩌구 싹다 밀어버리기
+        }
+
+
         public Deck(List<Card> estatelist, List<Card> moneylist, Game_Screen g)
         {
             HandDeck = new List<Card>();
@@ -113,7 +128,22 @@ namespace WindowsFormsApp1
             }
             DrawDeck = NewCards;
         }
+        public bool ShowDrawDeck()                 //검증필요. 옵저버 패턴은 도저히 모르겠음.
+        {
 
+            if (DrawDeck.Count == 0)
+                return false;
+            else
+                return true;
+        }
+        public bool ShowGraveDeck()
+        { 
+            if (GraveDeck.Count == 0)
+               return false;
+            else
+                return true;
+
+        }
         public void DrawToHand()
         {
             while (HandDeck.Count < 6)
@@ -123,9 +153,13 @@ namespace WindowsFormsApp1
                 if (DrawDeck.Count == 0)
                     Shuffle(DrawDeck);
             }
+            
         }
+
         public void DrawToHand(int i, Game_Screen g)
         {
+            g.MakeString(i);
+
             while (0 < i)
             {
                 HandDeck.Add(DrawDeck[0]);
@@ -135,6 +169,7 @@ namespace WindowsFormsApp1
                 i--;
             }
             g.setHandDeckImg(this);
+
         }
         public void DrawToHand(int i, List<Card> actionlist)        //지워야됨
         {
@@ -148,7 +183,7 @@ namespace WindowsFormsApp1
             }
             Card tmp = null;
             for (int j = 0; j < 10; j++) {
-                if (actionlist[j].Name.Equals("cellar"))
+                if (actionlist[j].Name.Equals("market"))
                 {
                     tmp = actionlist[j];
                     break;
@@ -165,19 +200,23 @@ namespace WindowsFormsApp1
                 HandDeck.RemoveAt(i);
             }
         }
-        public void GoToGrave(int number)
+        public void GoToGrave(int number, string mode, Game_Screen g)
         {
             GraveDeck.Add(HandDeck[number]);
             //HandDeck[number] = null;
+            if(mode  == "u") g.MakeString(HandDeck[number].Name, mode);  //매개변수 추가
+            else if(mode == "a") g.MakeString();
             HandDeck.RemoveAt(number);
+            
         }
         public void BuyCard(Card card)
         {
             GraveDeck.Add(card);
         }
 
-        public void DeckInit()
+        public void gainCardToHand(Card card)
         {
+            HandDeck.Add(card);
         }
     }
 }

@@ -22,11 +22,12 @@ namespace WindowsFormsApp1
             TransHandler t = new TransHandler("127.0.0.1", 5542, myID);
             Console.WriteLine(myID);
             t.Start_Matching();
-            if (t.Wait_Full_Queue(A) == 1)
-            {
-                Console.WriteLine("다찾음");
-                t.Respond(1, OID);
-            }
+            //if (t.Wait_Full_Queue(A) == 1)
+            //{
+            //    Console.WriteLine("다찾음");
+            //    t.Respond(1, OID);
+            //}
+
         }
     }
 
@@ -80,24 +81,32 @@ namespace WindowsFormsApp1
                 return 0;
             }
         }
-        public int Wait_Full_Queue(int Current_user)
+        public int Wait_Full_Queue(Form3 f)
         {
             while (true)
             {
                 Message recv = MessageUtil.Receive(Stream);
-                switch (recv.Header.MSGTYPE)
+                if (recv != null)
                 {
-                    case CONSTANTS.ADD_PLAYER:
-                        Current_user++;
-                        break;
-                    case CONSTANTS.SUB_PLAYER:
-                        Current_user--;
-                        break;
-                    case CONSTANTS.SUCCESS_CANCLE_MATCHING:
-                        return -1;
-                    case CONSTANTS.FULL_QUEUE:
-                        return 1;
+                    switch (recv.Header.MSGTYPE)
+                    {
+                        case CONSTANTS.ADD_PLAYER:
+                            //f.setNumberTextBox().Text = Current_user.ToString();
+                            f.ADD_P();
+                            break;
+                        case CONSTANTS.SUB_PLAYER:
+                            //f.setNumberTextBox().Text = Current_user.ToString();
+                            f.SUB_P();
+                            break;
+                        case CONSTANTS.SUCCESS_CANCLE_MATCHING:
+                            return -1;
+                        case CONSTANTS.FULL_QUEUE:
+                            return 1;
+                        default:
+                            break;
+                    }
                 }
+                else return 0;
             }
         }
         async public void Cancle_Matching()
@@ -143,15 +152,18 @@ namespace WindowsFormsApp1
                     };
                     break;
             }
+            MessageUtil.Send(Stream, Res_Msg);
+
             Message recv = MessageUtil.Receive(Stream);
+            if (recv == null)
+                return 1;
             switch (recv.Header.MSGTYPE)
             {
                 case CONSTANTS.GAME_START:
-                    ID_LIST[0] = BitConverter.ToString((recv.Body as BodyGameStart).ID1);
-                    ID_LIST[1] = BitConverter.ToString((recv.Body as BodyGameStart).ID2);
-                    ID_LIST[2] = BitConverter.ToString((recv.Body as BodyGameStart).ID3);
-                    ID_LIST[3] = BitConverter.ToString((recv.Body as BodyGameStart).ID4);
-
+                    ID_LIST[0] = Encoding.Default.GetString((recv.Body as BodyGameStart).ID1);
+                    ID_LIST[1] = Encoding.Default.GetString((recv.Body as BodyGameStart).ID2);
+                    ID_LIST[2] = Encoding.Default.GetString((recv.Body as BodyGameStart).ID3);
+                    ID_LIST[3] = Encoding.Default.GetString((recv.Body as BodyGameStart).ID4);
                     return 1;
 
                 case CONSTANTS.GAME_CANCLE:
@@ -353,6 +365,16 @@ namespace WindowsFormsApp1
                 BODYLEN = LSmsg.Body.GetSize()
             };
             MessageUtil.Send(Stream, LSmsg);
+        }
+        public string Log_Receive()
+        {
+            Message LRmsg = MessageUtil.Receive(Stream);
+            if (LRmsg.Header.MSGTYPE == CONSTANTS.LOG_SEND)
+            {
+                string log = Encoding.UTF8.GetString((LRmsg.Body as BodyLogSend).LOG);
+                return log;
+            }
+            return null;
         }
         public void Game_End()
         {

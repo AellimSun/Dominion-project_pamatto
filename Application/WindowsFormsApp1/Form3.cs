@@ -7,66 +7,111 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Timers;
 
 namespace WindowsFormsApp1
 {
     public partial class Form3 : Form
     {
+        private Game_Screen game_Screen;
         public Form3()
         {
             InitializeComponent();
         }
-        private int duration = 16;
+        int Qcount = 0;
         private void Form3_Load(object sender, EventArgs e)
         {
-            //int count = StartMatching("",UserID);
-            //if(count==1) CreateGameName();
-            timer1 = new System.Windows.Forms.Timer();
-            timer1.Tick += new EventHandler(count_down);
-            timer1.Interval = 1000;
-            timer1.Start();
-        }
-        private void TimeText_TextChanged(object sender, EventArgs e)
-        {
+            btnStart.Enabled = false;
+            Global.ID_List = new string[4];
 
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            //TimeText.Text = DateTime.Now.ToLongTimeString();
-        }
-
-        private void count_down(object sender, EventArgs e)
-        {
-
-            if (duration == 0)
+            Qcount = Global.transHandler.Start_Matching();
+            if (Qcount == 1)
             {
-                timer1.Stop();
-                //Respon(-1,UserID);
-            }
-            else if (duration > 0)
-            {
-                duration--;
-                TimeText.Text = duration.ToString();
-            }
-        }
+                DateTime now = DateTime.Now;
 
+                //DB_ACCESS dB_ACCESS = new DB_ACCESS();
+                //dB_ACCESS.SendDBLog();
+                //DB에 방 이름 생성 CreateGameName();
+            }
+            timeLabel.Text = "0";
+            numLabel.Text = Qcount.ToString();
+            WaitingForGameStart();
+        }
+        async public void WaitingForGameStart()
+        {
+            await Task.Run(async () =>
+            {
+                int res = Global.transHandler.Wait_Full_Queue(this);
+                if (res == 1)
+                {   //게임시작하실?
+                    btnStart.Enabled = true;
+                    int cnt = 15;
+                    while(cnt > 0)
+                    {
+                        timeLabel.Text = cnt.ToString();
+                        await Task.Delay(1000);
+                        cnt--;
+                    }
+                }
+                else if (res == -1)
+                {   //취소 버튼 클릭해서 응답받은 것
+                    this.Close();
+                    return;
+                }
+            });
+        }
+        public void ADD_P()
+        {
+            Qcount++;
+            numLabel.Text = Qcount.ToString();
+        }
+        public void SUB_P()
+        {
+            Qcount--;
+            numLabel.Text = Qcount.ToString();
+        }
         private void btnStart_Click(object sender, EventArgs e)
         {
-            //SendServer sendServer = new SendServer();
+            btnStart.Enabled = false;
             Game_Screen game_Screen = new Game_Screen();
             DB_ACCESS dB_ACCESS = new DB_ACCESS();
-
-            //Respond(1,UserID);
-            dB_ACCESS.SendLog(Global.UserID, "logging in");          //sending game login
-            game_Screen.Show();
-            this.Close();
+            int res = Global.transHandler.Respond(1, Global.ID_List);
+            if (res == 1)
+            {
+                btnCancle.Enabled = false;
+                MessageBox.Show("게임이 시작됩니다.");
+                //dB_ACCESS.SendDBLog("Game in");          //sending game login
+                game_Screen.Show();
+                this.Close();
+            }
+            else if (res == -1)
+            {
+                MessageBox.Show("게임이 취소되었습니다.");
+                this.Close();
+            }
         }
-
+        public void starttest()
+        {
+            game_Screen = new Game_Screen();
+            int res = Global.transHandler.Respond(1, Global.ID_List);
+            if (res == 1)
+            {
+                //MessageBox.Show("게임이 시작됩니다.");
+                game_Screen.Show();
+                this.Close();
+            }
+            else if (res == -1)
+            {
+                MessageBox.Show("게임이 취소되었습니다.");
+                this.Close();
+            }
+        }
         private void btnCancle_Click(object sender, EventArgs e)
         {
-            //Respond(-1,UserID);
-            Close();
+            if (btnStart.Enabled == true)
+                Global.transHandler.Respond(-1, Global.ID_List);
+            else
+                Global.transHandler.Cancle_Matching();
         }
     }
 }

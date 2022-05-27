@@ -29,8 +29,8 @@ namespace WindowsFormsApp1
             form.marketImgInit(market.MarketPile);
 
             //덱 초기화
-            deck = new Deck(market.estatePile, market.MoneyPile, form);
-            //deck = new Deck(market.estatePile, market.MoneyPile, market.MarketPile);   // 지워야됨
+            //deck = new Deck(market.estatePile, market.MoneyPile, form);
+            deck = new Deck(market.estatePile, market.MoneyPile, market.MarketPile);   // 지워야됨
             gameTable = new GameTable();
             trash = new Trash();
 
@@ -89,6 +89,7 @@ namespace WindowsFormsApp1
                         MoneyCard moneyCard = (MoneyCard)deck.HandDeck[idx];
 
                         gameTable.Coin += moneyCard.money;
+                        deck.GoToGrave(idx, "u", form);
                         form.changeABC(gameTable);
                     }
                 }
@@ -101,14 +102,15 @@ namespace WindowsFormsApp1
 
                     if (res)
                     {
+                        string cardName = deck.HandDeck[idx].Name;
                         gameTable.ActionNumber -= 1;
                         ActionCard actionCard = (ActionCard)deck.HandDeck[idx];
-                        form.printMessageBox(string.Format("{0}",actionCard.add_Draw));
-                        deck.GoToGrave(idx);
+                        deck.GoToGrave(idx, "u", form);
                         useCard(actionCard);
                         form.changeABC(gameTable);
 
-                        if (gameTable.ActionNumber <= 0)
+                        if (gameTable.ActionNumber <= 0 && !cardName.Equals("workshop") 
+                            && !cardName.Equals("remodel") && !cardName.Equals("mine"))
                         {
                             form.turn_button1("구매 종료");
                         }
@@ -128,8 +130,6 @@ namespace WindowsFormsApp1
                 gameTable.BuyNumber += card.add_Buy;
             if (card.add_Money != 0)
                 gameTable.Coin += card.add_Money;
-            if (card.goto_Grave != 0)
-                deck.GoToGrave(card.goto_Grave);
             if (card.add_Draw != 0)
                 deck.DrawToHand(card.add_Draw, form);
             if (card.attack)
@@ -145,10 +145,24 @@ namespace WindowsFormsApp1
                 merchantUsed = true;
             }
             //작업
-            if (card.Name.Equals("cellar"))
+            else if (card.Name.Equals("cellar"))
             {
                 form.clickMode = "grave";
                 form.turn_button1("버리기 종료");
+            }
+            else if (card.Name.Equals("workshop"))
+            {
+                form.clickMode = "actionEffectMode";
+                form.turn_button1("효과 종료");
+                gameTable.Coin = 4;
+            }else if (card.Name.Equals("remodel"))
+            {
+                form.clickMode = "trash";
+                form.turn_button1("폐기 종료");
+            }else if (card.Name.Equals("mine"))
+            {
+                form.clickMode = "moneyTrash";
+                form.turn_button1("폐기 종료");
             }
 
             //ShowTable에 보여지는 UI관련 메소드
@@ -163,11 +177,36 @@ namespace WindowsFormsApp1
                 //int amount = cardList[i].amount;
                 market.SellCard(cardList[i]);
                 deck.BuyCard(cardList[i]);
+                form.pictureBoxTF();
 
                 form.changeABC(gameTable);
             }
 
             //if(gameTable.Coin >=)
+
+            return cardList[i];
+        }
+
+        public Card notBuyCard(int i)
+        {
+            if (gameTable.Coin >= cardList[i].price)
+            {
+                gameTable.Coin = 0;
+                market.SellCard(cardList[i]);
+                deck.BuyCard(cardList[i]);
+                form.pictureBoxTF();
+                form.changeABC(gameTable);
+
+                form.clickMode = "market";
+                if (gameTable.ActionNumber == 0)
+                {
+                    form.turn_button1("구매 종료");
+                }
+                else
+                {
+                    form.turn_button1("액션 종료");
+                }
+            }
 
             return cardList[i];
         }
@@ -192,11 +231,65 @@ namespace WindowsFormsApp1
                 //int amount = cardList[i].amount;
                 market.SellCard(list[i]);
                 deck.BuyCard(list[i]);
-
+                form.pictureBoxTF();
                 form.changeABC(gameTable);
             }
 
             //if(gameTable.Coin >=)
+
+            return list[i];
+        }
+        public Card notBuyCSCSCard(int i)
+        {
+            List<Card> list = null;
+            if (i < 3)
+            {
+                list = market.MoneyPile;
+            }
+            else
+            {
+                list = market.estatePile;
+                i = i - 3;
+            }
+            if (gameTable.Coin >= list[i].price)
+            {
+                gameTable.Coin = 0;
+                market.SellCard(cardList[i]);
+                deck.BuyCard(cardList[i]);
+                form.pictureBoxTF();
+                form.changeABC(gameTable);
+
+                form.clickMode = "market";
+                if (gameTable.ActionNumber == 0)
+                {
+                    form.turn_button1("구매 종료");
+                }
+                else
+                {
+                    form.turn_button1("액션 종료");
+                }
+            }
+
+            //if(gameTable.Coin >=)
+
+            return list[i];
+        }
+
+        public Card gainCSCardToHand(int i)
+        {
+            List<Card> list = null;
+            if (i < 3)
+            {
+                list = market.MoneyPile;
+            }
+            else
+            {
+                list = market.estatePile;
+                i = i - 3;
+            }
+
+            market.SellCard(list[i]);
+            deck.gainCardToHand(list[i]);
 
             return list[i];
         }
