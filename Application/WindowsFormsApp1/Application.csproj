@@ -157,15 +157,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\Debug\back.png" />
-    <None Include="bin\Debug\KakaoTalk_20220523_212446275.jpg" />
-    <None Include="bin\Debug\배경.jpg" />
-    <None Include="bin\Debug\배경1.jpg" />
     <None Include="bin\Debug\배경2.jpg" />
+    <None Include="Resources\destination-4678741_960_720.jpg" />
+    <None Include="Resources\1.png" />
+    <None Include="Resources\Diamonds-3125.gif" />
+    <None Include="Resources\GameScreen_Backgroud.png" />
     <Content Include="정리.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>

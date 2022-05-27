@@ -20,12 +20,14 @@
             base.Dispose(disposing);
         }
 
+
         #region Windows Form 디자이너에서 생성한 코드
 
         /// <summary>
         /// 디자이너 지원에 필요한 메서드입니다. 
         /// 이 메서드의 내용을 코드 편집기로 수정하지 마세요.
         /// </summary>
+        /// 
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Game_Screen));
@@ -53,19 +55,20 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.CSamount7 = new System.Windows.Forms.Label();
+            this.pictureBox17 = new System.Windows.Forms.PictureBox();
             this.CSamount6 = new System.Windows.Forms.Label();
             this.CSamount5 = new System.Windows.Forms.Label();
             this.CSamount4 = new System.Windows.Forms.Label();
-            this.CSamount3 = new System.Windows.Forms.Label();
-            this.CSamount2 = new System.Windows.Forms.Label();
-            this.CSamount1 = new System.Windows.Forms.Label();
-            this.pictureBox17 = new System.Windows.Forms.PictureBox();
             this.pictureBox15 = new System.Windows.Forms.PictureBox();
-            this.pictureBox16 = new System.Windows.Forms.PictureBox();
             this.pictureBox13 = new System.Windows.Forms.PictureBox();
             this.pictureBox14 = new System.Windows.Forms.PictureBox();
+            this.CSamount3 = new System.Windows.Forms.Label();
+            this.pictureBox16 = new System.Windows.Forms.PictureBox();
+            this.CSamount2 = new System.Windows.Forms.Label();
             this.pictureBox11 = new System.Windows.Forms.PictureBox();
+            this.CSamount1 = new System.Windows.Forms.Label();
             this.pictureBox12 = new System.Windows.Forms.PictureBox();
+            this.pictureBox24 = new System.Windows.Forms.PictureBox();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -73,27 +76,6 @@
             this.pictureBox123 = new System.Windows.Forms.PictureBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.amount10 = new System.Windows.Forms.Label();
-            this.amount9 = new System.Windows.Forms.Label();
-            this.amount8 = new System.Windows.Forms.Label();
-            this.amount7 = new System.Windows.Forms.Label();
-            this.amount6 = new System.Windows.Forms.Label();
-            this.amount5 = new System.Windows.Forms.Label();
-            this.amount4 = new System.Windows.Forms.Label();
-            this.amount3 = new System.Windows.Forms.Label();
-            this.amount2 = new System.Windows.Forms.Label();
-            this.amount1 = new System.Windows.Forms.Label();
-            this.pictureBox10 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox9 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox8 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox7 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.pictureBox53 = new System.Windows.Forms.PictureBox();
             this.pictureBox54 = new System.Windows.Forms.PictureBox();
@@ -123,6 +105,27 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.amount10 = new System.Windows.Forms.Label();
+            this.amount9 = new System.Windows.Forms.Label();
+            this.amount8 = new System.Windows.Forms.Label();
+            this.amount7 = new System.Windows.Forms.Label();
+            this.amount6 = new System.Windows.Forms.Label();
+            this.amount5 = new System.Windows.Forms.Label();
+            this.amount4 = new System.Windows.Forms.Label();
+            this.amount3 = new System.Windows.Forms.Label();
+            this.amount2 = new System.Windows.Forms.Label();
+            this.amount1 = new System.Windows.Forms.Label();
+            this.pictureBox10 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.pictureBox9 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox8 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox40)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox39)).BeginInit();
@@ -145,25 +148,15 @@
             this.groupBox7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox24)).BeginInit();
             this.groupBox9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox124)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox123)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox53)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox54)).BeginInit();
@@ -187,6 +180,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox26)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox25)).BeginInit();
             this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox3
@@ -439,20 +443,23 @@
             // 
             // groupBox7
             // 
+            this.groupBox7.BackColor = System.Drawing.Color.Transparent;
             this.groupBox7.Controls.Add(this.CSamount7);
+            this.groupBox7.Controls.Add(this.pictureBox17);
             this.groupBox7.Controls.Add(this.CSamount6);
             this.groupBox7.Controls.Add(this.CSamount5);
             this.groupBox7.Controls.Add(this.CSamount4);
-            this.groupBox7.Controls.Add(this.CSamount3);
-            this.groupBox7.Controls.Add(this.CSamount2);
-            this.groupBox7.Controls.Add(this.CSamount1);
-            this.groupBox7.Controls.Add(this.pictureBox17);
             this.groupBox7.Controls.Add(this.pictureBox15);
-            this.groupBox7.Controls.Add(this.pictureBox16);
             this.groupBox7.Controls.Add(this.pictureBox13);
             this.groupBox7.Controls.Add(this.pictureBox14);
+            this.groupBox7.Controls.Add(this.CSamount3);
+            this.groupBox7.Controls.Add(this.pictureBox16);
+            this.groupBox7.Controls.Add(this.CSamount2);
             this.groupBox7.Controls.Add(this.pictureBox11);
+            this.groupBox7.Controls.Add(this.CSamount1);
             this.groupBox7.Controls.Add(this.pictureBox12);
+            this.groupBox7.Controls.Add(this.pictureBox24);
+            this.groupBox7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBox7.Location = new System.Drawing.Point(12, 182);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(199, 279);
@@ -463,72 +470,13 @@
             // CSamount7
             // 
             this.CSamount7.AutoSize = true;
+            this.CSamount7.BackColor = System.Drawing.Color.Transparent;
             this.CSamount7.ForeColor = System.Drawing.Color.Red;
             this.CSamount7.Location = new System.Drawing.Point(16, 202);
             this.CSamount7.Name = "CSamount7";
             this.CSamount7.Size = new System.Drawing.Size(17, 12);
             this.CSamount7.TabIndex = 17;
             this.CSamount7.Text = "10";
-            // 
-            // CSamount6
-            // 
-            this.CSamount6.AutoSize = true;
-            this.CSamount6.ForeColor = System.Drawing.Color.Red;
-            this.CSamount6.Location = new System.Drawing.Point(139, 122);
-            this.CSamount6.Name = "CSamount6";
-            this.CSamount6.Size = new System.Drawing.Size(17, 12);
-            this.CSamount6.TabIndex = 16;
-            this.CSamount6.Text = "10";
-            // 
-            // CSamount5
-            // 
-            this.CSamount5.AutoSize = true;
-            this.CSamount5.ForeColor = System.Drawing.Color.Red;
-            this.CSamount5.Location = new System.Drawing.Point(76, 122);
-            this.CSamount5.Name = "CSamount5";
-            this.CSamount5.Size = new System.Drawing.Size(17, 12);
-            this.CSamount5.TabIndex = 15;
-            this.CSamount5.Text = "10";
-            // 
-            // CSamount4
-            // 
-            this.CSamount4.AutoSize = true;
-            this.CSamount4.ForeColor = System.Drawing.Color.Red;
-            this.CSamount4.Location = new System.Drawing.Point(15, 122);
-            this.CSamount4.Name = "CSamount4";
-            this.CSamount4.Size = new System.Drawing.Size(17, 12);
-            this.CSamount4.TabIndex = 14;
-            this.CSamount4.Text = "10";
-            // 
-            // CSamount3
-            // 
-            this.CSamount3.AutoSize = true;
-            this.CSamount3.ForeColor = System.Drawing.Color.Red;
-            this.CSamount3.Location = new System.Drawing.Point(139, 36);
-            this.CSamount3.Name = "CSamount3";
-            this.CSamount3.Size = new System.Drawing.Size(17, 12);
-            this.CSamount3.TabIndex = 13;
-            this.CSamount3.Text = "10";
-            // 
-            // CSamount2
-            // 
-            this.CSamount2.AutoSize = true;
-            this.CSamount2.ForeColor = System.Drawing.Color.Red;
-            this.CSamount2.Location = new System.Drawing.Point(76, 36);
-            this.CSamount2.Name = "CSamount2";
-            this.CSamount2.Size = new System.Drawing.Size(17, 12);
-            this.CSamount2.TabIndex = 12;
-            this.CSamount2.Text = "10";
-            // 
-            // CSamount1
-            // 
-            this.CSamount1.AutoSize = true;
-            this.CSamount1.ForeColor = System.Drawing.Color.Red;
-            this.CSamount1.Location = new System.Drawing.Point(15, 36);
-            this.CSamount1.Name = "CSamount1";
-            this.CSamount1.Size = new System.Drawing.Size(17, 12);
-            this.CSamount1.TabIndex = 11;
-            this.CSamount1.Text = "10";
             // 
             // pictureBox17
             // 
@@ -541,6 +489,39 @@
             this.pictureBox17.TabStop = false;
             this.pictureBox17.Click += new System.EventHandler(this.CSClick);
             // 
+            // CSamount6
+            // 
+            this.CSamount6.AutoSize = true;
+            this.CSamount6.BackColor = System.Drawing.Color.Transparent;
+            this.CSamount6.ForeColor = System.Drawing.Color.Red;
+            this.CSamount6.Location = new System.Drawing.Point(139, 122);
+            this.CSamount6.Name = "CSamount6";
+            this.CSamount6.Size = new System.Drawing.Size(17, 12);
+            this.CSamount6.TabIndex = 16;
+            this.CSamount6.Text = "10";
+            // 
+            // CSamount5
+            // 
+            this.CSamount5.AutoSize = true;
+            this.CSamount5.BackColor = System.Drawing.Color.Transparent;
+            this.CSamount5.ForeColor = System.Drawing.Color.Red;
+            this.CSamount5.Location = new System.Drawing.Point(76, 122);
+            this.CSamount5.Name = "CSamount5";
+            this.CSamount5.Size = new System.Drawing.Size(17, 12);
+            this.CSamount5.TabIndex = 15;
+            this.CSamount5.Text = "10";
+            // 
+            // CSamount4
+            // 
+            this.CSamount4.AutoSize = true;
+            this.CSamount4.BackColor = System.Drawing.Color.Transparent;
+            this.CSamount4.ForeColor = System.Drawing.Color.Red;
+            this.CSamount4.Location = new System.Drawing.Point(15, 122);
+            this.CSamount4.Name = "CSamount4";
+            this.CSamount4.Size = new System.Drawing.Size(17, 12);
+            this.CSamount4.TabIndex = 14;
+            this.CSamount4.Text = "10";
+            // 
             // pictureBox15
             // 
             this.pictureBox15.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox15.Image")));
@@ -551,16 +532,6 @@
             this.pictureBox15.TabIndex = 6;
             this.pictureBox15.TabStop = false;
             this.pictureBox15.Click += new System.EventHandler(this.CSClick);
-            // 
-            // pictureBox16
-            // 
-            this.pictureBox16.Location = new System.Drawing.Point(136, 33);
-            this.pictureBox16.Name = "pictureBox16";
-            this.pictureBox16.Size = new System.Drawing.Size(51, 72);
-            this.pictureBox16.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox16.TabIndex = 5;
-            this.pictureBox16.TabStop = false;
-            this.pictureBox16.Click += new System.EventHandler(this.CSClick);
             // 
             // pictureBox13
             // 
@@ -584,6 +555,38 @@
             this.pictureBox14.TabStop = false;
             this.pictureBox14.Click += new System.EventHandler(this.CSClick);
             // 
+            // CSamount3
+            // 
+            this.CSamount3.AutoSize = true;
+            this.CSamount3.BackColor = System.Drawing.Color.Transparent;
+            this.CSamount3.ForeColor = System.Drawing.Color.Red;
+            this.CSamount3.Location = new System.Drawing.Point(139, 36);
+            this.CSamount3.Name = "CSamount3";
+            this.CSamount3.Size = new System.Drawing.Size(17, 12);
+            this.CSamount3.TabIndex = 13;
+            this.CSamount3.Text = "10";
+            // 
+            // pictureBox16
+            // 
+            this.pictureBox16.Location = new System.Drawing.Point(136, 33);
+            this.pictureBox16.Name = "pictureBox16";
+            this.pictureBox16.Size = new System.Drawing.Size(51, 72);
+            this.pictureBox16.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox16.TabIndex = 5;
+            this.pictureBox16.TabStop = false;
+            this.pictureBox16.Click += new System.EventHandler(this.CSClick);
+            // 
+            // CSamount2
+            // 
+            this.CSamount2.AutoSize = true;
+            this.CSamount2.BackColor = System.Drawing.Color.Transparent;
+            this.CSamount2.ForeColor = System.Drawing.Color.Red;
+            this.CSamount2.Location = new System.Drawing.Point(76, 36);
+            this.CSamount2.Name = "CSamount2";
+            this.CSamount2.Size = new System.Drawing.Size(17, 12);
+            this.CSamount2.TabIndex = 12;
+            this.CSamount2.Text = "10";
+            // 
             // pictureBox11
             // 
             this.pictureBox11.Location = new System.Drawing.Point(73, 33);
@@ -594,6 +597,17 @@
             this.pictureBox11.TabStop = false;
             this.pictureBox11.Click += new System.EventHandler(this.CSClick);
             // 
+            // CSamount1
+            // 
+            this.CSamount1.AutoSize = true;
+            this.CSamount1.BackColor = System.Drawing.Color.Transparent;
+            this.CSamount1.ForeColor = System.Drawing.Color.Red;
+            this.CSamount1.Location = new System.Drawing.Point(15, 36);
+            this.CSamount1.Name = "CSamount1";
+            this.CSamount1.Size = new System.Drawing.Size(17, 12);
+            this.CSamount1.TabIndex = 11;
+            this.CSamount1.Text = "10";
+            // 
             // pictureBox12
             // 
             this.pictureBox12.Location = new System.Drawing.Point(12, 33);
@@ -603,6 +617,15 @@
             this.pictureBox12.TabIndex = 2;
             this.pictureBox12.TabStop = false;
             this.pictureBox12.Click += new System.EventHandler(this.CSClick);
+            // 
+            // pictureBox24
+            // 
+            this.pictureBox24.Location = new System.Drawing.Point(1, 20);
+            this.pictureBox24.Name = "pictureBox24";
+            this.pictureBox24.Size = new System.Drawing.Size(198, 259);
+            this.pictureBox24.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox24.TabIndex = 18;
+            this.pictureBox24.TabStop = false;
             // 
             // groupBox9
             // 
@@ -675,246 +698,6 @@
             this.label5.Size = new System.Drawing.Size(66, 12);
             this.label5.TabIndex = 0;
             this.label5.Text = "Draw Deck";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.amount10);
-            this.groupBox1.Controls.Add(this.amount9);
-            this.groupBox1.Controls.Add(this.amount8);
-            this.groupBox1.Controls.Add(this.amount7);
-            this.groupBox1.Controls.Add(this.amount6);
-            this.groupBox1.Controls.Add(this.amount5);
-            this.groupBox1.Controls.Add(this.amount4);
-            this.groupBox1.Controls.Add(this.amount3);
-            this.groupBox1.Controls.Add(this.amount2);
-            this.groupBox1.Controls.Add(this.amount1);
-            this.groupBox1.Controls.Add(this.pictureBox10);
-            this.groupBox1.Controls.Add(this.pictureBox5);
-            this.groupBox1.Controls.Add(this.pictureBox9);
-            this.groupBox1.Controls.Add(this.pictureBox4);
-            this.groupBox1.Controls.Add(this.pictureBox8);
-            this.groupBox1.Controls.Add(this.pictureBox3);
-            this.groupBox1.Controls.Add(this.pictureBox7);
-            this.groupBox1.Controls.Add(this.pictureBox2);
-            this.groupBox1.Controls.Add(this.pictureBox6);
-            this.groupBox1.Controls.Add(this.pictureBox1);
-            this.groupBox1.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.groupBox1.Location = new System.Drawing.Point(269, 32);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(600, 247);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "시장";
-            // 
-            // amount10
-            // 
-            this.amount10.AutoSize = true;
-            this.amount10.ForeColor = System.Drawing.Color.Red;
-            this.amount10.Location = new System.Drawing.Point(494, 132);
-            this.amount10.Name = "amount10";
-            this.amount10.Size = new System.Drawing.Size(17, 12);
-            this.amount10.TabIndex = 10;
-            this.amount10.Text = "10";
-            // 
-            // amount9
-            // 
-            this.amount9.AutoSize = true;
-            this.amount9.ForeColor = System.Drawing.Color.Red;
-            this.amount9.Location = new System.Drawing.Point(371, 132);
-            this.amount9.Name = "amount9";
-            this.amount9.Size = new System.Drawing.Size(17, 12);
-            this.amount9.TabIndex = 9;
-            this.amount9.Text = "10";
-            // 
-            // amount8
-            // 
-            this.amount8.AutoSize = true;
-            this.amount8.ForeColor = System.Drawing.Color.Red;
-            this.amount8.Location = new System.Drawing.Point(252, 132);
-            this.amount8.Name = "amount8";
-            this.amount8.Size = new System.Drawing.Size(17, 12);
-            this.amount8.TabIndex = 8;
-            this.amount8.Text = "10";
-            // 
-            // amount7
-            // 
-            this.amount7.AutoSize = true;
-            this.amount7.ForeColor = System.Drawing.Color.Red;
-            this.amount7.Location = new System.Drawing.Point(135, 132);
-            this.amount7.Name = "amount7";
-            this.amount7.Size = new System.Drawing.Size(17, 12);
-            this.amount7.TabIndex = 7;
-            this.amount7.Text = "10";
-            // 
-            // amount6
-            // 
-            this.amount6.AutoSize = true;
-            this.amount6.ForeColor = System.Drawing.Color.Red;
-            this.amount6.Location = new System.Drawing.Point(23, 132);
-            this.amount6.Name = "amount6";
-            this.amount6.Size = new System.Drawing.Size(17, 12);
-            this.amount6.TabIndex = 6;
-            this.amount6.Text = "10";
-            // 
-            // amount5
-            // 
-            this.amount5.AutoSize = true;
-            this.amount5.ForeColor = System.Drawing.Color.Red;
-            this.amount5.Location = new System.Drawing.Point(494, 21);
-            this.amount5.Name = "amount5";
-            this.amount5.Size = new System.Drawing.Size(17, 12);
-            this.amount5.TabIndex = 5;
-            this.amount5.Text = "10";
-            // 
-            // amount4
-            // 
-            this.amount4.AutoSize = true;
-            this.amount4.ForeColor = System.Drawing.Color.Red;
-            this.amount4.Location = new System.Drawing.Point(371, 21);
-            this.amount4.Name = "amount4";
-            this.amount4.Size = new System.Drawing.Size(17, 12);
-            this.amount4.TabIndex = 4;
-            this.amount4.Text = "10";
-            // 
-            // amount3
-            // 
-            this.amount3.AutoSize = true;
-            this.amount3.ForeColor = System.Drawing.Color.Red;
-            this.amount3.Location = new System.Drawing.Point(252, 21);
-            this.amount3.Name = "amount3";
-            this.amount3.Size = new System.Drawing.Size(17, 12);
-            this.amount3.TabIndex = 3;
-            this.amount3.Text = "10";
-            // 
-            // amount2
-            // 
-            this.amount2.AutoSize = true;
-            this.amount2.ForeColor = System.Drawing.Color.Red;
-            this.amount2.Location = new System.Drawing.Point(135, 21);
-            this.amount2.Name = "amount2";
-            this.amount2.Size = new System.Drawing.Size(17, 12);
-            this.amount2.TabIndex = 2;
-            this.amount2.Text = "10";
-            // 
-            // amount1
-            // 
-            this.amount1.AutoSize = true;
-            this.amount1.ForeColor = System.Drawing.Color.Red;
-            this.amount1.Location = new System.Drawing.Point(23, 21);
-            this.amount1.Name = "amount1";
-            this.amount1.Size = new System.Drawing.Size(17, 12);
-            this.amount1.TabIndex = 1;
-            this.amount1.Text = "10";
-            // 
-            // pictureBox10
-            // 
-            this.pictureBox10.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox10.Image")));
-            this.pictureBox10.Location = new System.Drawing.Point(492, 128);
-            this.pictureBox10.Name = "pictureBox10";
-            this.pictureBox10.Size = new System.Drawing.Size(85, 101);
-            this.pictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox10.TabIndex = 0;
-            this.pictureBox10.TabStop = false;
-            this.pictureBox10.Click += new System.EventHandler(this.marketClick);
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
-            this.pictureBox5.Location = new System.Drawing.Point(492, 17);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(85, 101);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox5.TabIndex = 0;
-            this.pictureBox5.TabStop = false;
-            this.pictureBox5.Click += new System.EventHandler(this.marketClick);
-            // 
-            // pictureBox9
-            // 
-            this.pictureBox9.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox9.Image")));
-            this.pictureBox9.Location = new System.Drawing.Point(369, 128);
-            this.pictureBox9.Name = "pictureBox9";
-            this.pictureBox9.Size = new System.Drawing.Size(85, 101);
-            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox9.TabIndex = 0;
-            this.pictureBox9.TabStop = false;
-            this.pictureBox9.Click += new System.EventHandler(this.marketClick);
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(369, 17);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(85, 101);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox4.TabIndex = 0;
-            this.pictureBox4.TabStop = false;
-            this.pictureBox4.Click += new System.EventHandler(this.marketClick);
-            // 
-            // pictureBox8
-            // 
-            this.pictureBox8.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox8.Image")));
-            this.pictureBox8.Location = new System.Drawing.Point(250, 128);
-            this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(85, 101);
-            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox8.TabIndex = 0;
-            this.pictureBox8.TabStop = false;
-            this.pictureBox8.Click += new System.EventHandler(this.marketClick);
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(250, 17);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(85, 101);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 0;
-            this.pictureBox3.TabStop = false;
-            this.pictureBox3.Click += new System.EventHandler(this.marketClick);
-            // 
-            // pictureBox7
-            // 
-            this.pictureBox7.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox7.Image")));
-            this.pictureBox7.Location = new System.Drawing.Point(133, 128);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(85, 101);
-            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox7.TabIndex = 0;
-            this.pictureBox7.TabStop = false;
-            this.pictureBox7.Click += new System.EventHandler(this.marketClick);
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(133, 17);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(85, 101);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 0;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Click += new System.EventHandler(this.marketClick);
-            // 
-            // pictureBox6
-            // 
-            this.pictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox6.Image")));
-            this.pictureBox6.Location = new System.Drawing.Point(19, 128);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(85, 101);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox6.TabIndex = 0;
-            this.pictureBox6.TabStop = false;
-            this.pictureBox6.Click += new System.EventHandler(this.marketClick);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(19, 17);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(85, 101);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.marketClick);
             // 
             // groupBox10
             // 
@@ -1236,10 +1019,253 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Action : ";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox1.Controls.Add(this.amount10);
+            this.groupBox1.Controls.Add(this.amount9);
+            this.groupBox1.Controls.Add(this.amount8);
+            this.groupBox1.Controls.Add(this.amount7);
+            this.groupBox1.Controls.Add(this.amount6);
+            this.groupBox1.Controls.Add(this.amount5);
+            this.groupBox1.Controls.Add(this.amount4);
+            this.groupBox1.Controls.Add(this.amount3);
+            this.groupBox1.Controls.Add(this.amount2);
+            this.groupBox1.Controls.Add(this.amount1);
+            this.groupBox1.Controls.Add(this.pictureBox10);
+            this.groupBox1.Controls.Add(this.pictureBox5);
+            this.groupBox1.Controls.Add(this.pictureBox9);
+            this.groupBox1.Controls.Add(this.pictureBox4);
+            this.groupBox1.Controls.Add(this.pictureBox8);
+            this.groupBox1.Controls.Add(this.pictureBox3);
+            this.groupBox1.Controls.Add(this.pictureBox7);
+            this.groupBox1.Controls.Add(this.pictureBox2);
+            this.groupBox1.Controls.Add(this.pictureBox6);
+            this.groupBox1.Controls.Add(this.pictureBox1);
+            this.groupBox1.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.groupBox1.ForeColor = System.Drawing.Color.White;
+            this.groupBox1.Location = new System.Drawing.Point(269, 32);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(600, 247);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "시장";
+            // 
+            // amount10
+            // 
+            this.amount10.AutoSize = true;
+            this.amount10.ForeColor = System.Drawing.Color.Red;
+            this.amount10.Location = new System.Drawing.Point(494, 132);
+            this.amount10.Name = "amount10";
+            this.amount10.Size = new System.Drawing.Size(17, 12);
+            this.amount10.TabIndex = 10;
+            this.amount10.Text = "10";
+            // 
+            // amount9
+            // 
+            this.amount9.AutoSize = true;
+            this.amount9.ForeColor = System.Drawing.Color.Red;
+            this.amount9.Location = new System.Drawing.Point(371, 132);
+            this.amount9.Name = "amount9";
+            this.amount9.Size = new System.Drawing.Size(17, 12);
+            this.amount9.TabIndex = 9;
+            this.amount9.Text = "10";
+            // 
+            // amount8
+            // 
+            this.amount8.AutoSize = true;
+            this.amount8.ForeColor = System.Drawing.Color.Red;
+            this.amount8.Location = new System.Drawing.Point(252, 132);
+            this.amount8.Name = "amount8";
+            this.amount8.Size = new System.Drawing.Size(17, 12);
+            this.amount8.TabIndex = 8;
+            this.amount8.Text = "10";
+            // 
+            // amount7
+            // 
+            this.amount7.AutoSize = true;
+            this.amount7.ForeColor = System.Drawing.Color.Red;
+            this.amount7.Location = new System.Drawing.Point(135, 132);
+            this.amount7.Name = "amount7";
+            this.amount7.Size = new System.Drawing.Size(17, 12);
+            this.amount7.TabIndex = 7;
+            this.amount7.Text = "10";
+            // 
+            // amount6
+            // 
+            this.amount6.AutoSize = true;
+            this.amount6.ForeColor = System.Drawing.Color.Red;
+            this.amount6.Location = new System.Drawing.Point(23, 132);
+            this.amount6.Name = "amount6";
+            this.amount6.Size = new System.Drawing.Size(17, 12);
+            this.amount6.TabIndex = 6;
+            this.amount6.Text = "10";
+            // 
+            // amount5
+            // 
+            this.amount5.AutoSize = true;
+            this.amount5.ForeColor = System.Drawing.Color.Red;
+            this.amount5.Location = new System.Drawing.Point(494, 21);
+            this.amount5.Name = "amount5";
+            this.amount5.Size = new System.Drawing.Size(17, 12);
+            this.amount5.TabIndex = 5;
+            this.amount5.Text = "10";
+            // 
+            // amount4
+            // 
+            this.amount4.AutoSize = true;
+            this.amount4.ForeColor = System.Drawing.Color.Red;
+            this.amount4.Location = new System.Drawing.Point(371, 21);
+            this.amount4.Name = "amount4";
+            this.amount4.Size = new System.Drawing.Size(17, 12);
+            this.amount4.TabIndex = 4;
+            this.amount4.Text = "10";
+            // 
+            // amount3
+            // 
+            this.amount3.AutoSize = true;
+            this.amount3.ForeColor = System.Drawing.Color.Red;
+            this.amount3.Location = new System.Drawing.Point(252, 21);
+            this.amount3.Name = "amount3";
+            this.amount3.Size = new System.Drawing.Size(17, 12);
+            this.amount3.TabIndex = 3;
+            this.amount3.Text = "10";
+            // 
+            // amount2
+            // 
+            this.amount2.AutoSize = true;
+            this.amount2.ForeColor = System.Drawing.Color.Red;
+            this.amount2.Location = new System.Drawing.Point(135, 21);
+            this.amount2.Name = "amount2";
+            this.amount2.Size = new System.Drawing.Size(17, 12);
+            this.amount2.TabIndex = 2;
+            this.amount2.Text = "10";
+            // 
+            // amount1
+            // 
+            this.amount1.AutoSize = true;
+            this.amount1.ForeColor = System.Drawing.Color.Red;
+            this.amount1.Location = new System.Drawing.Point(23, 21);
+            this.amount1.Name = "amount1";
+            this.amount1.Size = new System.Drawing.Size(17, 12);
+            this.amount1.TabIndex = 1;
+            this.amount1.Text = "10";
+            // 
+            // pictureBox10
+            // 
+            this.pictureBox10.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox10.Image")));
+            this.pictureBox10.Location = new System.Drawing.Point(492, 128);
+            this.pictureBox10.Name = "pictureBox10";
+            this.pictureBox10.Size = new System.Drawing.Size(85, 101);
+            this.pictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox10.TabIndex = 0;
+            this.pictureBox10.TabStop = false;
+            this.pictureBox10.Click += new System.EventHandler(this.marketClick);
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
+            this.pictureBox5.Location = new System.Drawing.Point(492, 17);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(85, 101);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox5.TabIndex = 0;
+            this.pictureBox5.TabStop = false;
+            this.pictureBox5.Click += new System.EventHandler(this.marketClick);
+            // 
+            // pictureBox9
+            // 
+            this.pictureBox9.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox9.Image")));
+            this.pictureBox9.Location = new System.Drawing.Point(369, 128);
+            this.pictureBox9.Name = "pictureBox9";
+            this.pictureBox9.Size = new System.Drawing.Size(85, 101);
+            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox9.TabIndex = 0;
+            this.pictureBox9.TabStop = false;
+            this.pictureBox9.Click += new System.EventHandler(this.marketClick);
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
+            this.pictureBox4.Location = new System.Drawing.Point(369, 17);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(85, 101);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox4.TabIndex = 0;
+            this.pictureBox4.TabStop = false;
+            this.pictureBox4.Click += new System.EventHandler(this.marketClick);
+            // 
+            // pictureBox8
+            // 
+            this.pictureBox8.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox8.Image")));
+            this.pictureBox8.Location = new System.Drawing.Point(250, 128);
+            this.pictureBox8.Name = "pictureBox8";
+            this.pictureBox8.Size = new System.Drawing.Size(85, 101);
+            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox8.TabIndex = 0;
+            this.pictureBox8.TabStop = false;
+            this.pictureBox8.Click += new System.EventHandler(this.marketClick);
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
+            this.pictureBox3.Location = new System.Drawing.Point(250, 17);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(85, 101);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 0;
+            this.pictureBox3.TabStop = false;
+            this.pictureBox3.Click += new System.EventHandler(this.marketClick);
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox7.Image")));
+            this.pictureBox7.Location = new System.Drawing.Point(133, 128);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(85, 101);
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox7.TabIndex = 0;
+            this.pictureBox7.TabStop = false;
+            this.pictureBox7.Click += new System.EventHandler(this.marketClick);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(133, 17);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(85, 101);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 0;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.marketClick);
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox6.Image")));
+            this.pictureBox6.Location = new System.Drawing.Point(19, 128);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(85, 101);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox6.TabIndex = 0;
+            this.pictureBox6.TabStop = false;
+            this.pictureBox6.Click += new System.EventHandler(this.marketClick);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(19, 17);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(85, 101);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.marketClick);
+            // 
             // Game_Screen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1130, 694);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.groupBox10);
@@ -1279,27 +1305,16 @@
             this.groupBox7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox24)).EndInit();
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox124)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox123)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox10.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox53)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox54)).EndInit();
@@ -1324,6 +1339,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox25)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1424,6 +1451,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListBox list_log;
+        private System.Windows.Forms.PictureBox pictureBox24;
     }
 }
 

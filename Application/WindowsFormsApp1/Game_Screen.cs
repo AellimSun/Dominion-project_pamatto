@@ -32,6 +32,7 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
+
         public PictureBox[] getLower() { return lower; }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -65,6 +66,44 @@ namespace WindowsFormsApp1
             groupBox10.Font = font;
             groupBox10.Text = "My Action / Buy";
             button1.Font = font;
+            groupBox1.BackgroundImage = Image.FromFile("C:\\Users\\PKNU\\Desktop\\도미니언 zip\\1.png");
+            pictureBox24.Load(Directory.GetCurrentDirectory()+ "\\Diamonds-3125.gif");
+
+            amount1.Parent = pictureBox1;
+            amount1.Location = new Point(1, 1);
+            amount2.Parent = pictureBox2;
+            amount2.Location = new Point(1, 1);
+            amount3.Parent = pictureBox3;
+            amount3.Location = new Point(1, 1);
+            amount4.Parent = pictureBox4;
+            amount4.Location = new Point(1, 1);
+            amount5.Parent = pictureBox5;
+            amount5.Location = new Point(1, 1);
+            amount6.Parent = pictureBox6;
+            amount6.Location = new Point(1, 1);
+            amount7.Parent = pictureBox7;
+            amount7.Location = new Point(1, 1);
+            amount8.Parent = pictureBox8;
+            amount8.Location = new Point(1, 1);
+            amount9.Parent = pictureBox9;
+            amount9.Location = new Point(1, 1);
+            amount10.Parent = pictureBox10;
+            amount10.Location = new Point(1, 1);
+
+            CSamount1.Parent = pictureBox12;
+            CSamount1.Location = new Point(1, 1);
+            CSamount2.Parent = pictureBox11;
+            CSamount2.Location = new Point(1, 1);
+            CSamount3.Parent = pictureBox16;
+            CSamount3.Location = new Point(1, 1);
+            CSamount4.Parent = pictureBox14;
+            CSamount4.Location = new Point(1, 1);
+            CSamount5.Parent = pictureBox13;
+            CSamount5.Location = new Point(1, 1);
+            CSamount6.Parent = pictureBox15;
+            CSamount6.Location = new Point(1, 1);
+            CSamount7.Parent = pictureBox17;
+            CSamount7.Location = new Point(1, 1);
 
             upper = new PictureBox[] { pictureBox27, pictureBox26, pictureBox25, pictureBox30,
                 pictureBox29, pictureBox28, pictureBox41, pictureBox42, pictureBox43, pictureBox44,
@@ -228,6 +267,10 @@ namespace WindowsFormsApp1
                     return;
                 }
                 MakeString(name, "m");
+            }
+            else if ((e as MouseEventArgs).Button == MouseButtons.Right)
+            {
+                rightclick((PictureBox)sender);
             }
         }
 
