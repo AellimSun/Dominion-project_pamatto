@@ -42,6 +42,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -160,9 +161,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\Debug\back.png" />
-    <None Include="bin\Debug\KakaoTalk_20220523_212446275.jpg" />
-    <None Include="bin\Debug\배경.jpg" />
-    <None Include="bin\Debug\배경1.jpg" />
     <None Include="bin\Debug\배경2.jpg" />
     <Content Include="정리.txt" />
   </ItemGroup>

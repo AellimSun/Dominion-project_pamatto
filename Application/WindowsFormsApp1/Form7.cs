@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+//using System.Windows.Forms.DataVisualization.Charting;
 
 namespace WindowsFormsApp1
 {
@@ -16,7 +17,10 @@ namespace WindowsFormsApp1
         DB_ACCESS dB;
         Market market;
         Deck deck;
-       
+        
+        //Chart chart = new Chart();
+        //chart.ChartAreas.Add("차트");
+
         private TransHandler transHandler;
         public Form7(int[] US)
         {
@@ -32,12 +36,15 @@ namespace WindowsFormsApp1
 
         private void Form7_Load(object sender, EventArgs e)
         {
-            
+            chart1.Series["1번"].Points.Add(20);
+            chart1.Series["2번"].Points.Add(10);
+            chart1.Series["3번"].Points.Add(-5);
+            chart1.Series["4번"].Points.Add(0);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-           //Form2.Show();
+            //Application.Run(new Form2());
         }
     }
 }
