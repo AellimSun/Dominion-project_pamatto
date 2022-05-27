@@ -24,7 +24,7 @@ namespace WindowsFormsApp1
             {
                 MessageBox.Show("아이디나 패스워드를 입력해주세요!", "오류");
             }
-            else if(textID.Text == "1111")
+            else if(textID.Text == "1111")      //필요?
             {
                 Global.UserID = textID.Text;
                 Game_Screen game_Screen = new Game_Screen();
@@ -36,7 +36,7 @@ namespace WindowsFormsApp1
             else
             {
                 Global.UserID = textID.Text;
-                Global.transHandler = new TransHandler("210.119.12.76", 5542, Global.UserID);
+                Global.transHandler = new TransHandler("127.0.0.1", 5542, Global.UserID);
                 /*엘림만 사용*/
 
 
@@ -46,7 +46,15 @@ namespace WindowsFormsApp1
                 this.startBTN.Enabled = false;
 
                 this.Hide();
-                form3.ShowDialog();
+                if (form3.ShowDialog() == DialogResult.OK)
+                    Application.Exit();
+                else
+                {
+                    this.textID.Enabled = true;
+                    this.textPW.Enabled = true;
+                    this.startBTN.Enabled = true;
+                    this.Show();
+                }
                 //this.textID.Text = "";
                 //this.textPW.Text = "";
                 //this.textID.Enabled = true;
