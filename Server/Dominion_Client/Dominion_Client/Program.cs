@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -125,7 +125,6 @@ namespace Dominion_Client
                     break;
             }
             MessageUtil.Send(Stream, Res_Msg);
-
             Message recv = MessageUtil.Receive(Stream);
             switch (recv.Header.MSGTYPE)
             {
@@ -262,6 +261,16 @@ namespace Dominion_Client
                 BODYLEN = LSmsg.Body.GetSize()
             };
             MessageUtil.Send(Stream, LSmsg);
+        }
+        public string Log_Receive()
+        {
+            Message LRmsg = MessageUtil.Receive(Stream);
+            if (LRmsg.Header.MSGTYPE == CONSTANTS.LOG_SEND)
+            {
+                string log = Encoding.UTF8.GetString((LRmsg.Body as BodyLogSend).LOG);
+                return log;
+            }
+            return null;
         }
         public void Game_End(int Score)
         {
