@@ -7,6 +7,7 @@ using System.Drawing.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
+
 namespace WindowsFormsApp1
 {
     public partial class Game_Screen : Form
@@ -26,6 +27,8 @@ namespace WindowsFormsApp1
         public string clickMode = "market";
 
         List<int> selected = new List<int>();
+
+        
 
         public Game_Screen()
         {
@@ -555,9 +558,11 @@ namespace WindowsFormsApp1
 
             f6.ShowDialog();
         }
-        public void setLogBox(string message)
-        {
+        public void setLogBox(string message)  
+        { 
             list_log.Items.Add(message);
+            list_log.SelectedIndex = listBox1.Items.Count - 1;
+
         }
 
         public void Log_Handle(string make)
