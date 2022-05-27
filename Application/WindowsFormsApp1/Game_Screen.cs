@@ -441,9 +441,17 @@ namespace WindowsFormsApp1
 
         public void Log_Handle(string make)
         {
-            //Global.transHandler.Log_Send(make);
-            //make = Global.transHandler.Log_Receive();
-            setLogBox(make);
+            if (!Global.ID_List.Contains(""))
+            {
+                Global.transHandler.Log_Send(make);
+                make = Global.transHandler.Log_Receive();
+                setLogBox(make);
+            }
+            else
+            {
+                setLogBox(make);
+                return;
+            }
         }
 
         public void MakeString(string cardname, string cardaction)

@@ -26,15 +26,15 @@ namespace WindowsFormsApp1
             }
             else if(textID.Text == "1111")
             {
+                Global.UserID = textID.Text;
                 Game_Screen game_Screen = new Game_Screen();
                 this.Hide();
-                game_Screen.Show();
-                //this.Close();
+                game_Screen.ShowDialog();
+                this.Close();
 
             }
             else
             {
-
                 Global.UserID = textID.Text;
                 Global.transHandler = new TransHandler("210.119.12.76", 5542, Global.UserID);
                 /*엘림만 사용*/
