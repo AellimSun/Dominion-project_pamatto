@@ -20,12 +20,14 @@
             base.Dispose(disposing);
         }
 
+
         #region Windows Form 디자이너에서 생성한 코드
 
         /// <summary>
         /// 디자이너 지원에 필요한 메서드입니다. 
         /// 이 메서드의 내용을 코드 편집기로 수정하지 마세요.
         /// </summary>
+        /// 
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Game_Screen));
@@ -53,18 +55,18 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.CSamount7 = new System.Windows.Forms.Label();
+            this.pictureBox17 = new System.Windows.Forms.PictureBox();
             this.CSamount6 = new System.Windows.Forms.Label();
             this.CSamount5 = new System.Windows.Forms.Label();
             this.CSamount4 = new System.Windows.Forms.Label();
-            this.CSamount3 = new System.Windows.Forms.Label();
-            this.CSamount2 = new System.Windows.Forms.Label();
-            this.CSamount1 = new System.Windows.Forms.Label();
-            this.pictureBox17 = new System.Windows.Forms.PictureBox();
             this.pictureBox15 = new System.Windows.Forms.PictureBox();
-            this.pictureBox16 = new System.Windows.Forms.PictureBox();
             this.pictureBox13 = new System.Windows.Forms.PictureBox();
             this.pictureBox14 = new System.Windows.Forms.PictureBox();
+            this.CSamount3 = new System.Windows.Forms.Label();
+            this.pictureBox16 = new System.Windows.Forms.PictureBox();
+            this.CSamount2 = new System.Windows.Forms.Label();
             this.pictureBox11 = new System.Windows.Forms.PictureBox();
+            this.CSamount1 = new System.Windows.Forms.Label();
             this.pictureBox12 = new System.Windows.Forms.PictureBox();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -73,6 +75,13 @@
             this.pictureBox123 = new System.Windows.Forms.PictureBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.amount10 = new System.Windows.Forms.Label();
             this.amount9 = new System.Windows.Forms.Label();
@@ -116,13 +125,6 @@
             this.pictureBox28 = new System.Windows.Forms.PictureBox();
             this.pictureBox26 = new System.Windows.Forms.PictureBox();
             this.pictureBox25 = new System.Windows.Forms.PictureBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox40)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox39)).BeginInit();
@@ -145,14 +147,15 @@
             this.groupBox7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
             this.groupBox9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox124)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox123)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -186,7 +189,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox28)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox26)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox25)).BeginInit();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox3
@@ -206,6 +208,7 @@
             this.groupBox3.Controls.Add(this.pictureBox20);
             this.groupBox3.Controls.Add(this.pictureBox21);
             this.groupBox3.Controls.Add(this.pictureBox22);
+            this.groupBox3.ForeColor = System.Drawing.Color.White;
             this.groupBox3.Location = new System.Drawing.Point(269, 521);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(600, 110);
@@ -385,20 +388,24 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.BackColor = System.Drawing.Color.White;
+            this.groupBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.groupBox4.Controls.Add(this.list_log);
-            this.groupBox4.Location = new System.Drawing.Point(899, 32);
+            this.groupBox4.Location = new System.Drawing.Point(889, 12);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(199, 365);
+            this.groupBox4.Size = new System.Drawing.Size(229, 389);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             // 
             // list_log
             // 
+            this.list_log.BackColor = System.Drawing.Color.White;
+            this.list_log.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.list_log.FormattingEnabled = true;
             this.list_log.ItemHeight = 12;
-            this.list_log.Location = new System.Drawing.Point(6, 17);
+            this.list_log.Location = new System.Drawing.Point(22, 21);
             this.list_log.Name = "list_log";
-            this.list_log.Size = new System.Drawing.Size(187, 340);
+            this.list_log.Size = new System.Drawing.Size(187, 336);
             this.list_log.TabIndex = 0;
             // 
             // groupBox5
@@ -439,20 +446,23 @@
             // 
             // groupBox7
             // 
+            this.groupBox7.BackColor = System.Drawing.Color.Black;
             this.groupBox7.Controls.Add(this.CSamount7);
+            this.groupBox7.Controls.Add(this.pictureBox17);
             this.groupBox7.Controls.Add(this.CSamount6);
             this.groupBox7.Controls.Add(this.CSamount5);
             this.groupBox7.Controls.Add(this.CSamount4);
-            this.groupBox7.Controls.Add(this.CSamount3);
-            this.groupBox7.Controls.Add(this.CSamount2);
-            this.groupBox7.Controls.Add(this.CSamount1);
-            this.groupBox7.Controls.Add(this.pictureBox17);
             this.groupBox7.Controls.Add(this.pictureBox15);
-            this.groupBox7.Controls.Add(this.pictureBox16);
             this.groupBox7.Controls.Add(this.pictureBox13);
             this.groupBox7.Controls.Add(this.pictureBox14);
+            this.groupBox7.Controls.Add(this.CSamount3);
+            this.groupBox7.Controls.Add(this.pictureBox16);
+            this.groupBox7.Controls.Add(this.CSamount2);
             this.groupBox7.Controls.Add(this.pictureBox11);
+            this.groupBox7.Controls.Add(this.CSamount1);
             this.groupBox7.Controls.Add(this.pictureBox12);
+            this.groupBox7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.groupBox7.ForeColor = System.Drawing.Color.White;
             this.groupBox7.Location = new System.Drawing.Point(12, 182);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(199, 279);
@@ -463,72 +473,13 @@
             // CSamount7
             // 
             this.CSamount7.AutoSize = true;
+            this.CSamount7.BackColor = System.Drawing.Color.Transparent;
             this.CSamount7.ForeColor = System.Drawing.Color.Red;
             this.CSamount7.Location = new System.Drawing.Point(16, 202);
             this.CSamount7.Name = "CSamount7";
             this.CSamount7.Size = new System.Drawing.Size(17, 12);
             this.CSamount7.TabIndex = 17;
             this.CSamount7.Text = "10";
-            // 
-            // CSamount6
-            // 
-            this.CSamount6.AutoSize = true;
-            this.CSamount6.ForeColor = System.Drawing.Color.Red;
-            this.CSamount6.Location = new System.Drawing.Point(139, 122);
-            this.CSamount6.Name = "CSamount6";
-            this.CSamount6.Size = new System.Drawing.Size(17, 12);
-            this.CSamount6.TabIndex = 16;
-            this.CSamount6.Text = "10";
-            // 
-            // CSamount5
-            // 
-            this.CSamount5.AutoSize = true;
-            this.CSamount5.ForeColor = System.Drawing.Color.Red;
-            this.CSamount5.Location = new System.Drawing.Point(76, 122);
-            this.CSamount5.Name = "CSamount5";
-            this.CSamount5.Size = new System.Drawing.Size(17, 12);
-            this.CSamount5.TabIndex = 15;
-            this.CSamount5.Text = "10";
-            // 
-            // CSamount4
-            // 
-            this.CSamount4.AutoSize = true;
-            this.CSamount4.ForeColor = System.Drawing.Color.Red;
-            this.CSamount4.Location = new System.Drawing.Point(15, 122);
-            this.CSamount4.Name = "CSamount4";
-            this.CSamount4.Size = new System.Drawing.Size(17, 12);
-            this.CSamount4.TabIndex = 14;
-            this.CSamount4.Text = "10";
-            // 
-            // CSamount3
-            // 
-            this.CSamount3.AutoSize = true;
-            this.CSamount3.ForeColor = System.Drawing.Color.Red;
-            this.CSamount3.Location = new System.Drawing.Point(139, 36);
-            this.CSamount3.Name = "CSamount3";
-            this.CSamount3.Size = new System.Drawing.Size(17, 12);
-            this.CSamount3.TabIndex = 13;
-            this.CSamount3.Text = "10";
-            // 
-            // CSamount2
-            // 
-            this.CSamount2.AutoSize = true;
-            this.CSamount2.ForeColor = System.Drawing.Color.Red;
-            this.CSamount2.Location = new System.Drawing.Point(76, 36);
-            this.CSamount2.Name = "CSamount2";
-            this.CSamount2.Size = new System.Drawing.Size(17, 12);
-            this.CSamount2.TabIndex = 12;
-            this.CSamount2.Text = "10";
-            // 
-            // CSamount1
-            // 
-            this.CSamount1.AutoSize = true;
-            this.CSamount1.ForeColor = System.Drawing.Color.Red;
-            this.CSamount1.Location = new System.Drawing.Point(15, 36);
-            this.CSamount1.Name = "CSamount1";
-            this.CSamount1.Size = new System.Drawing.Size(17, 12);
-            this.CSamount1.TabIndex = 11;
-            this.CSamount1.Text = "10";
             // 
             // pictureBox17
             // 
@@ -541,6 +492,39 @@
             this.pictureBox17.TabStop = false;
             this.pictureBox17.Click += new System.EventHandler(this.CSClick);
             // 
+            // CSamount6
+            // 
+            this.CSamount6.AutoSize = true;
+            this.CSamount6.BackColor = System.Drawing.Color.Transparent;
+            this.CSamount6.ForeColor = System.Drawing.Color.Red;
+            this.CSamount6.Location = new System.Drawing.Point(139, 122);
+            this.CSamount6.Name = "CSamount6";
+            this.CSamount6.Size = new System.Drawing.Size(17, 12);
+            this.CSamount6.TabIndex = 16;
+            this.CSamount6.Text = "10";
+            // 
+            // CSamount5
+            // 
+            this.CSamount5.AutoSize = true;
+            this.CSamount5.BackColor = System.Drawing.Color.Transparent;
+            this.CSamount5.ForeColor = System.Drawing.Color.Red;
+            this.CSamount5.Location = new System.Drawing.Point(76, 122);
+            this.CSamount5.Name = "CSamount5";
+            this.CSamount5.Size = new System.Drawing.Size(17, 12);
+            this.CSamount5.TabIndex = 15;
+            this.CSamount5.Text = "10";
+            // 
+            // CSamount4
+            // 
+            this.CSamount4.AutoSize = true;
+            this.CSamount4.BackColor = System.Drawing.Color.Transparent;
+            this.CSamount4.ForeColor = System.Drawing.Color.Red;
+            this.CSamount4.Location = new System.Drawing.Point(15, 122);
+            this.CSamount4.Name = "CSamount4";
+            this.CSamount4.Size = new System.Drawing.Size(17, 12);
+            this.CSamount4.TabIndex = 14;
+            this.CSamount4.Text = "10";
+            // 
             // pictureBox15
             // 
             this.pictureBox15.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox15.Image")));
@@ -551,16 +535,6 @@
             this.pictureBox15.TabIndex = 6;
             this.pictureBox15.TabStop = false;
             this.pictureBox15.Click += new System.EventHandler(this.CSClick);
-            // 
-            // pictureBox16
-            // 
-            this.pictureBox16.Location = new System.Drawing.Point(136, 33);
-            this.pictureBox16.Name = "pictureBox16";
-            this.pictureBox16.Size = new System.Drawing.Size(51, 72);
-            this.pictureBox16.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox16.TabIndex = 5;
-            this.pictureBox16.TabStop = false;
-            this.pictureBox16.Click += new System.EventHandler(this.CSClick);
             // 
             // pictureBox13
             // 
@@ -584,6 +558,38 @@
             this.pictureBox14.TabStop = false;
             this.pictureBox14.Click += new System.EventHandler(this.CSClick);
             // 
+            // CSamount3
+            // 
+            this.CSamount3.AutoSize = true;
+            this.CSamount3.BackColor = System.Drawing.Color.Transparent;
+            this.CSamount3.ForeColor = System.Drawing.Color.Red;
+            this.CSamount3.Location = new System.Drawing.Point(139, 36);
+            this.CSamount3.Name = "CSamount3";
+            this.CSamount3.Size = new System.Drawing.Size(17, 12);
+            this.CSamount3.TabIndex = 13;
+            this.CSamount3.Text = "10";
+            // 
+            // pictureBox16
+            // 
+            this.pictureBox16.Location = new System.Drawing.Point(136, 33);
+            this.pictureBox16.Name = "pictureBox16";
+            this.pictureBox16.Size = new System.Drawing.Size(51, 72);
+            this.pictureBox16.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox16.TabIndex = 5;
+            this.pictureBox16.TabStop = false;
+            this.pictureBox16.Click += new System.EventHandler(this.CSClick);
+            // 
+            // CSamount2
+            // 
+            this.CSamount2.AutoSize = true;
+            this.CSamount2.BackColor = System.Drawing.Color.Transparent;
+            this.CSamount2.ForeColor = System.Drawing.Color.Red;
+            this.CSamount2.Location = new System.Drawing.Point(76, 36);
+            this.CSamount2.Name = "CSamount2";
+            this.CSamount2.Size = new System.Drawing.Size(17, 12);
+            this.CSamount2.TabIndex = 12;
+            this.CSamount2.Text = "10";
+            // 
             // pictureBox11
             // 
             this.pictureBox11.Location = new System.Drawing.Point(73, 33);
@@ -593,6 +599,17 @@
             this.pictureBox11.TabIndex = 1;
             this.pictureBox11.TabStop = false;
             this.pictureBox11.Click += new System.EventHandler(this.CSClick);
+            // 
+            // CSamount1
+            // 
+            this.CSamount1.AutoSize = true;
+            this.CSamount1.BackColor = System.Drawing.Color.Transparent;
+            this.CSamount1.ForeColor = System.Drawing.Color.Red;
+            this.CSamount1.Location = new System.Drawing.Point(15, 36);
+            this.CSamount1.Name = "CSamount1";
+            this.CSamount1.Size = new System.Drawing.Size(17, 12);
+            this.CSamount1.TabIndex = 11;
+            this.CSamount1.Text = "10";
             // 
             // pictureBox12
             // 
@@ -606,12 +623,14 @@
             // 
             // groupBox9
             // 
+            this.groupBox9.BackColor = System.Drawing.Color.Black;
             this.groupBox9.Controls.Add(this.label7);
             this.groupBox9.Controls.Add(this.label4);
             this.groupBox9.Controls.Add(this.pictureBox124);
             this.groupBox9.Controls.Add(this.pictureBox123);
             this.groupBox9.Controls.Add(this.label6);
             this.groupBox9.Controls.Add(this.label5);
+            this.groupBox9.ForeColor = System.Drawing.Color.White;
             this.groupBox9.Location = new System.Drawing.Point(13, 501);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Size = new System.Drawing.Size(199, 140);
@@ -622,6 +641,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.ForeColor = System.Drawing.Color.Red;
             this.label7.Location = new System.Drawing.Point(122, 27);
             this.label7.Name = "label7";
@@ -633,6 +653,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.ForeColor = System.Drawing.Color.Red;
             this.label4.Location = new System.Drawing.Point(21, 27);
             this.label4.Name = "label4";
@@ -663,6 +684,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.Color.White;
             this.label6.Location = new System.Drawing.Point(111, 116);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(70, 12);
@@ -672,14 +694,75 @@
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.Color.White;
             this.label5.Location = new System.Drawing.Point(10, 116);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(66, 12);
             this.label5.TabIndex = 0;
             this.label5.Text = "Draw Deck";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(16, 472);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(71, 12);
+            this.label9.TabIndex = 11;
+            this.label9.Text = "닉네임 / VP";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Location = new System.Drawing.Point(320, 468);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(474, 47);
+            this.groupBox2.TabIndex = 14;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "액션/바이 횟수";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(232, 20);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(68, 12);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Treasure : ";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(338, 14);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(108, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "AB 종료";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(135, 20);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(39, 12);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Buy : ";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(35, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(52, 12);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Action : ";
+            // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.Controls.Add(this.amount10);
             this.groupBox1.Controls.Add(this.amount9);
             this.groupBox1.Controls.Add(this.amount8);
@@ -941,12 +1024,13 @@
             this.groupBox10.Controls.Add(this.pictureBox28);
             this.groupBox10.Controls.Add(this.pictureBox26);
             this.groupBox10.Controls.Add(this.pictureBox25);
+            this.groupBox10.ForeColor = System.Drawing.Color.White;
             this.groupBox10.Location = new System.Drawing.Point(269, 301);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.Size = new System.Drawing.Size(600, 145);
             this.groupBox10.TabIndex = 10;
             this.groupBox10.TabStop = false;
-            this.groupBox10.Text = "내 액션/바이";
+            this.groupBox10.Text = "g";
             // 
             // pictureBox53
             // 
@@ -1243,6 +1327,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1130, 694);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.groupBox10);
@@ -1283,15 +1368,17 @@
             this.groupBox7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox124)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox123)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
@@ -1326,8 +1413,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox28)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox26)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox25)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
