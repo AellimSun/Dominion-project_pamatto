@@ -16,7 +16,7 @@ namespace WindowsFormsApp1
         public List<Card> cardList;
         public Deck deck;
         public GameTable gameTable;
-        public Trash trash;
+
 
         public Game(Game_Screen form)
         {
@@ -32,7 +32,7 @@ namespace WindowsFormsApp1
             deck = new Deck(market.estatePile, market.MoneyPile, form);
             //deck = new Deck(market.estatePile, market.MoneyPile, market.MarketPile);   // 지워야됨
             gameTable = new GameTable();
-            trash = new Trash();
+
 
             //핸드에 들어온 덱 이미지 바꾸기
             form.setHandDeckImg(deck);
@@ -185,6 +185,7 @@ namespace WindowsFormsApp1
 
                 form.changeABC(gameTable);
                 form.MakeString(market.MarketPile[i].Name, "m");
+                Global.transHandler.Get_Card(market.MarketPile[i].Name);
             }
 
             //if(gameTable.Coin >=)

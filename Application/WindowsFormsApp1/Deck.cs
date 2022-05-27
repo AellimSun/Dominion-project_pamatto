@@ -13,7 +13,7 @@ namespace WindowsFormsApp1
         public List<Card> DrawDeck;
         public List<Card> GraveDeck;
         //private List<Card> MerketDeck;
-
+        List<string> trash = new List<string>();
         private Random random = new Random();
 
         public void Hand_To_Grave()
@@ -204,8 +204,15 @@ namespace WindowsFormsApp1
         {
             GraveDeck.Add(HandDeck[number]);
             //HandDeck[number] = null;
-            if(mode  == "u") g.MakeString(HandDeck[number].Name, mode);  //매개변수 추가
-            else if(mode == "a") g.MakeString();
+            if (mode == "u")
+            {
+                Global.transHandler.Attack(HandDeck[number].Name);
+                g.MakeString(HandDeck[number].Name, mode);  //매개변수 추가
+            }
+            else if (mode == "a")
+            {
+                g.MakeString();
+            }
             HandDeck.RemoveAt(number);
             
         }
@@ -217,6 +224,14 @@ namespace WindowsFormsApp1
         public void gainCardToHand(Card card)
         {
             HandDeck.Add(card);
+        }
+        public void gotoTrash(string card)
+        {
+            trash.Add(card);
+        }
+        public List<string> getTrashList()
+        {
+            return trash;
         }
     }
 }

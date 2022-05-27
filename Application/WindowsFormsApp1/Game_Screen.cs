@@ -514,7 +514,7 @@ namespace WindowsFormsApp1
                 {
                     game.gameTable.Coin = deck.HandDeck[i].price + 2;
                     changeABC(game.gameTable);
-                    game.trash.gotoTrash(deck.HandDeck[i].Name);
+                    game.deck.gotoTrash(deck.HandDeck[i].Name);
                     deck.HandDeck.RemoveAt(i);
 
                     setHandDeckImg(deck);
@@ -534,7 +534,7 @@ namespace WindowsFormsApp1
                         return;
                     }
 
-                    game.trash.gotoTrash(deck.HandDeck[i].Name);
+                    game.deck.gotoTrash(deck.HandDeck[i].Name);
                     deck.HandDeck.RemoveAt(i);
 
                     Card res = game.gainCSCardToHand(idx);
@@ -727,7 +727,7 @@ namespace WindowsFormsApp1
                             //상대가 폐기했음 -> 시장의 카드를 줄임
                             case 4:
                                 //받아온 Card_Name 폐기시키기
-                                game.trash.gotoTrash(Card_Name);
+                                game.deck.gotoTrash(Card_Name);
                                 break;
                             //상대방한테 로그 받음 -> textbox 로그 추가
                             case 5:

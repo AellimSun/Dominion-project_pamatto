@@ -8,18 +8,6 @@ namespace WindowsFormsApp1
 {
     class Trash
     {
-        List<string> trash;
-        public Trash()
-        {
-            trash = new List<string>();
-        }
-        public void gotoTrash(string card)
-        {
-            trash.Add(card);
-        }
-        public List<string> getTrashList()
-        {
-            return trash;
-        }
+        
     }
 }
