@@ -93,9 +93,9 @@ namespace WindowsFormsApp1.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
-        internal static System.Drawing.Bitmap Diamonds_3125 {
+        internal static System.Drawing.Bitmap Diamonds {
             get {
-                object obj = ResourceManager.GetObject("Diamonds-3125", resourceCulture);
+                object obj = ResourceManager.GetObject("Diamonds", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
