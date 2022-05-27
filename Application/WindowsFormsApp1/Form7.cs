@@ -32,12 +32,15 @@ namespace WindowsFormsApp1
 
         private void Form7_Load(object sender, EventArgs e)
         {
-            
+            chart1.Series["1번"].Points.Add(20);
+            chart1.Series["2번"].Points.Add(10);
+            chart1.Series["3번"].Points.Add(-5);
+            chart1.Series["4번"].Points.Add(0);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-           //Form2.Show();
+            //Application.Run(new Form2());
         }
     }
 }
