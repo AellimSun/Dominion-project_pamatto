@@ -63,6 +63,7 @@ namespace WindowsFormsApp1
             groupBox9.Text = "Deck";
             groupBox10.Font = font;
             groupBox10.Text = "My Action / Buy";
+            button1.Font = font;
 
             upper = new PictureBox[] { pictureBox27, pictureBox26, pictureBox25, pictureBox30,
                 pictureBox29, pictureBox28, pictureBox41, pictureBox42, pictureBox43, pictureBox44,
@@ -114,7 +115,7 @@ namespace WindowsFormsApp1
             CSamount7.Text = estateList[3].amount.ToString();
 
             pictureBoxTF();
-            button1.Text = "액션 종료";
+            button1.Text = "Action End";
 
             
         }
@@ -207,7 +208,7 @@ namespace WindowsFormsApp1
                 }
                 else if (clickMode.Equals("grave"))
                 {
-                    MessageBox.Show("핸드에서 카드를 골라 버려야 합니다.\n원하지 않을 경우 효과 종료를 클릭해 주세요.");
+                    MessageBox.Show("핸드에서 카드를 골라 버려야 합니다.\n원하지 않을 경우 Effect End 종료를 클릭해 주세요.");
                     return;
                 }
                 else if (clickMode.Equals("actionEffectMode"))
@@ -217,12 +218,12 @@ namespace WindowsFormsApp1
                 }
                 else if (clickMode.Equals("trash"))
                 {
-                    MessageBox.Show("핸드에서 카드를 폐기해야 합니다.\n원하지 않을 경우 폐기 종료를 클릭해 주세요.");
+                    MessageBox.Show("핸드에서 카드를 폐기해야 합니다.\n원하지 않을 경우 Scrap End를 클릭해 주세요.");
                     return;
                 }
                 else if (clickMode.Equals("moneyTrash"))
                 {
-                    MessageBox.Show("핸드에서 재물 카드를 폐기해야 합니다.\n원하지 않을 경우 폐기 종료를 클릭해 주세요.");
+                    MessageBox.Show("핸드에서 재물 카드를 폐기해야 합니다.\n원하지 않을 경우 Scrap End를 클릭해 주세요.");
                     return;
                 }
             }
@@ -307,11 +308,11 @@ namespace WindowsFormsApp1
             string state = button1.Text;
             if (state.Equals("액션 종료"))
             {
-                button1.Text = "구매 종료";
+                button1.Text = "Buy End";
                 game.gameTable.ActionNumber = 0;
                 changeABC(game.gameTable);
             }
-            else if (state.Equals("버리기 종료"))
+            else if (state.Equals("Throw End"))
             {
                 if (selected.Count != 0)
                 {
@@ -336,14 +337,14 @@ namespace WindowsFormsApp1
 
                 if (game.gameTable.ActionNumber == 0)
                 {
-                    turn_button1("구매 종료");
+                    turn_button1("Buy End");
                 }
                 else
                 {
-                    turn_button1("액션 종료");
+                    turn_button1("Action End");
                 }
             }
-            else if (state.Equals("구매 종료"))
+            else if (state.Equals("Buy End"))
             {
                 //턴 종료
                 if (!market.Game_Over())
@@ -486,7 +487,7 @@ namespace WindowsFormsApp1
                 }
                 else if (clickMode.Equals("actionEffectMode"))
                 {
-                    MessageBox.Show("구매하실 카드를 클릭해 주세요.\n원하지 않을 경우 효과 종료를 클릭해주세요.");
+                    MessageBox.Show("구매하실 카드를 클릭해 주세요.\n원하지 않을 경우 Effect End를 클릭해주세요.");
                 }
                 else if (clickMode.Equals("trash"))
                 {
@@ -497,7 +498,7 @@ namespace WindowsFormsApp1
 
                     setHandDeckImg(deck);
                     clickMode = "actionEffectMode";
-                    button1.Text = "효과 종료";
+                    button1.Text = "Effect End";
                 }
                 else if (clickMode.Equals("moneyTrash"))
                 {
@@ -522,11 +523,11 @@ namespace WindowsFormsApp1
                     clickMode = "market";
                     if (game.gameTable.ActionNumber == 0)
                     {
-                        turn_button1("구매 종료");
+                        turn_button1("Buy End");
                     }
                     else
                     {
-                        turn_button1("액션 종료");
+                        turn_button1("Action End");
                     }
                 }
             }
