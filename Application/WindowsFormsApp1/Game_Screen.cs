@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace WindowsFormsApp1
 {
@@ -49,6 +50,8 @@ namespace WindowsFormsApp1
             label1.Text = "Action : ";
             label2.Text = "Buy : ";
             label3.Text = "Treasure : ";
+            label9.Font = font;
+            label9.Text = "Nickname / VP";
             groupBox3.Font = font;
             groupBox3.Text = "Hand";
             groupBox5.Font = font;
