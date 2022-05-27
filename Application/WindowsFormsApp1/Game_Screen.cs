@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using System.IO;
+using System.Drawing.Text;
 
 namespace WindowsFormsApp1
 {
@@ -39,6 +40,32 @@ namespace WindowsFormsApp1
         public PictureBox[] getLower() { return lower; }
         private void Form1_Load(object sender, EventArgs e)
         {
+            PrivateFontCollection privateFonts = new PrivateFontCollection();
+
+            privateFonts.AddFontFile("TypographerGotischB-Bold.ttf");
+
+            Font font = new Font(privateFonts.Families[0], 12f);
+
+            groupBox1.Font = font;
+            groupBox1.Text = "Market";
+            groupBox2.Font = font;
+            groupBox2.Text = "Action / Buy Count";
+            label1.Text = "Action : ";
+            label2.Text = "Buy : ";
+            label3.Text = "Treasure : ";
+            groupBox3.Font = font;
+            groupBox3.Text = "Hand";
+            groupBox5.Font = font;
+            groupBox5.Text = "Chatting";
+            groupBox6.Font = font;
+            groupBox6.Text = "Player List";
+            groupBox7.Font = font;
+            groupBox7.Text = "Treasure / Estate";
+            groupBox9.Font = font;
+            groupBox9.Text = "Deck";
+            groupBox10.Font = font;
+            groupBox10.Text = "My Action / Buy";
+
             upper = new PictureBox[] { pictureBox27, pictureBox26, pictureBox25, pictureBox30,
                 pictureBox29, pictureBox28, pictureBox41, pictureBox42, pictureBox43, pictureBox44,
                 pictureBox45, pictureBox46, pictureBox47, pictureBox48, pictureBox49 };
@@ -90,6 +117,8 @@ namespace WindowsFormsApp1
 
             pictureBoxTF();
             button1.Text = "액션 종료";
+
+            
         }
         /*public void ShowDeck(Deck deck)                 //검증필요. 옵저버 패턴은 도저히 모르겠음.
         {
@@ -120,9 +149,9 @@ namespace WindowsFormsApp1
         }
         public void changeABC(GameTable gameTable)
         {
-            label1.Text = "액션 : " + gameTable.ActionNumber;
-            label2.Text = "바이 : " + gameTable.BuyNumber;
-            label3.Text = "재물 : " + gameTable.Coin;
+            label1.Text = "Action : " + gameTable.ActionNumber;
+            label2.Text = "Buy : " + gameTable.BuyNumber;
+            label3.Text = "Treasure : " + gameTable.Coin;
         }
 
         //핸드덱 이미지 재정렬(or 초기세팅)하는 메소드
@@ -279,7 +308,7 @@ namespace WindowsFormsApp1
         private void button1_Click(object sender, EventArgs e)
         {
             string state = button1.Text;
-            if (state.Equals("액션 종료"))
+            if (state.Equals("Action End"))
             {
                 button1.Text = "구매 종료";
                 game.gameTable.ActionNumber = 0;
@@ -299,10 +328,10 @@ namespace WindowsFormsApp1
                     game.deck.DrawToHand(selected.Count, this);
                     selected.RemoveRange(0, selected.Count);
                     clickMode = "market";
-                    turn_button1("액션 종료");
+                    turn_button1("Action End");
                 }
             }
-            else if (state.Equals("효과 종료") || state.Equals("폐기 종료"))
+            else if (state.Equals("효과 종료") || state.Equals("폐기 End"))
             {
                 clickMode = "market";
                 game.gameTable.Coin = 0;
