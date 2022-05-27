@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Text;
+using System.Threading.Tasks;
 
 namespace WindowsFormsApp1
 {
@@ -28,18 +29,13 @@ namespace WindowsFormsApp1
         public Game_Screen()
         {
             InitializeComponent();
-            //Application.Idle += Application_Idle;
         }
-
-        //void Application_Idle(object sender, EventArgs e)
-        //{
-        //    Application.Idle -= Application_Idle;
-        //    Listen_Method();
-        //}
 
         public PictureBox[] getLower() { return lower; }
         private void Form1_Load(object sender, EventArgs e)
         {
+            Listen_Method();
+
             PrivateFontCollection privateFonts = new PrivateFontCollection();
 
             privateFonts.AddFontFile("TypographerGotischB-Bold.ttf");
@@ -609,122 +605,123 @@ namespace WindowsFormsApp1
 
         }
 
-        private void Listen_Method()
+        async private void Listen_Method()
         {
-            string Card_Name = null;
-            string Log = null;
-
-            while (true)
+            await Task.Run(() =>
             {
-                int flag = Global.transHandler.Game_Listener(Card_Name, Log);
+                string Card_Name = null;
+                string Log = null;
 
-                if (flag == 1)
+                while (true)
                 {
-                    break;
-                }
-                else
-                {
-                    switch (flag)
+                    int flag = Global.transHandler.Game_Listener(Card_Name, Log);
+
+                    if (flag == 1)
                     {
-                        //상대가 공격했음
-                        case 2:
-                            //해자가 있냐?
-                            bool check_moat = false;
+                        break;
+                    }
+                    else
+                    {
+                        switch (flag)
+                        {
+                            //상대가 공격했음
+                            case 2:
+                                //해자가 있냐?
+                                bool check_moat = false;
 
-                            foreach (Card item in deck.HandDeck)
-                            {
-                                if (item.Name.Equals("moat"))
+                                foreach (Card item in deck.HandDeck)
                                 {
-                                    check_moat = true;
-                                    break;
+                                    if (item.Name.Equals("moat"))
+                                    {
+                                        check_moat = true;
+                                        break;
+                                    }
                                 }
-                            }
 
-                            if (!check_moat)
-                            {
-                                //저주 먹었음을 서버에 전송
-                                MakeString("curse", "m");
-
-                                //무덤덱으로 저주 보내버리기
-                                Card curse = game.gainCurse();
-
-                                //UI수정
-                                CSAmt[6].Text = curse.amount.ToString();
-                            }
-                            else
-                            {
-                                //해자가 있다고 로그 전달
-                                MakeString("moat", "h");
-                            }
-                            break;
-
-                        //상대가 먹었음 -> 시장의 카드를 줄임
-                        case 3:
-                            Label[] Ptmp = new Label[CSAmt.Length + marketAmt.Length];
-                            Card[] Ctmp = new Card[market.MarketPile.Count + market.MoneyPile.Count + market.estatePile.Count];
-                            //Label 및 Ctmp 정의
-                            int Pi = 0, Ci = 0;
-                            foreach (Label P in marketAmt)
-                            {
-                                Ptmp[Pi++] = P;
-                            }
-                            foreach (Label P in CSAmt)
-                            {
-                                Ptmp[Pi++] = P;
-                            }
-                            foreach (Card C in market.MarketPile)
-                            {
-                                Ctmp[Ci++] = C;
-                            }
-                            foreach (Card C in market.MoneyPile)
-                            {
-                                Ctmp[Ci++] = C;
-                            }
-                            foreach (Card C in market.estatePile)
-                            {
-                                Ctmp[Ci++] = C;
-                            }
-
-                            //돌면서 찾고 인덱스 이용해서 숫자감소 및 UI변경
-                            for (int i = 0; i < Ctmp.Length; i++)
-                            {
-                                if (Ctmp[i].Name.Equals(Card_Name))
+                                if (!check_moat)
                                 {
-                                    Ctmp[i].amount--;
-                                    Ptmp[i].Text = Ctmp[i].amount.ToString();
-                                    break;
+                                    //저주 먹었음을 서버에 전송
+                                    MakeString("curse", "m");
+
+                                    //무덤덱으로 저주 보내버리기
+                                    Card curse = game.gainCurse();
+
+                                    //UI수정
+                                    CSAmt[6].Text = curse.amount.ToString();
                                 }
-                            }
+                                else
+                                {
+                                    //해자가 있다고 로그 전달
+                                    MakeString("moat", "h");
+                                }
+                                break;
 
-                            break;
-                        //상대가 폐기했음 -> 시장의 카드를 줄임
-                        case 4:
-                            //받아온 Card_Name 폐기시키기
-                            game.trash.gotoTrash(Card_Name);
-                            break;
-                        //상대방한테 로그 받음 -> textbox 로그 추가
-                        case 5:
-                            Log_Handle(Log);
-                            break;
-                        //상대방이 게임 종료 시켰음 -> 내 점수 집계 -> Score_send -> (전체 점수 집계 -> 결과 출력 -> Main Form으로 복귀)
-                        case 6:
-                            int my_score = My_Score();
+                            //상대가 먹었음 -> 시장의 카드를 줄임
+                            case 3:
+                                Label[] Ptmp = new Label[CSAmt.Length + marketAmt.Length];
+                                Card[] Ctmp = new Card[market.MarketPile.Count + market.MoneyPile.Count + market.estatePile.Count];
+                                //Label 및 Ctmp 정의
+                                int Pi = 0, Ci = 0;
+                                foreach (Label P in marketAmt)
+                                {
+                                    Ptmp[Pi++] = P;
+                                }
+                                foreach (Label P in CSAmt)
+                                {
+                                    Ptmp[Pi++] = P;
+                                }
+                                foreach (Card C in market.MarketPile)
+                                {
+                                    Ctmp[Ci++] = C;
+                                }
+                                foreach (Card C in market.MoneyPile)
+                                {
+                                    Ctmp[Ci++] = C;
+                                }
+                                foreach (Card C in market.estatePile)
+                                {
+                                    Ctmp[Ci++] = C;
+                                }
 
-                            Global.transHandler.Score_send(my_score);
+                                //돌면서 찾고 인덱스 이용해서 숫자감소 및 UI변경
+                                for (int i = 0; i < Ctmp.Length; i++)
+                                {
+                                    if (Ctmp[i].Name.Equals(Card_Name))
+                                    {
+                                        Ctmp[i].amount--;
+                                        Ptmp[i].Text = Ctmp[i].amount.ToString();
+                                        break;
+                                    }
+                                }
 
-                            Go_to_Main_Form();
+                                break;
+                            //상대가 폐기했음 -> 시장의 카드를 줄임
+                            case 4:
+                                //받아온 Card_Name 폐기시키기
+                                game.trash.gotoTrash(Card_Name);
+                                break;
+                            //상대방한테 로그 받음 -> textbox 로그 추가
+                            case 5:
+                                Log_Handle(Log);
+                                break;
+                            //상대방이 게임 종료 시켰음 -> 내 점수 집계 -> Score_send -> (전체 점수 집계 -> 결과 출력 -> Main Form으로 복귀)
+                            case 6:
+                                int my_score = My_Score();
 
-                            break;
-                        default:
-                            break;
+                                Global.transHandler.Score_send(my_score);
+
+                                Go_to_Main_Form();
+
+                                break;
+                            default:
+                                break;
+                        }
                     }
                 }
-            }
-        }
 
-        private void Game_Screen_Shown(object sender, EventArgs e)
-        {
-            Listen_Method();
+            });
+
+            
         }
 
         //private void Game_Screen_Shown(object sender, EventArgs e)
