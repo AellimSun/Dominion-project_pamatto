@@ -191,7 +191,7 @@ namespace WindowsFormsApp1
             }
             HandDeck.Add(tmp);
         }           //지워야됨
-            public void Clear()
+        public void Clear()
         {
             //HandToGrave
             for (int i = 0; i < HandDeck.Count; i++)

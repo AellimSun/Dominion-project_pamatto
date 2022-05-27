@@ -353,7 +353,11 @@ namespace WindowsFormsApp1
                     button1.Text = "Action End";
                     //버튼 비활성화
                     button1.Enabled = false;
+                    deck.Hand_To_Grave();
+                    deck.DrawToHand(5, this);
+
                     Listen_Method();
+                    
                 }
                 //게임 종료
                 else
