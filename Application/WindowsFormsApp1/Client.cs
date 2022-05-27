@@ -174,7 +174,7 @@ namespace WindowsFormsApp1
             return 0;
         }
 
-        public int Game_Listener(string Card_Name, string Log)
+        public int Game_Listener(ref string Card_Name, ref string Log)
         {
             Message Alway_Listen = MessageUtil.Receive(Stream);
             switch (Alway_Listen.Header.MSGTYPE)
@@ -196,7 +196,7 @@ namespace WindowsFormsApp1
                     }
                     return -1;
                 case CONSTANTS.LOG_SEND:
-                    Log = BitConverter.ToString((Alway_Listen.Body as BodyLogSend).LOG);
+                    Log = Encoding.Default.GetString((Alway_Listen.Body as BodyLogSend).LOG);
                     return 5;
                 case CONSTANTS.SCORE_REQUEST:
                     return 6;
@@ -281,7 +281,7 @@ namespace WindowsFormsApp1
             Message LSmsg = new Message();
             LSmsg.Body = new BodyLogSend()
             {
-                LOG = Encoding.UTF8.GetBytes(Log)
+                LOG = Encoding.Default.GetBytes(Log)
             };
             LSmsg.Header = new Header()
             {
@@ -296,7 +296,7 @@ namespace WindowsFormsApp1
             Message LRmsg = MessageUtil.Receive(Stream);
             if (LRmsg.Header.MSGTYPE == CONSTANTS.LOG_SEND)
             {
-                string log = Encoding.UTF8.GetString((LRmsg.Body as BodyLogSend).LOG);
+                string log = Encoding.Default.GetString((LRmsg.Body as BodyLogSend).LOG);
                 return log;
             }
             return null;

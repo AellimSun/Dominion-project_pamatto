@@ -73,9 +73,19 @@ namespace WindowsFormsApp1.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
-        internal static System.Drawing.Bitmap destination_4678741_960_720 {
+        internal static System.Drawing.Bitmap back1 {
             get {
-                object obj = ResourceManager.GetObject("destination-4678741_960_720", resourceCulture);
+                object obj = ResourceManager.GetObject("back1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap 배경2 {
+            get {
+                object obj = ResourceManager.GetObject("배경2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

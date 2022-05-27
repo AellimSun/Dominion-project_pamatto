@@ -72,15 +72,18 @@ namespace WindowsFormsApp1
         private void btnStart_Click(object sender, EventArgs e)
         {
             btnStart.Enabled = false;
-            Game_Screen game_Screen = new Game_Screen();
+            Game_Screen game_Screen;
             DB_ACCESS dB_ACCESS = new DB_ACCESS();
             int res = Global.transHandler.Respond(1, Global.ID_List, Global.HostNum);
             if (res == 1)
             {
                 btnCancle.Enabled = false;
-                MessageBox.Show("게임이 시작됩니다.");
+                game_Screen = new Game_Screen();
+                //MessageBox.Show("게임이 시작됩니다.");
                 //dB_ACCESS.SendDBLog("Game in");          //sending game login
+
                 game_Screen.Show();
+                //game_Screen.LogTest();
                 this.Close();
             }
             else if (res == -1)
