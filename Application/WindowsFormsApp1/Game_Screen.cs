@@ -36,10 +36,10 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
         }
-
         public PictureBox[] getLower() { return lower; }
         private void Form1_Load(object sender, EventArgs e)
         {
+            //LogTest();
             upper = new PictureBox[] { pictureBox27, pictureBox26, pictureBox25, pictureBox30,
                 pictureBox29, pictureBox28, pictureBox41, pictureBox42, pictureBox43, pictureBox44,
                 pictureBox45, pictureBox46, pictureBox47, pictureBox48, pictureBox49 };

@@ -45,13 +45,14 @@ namespace WindowsFormsApp1
                 this.textPW.Enabled = false;
                 this.startBTN.Enabled = false;
 
-                form3.ShowDialog();                   
-                this.textID.Text = "";
-                this.textPW.Text = "";
-                this.textID.Enabled = true;
-                this.textPW.Enabled = true;
-                this.startBTN.Enabled = true;
-                this.Show();
+                this.Hide();
+                form3.ShowDialog();
+                //this.textID.Text = "";
+                //this.textPW.Text = "";
+                //this.textID.Enabled = true;
+                //this.textPW.Enabled = true;
+                //this.startBTN.Enabled = true;
+                //this.Show();
             }
             //this.Enabled = false;  비활성화
             //this.Visible = false;  안보이게

@@ -46,6 +46,7 @@
             this.pictureBox21 = new System.Windows.Forms.PictureBox();
             this.pictureBox22 = new System.Windows.Forms.PictureBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.list_log = new System.Windows.Forms.ListBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.chatCon = new System.Windows.Forms.TextBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -122,7 +123,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.list_log = new System.Windows.Forms.ListBox();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox40)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox39)).BeginInit();
@@ -391,6 +391,15 @@
             this.groupBox4.Size = new System.Drawing.Size(199, 365);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
+            // 
+            // list_log
+            // 
+            this.list_log.FormattingEnabled = true;
+            this.list_log.ItemHeight = 12;
+            this.list_log.Location = new System.Drawing.Point(6, 17);
+            this.list_log.Name = "list_log";
+            this.list_log.Size = new System.Drawing.Size(187, 340);
+            this.list_log.TabIndex = 0;
             // 
             // groupBox5
             // 
@@ -1227,15 +1236,6 @@
             this.label1.Size = new System.Drawing.Size(37, 12);
             this.label1.TabIndex = 0;
             this.label1.Text = "액션 :";
-            // 
-            // list_log
-            // 
-            this.list_log.FormattingEnabled = true;
-            this.list_log.ItemHeight = 12;
-            this.list_log.Location = new System.Drawing.Point(6, 17);
-            this.list_log.Name = "list_log";
-            this.list_log.Size = new System.Drawing.Size(187, 340);
-            this.list_log.TabIndex = 0;
             // 
             // Game_Screen
             // 
