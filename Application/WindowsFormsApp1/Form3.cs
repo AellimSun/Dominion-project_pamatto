@@ -80,7 +80,9 @@ namespace WindowsFormsApp1
                 btnCancle.Enabled = false;
                 MessageBox.Show("게임이 시작됩니다.");
                 //dB_ACCESS.SendDBLog("Game in");          //sending game login
+
                 game_Screen.Show();
+
                 this.Close();
             }
             else if (res == -1)

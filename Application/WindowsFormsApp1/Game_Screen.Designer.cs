@@ -1176,7 +1176,6 @@
             this.pictureBox25.TabIndex = 6;
             this.pictureBox25.TabStop = false;
             this.pictureBox25.Visible = false;
-            this.pictureBox25.Click += new System.EventHandler(this.pictureBox25_Click);
             // 
             // label9
             // 
