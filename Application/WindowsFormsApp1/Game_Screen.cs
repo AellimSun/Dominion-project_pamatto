@@ -311,6 +311,14 @@ namespace WindowsFormsApp1
                     turn_button1("액션 종료");
                 }
             }
+            else if (state.Equals("구매 종료"))
+            {
+                //Global.transHandler.Turn_end();       서버 연결하면 주석 해제
+                button1.Text = "액션 종료";
+                //버튼 비활성화
+                button1.Enabled = false;
+
+            }
         }
 
         public void turn_button1(string content)
