@@ -22,7 +22,7 @@ namespace DTL
         public const int FULL_QUEUE = 0x09;                //x
         public const int ACCEPT = 0x0A;                    //x
         public const int DECLINE = 0x0B;                   //x
-        public const int GAME_START = 0x0C;                //ID1(string), ID2(string), ID3(string), ID4(string)
+        public const int GAME_START = 0x0C;                //ID1(string), ID2(string), ID3(string), ID4(string), Host_Number(int)
         public const int GAME_CANCLE = 0x0D;               //x
         public const int ALERT_ACTION = 0x0E;              //TYPE(int), CARD(int)
         public const int LOG_SEND = 0x0F;                  //LOG(string)
