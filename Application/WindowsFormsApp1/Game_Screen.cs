@@ -55,6 +55,8 @@ namespace WindowsFormsApp1
             label1.Text = "Action : ";
             label2.Text = "Buy : ";
             label3.Text = "Treasure : ";
+            label9.Font = font;
+            label9.Text = "Nickname / VP";
             groupBox3.Font = font;
             groupBox3.Text = "Hand";
             groupBox5.Font = font;
