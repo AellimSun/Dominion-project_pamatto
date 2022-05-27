@@ -753,6 +753,11 @@ namespace WindowsFormsApp1
             
         }
 
+        private void Game_Screen_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+        }
+
         //private void Game_Screen_Shown(object sender, EventArgs e)
         //{
         //    string Card_Name = null;

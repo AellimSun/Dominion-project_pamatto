@@ -308,11 +308,13 @@ namespace Dominion_Server
                                 {
                                     MessageUtil.Send(c.stream, R_Msg);
                                 }
+                                Console.WriteLine(Encoding.Default.GetString((R_Msg.Body as BodyLogSend).LOG));
                             }
                             break;
 
                         case CONSTANTS.ALERT_ACTION:
                             {
+                                Console.WriteLine(Encoding.Default.GetString((R_Msg.Body as BodyAlertAction).CARD));
                                 //공격!예외처리
                                 for (int i = 0; i < 4; i++)
                                 {

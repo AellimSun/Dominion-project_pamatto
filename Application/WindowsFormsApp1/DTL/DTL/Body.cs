@@ -74,6 +74,7 @@ namespace DTL
         public byte[] ID2;
         public byte[] ID3;
         public byte[] ID4;
+        public int HostNumber;
         public BodyGameStart() { }
         public BodyGameStart(byte[] bytes)
         {
@@ -85,6 +86,7 @@ namespace DTL
             Array.Copy(bytes, 11, ID2, 0, 11);
             Array.Copy(bytes, 22, ID3, 0, 11);
             Array.Copy(bytes, 33, ID4, 0, 11);
+            HostNumber = BitConverter.ToInt32(bytes, 44);
         }
         public byte[] GetBytes()
         {
@@ -93,36 +95,38 @@ namespace DTL
             ID2.CopyTo(bytes, 11);
             ID3.CopyTo(bytes, 22);
             ID4.CopyTo(bytes, 33);
+            byte[] tmp = BitConverter.GetBytes(HostNumber);
+            Array.Copy(tmp, 0, bytes, 44, 4);
             return bytes;
         }
         public int GetSize()
         {
-            return 44;
+            return 48;
         }
     }
 
     public class BodyAlertAction : ISerializable
     {
         public int ACTION;
-        public int CARD;
+        public byte[] CARD;
         public BodyAlertAction() { }
         public BodyAlertAction(byte[] bytes)
         {
+            CARD = new byte[21];
             ACTION = BitConverter.ToInt32(bytes, 0);
-            CARD = BitConverter.ToInt32(bytes, 4);
+            Array.Copy(bytes, 4, CARD, 0, 4);
         }
         public byte[] GetBytes()
         {
             byte[] bytes = new byte[GetSize()];
             byte[] temp = BitConverter.GetBytes(ACTION);
             Array.Copy(temp, 0, bytes, 0, 4);
-            temp = BitConverter.GetBytes(CARD);
-            Array.Copy(temp, 0, bytes, 4, 4);
+            Array.Copy(CARD, 0, bytes, 4, 21);
             return bytes;
         }
         public int GetSize()
         {
-            return 8;
+            return 25;
         }
     }
 

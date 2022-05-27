@@ -206,7 +206,11 @@ namespace WindowsFormsApp1
             //HandDeck[number] = null;
             if (mode == "u")
             {
-                Global.transHandler.Attack(HandDeck[number].Name);
+                if((HandDeck[number] as ActionCard) != null)
+                {
+                    if(((ActionCard)HandDeck[number]).attack)
+                        Global.transHandler.Attack(HandDeck[number].Name);
+                }
                 g.MakeString(HandDeck[number].Name, mode);  //매개변수 추가
             }
             else if (mode == "a")

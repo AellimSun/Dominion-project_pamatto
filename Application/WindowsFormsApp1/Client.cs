@@ -230,7 +230,7 @@ namespace WindowsFormsApp1
         {
             byte[] cbyte = new byte[21];
             byte[] tmp = Encoding.Default.GetBytes(Card_Name);
-            Array.Copy(tmp, 0, cbyte, 0, 21);
+            Array.Copy(cbyte, 0, tmp, 0, 21);
             Message GCmsg = new Message();
             GCmsg.Body = new BodyAlertAction()
             {

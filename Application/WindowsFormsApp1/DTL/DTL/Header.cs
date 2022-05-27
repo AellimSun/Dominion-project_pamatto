@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DTL
 {
-    public class Header:ISerializable
+    public class Header : ISerializable
     {
         public byte HASBODY { get; set; }
         public int MSGTYPE { get; set; }
