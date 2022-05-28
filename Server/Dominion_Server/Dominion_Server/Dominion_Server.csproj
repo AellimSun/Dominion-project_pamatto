@@ -35,7 +35,7 @@
   <ItemGroup>
     <Reference Include="DTL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Application\DTL.dll</HintPath>
+      <HintPath>..\DTL.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
