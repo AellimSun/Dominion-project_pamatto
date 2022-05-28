@@ -403,9 +403,9 @@
             this.list_log.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.list_log.FormattingEnabled = true;
             this.list_log.ItemHeight = 12;
-            this.list_log.Location = new System.Drawing.Point(22, 21);
+            this.list_log.Location = new System.Drawing.Point(6, 21);
             this.list_log.Name = "list_log";
-            this.list_log.Size = new System.Drawing.Size(187, 336);
+            this.list_log.Size = new System.Drawing.Size(217, 336);
             this.list_log.TabIndex = 0;
             // 
             // groupBox5
@@ -704,7 +704,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(16, 472);
+            this.label9.Location = new System.Drawing.Point(16, 486);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(71, 12);
             this.label9.TabIndex = 11;
@@ -731,6 +731,17 @@
             this.label3.Size = new System.Drawing.Size(68, 12);
             this.label3.TabIndex = 2;
             this.label3.Text = "Treasure : ";
+            // 
+            // button1
+            // 
+            this.button1.Enabled = false;
+            this.button1.Location = new System.Drawing.Point(338, 14);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(108, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "AB 종료";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label2
             // 
@@ -1252,66 +1263,6 @@
             this.pictureBox25.TabIndex = 6;
             this.pictureBox25.TabStop = false;
             this.pictureBox25.Visible = false;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(16, 486);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(71, 12);
-            this.label9.TabIndex = 11;
-            this.label9.Text = "닉네임 / VP";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.button1);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Location = new System.Drawing.Point(320, 468);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(474, 47);
-            this.groupBox2.TabIndex = 14;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "액션/바이 횟수";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(232, 20);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(68, 12);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Treasure : ";
-            // 
-            // button1
-            // 
-            this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(338, 14);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(108, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "AB 종료";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(135, 20);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(39, 12);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Buy : ";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(35, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Action : ";
             // 
             // Game_Screen
             // 
