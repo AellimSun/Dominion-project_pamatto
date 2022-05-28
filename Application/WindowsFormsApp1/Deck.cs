@@ -158,9 +158,9 @@ namespace WindowsFormsApp1
 
         public void DrawToHand(int i, Game_Screen g)
         {
-            g.MakeString(i);
+            //g.MakeString(i);
 
-            while (0 < i)
+            while (i > 0)
             {
                 if (DrawDeck.Count == 0)
                     Shuffle(GraveDeck);
@@ -194,10 +194,10 @@ namespace WindowsFormsApp1
         public void Clear()
         {
             //HandToGrave
-            for (int i = 0; i < HandDeck.Count; i++)
+            while (HandDeck.Count > 0)
             {
-                GraveDeck.Add(HandDeck[i]);
-                HandDeck.RemoveAt(i);
+                GraveDeck.Add(HandDeck[0]);
+                HandDeck.RemoveAt(0);
             }
         }
         public void GoToGrave(int number, string mode, Game_Screen g)
