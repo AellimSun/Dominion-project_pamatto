@@ -67,11 +67,11 @@ namespace WindowsFormsApp1
             groupBox10.Text = "My Action / Buy";
             button1.Font = font;
 
-            //groupBox1.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\1.png");
-            //groupBox3.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\Hand_Background.png");
-            //groupBox4.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\Log.png");
-            //groupBox5.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\BonoBono.png");
-            //groupBox10.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\1.png");
+            groupBox1.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\1.png");
+            groupBox3.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\Hand_Background.png");
+            groupBox4.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\Log.png");
+            groupBox5.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\BonoBono.png");
+            groupBox10.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\1.png");
 
             label4.Parent = pictureBox123;
             label4.Location = new Point(1, 1);
