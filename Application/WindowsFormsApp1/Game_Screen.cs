@@ -36,7 +36,7 @@ namespace WindowsFormsApp1
         public PictureBox[] getLower() { return lower; }
         private void Form1_Load(object sender, EventArgs e)
         {
-            Listen_Method();
+            //Listen_Method();
 
             PrivateFontCollection privateFonts = new PrivateFontCollection();
 
