@@ -21,7 +21,7 @@ namespace WindowsFormsApp1
         int Qcount = 0;
         private void Form3_Load(object sender, EventArgs e)
         {
-            btnStart.Enabled = false;
+            btnStart.Enabled = false;    //(FIND용) false로
             Global.ID_List = new string[4];
 
             Qcount = Global.transHandler.Start_Matching();
@@ -44,11 +44,11 @@ namespace WindowsFormsApp1
                 int res = Global.transHandler.Wait_Full_Queue(this);
                 if (res == 1)
                 {   //게임시작하실?
-                    btnStart.Enabled = true;
+                    btnStart.Enabled = true; //(FIND용)
                     int cnt = 15;
                     while(cnt > 0)
                     {
-                        timeLabel.Text = cnt.ToString();
+                        timeLabel.Text = cnt.ToString(); //(FIND용)
                         await Task.Delay(1000);
                         cnt--;
                     }

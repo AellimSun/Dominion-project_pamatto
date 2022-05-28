@@ -37,7 +37,7 @@ namespace WindowsFormsApp1
         private void Form1_Load(object sender, EventArgs e)
         {
             Listen_Method();
-
+            //button1.Enabled = true; //FIND(용) 지워야됨
             PrivateFontCollection privateFonts = new PrivateFontCollection();
 
             privateFonts.AddFontFile("TypographerGotischB-Bold.ttf");
@@ -211,7 +211,7 @@ namespace WindowsFormsApp1
 
             for (int i = 0; i < lower.Length; i++)
             {
-                lower[i].Image = null;
+                lower[i].Image.Dispose();
                 lower[i].Visible = false;
                 lower[i].Enabled = false;
             }
@@ -328,7 +328,8 @@ namespace WindowsFormsApp1
             if (sbj.Image != null)
             {
                 obj.Image = sbj.Image;
-                sbj.Image = null;
+                //sbj.Image = null;
+                sbj.Image.Dispose();
 
                 return true;
             }
@@ -409,14 +410,14 @@ namespace WindowsFormsApp1
                     Global.transHandler.Turn_end();
                     button1.Text = "Action End";
                     //버튼 비활성화
-                    button1.Enabled = false;
+                    button1.Enabled = false;        //(FIND용)
                     deck.Clear();
                     deck.DrawToHand(5, this);
                     pictureBoxTF();
 
                     foreach (PictureBox item in upper)
                     {
-                        item.Image = null;
+                        item.Image.Dispose();
                         item.Visible = false;
                         item.Enabled = false;
                     }
@@ -441,7 +442,7 @@ namespace WindowsFormsApp1
             //winform 디자인 어쩌구저쩌구 싹다 밀어버리기
             foreach (PictureBox item in lower)
             {
-                item.Image = null;
+                item.Image.Dispose();
             }
 
             //핸드 덱 -> 무덤 덱으로 보내기
@@ -552,7 +553,7 @@ namespace WindowsFormsApp1
                 else if (clickMode.Equals("grave"))
                 {
                     selected.Add(i);
-                    lower[i].Image = null;
+                    lower[i].Image.Dispose();
                     lower[i].Visible = false;
                     lower[i].Enabled = false;
                 }
@@ -613,7 +614,7 @@ namespace WindowsFormsApp1
         {
             for (int i = 0; i < marketlist.Count; i++)
             {
-                marketPics[i].Load(Directory.GetCurrentDirectory() + "\\" + marketlist[i].Name + ".png");
+                marketPics[i].Image = new Bitmap(Directory.GetCurrentDirectory() + "\\" + marketlist[i].Name + ".png");
             }
         }
         private void rightclick(PictureBox sender)
@@ -695,8 +696,8 @@ namespace WindowsFormsApp1
 
                     if (flag == 1)
                     {
-                        button1.Enabled = true;
-                        setLogBox("Your Turn!");
+                        button1.Enabled = true;   //(FIND용)
+                        setLogBox("Your Turn!");  //(FIND용)
                         break;
                     }
                     else
@@ -785,7 +786,7 @@ namespace WindowsFormsApp1
                                 break;
                             //상대방한테 로그 받음 -> textbox 로그 추가
                             case 5:
-                                setLogBox(Log);
+                                setLogBox(Log);   //(FIND용)
                                 break;
                             //상대방이 게임 종료 시켰음 -> 내 점수 집계 -> Score_send -> (전체 점수 집계 -> 결과 출력 -> Main Form으로 복귀)
                             case 6:

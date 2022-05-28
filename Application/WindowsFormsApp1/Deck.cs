@@ -203,7 +203,7 @@ namespace WindowsFormsApp1
         public void GoToGrave(int number, string mode, Game_Screen g)
         {
             GraveDeck.Add(HandDeck[number]);
-            //HandDeck[number] = null;
+            //HandDeck[number] = null;      //주석모임
             if (mode == "u")
             {
                 if((HandDeck[number] as ActionCard) != null)
