@@ -337,7 +337,7 @@ namespace WindowsFormsApp1
             if (sbj.Image != null)
             {
                 obj.Image = sbj.Image;
-                sbj.Image = null;
+                sbj.Image.Dispose();
 
                 return true;
             }
@@ -425,7 +425,7 @@ namespace WindowsFormsApp1
 
                     foreach (PictureBox item in upper)
                     {
-                        item.Image = null;
+                        item.Image.Dispose();
                         item.Visible = false;
                         item.Enabled = false;
                     }
@@ -561,7 +561,7 @@ namespace WindowsFormsApp1
                 else if (clickMode.Equals("grave"))
                 {
                     selected.Add(i);
-                    lower[i].Image = null;
+                    lower[i].Image.Dispose();
                     lower[i].Visible = false;
                     lower[i].Enabled = false;
                 }
@@ -692,9 +692,20 @@ namespace WindowsFormsApp1
 
         }
 
+        private bool Matching_Character(string subject, string target)
+        {
+            bool strMatch = true;
+
+            for (int i = 0; i < subject.Length; i++)
+            {
+                strMatch = strMatch && (subject[i] == target[i]);
+            }
+
+            return strMatch;
+        }
         async private void Listen_Method()
         {
-            await Task.Run(() =>
+            await Task.Run(async() =>
             {
                 string Card_Name = null;
                 string Log = null;
@@ -716,6 +727,17 @@ namespace WindowsFormsApp1
 
                             //상대가 공격했음
                             case 2:
+                                //공격 카드가 마녀일 경우
+                                if (Matching_Character(Card_Name, "witch"))
+                                {
+                                    //마녀이펙트 출력
+                                    Form4 f4 = new Form4();
+                                    await Task.Run(() =>
+                                    {
+                                        f4.Show();
+                                    });
+                                }
+
                                 //해자가 있냐?
                                 bool check_moat = false;
 
