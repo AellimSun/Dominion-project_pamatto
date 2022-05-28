@@ -211,7 +211,7 @@ namespace WindowsFormsApp1
         {
             byte[] cbyte = new byte[21];
             byte[] tmp = Encoding.Default.GetBytes(Card_Name);
-            Array.Copy(tmp, 0, cbyte, 0, 21);
+            Array.Copy(tmp, 0, cbyte, 0, tmp.Length);
             Message Amsg = new Message();
             Amsg.Body = new BodyAlertAction()
             {
@@ -230,7 +230,7 @@ namespace WindowsFormsApp1
         {
             byte[] cbyte = new byte[21];
             byte[] tmp = Encoding.Default.GetBytes(Card_Name);
-            Array.Copy(tmp, 0, cbyte, 0, 21);
+            Array.Copy(tmp, 0, cbyte, 0, tmp.Length);
             Message GCmsg = new Message();
             GCmsg.Body = new BodyAlertAction()
             {
@@ -249,7 +249,7 @@ namespace WindowsFormsApp1
         {
             byte[] cbyte = new byte[21];
             byte[] tmp = Encoding.Default.GetBytes(Card_Name);
-            Array.Copy(tmp, 0, cbyte, 0, 21);
+            Array.Copy(tmp, 0, cbyte, 0, tmp.Length);
             Message SCmsg = new Message();
             SCmsg.Body = new BodyAlertAction()
             {

@@ -67,11 +67,11 @@ namespace WindowsFormsApp1
             groupBox10.Text = "My Action / Buy";
             button1.Font = font;
 
-            groupBox1.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\1.png");
-            groupBox3.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\Hand_Background.png");
-            groupBox4.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\Log.png");
-            groupBox5.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\BonoBono.png");
-            groupBox10.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\1.png");
+            //groupBox1.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\1.png");
+            //groupBox3.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\Hand_Background.png");
+            //groupBox4.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\Log.png");
+            //groupBox5.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\BonoBono.png");
+            //groupBox10.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\1.png");
             //pictureBox23.Load(Directory.GetCurrentDirectory() + "\\Diamonds.gif");
            
             label4.Parent = pictureBox123;
@@ -656,11 +656,11 @@ namespace WindowsFormsApp1
             }
             else if (cardaction == "m")
             {
-                make = Global.UserID + "(이)가" + cardname + "카드 구입.";
+                make = Global.UserID + "(이)가 " + cardname + " 카드 구입.";
             }
             else if (cardaction == "h") 
             { 
-                make = Global.UserID + "(이)가" + cardname + "카드로 방어.";
+                make = Global.UserID + "(이)가 " + cardname + " 카드로 방어.";
             }
 
             Log_Handle(make);
@@ -738,7 +738,6 @@ namespace WindowsFormsApp1
 
                             //상대가 먹었음 -> 시장의 카드를 줄임
                             case 3:
-                                setLogBox(Card_Name);
                                 Label[] Ptmp = new Label[CSAmt.Length + marketAmt.Length];
                                 Card[] Ctmp = new Card[market.MarketPile.Count + market.MoneyPile.Count + market.estatePile.Count];
                                 //Label 및 Ctmp 정의
@@ -763,11 +762,15 @@ namespace WindowsFormsApp1
                                 {
                                     Ctmp[Ci++] = C;
                                 }
-
                                 //돌면서 찾고 인덱스 이용해서 숫자감소 및 UI변경
                                 for (int i = 0; i < Ctmp.Length; i++)
                                 {
-                                    if (Ctmp[i].Name.Equals(Card_Name))
+                                    bool strMatch = true;
+                                    for (int j = 0; j < Ctmp[i].Name.Length; j++)
+                                    {
+                                        strMatch = strMatch && (Ctmp[i].Name[j] == Card_Name[j]);
+                                    }
+                                    if (strMatch)
                                     {
                                         Ctmp[i].amount--;
                                         Ptmp[i].Text = Ctmp[i].amount.ToString();
