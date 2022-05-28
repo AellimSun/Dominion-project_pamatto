@@ -72,8 +72,7 @@ namespace WindowsFormsApp1
             //groupBox4.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\Log.png");
             //groupBox5.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\BonoBono.png");
             //groupBox10.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\1.png");
-            //pictureBox23.Load(Directory.GetCurrentDirectory() + "\\Diamonds.gif");
-           
+
             label4.Parent = pictureBox123;
             label4.Location = new Point(1, 1);
             label7.Parent = pictureBox124;
@@ -147,13 +146,22 @@ namespace WindowsFormsApp1
             List<Card> moneyList = market.MoneyPile;
             List<Card> estateList = market.estatePile;
 
-            pictureBox12.Load(Directory.GetCurrentDirectory() + "\\copper.png");
-            pictureBox11.Load(Directory.GetCurrentDirectory() + "\\silver.png");
-            pictureBox16.Load(Directory.GetCurrentDirectory() + "\\gold.png");
-            pictureBox14.Load(Directory.GetCurrentDirectory() + "\\estate.png");
-            pictureBox13.Load(Directory.GetCurrentDirectory() + "\\duchy.png");
-            pictureBox15.Load(Directory.GetCurrentDirectory() + "\\province.png");
-            pictureBox17.Load(Directory.GetCurrentDirectory() + "\\curse.png");
+            //pictureBox12.Load(Directory.GetCurrentDirectory() + "\\copper.png");
+            //pictureBox11.Load(Directory.GetCurrentDirectory() + "\\silver.png");
+            //pictureBox16.Load(Directory.GetCurrentDirectory() + "\\gold.png");
+            //pictureBox14.Load(Directory.GetCurrentDirectory() + "\\estate.png");
+            //pictureBox13.Load(Directory.GetCurrentDirectory() + "\\duchy.png");
+            //pictureBox15.Load(Directory.GetCurrentDirectory() + "\\province.png");
+            //pictureBox17.Load(Directory.GetCurrentDirectory() + "\\curse.png");
+
+            pictureBox12.Image = new Bitmap(Directory.GetCurrentDirectory() + "\\copper.png");
+            pictureBox11.Image = new Bitmap(Directory.GetCurrentDirectory() + "\\silver.png");
+            pictureBox16.Image = new Bitmap(Directory.GetCurrentDirectory() + "\\gold.png");
+            pictureBox14.Image = new Bitmap(Directory.GetCurrentDirectory() + "\\estate.png");
+            pictureBox13.Image = new Bitmap(Directory.GetCurrentDirectory() + "\\duchy.png");
+            pictureBox15.Image = new Bitmap(Directory.GetCurrentDirectory() + "\\province.png");
+            pictureBox17.Image = new Bitmap(Directory.GetCurrentDirectory() + "\\curse.png");
+
 
             CSamount1.Text = moneyList[0].amount.ToString();
             CSamount2.Text = moneyList[1].amount.ToString();
@@ -218,7 +226,8 @@ namespace WindowsFormsApp1
 
             for (int i = 0; i < handList.Count; i++)
             {
-                lower[i].Load(Directory.GetCurrentDirectory() + "\\" + handList[i].Name + ".png");
+                //lower[i].Load(Directory.GetCurrentDirectory() + "\\" + handList[i].Name + ".png");
+                lower[i].Image = new Bitmap(Directory.GetCurrentDirectory() + "\\" + handList[i].Name + ".png");
                 lower[i].Visible = true;
                 lower[i].Enabled = true;
             }
@@ -613,7 +622,8 @@ namespace WindowsFormsApp1
         {
             for (int i = 0; i < marketlist.Count; i++)
             {
-                marketPics[i].Load(Directory.GetCurrentDirectory() + "\\" + marketlist[i].Name + ".png");
+                //marketPics[i].Load(Directory.GetCurrentDirectory() + "\\" + marketlist[i].Name + ".png");
+                marketPics[i].Image = new Bitmap(Directory.GetCurrentDirectory() + "\\" + marketlist[i].Name + ".png");
             }
         }
         private void rightclick(PictureBox sender)

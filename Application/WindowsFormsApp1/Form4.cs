@@ -60,7 +60,8 @@ namespace WindowsFormsApp1
         private void Form4_Load(object sender, EventArgs e)
         {
             f5.Show();
-            pictureBox1.Load(Directory.GetCurrentDirectory() + "\\witch.png");
+            //pictureBox1.Load(Directory.GetCurrentDirectory() + "\\witch.png");
+            pictureBox1.Image = new Bitmap(Directory.GetCurrentDirectory() + "\\witch.png");
         }
     }
 }

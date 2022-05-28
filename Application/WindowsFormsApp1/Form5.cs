@@ -21,7 +21,8 @@ namespace WindowsFormsApp1
 
         private void Form5_Load(object sender, EventArgs e)
         {
-            pictureBox1.Load(Directory.GetCurrentDirectory() + ("\\effect.gif"));
+            //pictureBox1.Load(Directory.GetCurrentDirectory() + ("\\effect.gif"));
+            pictureBox1.Image = new Bitmap(Directory.GetCurrentDirectory() + ("\\effect.gif"));
         }
     }
 }
