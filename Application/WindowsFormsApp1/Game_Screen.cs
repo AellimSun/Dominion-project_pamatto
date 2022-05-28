@@ -219,7 +219,7 @@ namespace WindowsFormsApp1
 
             for (int i = 0; i < lower.Length; i++)
             {
-                lower[i].Image = null;
+                lower[i].Image.Dispose();
                 lower[i].Visible = false;
                 lower[i].Enabled = false;
             }
@@ -450,7 +450,7 @@ namespace WindowsFormsApp1
             //winform 디자인 어쩌구저쩌구 싹다 밀어버리기
             foreach (PictureBox item in lower)
             {
-                item.Image = null;
+                item.Image.Dispose();
             }
 
             //핸드 덱 -> 무덤 덱으로 보내기
