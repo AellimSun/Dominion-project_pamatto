@@ -114,7 +114,7 @@ namespace DTL
         {
             CARD = new byte[21];
             ACTION = BitConverter.ToInt32(bytes, 0);
-            Array.Copy(bytes, 4, CARD, 0, 4);
+            Array.Copy(bytes, 4, CARD, 0, 21);
         }
         public byte[] GetBytes()
         {
