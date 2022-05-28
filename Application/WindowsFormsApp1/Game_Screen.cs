@@ -317,12 +317,21 @@ namespace WindowsFormsApp1
 
         public bool pictureBox_SetImg(int idx)
         {
-            PictureBox obj = upper[idx];
+            int idx2 = 100;
+            PictureBox[] obj = upper;
             PictureBox sbj = lower[idx];
 
-            obj.Enabled = true;
+            for (int i = 0; i < obj.Count(); i++)
+            {
+                if (obj[i].Image == null)
+                {
+                    idx2 = i;
+                    break;
+                }
+            }
+            obj[idx2].Enabled = true;
             sbj.Enabled = true;
-            obj.Visible = true;
+            obj[idx2].Visible = true;
             sbj.Visible = true;
 
             if (sbj.Image != null)
