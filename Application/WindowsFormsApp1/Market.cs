@@ -89,7 +89,7 @@ namespace WindowsFormsApp1
         {
             string name = card.Name;
             int amount = card.amount;
-            card.minusAmount(1);
+            card.amount -= 1;
         }
         public void ShuffleDraw()
         {
