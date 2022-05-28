@@ -28,6 +28,7 @@ namespace WindowsFormsApp1
         private void Form5_FormClosed(object sender, FormClosedEventArgs e)
         {
             pictureBox1.Image.Dispose();
+            pictureBox1.Image = null;
         }
     }
 }

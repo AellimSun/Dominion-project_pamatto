@@ -219,7 +219,8 @@ namespace WindowsFormsApp1
 
             for (int i = 0; i < lower.Length; i++)
             {
-                lower[i].Image.Dispose();
+                //초기 세팅에는 Dispose가 아니라 null이 맞음
+                lower[i].Image = null;
                 lower[i].Visible = false;
                 lower[i].Enabled = false;
             }
@@ -337,7 +338,8 @@ namespace WindowsFormsApp1
             if (sbj.Image != null)
             {
                 obj.Image = sbj.Image;
-                sbj.Image.Dispose();
+                sbj.Image = null;
+                //sbj.Image.Dispose();
 
                 return true;
             }
@@ -425,7 +427,8 @@ namespace WindowsFormsApp1
 
                     foreach (PictureBox item in upper)
                     {
-                        item.Image.Dispose();
+                        //item.Image.Dispose();
+                        item.Image = null;
                         item.Visible = false;
                         item.Enabled = false;
                     }
@@ -451,6 +454,7 @@ namespace WindowsFormsApp1
             foreach (PictureBox item in lower)
             {
                 item.Image.Dispose();
+                item.Image = null;
             }
 
             //핸드 덱 -> 무덤 덱으로 보내기
@@ -561,7 +565,8 @@ namespace WindowsFormsApp1
                 else if (clickMode.Equals("grave"))
                 {
                     selected.Add(i);
-                    lower[i].Image.Dispose();
+                    //lower[i].Image.Dispose();
+                    lower[i].Image = null;
                     lower[i].Visible = false;
                     lower[i].Enabled = false;
                 }
