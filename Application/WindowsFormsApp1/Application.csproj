@@ -166,6 +166,29 @@
     <None Include="Resources\1.png" />
     <None Include="Resources\GameScreen_Backgroud.png" />
     <None Include="bin\Debug\Diamonds.gif" />
+    <Content Include="bin\Debug\1.png" />
+    <Content Include="bin\Debug\BonoBono.png" />
+    <Content Include="bin\Debug\cellar.png" />
+    <Content Include="bin\Debug\copper.png" />
+    <Content Include="bin\Debug\Crow.gif" />
+    <Content Include="bin\Debug\curse.png" />
+    <Content Include="bin\Debug\duchy.png" />
+    <Content Include="bin\Debug\estate.png" />
+    <Content Include="bin\Debug\gold.png" />
+    <Content Include="bin\Debug\Hand_Background.png" />
+    <Content Include="bin\Debug\Log.png" />
+    <Content Include="bin\Debug\market,action,buy_Background.png" />
+    <Content Include="bin\Debug\market.png" />
+    <Content Include="bin\Debug\merchant.png" />
+    <Content Include="bin\Debug\mine.png" />
+    <Content Include="bin\Debug\moat.png" />
+    <Content Include="bin\Debug\province.png" />
+    <Content Include="bin\Debug\remodel.png" />
+    <Content Include="bin\Debug\silver.png" />
+    <Content Include="bin\Debug\smithy.png" />
+    <Content Include="bin\Debug\village.png" />
+    <Content Include="bin\Debug\witch.png" />
+    <Content Include="bin\Debug\workshop.png" />
     <Content Include="정리.txt" />
   </ItemGroup>
   <ItemGroup />
