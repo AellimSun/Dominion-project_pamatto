@@ -137,6 +137,10 @@ namespace WindowsFormsApp1
                 gameTable.Coin += card.add_Money;
             if (card.add_Draw != 0)
                 deck.DrawToHand(card.add_Draw, form);
+            if (card.attack)
+            {
+                //어택내용을 서버로 넘기나?
+            }
 
             //예외사항이 있는 카드들
 
@@ -203,7 +207,7 @@ namespace WindowsFormsApp1
                 form.clickMode = "market";
                 if (gameTable.ActionNumber == 0)
                 {
-                    form.turn_button1("Buy End");
+                    form.turn_button1("Action End");
                 }
                 else
                 {
