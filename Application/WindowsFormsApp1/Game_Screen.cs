@@ -36,7 +36,7 @@ namespace WindowsFormsApp1
         public PictureBox[] getLower() { return lower; }
         private void Form1_Load(object sender, EventArgs e)
         {
-            //Listen_Method();
+            Listen_Method();
 
             PrivateFontCollection privateFonts = new PrivateFontCollection();
 
@@ -67,12 +67,11 @@ namespace WindowsFormsApp1
             groupBox10.Text = "My Action / Buy";
             button1.Font = font;
 
-            //groupBox1.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\1.png");
-            //groupBox3.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\Hand_Background.png");
-            //groupBox4.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\Log.png");
-            //groupBox5.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\BonoBono.png");
-            //groupBox10.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\1.png");
-            //pictureBox23.Load(Directory.GetCurrentDirectory() + "\\Diamonds.gif");
+            groupBox1.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\market,action,buy_Background.png");
+            groupBox3.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\Hand_Background.png");
+            groupBox4.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\Log.png");
+            groupBox5.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\BonoBono.png");
+            groupBox10.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\market,action,buy_Background.png");
            
             label4.Parent = pictureBox123;
             label4.Location = new Point(1, 1);
@@ -706,6 +705,13 @@ namespace WindowsFormsApp1
 
                             //상대가 공격했음
                             case 2:
+                                if(true)
+                                {
+                                    //마녀 이펙트 호출
+                                    Form4 f4 = new Form4();
+                                    f4.Show();
+                                }
+                               
                                 //해자가 있냐?
                                 bool check_moat = false;
 
