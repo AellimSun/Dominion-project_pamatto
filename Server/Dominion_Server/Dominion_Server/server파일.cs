@@ -103,7 +103,7 @@ namespace Dominion_Server
             MessageUtil.Send(tmp.stream, I_Q);
 
 
-            await Task.Run(async () =>
+            await Task.Run(() =>
             {
                 Client me = clients[clients.Count - 1];
                 //10초안에 판단해서 클라이언트가 서버에게 메세지를 넘겨줘야함 (클라이언트 측에서 구현)
@@ -189,7 +189,7 @@ namespace Dominion_Server
 
             Console.WriteLine("[FULL] HostNumber = {0}", this_host_number);
 
-            await Task.Run(async () =>
+            await Task.Run(() =>
             {
                 Message F_Q = new Message();
                 F_Q.Body = null;
@@ -265,6 +265,19 @@ namespace Dominion_Server
                 }
             });
         }
+
+        static bool Matching_Character(string CardName, string Name)
+        {
+            bool strMatch = true;
+
+            for (int i = 0; i < Name.Length; i++)
+            {
+                strMatch = strMatch && (CardName[i] == Name[i]);
+            }
+
+            return strMatch;
+        }
+
         static public void Play_Game(Client[] full_list)
         {
             /*
@@ -301,7 +314,6 @@ namespace Dominion_Server
 
                     switch (R_Msg.Header.MSGTYPE)
                     {
-
                         case CONSTANTS.LOG_SEND:
                             {
                                 foreach (Client c in full_list)
@@ -315,51 +327,109 @@ namespace Dominion_Server
                         case CONSTANTS.ALERT_ACTION:
                             {
                                 Console.WriteLine(Encoding.Default.GetString((R_Msg.Body as BodyAlertAction).CARD));
-                                //공격!예외처리
-                                for (int i = 0; i < 4; i++)
-                                {
-                                    if (next_player != i)
-                                    {
-                                        MessageUtil.Send(full_list[i].stream, R_Msg);
-                                        if ((R_Msg.Body as BodyAlertAction).ACTION == CONSTANTS.ATTACK)
-                                        {
-                                            string CardName = Encoding.Default.GetString((R_Msg.Body as BodyAlertAction).CARD);
-                                            Message recv_res = MessageUtil.Receive(full_list[i].stream);
-                                            switch (CardName)
-                                            {
-                                                case "witch":
-                                                    if (recv_res.Header.MSGTYPE == CONSTANTS.ALERT_ACTION)
-                                                    {
-                                                        //해자가 없다면 저주 카드 획득 메시지를 날리므로
-                                                        for (int j = 0; j < 4; j++)
-                                                        {
-                                                            //다른 플레이어에게 전달
-                                                            if (i != j)
-                                                                MessageUtil.Send(full_list[j].stream, recv_res);
-                                                        }
-                                                        //이후 저주 카드 획득 로그 전달
-                                                        recv_res = MessageUtil.Receive(full_list[i].stream);
-                                                        if (recv_res.Header.MSGTYPE == CONSTANTS.LOG_SEND)
-                                                        {
-                                                            foreach (Client c in full_list)
-                                                            {
-                                                                MessageUtil.Send(c.stream, recv_res);
-                                                            }
-                                                        }
 
-                                                    }
-                                                    else
+                                switch ((R_Msg.Body as BodyAlertAction).ACTION)
+                                {
+                                    case CONSTANTS.GET_CARD:
+                                    case CONSTANTS.SCRAP_CARD:
+                                        {
+                                            for (int i = 0; i < 4; i++)
+                                            {
+                                                if (next_player != i)
+                                                {
+                                                    MessageUtil.Send(full_list[i].stream, R_Msg);
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    case CONSTANTS.ATTACK:
+                                        for (int i = 0; i < 4; i++)
+                                        {
+                                            if (next_player != i)
+                                            {
+                                                MessageUtil.Send(full_list[i].stream, R_Msg);
+                                            }
+                                        }
+
+                                        for (int i = 0; i < 4; i++)
+                                        {
+                                            if (next_player == i)
+                                            {
+                                                continue;
+                                            }
+
+                                            string CardName = Encoding.Default.GetString((R_Msg.Body as BodyAlertAction).CARD);
+                                            Console.WriteLine(CardName);
+                                            Message recv_res = MessageUtil.Receive(full_list[i].stream);
+                                            Console.WriteLine("1");     //테스트용
+                                            Console.WriteLine(CardName);
+
+                                            if (Matching_Character(CardName, "witch"))
+                                            {
+                                                Console.WriteLine("2"); //테스트용
+
+                                                string Log = "";
+                                                if (recv_res.Header.MSGTYPE == CONSTANTS.LOG_SEND)
+                                                {
+                                                    Console.WriteLine("3"); //테스트용
+                                                    //해자가 없다면 저주 카드 획득 로그 전달
+
+                                                    Log = Encoding.Default.GetString((recv_res.Body as BodyLogSend).LOG);
+                                                    Console.WriteLine(Log + "으아아악!");   //테스트용
+                                                    recv_res = MessageUtil.Receive(full_list[i].stream);
+                                                    if (recv_res.Header.MSGTYPE == CONSTANTS.LOG_SEND)
                                                     {
-                                                        //해자가 있다면 획득메시지 없이 로그만 전달
                                                         foreach (Client c in full_list)
                                                         {
                                                             MessageUtil.Send(c.stream, recv_res);
                                                         }
                                                     }
-                                                    break;
+                                                }
+                                                Console.WriteLine(Log); //테스트용
+
+
+                                                //보낸 로그의 내용이 저주를 먹었다는 내용이라면 
+                                                if (Log.Contains("curse"))
+                                                {
+                                                    Console.WriteLine("4"); //테스트용
+
+                                                    //클라이언트 측에서 저주 먹음 alert를 보냄
+                                                    Message recv_alert = MessageUtil.Receive(full_list[i].stream);
+                                                    Console.WriteLine(Encoding.Default.GetString((recv_alert.Body as BodyAlertAction).CARD) + "<- 이거 먹었데 ㅋㅋ");
+
+                                                    if (recv_alert.Header.MSGTYPE == CONSTANTS.ALERT_ACTION)
+                                                    {
+                                                        Console.WriteLine("5"); //테스트용
+                                                        for (int j = 0; j < 4; j++)
+                                                        {
+                                                            //다른 플레이어에게 전달
+                                                            if (i != j)
+                                                            {
+                                                                MessageUtil.Send(full_list[j].stream, recv_res);
+                                                                Console.WriteLine(j.ToString()
+                                                                    + "유저에게 Get_Card : "
+                                                                    + (recv_res.Body as BodyAlertAction).CARD);//테스트용
+
+                                                            }
+
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
-                                    }
+
+                                        //공격자 클라이언트에게 Listen_Method를 쓰레드를 종료하라는 메세지 전송
+                                        Message exc_msg = new Message();
+                                        exc_msg.Body = null;
+                                        exc_msg.Header = new Header()
+                                        {
+                                            HASBODY = CONSTANTS.NO_BODY,
+                                            MSGTYPE = CONSTANTS.EXCAPE_LISTEN_METHOD,
+                                            BODYLEN = 0
+                                        };
+                                        MessageUtil.Send(full_list[next_player].stream, exc_msg);
+
+                                        break;
                                 }
                             }
                             break;

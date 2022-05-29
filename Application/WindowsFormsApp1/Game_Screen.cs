@@ -642,7 +642,7 @@ namespace WindowsFormsApp1
 
         public void Log_Handle(string make)
         {
-            if (!Global.ID_List.Contains(""))
+            /*if (!Global.ID_List.Contains(""))
             {
                 Global.transHandler.Log_Send(make);
                 make = Global.transHandler.Log_Receive();
@@ -652,7 +652,13 @@ namespace WindowsFormsApp1
             {
                 setLogBox(make);
                 return;
-            }
+            }*/
+
+            Global.transHandler.Log_Send(make);
+            //테스트용
+            //list_log.Items.Add("");
+            //list_log.Items.Add(make+"아아ㅏㅇ");
+            setLogBox(make);
         }
 
         public void MakeString(string cardname, string cardaction)
@@ -665,8 +671,12 @@ namespace WindowsFormsApp1
             }
             else if (cardaction == "m")
             {
-                if(cardname.Equals("curse"))
+                if (Matching_Character(cardname, "curse"))
                 {
+                    //테스트용
+                    //list_log.Items.Add(" ");
+                    //list_log.Items.Add("********************");
+
                     make = Global.UserID + "(이)가 " + cardname + " 카드 먹음.";
                 }
                 else
@@ -674,8 +684,8 @@ namespace WindowsFormsApp1
                     make = Global.UserID + "(이)가 " + cardname + " 카드 구입.";
                 }
             }
-            else if (cardaction == "h") 
-            { 
+            else if (cardaction == "h")
+            {
                 make = Global.UserID + "(이)가 " + cardname + " 카드로 방어.";
             }
 
@@ -739,7 +749,7 @@ namespace WindowsFormsApp1
                         {
                             //상대가 공격했음
                             case 2:
-                                //공격 카드가 마녀일 경우
+                                /*//공격 카드가 마녀일 경우
                                 if (Matching_Character(Card_Name, "witch"))
                                 {
                                     //마녀이펙트 출력
@@ -748,7 +758,9 @@ namespace WindowsFormsApp1
                                     {
                                         f4.Show();
                                     });
-                                }
+                                }*/
+
+                                //여기 위에 이펙트가 문제 있을듯?
 
                                 //해자가 있냐?
                                 bool check_moat = false;
@@ -764,11 +776,15 @@ namespace WindowsFormsApp1
 
                                 if (!check_moat)
                                 {
+                                    //저주 먹었음 Log 전송
+                                    MakeString("curse", "m");
+
+                                    list_log.Items.Add("curse Alert b" + Global.UserID);    //테스트용
+
                                     //저주 먹음 Alert 보내기
                                     Global.transHandler.Get_Card("curse");
 
-                                    //저주 먹었음 Log 전송
-                                    MakeString("curse", "m");
+                                    list_log.Items.Add("curse Alert a" + Global.UserID);    //테스트용
 
                                     //무덤덱으로 저주 보내버리기
                                     Card curse = game.gainCurse();
@@ -778,6 +794,12 @@ namespace WindowsFormsApp1
                                 }
                                 else
                                 {
+                                    //테스트용
+                                    //list_log.Items.Add("=============");
+                                    //list_log.Items.Add("해자");
+                                    //list_log.Items.Add("=============");
+
+
                                     //해자가 있다고 로그 전달
                                     MakeString("moat", "h");
                                 }

@@ -127,15 +127,17 @@ namespace WindowsFormsApp1
             //HandDeck[number] = null;      //주석모임
             if (mode == "u")
             {
-                if((HandDeck[number] as ActionCard) != null)
+                //log 먼저 전송
+                g.MakeString(HandDeck[number].Name, mode);  //매개변수 추가
+
+                if ((HandDeck[number] as ActionCard) != null)
                 {
                     if(((ActionCard)HandDeck[number]).attack)
                     {
                         Global.transHandler.Attack(HandDeck[number].Name);
-                        //gs.Listen_Method();   //여기서 쓰레드를 생성하는게 맞는지 의문....
+                        gs.Listen_Method();   //여기서 쓰레드를 생성하는게 맞는지 의문....
                     }
                 }
-                g.MakeString(HandDeck[number].Name, mode);  //매개변수 추가
             }
             else if (mode == "a")
             {
