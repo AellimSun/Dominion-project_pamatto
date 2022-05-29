@@ -427,6 +427,8 @@ namespace WindowsFormsApp1
                         item.Visible = false;
                         item.Enabled = false;
                     }
+                    //먼지는 모르겠지만 주석에 턴 종료할 때 꼭 false로 바꿔달라길래 바꿔놓음
+                    game.merchantUsed = false;
 
                     Listen_Method();
                     game.gameTable.initGameTable();
@@ -663,7 +665,14 @@ namespace WindowsFormsApp1
             }
             else if (cardaction == "m")
             {
-                make = Global.UserID + "(이)가 " + cardname + " 카드 구입.";
+                if(cardname.Equals("curse"))
+                {
+                    make = Global.UserID + "(이)가 " + cardname + " 카드 먹음.";
+                }
+                else
+                {
+                    make = Global.UserID + "(이)가 " + cardname + " 카드 구입.";
+                }
             }
             else if (cardaction == "h") 
             { 
@@ -689,29 +698,36 @@ namespace WindowsFormsApp1
 
         }
 
-        private bool Matching_Character(string subject, string target)
+        private bool Matching_Character(string CardName, string Name)
         {
             bool strMatch = true;
 
-            for (int i = 0; i < subject.Length; i++)
+            for (int i = 0; i < Name.Length; i++)
             {
-                strMatch = strMatch && (subject[i] == target[i]);
+                strMatch = strMatch && (CardName[i] == Name[i]);
             }
 
             return strMatch;
         }
-        async private void Listen_Method()
+        async public void Listen_Method()
         {
             await Task.Run(async() =>
             {
                 string Card_Name = null;
                 string Log = null;
+                bool esc_thread = false;
 
                 while (true)
                 {
                     int flag = Global.transHandler.Game_Listener(ref Card_Name, ref Log);
 
-                    if (flag == 1)
+                    //서버가 Listen_Method 쓰레드를 소멸해라는 메세지를 보냄
+                    if (flag == 0)
+                    {
+                        break;
+                    }
+                    //서버가 클라이언트에게 턴 시작 메세지를 보냄
+                    else if (flag == 1)
                     {
                         button1.Enabled = true;
                         setLogBox("Your Turn!");
@@ -721,7 +737,6 @@ namespace WindowsFormsApp1
                     {
                         switch (flag)
                         {
-
                             //상대가 공격했음
                             case 2:
                                 //공격 카드가 마녀일 경우
@@ -749,7 +764,10 @@ namespace WindowsFormsApp1
 
                                 if (!check_moat)
                                 {
-                                    //저주 먹었음을 서버에 전송
+                                    //저주 먹음 Alert 보내기
+                                    Global.transHandler.Get_Card("curse");
+
+                                    //저주 먹었음 Log 전송
                                     MakeString("curse", "m");
 
                                     //무덤덱으로 저주 보내버리기
@@ -824,9 +842,14 @@ namespace WindowsFormsApp1
 
                                 Go_to_Main_Form();
 
+                                esc_thread = true;
                                 break;
                             default:
                                 break;
+                        }
+                        if (esc_thread)
+                        {
+                            break;
                         }
                     }
                 }

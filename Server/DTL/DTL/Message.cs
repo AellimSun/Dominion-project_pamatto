@@ -32,6 +32,7 @@ namespace DTL
         public const int SCORE_REQUEST = 0x13;             //x
         public const int SCORE_SEND = 0x14;                //SCORE(int)
         public const int TOTAL_SCORE_SEND = 0x15;          //SCORE1(int), SCORE2(int), SCORE3(int), SCORE4(int)
+        public const int EXCAPE_LISTEN_METHOD = 0x16;      //x
 
         public const int GET_CARD = 0x01;
         public const int SCRAP_CARD = 0x02;
