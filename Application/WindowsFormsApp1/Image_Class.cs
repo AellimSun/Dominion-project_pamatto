@@ -32,6 +32,7 @@ namespace WindowsFormsApp1
         public Bitmap HandBackgroundpng { get; }
         public Bitmap Logpng { get; }
         public Bitmap BonoBonopng { get; }
+        public Bitmap Cow_gif { get; }
 
         public Image_Class()
         {
@@ -57,6 +58,7 @@ namespace WindowsFormsApp1
             HandBackgroundpng = new Bitmap(Directory.GetCurrentDirectory() + "\\Hand_Background.png");
             Logpng = new Bitmap(Directory.GetCurrentDirectory() + "\\Log.png");
             BonoBonopng = new Bitmap(Directory.GetCurrentDirectory() + "\\BonoBono.png");
+            Cow_gif = new Bitmap(Directory.GetCurrentDirectory() + ("\\Crow.gif"));
         }
         public Bitmap getBitmap(string name)
         {
@@ -106,6 +108,8 @@ namespace WindowsFormsApp1
                     return Logpng;
                 case "BonoBonopng":
                     return BonoBonopng;
+                case "Cow_gif":
+                    return Cow_gif;
                 default:
                     return null;
             }

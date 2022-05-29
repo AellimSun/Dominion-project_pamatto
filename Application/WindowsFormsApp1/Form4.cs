@@ -24,7 +24,7 @@ namespace WindowsFormsApp1
         {
             double[] opacity = new double[] { 0.05d, 0.1d, 0.15d, 0.2d, 0.25d, 0.3d, 0.4d, 0.5d, 0.7d, 0.8d, 0.9d, 1.0d };
             int cnt = 0;
-            Timer tm = new Timer();
+            System.Windows.Forms.Timer tm = new System.Windows.Forms.Timer();
             {
                 fm.RightToLeftLayout = false;
                 fm.Opacity = 0d;
@@ -64,7 +64,7 @@ namespace WindowsFormsApp1
             pictureBox1.Image = images.witch;
         }
 
-        private void Form4_FormClosed(object sender, FormClosedEventArgs e)
+        private void Form4_FormClosing(object sender, FormClosingEventArgs e)
         {
             pictureBox1.Image = null;
         }

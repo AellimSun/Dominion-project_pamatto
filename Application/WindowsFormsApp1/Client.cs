@@ -204,7 +204,6 @@ namespace WindowsFormsApp1
                 default:
                     return -1;
             }
-
         }
 
         public void Attack(string Card_Name)

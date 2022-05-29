@@ -27,6 +27,8 @@ namespace WindowsFormsApp1
             //HanDeck 리스트를 모두 삭제
             HandDeck.Clear();
         }
+
+
         public Deck(List<Card> estatelist, List<Card> moneylist, Game_Screen g)
         {
             HandDeck = new List<Card>();
@@ -69,6 +71,7 @@ namespace WindowsFormsApp1
             Shuffle(DrawDeck);
             DrawToHand(5, g);
         }
+
         public void Shuffle(List<Card> Obj)
         {
             List<Card> NewCards = new List<Card>();
@@ -80,6 +83,7 @@ namespace WindowsFormsApp1
             }
             DrawDeck = NewCards;
         }
+
         public bool ShowDrawDeck()                 //검증필요. 옵저버 패턴은 도저히 모르겠음.
         {
 
@@ -88,6 +92,7 @@ namespace WindowsFormsApp1
             else
                 return true;
         }
+
         public bool ShowGraveDeck()
         { 
             if (GraveDeck.Count == 0)
@@ -96,6 +101,7 @@ namespace WindowsFormsApp1
                 return true;
 
         }
+
         public void DrawToHand(int i, Game_Screen g)
         {
             //g.MakeString(i);
@@ -111,6 +117,7 @@ namespace WindowsFormsApp1
             g.setHandDeckImg(this);
 
         }
+
         public void Clear()
         {
             //HandToGrave
@@ -120,13 +127,13 @@ namespace WindowsFormsApp1
                 HandDeck.RemoveAt(0);
             }
         }
+
         public void GoToGrave(int number, string mode, Game_Screen g)
         {
             GraveDeck.Add(HandDeck[number]);
             //HandDeck[number] = null;      //주석모임
             if (mode == "u")
             {
-                //log 먼저 전송
                 g.MakeString(HandDeck[number].Name, mode);  //매개변수 추가
 
                 if ((HandDeck[number] as ActionCard) != null)
@@ -143,8 +150,8 @@ namespace WindowsFormsApp1
                 g.MakeString();
             }
             HandDeck.RemoveAt(number);
-            
         }
+
         public void BuyCard(Card card)
         {
             GraveDeck.Add(card);

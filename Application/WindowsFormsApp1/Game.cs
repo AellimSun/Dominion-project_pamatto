@@ -9,7 +9,6 @@ namespace WindowsFormsApp1
 {
     class Game
     {
-        //int score = 0;
         int silverUsed = 0;             //상인카드를 위해 은 카드를 사용한적 있는지 체크하는 변수
         public bool merchantUsed = false;      //이번턴에 상인카드를 사용했었는지 체크하는 변수 !!!!!!!!!!턴 끝날때 꼭 false로 다시 바꿔줄것!!!!!!!!!!
         Game_Screen form;
@@ -17,6 +16,7 @@ namespace WindowsFormsApp1
         public List<Card> cardList;
         public Deck deck;
         public GameTable gameTable;
+
 
         public Game(Game_Screen form)
         {
@@ -152,13 +152,11 @@ namespace WindowsFormsApp1
                 form.clickMode = "actionEffectMode";
                 form.turn_button1("Effect End");
                 gameTable.Coin = 4;
-            }
-            else if (card.Name.Equals("remodel"))
+            }else if (card.Name.Equals("remodel"))
             {
                 form.clickMode = "trash";
                 form.turn_button1("Scrap End");
-            }
-            else if (card.Name.Equals("mine"))
+            }else if (card.Name.Equals("mine"))
             {
                 form.clickMode = "moneyTrash";
                 form.turn_button1("Scrap End");
@@ -198,7 +196,7 @@ namespace WindowsFormsApp1
                 form.clickMode = "market";
                 if (gameTable.ActionNumber == 0)
                 {
-                    form.turn_button1("Action End");
+                    form.turn_button1("Buy End");
                 }
                 else
                 {
@@ -232,7 +230,6 @@ namespace WindowsFormsApp1
                 form.pictureBoxTF();
                 form.changeABC(gameTable);
 
-                //카드 먹음 log 전송
                 form.MakeString(list[i].Name, "m");
             }
 

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Drawing;
 
@@ -34,7 +33,6 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
         }
-
 
         public PictureBox[] getLower() { return lower; }
         private void Form1_Load(object sender, EventArgs e)
@@ -168,9 +166,8 @@ namespace WindowsFormsApp1
 
             pictureBoxTF();
             button1.Text = "Action End";
-
-            
         }
+
         /*public void ShowDeck(Deck deck)                 //검증필요. 옵저버 패턴은 도저히 모르겠음.
         {
 
@@ -196,6 +193,7 @@ namespace WindowsFormsApp1
             label4.Text = deck.DrawDeck.Count.ToString();
             label7.Text = deck.GraveDeck.Count.ToString();
         }
+
         public void changeABC(GameTable gameTable)
         {
             label1.Text = "Action : " + gameTable.ActionNumber;
@@ -429,6 +427,7 @@ namespace WindowsFormsApp1
                         item.Visible = false;
                         item.Enabled = false;
                     }
+
                     //먼지는 모르겠지만 주석에 턴 종료할 때 꼭 false로 바꿔달라길래 바꿔놓음
                     game.merchantUsed = false;
 
@@ -449,9 +448,10 @@ namespace WindowsFormsApp1
         {
             int myScore = 0;
             //행위 덱은 클릭 즉시 무덤덱으로 보내지므로, AB영역 이미지를 NULL전환만 하면 됨
+            //winform 디자인 어쩌구저쩌구 싹다 밀어버리기
             foreach (PictureBox item in lower)
             {
-                item.Image = null;
+                item.Image.Dispose();
             }
 
             //핸드 덱 -> 무덤 덱으로 보내기
@@ -562,7 +562,7 @@ namespace WindowsFormsApp1
                 else if (clickMode.Equals("grave"))
                 {
                     selected.Add(i);
-                    lower[i].Image = null;
+                    lower[i].Image.Dispose();
                     lower[i].Visible = false;
                     lower[i].Enabled = false;
                 }
@@ -623,7 +623,7 @@ namespace WindowsFormsApp1
         {
             for (int i = 0; i < marketlist.Count; i++)
             {
-                //marketPics[i].Load(Directory.GetCurrentDirectory() + "\\" + marketlist[i].Name + ".png");
+                //marketPics[i].Image = new Bitmap(Directory.GetCurrentDirectory() + "\\" + marketlist[i].Name + ".png");
                 marketPics[i].Image = images.getBitmap(marketlist[i].Name);
             }
         }
@@ -673,8 +673,8 @@ namespace WindowsFormsApp1
             {
                 make = Global.UserID + "(이)가 " + cardname + " 카드 획득.";
             }
-            else if (cardaction == "h")
-            {
+            else if (cardaction == "h") 
+            { 
                 make = Global.UserID + "(이)가 " + cardname + " 카드로 방어.";
             }
 
@@ -709,7 +709,7 @@ namespace WindowsFormsApp1
             return strMatch;
         }
 
-        async public void Listen_Method()
+        async private void Listen_Method()
         {
             await Task.Run(() =>
             {
@@ -720,7 +720,6 @@ namespace WindowsFormsApp1
                 {
                     int flag = Global.transHandler.Game_Listener(ref Card_Name, ref Log);
 
-                    //서버가 클라이언트에게 턴 시작 메세지를 보냄
                     if (flag == 1)
                     {
                         button1.Enabled = true;
@@ -731,18 +730,16 @@ namespace WindowsFormsApp1
                     {
                         switch (flag)
                         {
+
                             //상대가 공격했음
                             case 2:
-                                /*//공격 카드가 마녀일 경우
+                                
                                 if (Matching_Character(Card_Name, "witch"))
                                 {
                                     //마녀이펙트 출력
                                     Form4 f4 = new Form4();
-                                    await Task.Run(() =>
-                                    {
-                                        f4.Show();
-                                    });
-                                }*/
+                                    f4.Show();
+                                }
 
                                 //여기 위에 이펙트가 문제 있는듯?
 
@@ -761,7 +758,7 @@ namespace WindowsFormsApp1
                                 if (!check_moat)
                                 {
                                     Global.transHandler.Get_Card("curse");
-                                    //저주 먹었음 Log 전송
+                                    //저주 먹었음을 Log 전송
                                     MakeString("curse", "g");
 
                                     //무덤덱으로 저주 보내버리기
@@ -848,8 +845,8 @@ namespace WindowsFormsApp1
                     }
                 }
             });
-
         }
+
         public void Attack_Receive()
         {
             string Card_Name = null;
@@ -909,6 +906,7 @@ namespace WindowsFormsApp1
                 }
             }
         }
+
         private void Game_Screen_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.DialogResult = DialogResult.OK;
