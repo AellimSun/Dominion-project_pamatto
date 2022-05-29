@@ -28,7 +28,6 @@ namespace WindowsFormsApp1
         public Bitmap village { get; }
         public Bitmap witch { get; }
         public Bitmap workshop { get; }
-
         public Bitmap Png1 { get; }
         public Bitmap HandBackgroundpng { get; }
         public Bitmap Logpng { get; }

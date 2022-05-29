@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Drawing;
 
@@ -16,6 +17,7 @@ namespace WindowsFormsApp1
         //DB_ACCESS dB;
         Market market;
         Deck deck;
+        bool esc_thread = false;
 
         PictureBox[] upper = null;
         public PictureBox[] lower = null;
@@ -642,7 +644,7 @@ namespace WindowsFormsApp1
 
         public void Log_Handle(string make)
         {
-            /*if (!Global.ID_List.Contains(""))
+            if (!Global.ID_List.Contains(""))
             {
                 Global.transHandler.Log_Send(make);
                 make = Global.transHandler.Log_Receive();
@@ -652,13 +654,7 @@ namespace WindowsFormsApp1
             {
                 setLogBox(make);
                 return;
-            }*/
-
-            Global.transHandler.Log_Send(make);
-            //테스트용
-            //list_log.Items.Add("");
-            //list_log.Items.Add(make+"아아ㅏㅇ");
-            setLogBox(make);
+            }
         }
 
         public void MakeString(string cardname, string cardaction)
@@ -671,18 +667,11 @@ namespace WindowsFormsApp1
             }
             else if (cardaction == "m")
             {
-                if (Matching_Character(cardname, "curse"))
-                {
-                    //테스트용
-                    //list_log.Items.Add(" ");
-                    //list_log.Items.Add("********************");
-
-                    make = Global.UserID + "(이)가 " + cardname + " 카드 먹음.";
-                }
-                else
-                {
-                    make = Global.UserID + "(이)가 " + cardname + " 카드 구입.";
-                }
+                make = Global.UserID + "(이)가 " + cardname + " 카드 구입.";
+            }
+            else if (cardaction == "g")
+            {
+                make = Global.UserID + "(이)가 " + cardname + " 카드 획득.";
             }
             else if (cardaction == "h")
             {
@@ -719,25 +708,20 @@ namespace WindowsFormsApp1
 
             return strMatch;
         }
+
         async public void Listen_Method()
         {
-            await Task.Run(async() =>
+            await Task.Run(() =>
             {
                 string Card_Name = null;
                 string Log = null;
-                bool esc_thread = false;
 
                 while (true)
                 {
                     int flag = Global.transHandler.Game_Listener(ref Card_Name, ref Log);
 
-                    //서버가 Listen_Method 쓰레드를 소멸해라는 메세지를 보냄
-                    if (flag == 0)
-                    {
-                        break;
-                    }
                     //서버가 클라이언트에게 턴 시작 메세지를 보냄
-                    else if (flag == 1)
+                    if (flag == 1)
                     {
                         button1.Enabled = true;
                         setLogBox("Your Turn!");
@@ -760,7 +744,7 @@ namespace WindowsFormsApp1
                                     });
                                 }*/
 
-                                //여기 위에 이펙트가 문제 있을듯?
+                                //여기 위에 이펙트가 문제 있는듯?
 
                                 //해자가 있냐?
                                 bool check_moat = false;
@@ -776,15 +760,9 @@ namespace WindowsFormsApp1
 
                                 if (!check_moat)
                                 {
-                                    //저주 먹었음 Log 전송
-                                    MakeString("curse", "m");
-
-                                    //list_log.Items.Add("curse Alert b" + Global.UserID);    //테스트용
-
-                                    //저주 먹음 Alert 보내기
                                     Global.transHandler.Get_Card("curse");
-
-                                    //list_log.Items.Add("curse Alert a" + Global.UserID);    //테스트용
+                                    //저주 먹었음 Log 전송
+                                    MakeString("curse", "g");
 
                                     //무덤덱으로 저주 보내버리기
                                     Card curse = game.gainCurse();
@@ -794,12 +772,6 @@ namespace WindowsFormsApp1
                                 }
                                 else
                                 {
-                                    //테스트용
-                                    //list_log.Items.Add("=============");
-                                    //list_log.Items.Add("해자");
-                                    //list_log.Items.Add("=============");
-
-
                                     //해자가 있다고 로그 전달
                                     MakeString("moat", "h");
                                 }
@@ -875,12 +847,68 @@ namespace WindowsFormsApp1
                         }
                     }
                 }
-
             });
 
-            
         }
-
+        public void Attack_Receive()
+        {
+            string Card_Name = null;
+            string Log = null;
+            while (true)
+            {
+                int flag = Global.transHandler.Game_Listener(ref Card_Name, ref Log);
+                if (flag == 1)
+                {
+                    break;
+                }
+                else
+                {
+                    switch (flag)
+                    {
+                        //상대가 먹었음 -> 시장의 카드를 줄임
+                        case 3:
+                            Label[] Ptmp = new Label[CSAmt.Length];
+                            Card[] Ctmp = new Card[market.MoneyPile.Count + market.estatePile.Count];
+                            //Label 및 Ctmp 정의
+                            int Pi = 0, Ci = 0;
+                            foreach (Label P in CSAmt)
+                            {
+                                Ptmp[Pi++] = P;
+                            }
+                            foreach (Card C in market.MoneyPile)
+                            {
+                                Ctmp[Ci++] = C;
+                            }
+                            foreach (Card C in market.estatePile)
+                            {
+                                Ctmp[Ci++] = C;
+                            }
+                            //돌면서 찾고 인덱스 이용해서 숫자감소 및 UI변경
+                            for (int i = 0; i < Ctmp.Length; i++)
+                            {
+                                bool strMatch = true;
+                                for (int j = 0; j < Ctmp[i].Name.Length; j++)
+                                {
+                                    strMatch = strMatch && (Ctmp[i].Name[j] == Card_Name[j]);
+                                }
+                                if (strMatch)
+                                {
+                                    Ctmp[i].amount--;
+                                    Ptmp[i].Text = Ctmp[i].amount.ToString();
+                                    break;
+                                }
+                            }
+                            break;
+                        //상대방한테 로그 받음 -> textbox 로그 추가
+                        case 5:
+                            setLogBox(Log);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
         private void Game_Screen_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.DialogResult = DialogResult.OK;

@@ -179,8 +179,6 @@ namespace WindowsFormsApp1
             Message Alway_Listen = MessageUtil.Receive(Stream);
             switch (Alway_Listen.Header.MSGTYPE)
             {
-                case CONSTANTS.EXCAPE_LISTEN_METHOD:
-                    return 0;
                 case CONSTANTS.TURN_SEND:
                     return 1;
                 case CONSTANTS.ALERT_ACTION:

@@ -7,9 +7,8 @@ using System.IO;
 
 namespace WindowsFormsApp1
 {
-    public class Deck : GameTable
+    public class Deck
     {
-        Game_Screen gs = new Game_Screen();
         public List<Card> HandDeck;
         public List<Card> DrawDeck;
         public List<Card> GraveDeck;
@@ -135,7 +134,7 @@ namespace WindowsFormsApp1
                     if(((ActionCard)HandDeck[number]).attack)
                     {
                         Global.transHandler.Attack(HandDeck[number].Name);
-                        gs.Listen_Method();   //여기서 쓰레드를 생성하는게 맞는지 의문....
+                        g.Attack_Receive();
                     }
                 }
             }

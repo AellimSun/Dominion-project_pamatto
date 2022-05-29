@@ -57,9 +57,6 @@ namespace WindowsFormsApp1
 
         //플레이어 본인차례 false 턴 종료
 
-        //
-        //
-
         public void clickHand(string now, int idx)
         {
             if (deck.HandDeck[idx].kind.Equals("estate"))
@@ -136,10 +133,6 @@ namespace WindowsFormsApp1
                 gameTable.Coin += card.add_Money;
             if (card.add_Draw != 0)
                 deck.DrawToHand(card.add_Draw, form);
-            if (card.attack)
-            {
-                //어택내용을 서버로 넘기나?
-            }
 
             //예외사항이 있는 카드들
 
@@ -180,7 +173,6 @@ namespace WindowsFormsApp1
             {
                 gameTable.Coin -= cardList[i].price;
                 gameTable.BuyNumber -= 1;
-                //int amount = cardList[i].amount;
                 market.SellCard(cardList[i]);
                 deck.BuyCard(cardList[i]);
                 form.pictureBoxTF();
@@ -240,13 +232,9 @@ namespace WindowsFormsApp1
                 form.pictureBoxTF();
                 form.changeABC(gameTable);
 
-                //카드 먹음 alert_msg 전송
-                Global.transHandler.Get_Card(list[i].Name);
                 //카드 먹음 log 전송
                 form.MakeString(list[i].Name, "m");
             }
-
-            //if(gameTable.Coin >=)
 
             return list[i];
         }
