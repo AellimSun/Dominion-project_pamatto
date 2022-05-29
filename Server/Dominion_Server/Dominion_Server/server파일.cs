@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
@@ -278,6 +279,73 @@ namespace Dominion_Server
             return strMatch;
         }
 
+        static void Another_anser(int user, int next_player, Client[] full_list, Message R_Msg)
+        {
+            if (next_player == user)
+            {
+                return;
+            }
+
+            string CardName = Encoding.Default.GetString((R_Msg.Body as BodyAlertAction).CARD);
+            Console.WriteLine(CardName);
+            Message recv_res = MessageUtil.Receive(full_list[user].stream);
+            //Console.WriteLine("1");     //테스트용
+            Console.WriteLine(CardName);
+
+            if (Matching_Character(CardName, "witch"))
+            {
+                //Console.WriteLine("2"); //테스트용
+
+                string Log = "";
+                if (recv_res.Header.MSGTYPE == CONSTANTS.LOG_SEND)
+                {
+                    //Console.WriteLine("3"); //테스트용
+                    //해자가 없다면 저주 카드 획득 로그 전달
+
+                    Log = Encoding.Default.GetString((recv_res.Body as BodyLogSend).LOG);
+                    //Console.WriteLine(Log + "으아아악!");   //테스트용
+                    recv_res = MessageUtil.Receive(full_list[user].stream);
+                    if (recv_res.Header.MSGTYPE == CONSTANTS.LOG_SEND)
+                    {
+                        foreach (Client c in full_list)
+                        {
+                            MessageUtil.Send(c.stream, recv_res);
+                        }
+                    }
+                }
+                Console.WriteLine(Log); //테스트용
+
+
+                //보낸 로그의 내용이 저주를 먹었다는 내용이라면 
+                if (Log.Contains("curse"))
+                {
+                    //Console.WriteLine("4"); //테스트용
+
+                    //클라이언트 측에서 저주 먹음 alert를 보냄
+                    Message recv_alert = MessageUtil.Receive(full_list[user].stream);
+                    Console.WriteLine(Encoding.Default.GetString((recv_alert.Body as BodyAlertAction).CARD) + "<- 이거 먹었데 ㅋㅋ");
+
+                    if (recv_alert.Header.MSGTYPE == CONSTANTS.ALERT_ACTION)
+                    {
+                        //Console.WriteLine("5"); //테스트용
+                        for (int j = 0; j < 4; j++)
+                        {
+                            //다른 플레이어에게 전달
+                            if (user != j)
+                            {
+                                MessageUtil.Send(full_list[j].stream, recv_res);
+                                Console.WriteLine(j.ToString()
+                                    + "유저에게 Get_Card : "
+                                    + (recv_res.Body as BodyAlertAction).CARD);//테스트용
+
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+
         static public void Play_Game(Client[] full_list)
         {
             /*
@@ -351,6 +419,19 @@ namespace Dominion_Server
                                             }
                                         }
 
+                                        bool all_clear = true;
+
+                                        //4개의 쓰레드를 만들고(1개는 바로 소멸 됨) 이 4개의 쓰레드가 모두 끝나면 공격자에게 EXCAPE_LISTEN_METHOD 메세지 전송
+                                        Thread t1 = new Thread(() => Another_anser(0, next_player, full_list, R_Msg));
+                                        Thread t2 = new Thread(() => Another_anser(1, next_player, full_list, R_Msg));
+                                        Thread t3 = new Thread(() => Another_anser(2, next_player, full_list, R_Msg));
+                                        Thread t4 = new Thread(() => Another_anser(3, next_player, full_list, R_Msg));
+                                        t1.Start(); t2.Start(); t3.Start(); t4.Start();
+                                        t1.Join();  t2.Join();  t3.Join();  t4.Join();
+
+
+                                        
+                                        /*
                                         for (int i = 0; i < 4; i++)
                                         {
                                             if (next_player == i)
@@ -361,21 +442,21 @@ namespace Dominion_Server
                                             string CardName = Encoding.Default.GetString((R_Msg.Body as BodyAlertAction).CARD);
                                             Console.WriteLine(CardName);
                                             Message recv_res = MessageUtil.Receive(full_list[i].stream);
-                                            Console.WriteLine("1");     //테스트용
+                                            //Console.WriteLine("1");     //테스트용
                                             Console.WriteLine(CardName);
 
                                             if (Matching_Character(CardName, "witch"))
                                             {
-                                                Console.WriteLine("2"); //테스트용
+                                                //Console.WriteLine("2"); //테스트용
 
                                                 string Log = "";
                                                 if (recv_res.Header.MSGTYPE == CONSTANTS.LOG_SEND)
                                                 {
-                                                    Console.WriteLine("3"); //테스트용
+                                                    //Console.WriteLine("3"); //테스트용
                                                     //해자가 없다면 저주 카드 획득 로그 전달
 
                                                     Log = Encoding.Default.GetString((recv_res.Body as BodyLogSend).LOG);
-                                                    Console.WriteLine(Log + "으아아악!");   //테스트용
+                                                    //Console.WriteLine(Log + "으아아악!");   //테스트용
                                                     recv_res = MessageUtil.Receive(full_list[i].stream);
                                                     if (recv_res.Header.MSGTYPE == CONSTANTS.LOG_SEND)
                                                     {
@@ -391,7 +472,7 @@ namespace Dominion_Server
                                                 //보낸 로그의 내용이 저주를 먹었다는 내용이라면 
                                                 if (Log.Contains("curse"))
                                                 {
-                                                    Console.WriteLine("4"); //테스트용
+                                                    //Console.WriteLine("4"); //테스트용
 
                                                     //클라이언트 측에서 저주 먹음 alert를 보냄
                                                     Message recv_alert = MessageUtil.Receive(full_list[i].stream);
@@ -399,7 +480,7 @@ namespace Dominion_Server
 
                                                     if (recv_alert.Header.MSGTYPE == CONSTANTS.ALERT_ACTION)
                                                     {
-                                                        Console.WriteLine("5"); //테스트용
+                                                        //Console.WriteLine("5"); //테스트용
                                                         for (int j = 0; j < 4; j++)
                                                         {
                                                             //다른 플레이어에게 전달
@@ -417,6 +498,7 @@ namespace Dominion_Server
                                                 }
                                             }
                                         }
+                                        */
 
                                         //공격자 클라이언트에게 Listen_Method를 쓰레드를 종료하라는 메세지 전송
                                         Message exc_msg = new Message();

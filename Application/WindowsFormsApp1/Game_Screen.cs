@@ -779,12 +779,12 @@ namespace WindowsFormsApp1
                                     //저주 먹었음 Log 전송
                                     MakeString("curse", "m");
 
-                                    list_log.Items.Add("curse Alert b" + Global.UserID);    //테스트용
+                                    //list_log.Items.Add("curse Alert b" + Global.UserID);    //테스트용
 
                                     //저주 먹음 Alert 보내기
                                     Global.transHandler.Get_Card("curse");
 
-                                    list_log.Items.Add("curse Alert a" + Global.UserID);    //테스트용
+                                    //list_log.Items.Add("curse Alert a" + Global.UserID);    //테스트용
 
                                     //무덤덱으로 저주 보내버리기
                                     Card curse = game.gainCurse();
