@@ -59,8 +59,14 @@ namespace WindowsFormsApp1
 
         private void Form4_Load(object sender, EventArgs e)
         {
+            Image_Class images = new Image_Class();
             f5.Show();
-            pictureBox1.Load(Directory.GetCurrentDirectory() + "\\witch.png");
+            pictureBox1.Image = images.witch;
+        }
+
+        private void Form4_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            pictureBox1.Image = null;
         }
     }
 }

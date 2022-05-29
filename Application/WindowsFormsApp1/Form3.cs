@@ -21,7 +21,7 @@ namespace WindowsFormsApp1
         int Qcount = 0;
         private void Form3_Load(object sender, EventArgs e)
         {
-            btnStart.Enabled = false;    //(FIND용) false로
+            btnStart.Enabled = false;
             Global.ID_List = new string[4];
 
             Qcount = Global.transHandler.Start_Matching();
@@ -44,11 +44,11 @@ namespace WindowsFormsApp1
                 int res = Global.transHandler.Wait_Full_Queue(this);
                 if (res == 1)
                 {   //게임시작하실?
-                    btnStart.Enabled = true; //(FIND용)
+                    btnStart.Enabled = true;
                     int cnt = 15;
                     while(cnt > 0)
                     {
-                        timeLabel.Text = cnt.ToString(); //(FIND용)
+                        timeLabel.Text = cnt.ToString();
                         await Task.Delay(1000);
                         cnt--;
                     }
@@ -127,21 +127,21 @@ namespace WindowsFormsApp1
                 Global.transHandler.Cancle_Matching();
             }
         }
-        //public void starttest()
-        //{
-        //    game_Screen = new Game_Screen();
-        //    int res = Global.transHandler.Respond(1, Global.ID_List);
-        //    if (res == 1)
-        //    {
-        //        //MessageBox.Show("게임이 시작됩니다.");
-        //        game_Screen.Show();
-        //        this.Close();
-        //    }
-        //    else if (res == -1)
-        //    {
-        //        MessageBox.Show("게임이 취소되었습니다.");
-        //        this.Close();
-        //    }
-        //}
+        /*public void starttest()
+        {
+            game_Screen = new Game_Screen();
+            int res = Global.transHandler.Respond(1, Global.ID_List);
+            if (res == 1)
+            {
+                //MessageBox.Show("게임이 시작됩니다.");
+                game_Screen.Show();
+                this.Close();
+            }
+            else if (res == -1)
+            {
+                MessageBox.Show("게임이 취소되었습니다.");
+                this.Close();
+            }
+        }*/
     }
 }

@@ -9,9 +9,8 @@ namespace WindowsFormsApp1
 {
     class Game
     {
-        int score = 0;
         int silverUsed = 0;             //상인카드를 위해 은 카드를 사용한적 있는지 체크하는 변수
-        bool merchantUsed = false;      //이번턴에 상인카드를 사용했었는지 체크하는 변수 !!!!!!!!!!턴 끝날때 꼭 false로 다시 바꿔줄것!!!!!!!!!!
+        public bool merchantUsed = false;      //이번턴에 상인카드를 사용했었는지 체크하는 변수 !!!!!!!!!!턴 끝날때 꼭 false로 다시 바꿔줄것!!!!!!!!!!
         Game_Screen form;
         public Market market;
         public List<Card> cardList;
@@ -57,9 +56,6 @@ namespace WindowsFormsApp1
 
 
         //플레이어 본인차례 false 턴 종료
-
-        //
-        //
 
         public void clickHand(string now, int idx)
         {
@@ -123,7 +119,7 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                    form.printMessageBox("지금은 재화 카드만 선택할 수 있습니다. \n재화를 사용하지 않는다면 Action End를 눌러주세요.");
+                    form.printMessageBox("지금은 액션 카드만 선택할 수 있습니다. \n액션을 사용하지 않는다면 Action End를 눌러주세요.");
                 }
             }
         }
@@ -175,7 +171,6 @@ namespace WindowsFormsApp1
             {
                 gameTable.Coin -= cardList[i].price;
                 gameTable.BuyNumber -= 1;
-                //int amount = cardList[i].amount;
                 market.SellCard(cardList[i]);
                 deck.BuyCard(cardList[i]);
                 form.pictureBoxTF();
@@ -184,8 +179,6 @@ namespace WindowsFormsApp1
                 form.MakeString(market.MarketPile[i].Name, "m");
                 Global.transHandler.Get_Card(market.MarketPile[i].Name);
             }
-
-            //if(gameTable.Coin >=)
 
             return cardList[i];
         }
@@ -240,8 +233,6 @@ namespace WindowsFormsApp1
                 form.MakeString(list[i].Name, "m");
             }
 
-            //if(gameTable.Coin >=)
-
             return list[i];
         }
         public Card notBuyCSCSCard(int i)
@@ -275,8 +266,6 @@ namespace WindowsFormsApp1
                 }
             }
 
-            //if(gameTable.Coin >=)
-
             return list[i];
         }
 
@@ -289,7 +278,6 @@ namespace WindowsFormsApp1
             form.changeABC(gameTable);
             return market.estatePile[3];
         }
-
 
         public Card gainCSCardToHand(int i)
         {

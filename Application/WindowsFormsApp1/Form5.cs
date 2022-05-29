@@ -21,7 +21,14 @@ namespace WindowsFormsApp1
 
         private void Form5_Load(object sender, EventArgs e)
         {
-            pictureBox1.Load(Directory.GetCurrentDirectory() + ("\\effect.gif"));
+            Image_Class img = new Image_Class();
+
+            pictureBox1.Image = img.Cow_gif;
+        }
+
+        private void Form5_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            pictureBox1.Image = null;
         }
     }
 }

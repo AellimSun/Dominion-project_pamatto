@@ -87,8 +87,6 @@ namespace WindowsFormsApp1
 
         public void SellCard(Card card)
         {
-            string name = card.Name;
-            int amount = card.amount;
             card.amount -= 1;
         }
         public void ShuffleDraw()

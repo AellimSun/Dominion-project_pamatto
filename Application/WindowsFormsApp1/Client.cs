@@ -10,7 +10,7 @@ using DTL;
 
 namespace WindowsFormsApp1
 {
-    internal class Dominion_Client
+    /*internal class Dominion_Client
     {
         public void test(string[] args)
         {
@@ -29,7 +29,7 @@ namespace WindowsFormsApp1
             //}
 
         }
-    }
+    }*/
 
     public class TransHandler
     {
@@ -111,7 +111,7 @@ namespace WindowsFormsApp1
         }
         async public void Cancle_Matching()
         {
-            await Task.Run(async () =>
+            await Task.Run(() =>
             {
                 //큐 매칭 취소
                 Message CNM = new Message();
@@ -204,7 +204,6 @@ namespace WindowsFormsApp1
                 default:
                     return -1;
             }
-
         }
 
         public void Attack(string Card_Name)

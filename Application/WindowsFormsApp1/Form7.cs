@@ -31,8 +31,6 @@ namespace WindowsFormsApp1
             }
         }
 
-        
-
         private void Form7_Load(object sender, EventArgs e)
         {
             PrivateFontCollection privateFonts = new PrivateFontCollection();
@@ -43,7 +41,6 @@ namespace WindowsFormsApp1
 
             label50.Font = font;
             label50.Text = "Game Over";
-
 
             textBox1.Text = Global.ID_List[0] + "   **우  승**   ";
             textBox2.Text = "   축하합니다!  ";
@@ -58,7 +55,6 @@ namespace WindowsFormsApp1
         private void button1_Click(object sender, EventArgs e)
         {
             chart1.Visible = true;
-
 
             chart1.Series["Score"].LegendText = "점 수";
             chart1.Series["Score"].Points.Clear();

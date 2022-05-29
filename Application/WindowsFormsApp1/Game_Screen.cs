@@ -12,9 +12,11 @@ namespace WindowsFormsApp1
     public partial class Game_Screen : Form
     {
         Game game;
-        DB_ACCESS dB;
+        Image_Class images;
+        //DB_ACCESS dB;
         Market market;
         Deck deck;
+        bool esc_thread = false;
 
         PictureBox[] upper = null;
         public PictureBox[] lower = null;
@@ -32,12 +34,11 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
-
         public PictureBox[] getLower() { return lower; }
         private void Form1_Load(object sender, EventArgs e)
         {
             Listen_Method();
-            //button1.Enabled = true; //FIND(용) 지워야됨
+            images = new Image_Class();
             PrivateFontCollection privateFonts = new PrivateFontCollection();
 
             privateFonts.AddFontFile("TypographerGotischB-Bold.ttf");
@@ -67,13 +68,12 @@ namespace WindowsFormsApp1
             groupBox10.Text = "My Action / Buy";
             button1.Font = font;
 
-            //groupBox1.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\1.png");
-            //groupBox3.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\Hand_Background.png");
-            //groupBox4.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\Log.png");
-            //groupBox5.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\BonoBono.png");
-            //groupBox10.BackgroundImage = Image.FromFile(Directory.GetCurrentDirectory() + "\\1.png");
-            //pictureBox23.Load(Directory.GetCurrentDirectory() + "\\Diamonds.gif");
-           
+            groupBox1.BackgroundImage = images.Png1;
+            groupBox3.BackgroundImage = images.HandBackgroundpng;
+            groupBox4.BackgroundImage = images.Logpng;
+            groupBox5.BackgroundImage = images.BonoBonopng;
+            groupBox10.BackgroundImage = images.Png1;
+
             label4.Parent = pictureBox123;
             label4.Location = new Point(1, 1);
             label7.Parent = pictureBox124;
@@ -147,13 +147,13 @@ namespace WindowsFormsApp1
             List<Card> moneyList = market.MoneyPile;
             List<Card> estateList = market.estatePile;
 
-            pictureBox12.Load(Directory.GetCurrentDirectory() + "\\copper.png");
-            pictureBox11.Load(Directory.GetCurrentDirectory() + "\\silver.png");
-            pictureBox16.Load(Directory.GetCurrentDirectory() + "\\gold.png");
-            pictureBox14.Load(Directory.GetCurrentDirectory() + "\\estate.png");
-            pictureBox13.Load(Directory.GetCurrentDirectory() + "\\duchy.png");
-            pictureBox15.Load(Directory.GetCurrentDirectory() + "\\province.png");
-            pictureBox17.Load(Directory.GetCurrentDirectory() + "\\curse.png");
+            pictureBox12.Image = images.copper;
+            pictureBox11.Image = images.silver;
+            pictureBox16.Image = images.gold;
+            pictureBox14.Image = images.estate;
+            pictureBox13.Image = images.duchy;
+            pictureBox15.Image = images.province;
+            pictureBox17.Image = images.curse;
 
             CSamount1.Text = moneyList[0].amount.ToString();
             CSamount2.Text = moneyList[1].amount.ToString();
@@ -166,9 +166,8 @@ namespace WindowsFormsApp1
 
             pictureBoxTF();
             button1.Text = "Action End";
-
-            
         }
+
         /*public void ShowDeck(Deck deck)                 //검증필요. 옵저버 패턴은 도저히 모르겠음.
         {
 
@@ -186,8 +185,6 @@ namespace WindowsFormsApp1
 
         }*/
 
-
-
         public void pictureBoxTF()
         {
             pictureBox123.Visible = deck.ShowDrawDeck();
@@ -196,6 +193,7 @@ namespace WindowsFormsApp1
             label4.Text = deck.DrawDeck.Count.ToString();
             label7.Text = deck.GraveDeck.Count.ToString();
         }
+
         public void changeABC(GameTable gameTable)
         {
             label1.Text = "Action : " + gameTable.ActionNumber;
@@ -211,14 +209,15 @@ namespace WindowsFormsApp1
 
             for (int i = 0; i < lower.Length; i++)
             {
-                lower[i].Image.Dispose();
+                //초기 세팅에는 Dispose가 아니라 null이 맞음
+                lower[i].Image = null;
                 lower[i].Visible = false;
                 lower[i].Enabled = false;
             }
 
             for (int i = 0; i < handList.Count; i++)
             {
-                lower[i].Load(Directory.GetCurrentDirectory() + "\\" + handList[i].Name + ".png");
+                lower[i].Image = images.getBitmap(handList[i].Name);
                 lower[i].Visible = true;
                 lower[i].Enabled = true;
             }
@@ -336,9 +335,7 @@ namespace WindowsFormsApp1
 
             if (sbj.Image != null)
             {
-                obj.Image = sbj.Image;
-                //sbj.Image = null;
-                sbj.Image.Dispose();
+                obj[idx2].Image = sbj.Image;
 
                 return true;
             }
@@ -419,17 +416,20 @@ namespace WindowsFormsApp1
                     Global.transHandler.Turn_end();
                     button1.Text = "Action End";
                     //버튼 비활성화
-                    button1.Enabled = false;        //(FIND용)
+                    button1.Enabled = false;
                     deck.Clear();
                     deck.DrawToHand(5, this);
                     pictureBoxTF();
 
                     foreach (PictureBox item in upper)
                     {
-                        item.Image.Dispose();
+                        item.Image = null;
                         item.Visible = false;
                         item.Enabled = false;
                     }
+
+                    //먼지는 모르겠지만 주석에 턴 종료할 때 꼭 false로 바꿔달라길래 바꿔놓음
+                    game.merchantUsed = false;
 
                     Listen_Method();
                     game.gameTable.initGameTable();
@@ -517,25 +517,25 @@ namespace WindowsFormsApp1
             button1.Text = content;
         }
 
-        //private void Market_CS_RightClick(object sender, EventArgs e)
-        //{
-        //    PictureBox tmp = (PictureBox)sender;
-        //    string name = tmp.Name;
+        /*private void Market_CS_RightClick(object sender, EventArgs e)
+        {
+            PictureBox tmp = (PictureBox)sender;
+            string name = tmp.Name;
 
-        //    int i = 0;
-        //    for (i = 0; i < marketPics.Length; i++)
-        //    {
-        //        if (name.Equals(marketPics[i].Name))
-        //        {
-        //            break;
-        //        }
-        //        else if(name.Equals(CSPics[i].Name))
-        //        {
-        //            break;
-        //        }
-        //    }
+            int i = 0;
+            for (i = 0; i < marketPics.Length; i++)
+            {
+                if (name.Equals(marketPics[i].Name))
+                {
+                    break;
+                }
+                else if (name.Equals(CSPics[i].Name))
+                {
+                    break;
+                }
+            }
 
-        //}
+        }*/
 
         private void handClick(object sender, EventArgs e)
         {
@@ -623,7 +623,8 @@ namespace WindowsFormsApp1
         {
             for (int i = 0; i < marketlist.Count; i++)
             {
-                marketPics[i].Image = new Bitmap(Directory.GetCurrentDirectory() + "\\" + marketlist[i].Name + ".png");
+                //marketPics[i].Image = new Bitmap(Directory.GetCurrentDirectory() + "\\" + marketlist[i].Name + ".png");
+                marketPics[i].Image = images.getBitmap(marketlist[i].Name);
             }
         }
         private void rightclick(PictureBox sender)
@@ -668,6 +669,10 @@ namespace WindowsFormsApp1
             {
                 make = Global.UserID + "(이)가 " + cardname + " 카드 구입.";
             }
+            else if (cardaction == "g")
+            {
+                make = Global.UserID + "(이)가 " + cardname + " 카드 획득.";
+            }
             else if (cardaction == "h") 
             { 
                 make = Global.UserID + "(이)가 " + cardname + " 카드로 방어.";
@@ -692,6 +697,18 @@ namespace WindowsFormsApp1
 
         }
 
+        private bool Matching_Character(string CardName, string Name)
+        {
+            bool strMatch = true;
+
+            for (int i = 0; i < Name.Length; i++)
+            {
+                strMatch = strMatch && (CardName[i] == Name[i]);
+            }
+
+            return strMatch;
+        }
+
         async private void Listen_Method()
         {
             await Task.Run(() =>
@@ -705,8 +722,8 @@ namespace WindowsFormsApp1
 
                     if (flag == 1)
                     {
-                        button1.Enabled = true;   //(FIND용)
-                        setLogBox("Your Turn!");  //(FIND용)
+                        button1.Enabled = true;
+                        setLogBox("Your Turn!");
                         break;
                     }
                     else
@@ -716,6 +733,16 @@ namespace WindowsFormsApp1
 
                             //상대가 공격했음
                             case 2:
+                                
+                                if (Matching_Character(Card_Name, "witch"))
+                                {
+                                    //마녀이펙트 출력
+                                    Form4 f4 = new Form4();
+                                    f4.Show();
+                                }
+
+                                //여기 위에 이펙트가 문제 있는듯?
+
                                 //해자가 있냐?
                                 bool check_moat = false;
 
@@ -730,8 +757,9 @@ namespace WindowsFormsApp1
 
                                 if (!check_moat)
                                 {
-                                    //저주 먹었음을 서버에 전송
-                                    MakeString("curse", "m");
+                                    Global.transHandler.Get_Card("curse");
+                                    //저주 먹었음을 Log 전송
+                                    MakeString("curse", "g");
 
                                     //무덤덱으로 저주 보내버리기
                                     Card curse = game.gainCurse();
@@ -795,7 +823,7 @@ namespace WindowsFormsApp1
                                 break;
                             //상대방한테 로그 받음 -> textbox 로그 추가
                             case 5:
-                                setLogBox(Log);   //(FIND용)
+                                setLogBox(Log);
                                 break;
                             //상대방이 게임 종료 시켰음 -> 내 점수 집계 -> Score_send -> (전체 점수 집계 -> 결과 출력 -> Main Form으로 복귀)
                             case 6:
@@ -805,16 +833,78 @@ namespace WindowsFormsApp1
 
                                 Go_to_Main_Form();
 
+                                esc_thread = true;
                                 break;
                             default:
                                 break;
                         }
+                        if (esc_thread)
+                        {
+                            break;
+                        }
                     }
                 }
-
             });
+        }
 
-            
+        public void Attack_Receive()
+        {
+            string Card_Name = null;
+            string Log = null;
+            while (true)
+            {
+                int flag = Global.transHandler.Game_Listener(ref Card_Name, ref Log);
+                if (flag == 1)
+                {
+                    break;
+                }
+                else
+                {
+                    switch (flag)
+                    {
+                        //상대가 먹었음 -> 시장의 카드를 줄임
+                        case 3:
+                            Label[] Ptmp = new Label[CSAmt.Length];
+                            Card[] Ctmp = new Card[market.MoneyPile.Count + market.estatePile.Count];
+                            //Label 및 Ctmp 정의
+                            int Pi = 0, Ci = 0;
+                            foreach (Label P in CSAmt)
+                            {
+                                Ptmp[Pi++] = P;
+                            }
+                            foreach (Card C in market.MoneyPile)
+                            {
+                                Ctmp[Ci++] = C;
+                            }
+                            foreach (Card C in market.estatePile)
+                            {
+                                Ctmp[Ci++] = C;
+                            }
+                            //돌면서 찾고 인덱스 이용해서 숫자감소 및 UI변경
+                            for (int i = 0; i < Ctmp.Length; i++)
+                            {
+                                bool strMatch = true;
+                                for (int j = 0; j < Ctmp[i].Name.Length; j++)
+                                {
+                                    strMatch = strMatch && (Ctmp[i].Name[j] == Card_Name[j]);
+                                }
+                                if (strMatch)
+                                {
+                                    Ctmp[i].amount--;
+                                    Ptmp[i].Text = Ctmp[i].amount.ToString();
+                                    break;
+                                }
+                            }
+                            break;
+                        //상대방한테 로그 받음 -> textbox 로그 추가
+                        case 5:
+                            setLogBox(Log);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
         }
 
         private void Game_Screen_FormClosed(object sender, FormClosedEventArgs e)
@@ -822,85 +912,85 @@ namespace WindowsFormsApp1
             this.DialogResult = DialogResult.OK;
         }
 
-        //private void Game_Screen_Shown(object sender, EventArgs e)
-        //{
-        //    string Card_Name = null;
-        //    string Log = null;
+        /*private void Game_Screen_Shown(object sender, EventArgs e)
+        {
+            string Card_Name = null;
+            string Log = null;
 
-        //    while (true)
-        //    {
-        //        int flag = Global.transHandler.Game_Listener(Card_Name, Log);
+            while (true)
+            {
+                int flag = Global.transHandler.Game_Listener(Card_Name, Log);
 
-        //        if (flag == 1)
-        //        {
-        //            break;
-        //        }
-        //        else
-        //        {
-        //            switch (flag)
-        //            {
-        //                //상대가 공격했음
-        //                case 2:
+                if (flag == 1)
+                {
+                    break;
+                }
+                else
+                {
+                    switch (flag)
+                    {
+                        //상대가 공격했음
+                        case 2:
 
-        //                    break;
-        //                //상대가 먹었음 -> 시장의 카드를 줄임
-        //                case 3:
-        //                    Label[] Ptmp = new Label[CSAmt.Length + marketAmt.Length];
-        //                    Card[] Ctmp = new Card[market.MarketPile.Count + market.MoneyPile.Count + market.estatePile.Count];
-        //                    //Label 및 Ctmp 정의
-        //                    int Pi = 0, Ci = 0;
-        //                    foreach (Label P in marketAmt)
-        //                    {
-        //                        Ptmp[Pi++] = P;
-        //                    }
-        //                    foreach (Label P in CSAmt)
-        //                    {
-        //                        Ptmp[Pi++] = P;
-        //                    }
-        //                    foreach (Card C in market.MarketPile)
-        //                    {
-        //                        Ctmp[Ci++] = C;
-        //                    }
-        //                    foreach (Card C in market.MoneyPile)
-        //                    {
-        //                        Ctmp[Ci++] = C;
-        //                    }
-        //                    foreach (Card C in market.estatePile)
-        //                    {
-        //                        Ctmp[Ci++] = C;
-        //                    }
+                            break;
+                        //상대가 먹었음 -> 시장의 카드를 줄임
+                        case 3:
+                            Label[] Ptmp = new Label[CSAmt.Length + marketAmt.Length];
+                            Card[] Ctmp = new Card[market.MarketPile.Count + market.MoneyPile.Count + market.estatePile.Count];
+                            //Label 및 Ctmp 정의
+                            int Pi = 0, Ci = 0;
+                            foreach (Label P in marketAmt)
+                            {
+                                Ptmp[Pi++] = P;
+                            }
+                            foreach (Label P in CSAmt)
+                            {
+                                Ptmp[Pi++] = P;
+                            }
+                            foreach (Card C in market.MarketPile)
+                            {
+                                Ctmp[Ci++] = C;
+                            }
+                            foreach (Card C in market.MoneyPile)
+                            {
+                                Ctmp[Ci++] = C;
+                            }
+                            foreach (Card C in market.estatePile)
+                            {
+                                Ctmp[Ci++] = C;
+                            }
 
-        //                    //돌면서 찾고 인덱스 이용해서 숫자감소 및 UI변경
-        //                    for (int i = 0; i < Ctmp.Length; i++)
-        //                    {
-        //                        if (Ctmp[i].Name.Equals(Card_Name))
-        //                        {
-        //                            Ctmp[i].amount--;
-        //                            Ptmp[i].Text = Ctmp[i].amount.ToString();
-        //                            break;
-        //                        }
-        //                    }
+                            //돌면서 찾고 인덱스 이용해서 숫자감소 및 UI변경
+                            for (int i = 0; i < Ctmp.Length; i++)
+                            {
+                                if (Ctmp[i].Name.Equals(Card_Name))
+                                {
+                                    Ctmp[i].amount--;
+                                    Ptmp[i].Text = Ctmp[i].amount.ToString();
+                                    break;
+                                }
+                            }
 
-        //                    break;
-        //                //상대가 폐기했음 -> 시장의 카드를 줄임
-        //                case 4:
-        //                    //받아온 Card_Name 폐기시키기
-        //                    game.trash.gotoTrash(Card_Name);
-        //                    break;
-        //                //상대방한테 로그 받음 -> textbox 로그 추가
-        //                case 5:
-        //                    Log_Handle(Log);
-        //                    break;
-        //                //상대방이 게임 종료 시켰음 ->
-        //                case 6:
+                            break;
+                        //상대가 폐기했음 -> 시장의 카드를 줄임
+                        case 4:
+                            //받아온 Card_Name 폐기시키기
+                            game.trash.gotoTrash(Card_Name);
+                            break;
+                        //상대방한테 로그 받음 -> textbox 로그 추가
+                        case 5:
+                            Log_Handle(Log);
+                            break;
+                        //상대방이 게임 종료 시켰음 ->
+                        case 6:
 
-        //                    break;
-        //                default:
-        //                    break;
-        //            }
-        //        }
+                            break;
+                        default:
+                            break;
+                    }
+                }
 
-        //    }
-        //}
+            }
+        }*/
     }
 }

@@ -117,27 +117,41 @@ namespace WindowsFormsApp1
             g.setHandDeckImg(this);
 
         }
-        
+
+        public void Clear()
+        {
+            //HandToGrave
+            while (HandDeck.Count > 0)
+            {
+                GraveDeck.Add(HandDeck[0]);
+                HandDeck.RemoveAt(0);
+            }
+        }
+
         public void GoToGrave(int number, string mode, Game_Screen g)
         {
             GraveDeck.Add(HandDeck[number]);
             //HandDeck[number] = null;      //주석모임
             if (mode == "u")
             {
-                if((HandDeck[number] as ActionCard) != null)
+                g.MakeString(HandDeck[number].Name, mode);  //매개변수 추가
+
+                if ((HandDeck[number] as ActionCard) != null)
                 {
                     if(((ActionCard)HandDeck[number]).attack)
+                    {
                         Global.transHandler.Attack(HandDeck[number].Name);
+                        g.Attack_Receive();
+                    }
                 }
-                g.MakeString(HandDeck[number].Name, mode);  //매개변수 추가
             }
             else if (mode == "a")
             {
                 g.MakeString();
             }
             HandDeck.RemoveAt(number);
-            
         }
+
         public void BuyCard(Card card)
         {
             GraveDeck.Add(card);
