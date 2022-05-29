@@ -26,11 +26,7 @@ namespace WindowsFormsApp1
 
             //HanDeck 리스트를 모두 삭제
             HandDeck.Clear();
-
-            //복구해서 디자인 어쩌구저쩌구 싹다 밀어버리기
         }
-
-
         public Deck(List<Card> estatelist, List<Card> moneylist, Game_Screen g)
         {
             HandDeck = new List<Card>();
@@ -73,50 +69,6 @@ namespace WindowsFormsApp1
             Shuffle(DrawDeck);
             DrawToHand(5, g);
         }
-
-        public Deck(List<Card> estatelist, List<Card> moneylist, List<Card> actionlist)     //지워야됨
-        {
-            HandDeck = new List<Card>();
-            DrawDeck = new List<Card>();
-            GraveDeck = new List<Card>();
-
-            Card copper = null;
-            int i;
-            for (i = 0; i < 3; i++)
-            {
-                if (moneylist[i].Name.Equals("copper"))
-                {
-                    copper = moneylist[i];
-                    break;
-                }
-            }
-            Card estate = null;
-            int j;
-            for (j = 0; j < 4; j++)
-            {
-                if (estatelist[j].Name.Equals("estate"))
-                {
-                    estate = estatelist[j];
-                    break;
-                }
-            }
-
-            for (int k = 0; k < 7; k++)
-            {
-                DrawDeck.Add(copper);
-                moneylist[i].amount -= 1;
-            }
-
-            for (int k = 0; k < 3; k++)
-            {
-                DrawDeck.Add(estate);
-                estatelist[j].amount -= 1;
-            }
-
-            Shuffle(GraveDeck);
-            DrawToHand(5,actionlist);
-        }       //지워야됨
-
         public void Shuffle(List<Card> Obj)
         {
             List<Card> NewCards = new List<Card>();
@@ -144,18 +96,6 @@ namespace WindowsFormsApp1
                 return true;
 
         }
-        public void DrawToHand()
-        {
-            while (HandDeck.Count < 6)
-            {
-                HandDeck.Add(DrawDeck[0]);
-                DrawDeck.RemoveAt(0); //0번이 채ㅣ워지나?
-                if (DrawDeck.Count == 0)
-                    Shuffle(DrawDeck);
-            }
-            
-        }
-
         public void DrawToHand(int i, Game_Screen g)
         {
             //g.MakeString(i);
@@ -171,26 +111,6 @@ namespace WindowsFormsApp1
             g.setHandDeckImg(this);
 
         }
-        public void DrawToHand(int i, List<Card> actionlist)        //지워야됨
-        {
-            while (0 < i)
-            {
-                if (DrawDeck.Count == 0)
-                    Shuffle(DrawDeck);
-                HandDeck.Add(DrawDeck[0]);
-                DrawDeck.RemoveAt(0);
-                i--;
-            }
-            Card tmp = null;
-            for (int j = 0; j < 10; j++) {
-                if (actionlist[j].Name.Equals("market"))
-                {
-                    tmp = actionlist[j];
-                    break;
-                }
-            }
-            HandDeck.Add(tmp);
-        }           //지워야됨
         public void Clear()
         {
             //HandToGrave
@@ -203,7 +123,7 @@ namespace WindowsFormsApp1
         public void GoToGrave(int number, string mode, Game_Screen g)
         {
             GraveDeck.Add(HandDeck[number]);
-            //HandDeck[number] = null;
+            //HandDeck[number] = null;      //주석모임
             if (mode == "u")
             {
                 if((HandDeck[number] as ActionCard) != null)
@@ -232,10 +152,6 @@ namespace WindowsFormsApp1
         public void gotoTrash(string card)
         {
             trash.Add(card);
-        }
-        public List<string> getTrashList()
-        {
-            return trash;
         }
     }
 }

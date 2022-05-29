@@ -26,7 +26,7 @@ namespace WindowsFormsApp1
         }
         async public void LogTest()
         {
-            await Task.Run(async () =>
+            await Task.Run(() =>
             {
                 string CardName = "";
                 string Log = "";

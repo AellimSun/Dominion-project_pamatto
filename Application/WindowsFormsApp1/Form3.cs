@@ -127,21 +127,21 @@ namespace WindowsFormsApp1
                 Global.transHandler.Cancle_Matching();
             }
         }
-        //public void starttest()
-        //{
-        //    game_Screen = new Game_Screen();
-        //    int res = Global.transHandler.Respond(1, Global.ID_List);
-        //    if (res == 1)
-        //    {
-        //        //MessageBox.Show("게임이 시작됩니다.");
-        //        game_Screen.Show();
-        //        this.Close();
-        //    }
-        //    else if (res == -1)
-        //    {
-        //        MessageBox.Show("게임이 취소되었습니다.");
-        //        this.Close();
-        //    }
-        //}
+        /*public void starttest()
+        {
+            game_Screen = new Game_Screen();
+            int res = Global.transHandler.Respond(1, Global.ID_List);
+            if (res == 1)
+            {
+                //MessageBox.Show("게임이 시작됩니다.");
+                game_Screen.Show();
+                this.Close();
+            }
+            else if (res == -1)
+            {
+                MessageBox.Show("게임이 취소되었습니다.");
+                this.Close();
+            }
+        }*/
     }
 }

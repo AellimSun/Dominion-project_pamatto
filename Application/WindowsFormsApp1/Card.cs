@@ -14,38 +14,6 @@ namespace WindowsFormsApp1
         public int amount = 0;
         public string Name = "";
         public string kind = "";
-
-        public void setName(string Name)
-        {
-            this.Name = Name;
-        }
-        public string getName()
-        {
-            return this.Name;
-        }
-        public void setPrice(int price)
-        {
-            this.price = price;
-        }
-        public int getPrice()
-        {
-            return this.price;
-        }
-
-        public void setAmount(int amount)
-        {
-            this.amount = amount;
-        }
-        public void minusAmount(int amount)
-        {
-            this.amount -= amount;
-        }
-        public int getAmount()
-        {
-            return amount;
-        }
-        //추가
-
     }
 
     public class ActionCard : Card
@@ -62,109 +30,6 @@ namespace WindowsFormsApp1
         public bool attack = false;
         public bool protect = false;
 
-        public void set_add_Draw(string val)
-        {
-            this.add_Draw = Convert.ToInt32(val);
-        }
-        public int get_add_Draw()
-        {
-            return add_Draw;
-        }
-
-        public void set_goto_Grave(string val)
-        {
-            this.goto_Grave = Convert.ToInt32(val);
-        }
-        public int get_goto_Grave()
-        {
-            return goto_Grave;
-        }
-
-        public void set_goto_Trash(string val)
-        {
-            this.goto_Trash = Convert.ToInt32(val);
-        }
-        public int get_goto_Trash()
-        {
-            return goto_Trash;
-        }
-
-        public void set_add_Action(string val)
-        {
-            this.add_Action = Convert.ToInt32(val);
-        }
-        public int get_add_Action()
-        {
-            return add_Action;
-        }
-
-        public void set_add_Buy(string val)
-        {
-            this.add_Buy = Convert.ToInt32(val);
-        }
-        public int get_add_Buy()
-        {
-            return add_Buy;
-        }
-
-        public void set_add_Money(string val)
-        {
-            this.add_Money = Convert.ToInt32(val);
-        }
-        public int get_add_Money()
-        {
-            return add_Money;
-        }
-
-        public void set_gain_to_Deck(string val)
-        {
-            this.gain_to_Deck = Convert.ToInt32(val);
-        }
-        public int get_gain_to_Deck()
-        {
-            return gain_to_Deck;
-        }
-
-        public void set_gain_to_Hand(string val)
-        {
-            this.gain_to_Hand = Convert.ToInt32(val);
-        }
-        public int get_gain_to_Hand()
-        {
-            return gain_to_Hand;
-        }
-
-        public void set_attack(string val)
-        {
-            if (val == "true")
-            {
-                this.attack = true;
-            }
-            else{
-                this.attack = false;
-            }
-        }
-        public bool get_attack()
-        {
-            return attack;
-        }
-
-        public void set_protect(string val)
-        {
-            if (val == "true")
-            {
-                this.protect = true;
-            }
-            else
-            {
-                this.protect = false;
-            }
-        }
-        public bool get_protect()
-        {
-            return protect;
-        }
-
         //생성자
         public ActionCard(string key, JToken jtoken)
         {
@@ -173,9 +38,8 @@ namespace WindowsFormsApp1
             string[] ops = { "price", "amount", "add_Draw", "goto_Grave", "goto_Trash",
                         "add_Action", "add_Buy", "add_Money", "gain_to_Deck",
                         "gain_to_Hand" };
-            setName(key);
+            Name = key;
 
-            int i = 0;
             foreach(JToken j in jtoken)
             { 
                 foreach(JToken j2 in j)
@@ -216,7 +80,6 @@ namespace WindowsFormsApp1
             Card card = new Card();
             Name = key;
             kind = "money";
-            int i = 0;
 
             foreach (JToken j in jtoken)
             {
@@ -243,8 +106,6 @@ namespace WindowsFormsApp1
             Card card = new Card();
             Name = key;
             kind = "estate";
-
-            int i = 0;
 
             foreach (JToken j in jtoken)
             {

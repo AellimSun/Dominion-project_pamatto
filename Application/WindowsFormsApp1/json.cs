@@ -29,7 +29,7 @@ namespace WindowsFormsApp1
             }
             catch (Exception e)
             {
-                MessageBox.Show("json 파일을 읽는 중에 오류가 발생했습니다.");
+                MessageBox.Show(e.Message + "json 파일을 읽는 중에 오류가 발생했습니다.");
                 return null;
             }
         }

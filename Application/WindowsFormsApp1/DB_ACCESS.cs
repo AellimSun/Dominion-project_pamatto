@@ -49,41 +49,41 @@ namespace WindowsFormsApp1
             }
         }
 
-        //public void RecieveLog(ListBox listBox)
-        //{
-        //    try
-        //    {
-        //        Con = new SqlConnection();
-        //        Con.ConnectionString = "Server=(local);database=GameTestDB;Integrated Security = true";
-        //        Con.Open();
+        /*public void RecieveLog(ListBox listBox)
+        {
+            try
+            {
+                Con = new SqlConnection();
+                Con.ConnectionString = "Server=(local);database=GameTestDB;Integrated Security = true";
+                Con.Open();
 
-        //        SqlCommand Com = new SqlCommand();
-        //        Com.Connection = Con;
-        //        Com.CommandText =
-        //            "select nickName, GameLog from GameLogTest";
-        //        SqlDataReader reader;
-        //        reader = Com.ExecuteReader();
+                SqlCommand Com = new SqlCommand();
+                Com.Connection = Con;
+                Com.CommandText =
+                    "select nickName, GameLog from GameLogTest";
+                SqlDataReader reader;
+                reader = Com.ExecuteReader();
 
-        //        //어떤 값 받아올것인지 정해야 함. 맨 위? 마지막 로그 이후의 값?
-        //        while (reader.Read())
-        //        {
-        //            string showing_text = reader["nickName"].ToString() + " is ";
-        //            showing_text += reader["GameLog"].ToString();
-        //            listBox.Items.Add(showing_text);
-        //        }
-        //        reader.Close();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("DB를 불러오는데 실패했습니다.", "알림");
-        //        MessageBox.Show(ex.ToString());
-        //    }
-        //    finally
-        //    {
-        //        Con.Close();
-        //    }
+                //어떤 값 받아올것인지 정해야 함. 맨 위? 마지막 로그 이후의 값?
+                while (reader.Read())
+                {
+                    string showing_text = reader["nickName"].ToString() + " is ";
+                    showing_text += reader["GameLog"].ToString();
+                    listBox.Items.Add(showing_text);
+                }
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("DB를 불러오는데 실패했습니다.", "알림");
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                Con.Close();
+            }
 
 
-        //}
+        }*/
     }
 }
