@@ -190,14 +190,15 @@ namespace DominionApp
                 form.MakeString(market.MarketPile[i].Name, "g");
                 Global.transHandler.Get_Card(market.MarketPile[i].Name);
 
-                form.clickMode = "market";
                 if (gameTable.ActionNumber == 0)
                 {
                     form.turn_button1("Buy End");
+                    form.clickMode = "market";
                 }
                 else
                 {
                     form.turn_button1("Action End");
+                    form.clickMode = "action";
                 }
             }
 
@@ -252,14 +253,15 @@ namespace DominionApp
                 form.MakeString(list[i].Name, "g");
                 Global.transHandler.Get_Card(list[i].Name);
 
-                form.clickMode = "market";
                 if (gameTable.ActionNumber == 0)
                 {
                     form.turn_button1("Buy End");
+                    form.clickMode = "market";
                 }
                 else
                 {
                     form.turn_button1("Action End");
+                    form.clickMode = "action";
                 }
             }
 

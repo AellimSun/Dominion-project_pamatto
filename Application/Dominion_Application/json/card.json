@@ -35,7 +35,7 @@
 			"add_Draw": "3"
 		},
 		"witch": {
-			"price": "0",
+			"price": "5",
 			"add_Draw": "2",
 			"attack": "true"
 		},
@@ -57,12 +57,12 @@
 		"copper": {
 			"price": "0",
 			"money": "1",
-			"amount" :  "8"
+			"amount" :  "46"
 		},
 		"silver": {
 			"price": "3",
 			"money": "2",
-			"amount" :  "30"
+			"amount" :  "40"
 		},
 		"gold": {
 			"price": "6",
@@ -74,7 +74,7 @@
 		"estate": {
 			"price": "2",
 			"score": "1",
-			"amount" :  "4"
+			"amount" :  "15"
 		},
 		"duchy": {
 			"price": "5",
@@ -82,14 +82,14 @@
 			"amount" :  "12"
 		},
 		"province": {
-			"price": "0",
+			"price": "8",
 			"score": "6",
-			"amount": "1"
+			"amount": "12"
 		},
 		"curse": {
 			"price": "0",
 			"score": "-1",
-			"amount" : "10"
+			"amount" : "30"
 		}
 	}
 }
