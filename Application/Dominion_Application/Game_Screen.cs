@@ -23,7 +23,7 @@ namespace DominionApp
         Label[] marketAmt = null;
         Label[] CSAmt = null;
 
-        public string clickMode = "market";
+        public string clickMode = "action";
 
         List<int> selected = new List<int>();
 
@@ -36,34 +36,30 @@ namespace DominionApp
         private void Form1_Load(object sender, EventArgs e)
         {
             Listen_Method();
-            //PrivateFontCollection privateFonts = new PrivateFontCollection();
+            Font font = new Font(FontManager.myFont[0], 12);
 
-            //privateFonts.AddFontFile("TypographerGotischB-Bold.ttf");
-
-            //Font font = new Font(privateFonts.Families[0], 12f);
-
-            //groupBox1.Font = font;
-            //groupBox1.Text = "Market";
-            //groupBox2.Font = font;
-            //groupBox2.Text = "Action / Buy Count";
-            //label1.Text = "Action : ";
-            //label2.Text = "Buy : ";
-            //label3.Text = "Treasure : ";
-            //label9.Font = font;
-            //label9.Text = "Nickname / VP";
-            //groupBox3.Font = font;
-            //groupBox3.Text = "Hand";
-            //groupBox5.Font = font;
-            //groupBox5.Text = "Chatting";
-            //groupBox6.Font = font;
-            //groupBox6.Text = "Player List";
-            //groupBox7.Font = font;
-            //groupBox7.Text = "Treasure / Estate";
-            //groupBox9.Font = font;
-            //groupBox9.Text = "Deck";
-            //groupBox10.Font = font;
-            //groupBox10.Text = "My Action / Buy";
-            //button1.Font = font;
+            groupBox1.Font = font;
+            groupBox1.Text = "Market";
+            groupBox2.Font = font;
+            groupBox2.Text = "Action / Buy Count";
+            label1.Text = "Action : ";
+            label2.Text = "Buy : ";
+            label3.Text = "Treasure : ";
+            label9.Font = font;
+            label9.Text = "Nickname / VP";
+            groupBox3.Font = font;
+            groupBox3.Text = "Hand";
+            groupBox5.Font = font;
+            groupBox5.Text = "Chatting";
+            groupBox6.Font = font;
+            groupBox6.Text = "Player List";
+            groupBox7.Font = font;
+            groupBox7.Text = "Treasure / Estate";
+            groupBox9.Font = font;
+            groupBox9.Text = "Deck";
+            groupBox10.Font = font;
+            groupBox10.Text = "My Action / Buy";
+            button1.Font = font;
 
             groupBox1.BackgroundImage = Properties.Resources.market_action_buy_Background;
             groupBox3.BackgroundImage = Properties.Resources.Hand_Background;
@@ -166,23 +162,6 @@ namespace DominionApp
             pictureBoxTF();
             button1.Text = "Action End";
         }
-
-        /*public void ShowDeck(Deck deck)                 //검증필요. 옵저버 패턴은 도저히 모르겠음.
-        {
-
-            this.deck = deck;
-
-            if (deck.DrawDeck.Count == 0)
-                pictureBox123.Visible = false;
-            else
-                pictureBox123.Visible = true;
-
-            if (deck.GraveDeck.Count == 0)
-                pictureBox124.Visible = false;
-            else
-                pictureBox124.Visible = true;
-
-        }*/
 
         public void pictureBoxTF()
         {
@@ -387,6 +366,7 @@ namespace DominionApp
             if (state.Equals("Action End"))
             {
                 button1.Text = "Buy End";
+                clickMode = "market";
                 game.gameTable.ActionNumber = 0;
                 changeABC(game.gameTable);
                 return;
@@ -408,23 +388,24 @@ namespace DominionApp
                     MakeString();
                     selected.RemoveRange(0, selected.Count);
                 }
-                clickMode = "market";
                 turn_button1("Action End");
+                clickMode = "action";
                 return;
             }
             else if (state.Equals("Effect End") || state.Equals("Scrap End"))
             {
-                clickMode = "market";
                 game.gameTable.Coin = 0;
                 changeABC(game.gameTable);
 
                 if (game.gameTable.ActionNumber == 0)
                 {
                     turn_button1("Buy End");
+                    clickMode = "market";
                 }
                 else
                 {
                     turn_button1("Action End");
+                    clickMode = "action";
                 }
                 return;
             }
@@ -435,6 +416,7 @@ namespace DominionApp
                 {
                     Global.transHandler.Turn_end();
                     button1.Text = "Action End";
+                    clickMode = "action";
                     //버튼 비활성화
                     button1.Enabled = false;
                     deck.Clear();
@@ -558,7 +540,7 @@ namespace DominionApp
                     }
                 }
 
-                if (clickMode.Equals("market"))
+                if (clickMode.Equals("action")||clickMode.Equals("market"))
                 {
                     string now = button1.Text;
 
@@ -612,14 +594,15 @@ namespace DominionApp
                     Global.transHandler.Scrap_Card(market.estatePile[idx].Name);
 
                     setHandDeckImg(deck);
-                    clickMode = "market";
                     if (game.gameTable.ActionNumber == 0)
                     {
                         turn_button1("Buy End");
+                        clickMode = "market";
                     }
                     else
                     {
                         turn_button1("Action End");
+                        clickMode = "action";
                     }
                 }
             }

@@ -19,7 +19,7 @@ namespace DominionApp.Properties {
     // 클래스에서 자동으로 생성되었습니다.
     // 멤버를 추가하거나 제거하려면 .ResX 파일을 편집한 다음 /str 옵션을 사용하여 ResGen을
     // 다시 실행하거나 VS 프로젝트를 다시 빌드하십시오.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -77,6 +77,48 @@ namespace DominionApp.Properties {
             get {
                 object obj = ResourceManager.GetObject("BonoBono", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   {
+        ///	&quot;action&quot;: {
+        ///		&quot;moat&quot;: {
+        ///			&quot;price&quot;: &quot;2&quot;,
+        ///			&quot;add_Draw&quot;: &quot;2&quot;,
+        ///			&quot;protect&quot;: &quot;true&quot;
+        ///		},
+        ///		&quot;cellar&quot;: {
+        ///			&quot;price&quot;: &quot;2&quot;,
+        ///			&quot;add_Action&quot;: &quot;1&quot;,
+        ///			&quot;add_Draw&quot;: &quot;n&quot;,
+        ///			&quot;goto_Grave&quot;: &quot;n&quot;
+        ///		},
+        ///		&quot;merchant&quot;: {
+        ///			&quot;price&quot;: &quot;3&quot;,
+        ///			&quot;add_Action&quot;: &quot;1&quot;,
+        ///			&quot;add_Draw&quot;: &quot;1&quot;
+        ///		},
+        ///		&quot;village&quot;: {
+        ///			&quot;price&quot;: &quot;3&quot;,
+        ///			&quot;add_Draw&quot;: &quot;1&quot;,
+        ///			&quot;add_Action&quot;: &quot;2&quot;
+        ///		},
+        ///		&quot;workshop&quot;: {
+        ///			&quot;price&quot;: &quot;3&quot;,
+        ///			&quot;gain_to_Deck&quot;: &quot;1&quot;
+        ///		},
+        ///		&quot;remodel&quot;: {
+        ///			&quot;price&quot;: &quot;4&quot;,
+        ///			&quot;goto_Trash&quot;: &quot;1&quot;,
+        ///			&quot;gain_to_Deck&quot;: &quot;1&quot;
+        ///		},
+        ///		&quot;smithy&quot;: {
+        ///			&quot;price[나머지 문자열은 잘림]&quot;;과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string card {
+            get {
+                return ResourceManager.GetString("card", resourceCulture);
             }
         }
         
@@ -287,6 +329,16 @@ namespace DominionApp.Properties {
             get {
                 object obj = ResourceManager.GetObject("smithy", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Byte[] 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static byte[] TypographerGotischB_Bold {
+            get {
+                object obj = ResourceManager.GetObject("TypographerGotischB_Bold", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
