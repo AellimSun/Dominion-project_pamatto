@@ -7,3 +7,22 @@
  - TCP/IP
  - JSON
  - WINFORM
+
+<br/>
+
+![card](https://user-images.githubusercontent.com/99781323/175780753-5a961aa6-79b3-4ef6-a54d-10b0249428e4.gif)
+ 
+ 유저 화면(1)
+
+<br/>
+
+
+![witch](https://user-images.githubusercontent.com/99781323/175780725-eb7daa14-5954-464f-9061-8fe8185e49f7.gif)
+ 
+ 유저 화면(2)
+ 
+ <br/>
+
+![sever](https://user-images.githubusercontent.com/99781323/175780713-88bb0fe4-17a4-42a1-be57-b692a1cb57f7.gif)
+
+ 서버 ( 방 생성, 사용자 로그 기록)
